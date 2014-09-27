@@ -12,6 +12,9 @@ namespace TestSystem.Algorithm
      */
     interface IAlgorithm
     {
-        IOutBlackBoxParam Calulate();
+        IOutBlackBoxParam Calculate();
+        String Name {get; }
+        int length { get; }
+        
     }
 }
