@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSystem", "..\TestSystem\TestSystem.csproj", "{B63B585B-D910-4A34-A01E-A8B3AF47A920}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSystem", "TestSystem.csproj", "{B63B585B-D910-4A34-A01E-A8B3AF47A920}"
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "TestSystem_model", "..\TestSystem_model\TestSystem_model.modelproj", "{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}"
 EndProject
