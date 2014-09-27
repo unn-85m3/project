@@ -1,4 +1,4 @@
-﻿namespace TestSystem_beta
+﻿namespace TestSystem
 {
     partial class Form1
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestSystem_beta.test_system
+namespace TestSystem.test_system
 {
     interface IBlackBoxParam
     {
