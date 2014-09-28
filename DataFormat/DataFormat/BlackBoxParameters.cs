@@ -11,6 +11,9 @@ namespace DataFormat
 {
     class BlackBoxParameters
     {
+        /// <summary>
+        /// Structure for for storing a set of parameters.
+        /// </summary>
         [DataContract]
         struct Parameter
         {
@@ -47,11 +50,31 @@ namespace DataFormat
 
         List<Parameter> Params;
 
+        /// <summary>
+        /// Fucking constructor.
+        /// </summary>
         public BlackBoxParameters()
         {
             Params = new List<Parameter>();
         }
 
+        /// <summary>
+        /// Add new parameter collection.
+        /// </summary>
+        /// <param name="Pin">input pressure</param>
+        /// <param name="Pout">output pressure</param>
+        /// <param name="Qout">output quotation?</param>
+        /// <param name="Tin">input temperature</param>
+        /// <param name="Cin">input calorific</param>
+        /// <param name="Din">input density</param>
+        /// <param name="Qin">input quatation?</param>
+        /// <param name="Tout">output temperature</param>
+        /// <param name="OpCosts">operating costs</param>
+        /// <param name="CaCosts">capital costs</param>
+        /// <param name="Expan">expansion coefficient</param>
+        /// <param name="Cout">output calorific</param>
+        /// <param name="Dout">output density</param>
+        /// <returns>new collection's index</returns>
         public int NewParam( // add new parameter collection
             double Pin, double Pout, double Qout, double Tin, double Cin, double Din, // "input"
             double Qin, double Tout, double OpCosts, double CaCosts, double Expan, double Cout, double Dout // "output"
@@ -80,6 +103,10 @@ namespace DataFormat
             return Params.Count(); // return new collection's index
         }
 
+        /// <summary>
+        /// Print all parameter collections into text file.
+        /// Not working!
+        /// </summary>
         public void printAllParams()
         {
             int MaxI = Params.Count();
@@ -89,22 +116,37 @@ namespace DataFormat
             }
         }
 
+        /// <summary>
+        /// It is a file?!
+        /// </summary>
+        /// <param name="fn">file name</param>
+        /// <returns>updated file name</returns>
         String itsFile(String fn)
         {
             if (fn.IndexOf('.') < 0)
             {
-                fn += ".txt";
+                fn += ".json";
             }
             fn = "..\\" + fn;
             return fn;
         }
 
+        /// <summary>
+        /// Write data into file.
+        /// </summary>
+        /// <param name="filename">file name</param>
+        /// <param name="data">data</param>
         void intoFile(String filename, String data)
         {
             filename = itsFile(filename);
             System.IO.File.WriteAllText(filename, data);
         }
 
+        /// <summary>
+        /// Reading data from the file.
+        /// </summary>
+        /// <param name="filename">file name</param>
+        /// <returns>file's data</returns>
         String outFile(String filename)
         {
             filename = itsFile(filename);
@@ -112,6 +154,10 @@ namespace DataFormat
             return data;
         }
 
+        /// <summary>
+        /// Serialization parameter collections and save this data into json file.
+        /// </summary>
+        /// <param name="filename">file name</param>
         public void SaveFile(String filename)
         {
             MemoryStream stream = new MemoryStream();
@@ -123,6 +169,10 @@ namespace DataFormat
             intoFile(filename, jsondata);
         }
 
+        /// <summary>
+        /// Opening file, reading, and deserializationing it. Then transfering data in collection.
+        /// </summary>
+        /// <param name="filename">json file name</param>
         public void OpenFile(String filename)
         {
             String jsondata = outFile(filename);
