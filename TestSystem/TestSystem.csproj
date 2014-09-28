@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Algorithm\AbsAlgorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
     <Compile Include="DataFormat\IDataFormat.cs" />
     <Compile Include="DataFormat\IEnterBlackBoxParam.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

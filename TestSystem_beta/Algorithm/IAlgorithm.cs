@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestSystem_beta.Algorithm
+namespace TestSystem.Algorithm
 {
     /**
-     *Этот интерфейс должны наследовать все алгоритмы
+     * Этот интерфейс должны наследовать все алгоритмы
      */
     interface IAlgorithm
     {
