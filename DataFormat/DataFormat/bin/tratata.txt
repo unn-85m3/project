@@ -1,0 +1,1 @@
+[{"cacosts":10,"cin":5,"cout":12,"din":6,"dout":13,"expan":11,"opcosts":9,"pin":1,"pout":2,"qin":7,"qout":3,"tin":4,"tout":8},{"cacosts":4,"cin":9,"cout":2,"din":8,"dout":1,"expan":3,"opcosts":5,"pin":13,"pout":12,"qin":7,"qout":11,"tin":10,"tout":6}]
