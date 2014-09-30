@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Exception;
 using TestSystem.DataFormat;
 
 namespace TestSystem.BackBoxFunction
@@ -12,7 +13,11 @@ namespace TestSystem.BackBoxFunction
         private Double cost;
         public IOutBlackBoxParam Calculate(double x1, double x2)
         {
-            cost = Math.Sin(x1) * Math.Cos(x2);
+            if ((x1 - x2) < 0) throw new Exception();
+            else
+            {
+                cost = (Math.Sin(x1) * Math.Cos(x2) + Math.Max(x1, x2)) / Math.Sqrt(x1 - x2);
+            }
             return this;
         }
 
