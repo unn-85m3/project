@@ -61,6 +61,8 @@
   <ItemGroup>
     <Compile Include="Algorithm\AbsAlgorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
+    <Compile Include="BackBoxFunction\BlackBoxFunction.cs" />
+    <Compile Include="BackBoxFunction\IFunction.cs" />
     <Compile Include="DataFormat\IDataFormat.cs" />
     <Compile Include="DataFormat\IEnterBlackBoxParam.cs" />
     <Compile Include="DataFormat\IOutBlackBoxParam.cs" />
@@ -72,7 +74,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test_system\CalculatingThread.cs" />
+    <Compile Include="test_system\IEndCalculate.cs" />
     <Compile Include="test_system\ITestSystem.cs" />
+    <Compile Include="test_system\TestSystem.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -3,6 +3,19 @@
   dslVersion="1.0.0.0"
   Id="219dedf5-d731-4d2c-b73b-45bbd7589ff0"
   name="TestSystem_model" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="f2ca29fb-e04b-49f1-9412-7a324faf1728">
+      <body>Интерфейс, который наследуется классом, отвечающим за агрегирование функции Ч.Я.
+С этим интерфейсом баботают все алгоритмы</body>
+      <annotatedElements>
+        <interfaceMoniker
+          Id="62474c52-1b49-42ee-bd48-6800fada52a4"
+          LastKnownName="IFunction"
+          LastKnownLocation="TestSystem_model.uml" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
   <profileInstances>
     <packageHasProfileInstances
       Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
@@ -24,16 +37,47 @@
         name="IDataFormat"
         isAbstract="false"
         isLeaf="false">
-        <generalsInternal>
-          <generalization
-            Id="c02bb090-5347-4f20-ad6a-65aa05bc5372"
-            isSubstitutable="false">
+        <targetEnds>
+          <association
+            Id="5d712406-2b89-4731-9cc2-0d92cd8955dd"
+            isDerived="false"
+            sourceEndRoleName="IDataFormat"
+            targetEndRoleName="IEnterBlackBox"
+            isLeaf="false"
+            isAbstract="false">
             <interfaceMoniker
               Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1"
               LastKnownName="IEnterBlackBox"
               LastKnownLocation="TestSystem_model.uml" />
-          </generalization>
-        </generalsInternal>
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e97ffcdd-0c8d-45d7-bdee-f6dbe71517e6"
+                  name="IDataFormat"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Composite"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="d0b8e61d-bf6d-4b05-bdb1-1145246cc585"
+                  name="IEnterBlackBox"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="true" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+        </targetEnds>
         <ownedOperations>
           <operation
             Id="4a0e2d9f-147e-470b-8fdf-d3028a13a595"
@@ -51,8 +95,8 @@
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="259b4e4c-cc88-4921-a7eb-aa0cebf20b31"
-                      LastKnownName="IEnterBalcBox"
+                      Id="c1a61d25-146b-4873-b334-eb680769389e"
+                      LastKnownName="List&lt;IEnterBlackBox&gt;"
                       LastKnownLocation="TestSystem_model.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -101,12 +145,168 @@
         isLeaf="false">
         <ownedOperations>
           <operation
-            Id="3a77a6b8-620d-4a16-933c-5ec6133cdb7a"
+            Id="028af01e-e423-4d40-92e5-191042d13578"
+            name=" p_in_min { get; }"
             isLeaf="false"
             isStatic="false"
             isAbstract="true"
             concurrency="Sequential"
-            isQuery="false" />
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="74e7d96a-6166-4a7d-90be-e801a73e8b6c"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="ce75bb8d-b8cf-47aa-8c3b-47b7d133076d"
+            name="p_in_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="bb4277a8-2728-4d31-bf3e-7f876fe9e89d"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f039e6ff-e36d-4ea9-b048-f9bf44950c8a"
+            name="p_out_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="71c69733-8671-4a08-81e9-b4eb7716b58e"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="0f02df1b-8467-4e8d-a3af-554a91b830fb"
+            name="p_out_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3d402a24-9521-4f64-ab06-f25add345875"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="61588a51-0390-407e-82b6-a44e4f32446c"
+            name="comprimate_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f603f209-b72e-4098-9616-5c7551057fe5"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="643cb74c-d67e-4d4d-aa84-3c6eec313ee8"
+            name="comprimate_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d19a37e8-3f81-4f74-b5b0-cef8ff64232a"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="1f5ef6ea-e769-4cf8-9af4-07302149f6b5"
+            name="id{get;}"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="97c851cf-576b-4597-85e2-cfeb015ebf71"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperations>
       </Interface>
     </packageHasNamedElement>
@@ -144,6 +344,224 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
+          <operation
+            Id="8987268f-a734-43db-99ef-cf585428e85e"
+            name=" p_in_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e789294f-cf88-4815-9524-5d131d01cf16"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="d224467d-d701-43b7-8ad3-83aaff18fb78"
+            name="p_in_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fa488301-f5f5-443d-80a7-64b4a0c3717e"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="5e0892c6-9919-4454-a40b-808e2410ce7f"
+            name="p_out_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="0af9c628-22e3-4dd0-ae3f-8be78c59efbe"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="3f449d66-430d-4964-a49c-a8790dc4451e"
+            name="p_out_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="02ff2dcc-c802-4ee4-bcd0-a70954362917"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="97ebde9d-8c25-4d7e-84ca-1749d00c15a4"
+            name="comprimate_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e79d0a9d-2099-4c71-a0c7-e187edd7e65c"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="7462f656-8eff-4627-84f1-d167e4000673"
+            name="comprimate_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="8df8dce5-b6d7-4e40-9c9d-ca5b3ea0c292"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="7ff4fa06-ea26-418a-bf87-d07c37cb0a4f"
+            name="GetData"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="84571386-1796-4b6a-87ab-3fbe4470f887"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="259b4e4c-cc88-4921-a7eb-aa0cebf20b31"
+                      LastKnownName="IEnterBalcBox"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="86933b16-b6bd-45c6-bc3a-6b93f8fdec5e"
+            name="SaveData"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d4284b22-e016-4ac6-b6b9-19b6a40e13b3"
+                  name="IEnterBlackBox"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d08b85c8-2fa7-456f-823e-738a81b6f104"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="70956605-a2ed-40f1-8bd5-3932923f769d"
+                      LastKnownName="void"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="85fd5767-c291-4a3a-ad3e-1382c3bb12a8"
+            name="id{get;}"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="af9d2496-a73a-4b23-a112-c56ff22b3052"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <primitiveTypeMoniker
+                      Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+                      LastKnownName="String"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -180,8 +598,8 @@
                   isUnique="false">
                   <type_NamedElement>
                     <undefinedTypeMoniker
-                      Id="259b4e4c-cc88-4921-a7eb-aa0cebf20b31"
-                      LastKnownName="IEnterBalcBox"
+                      Id="c1a61d25-146b-4873-b334-eb680769389e"
+                      LastKnownName="List&lt;IEnterBlackBox&gt;"
                       LastKnownLocation="TestSystem_model.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -226,6 +644,145 @@
             isAbstract="false"
             concurrency="Sequential"
             isQuery="false" />
+          <operation
+            Id="9a1f01d9-1661-49fd-b615-1c3f8953ef9d"
+            name=" p_in_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="e3b2840a-0798-425f-a20b-9556713645f1"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a4481436-80b7-41b0-a22a-6ba7b5ef65fb"
+            name="p_in_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7d38e228-91d0-4132-9d6e-9a5d23e5060c"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="5f49a484-46b3-463c-906a-b4903fc51ef7"
+            name="p_out_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="efffb98d-dd73-422c-87a8-9cd3c6205b1a"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="cb0ac91c-615d-48a4-ab20-071ed349f607"
+            name="p_out_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="3867c3e2-a072-4d37-8392-a22a1fb8801c"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="470bdcf1-1c66-4526-9574-8d9232470f33"
+            name="comprimate_min { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b9a8e681-0c62-4691-a673-ac551a8e4be7"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="bd26427d-62b1-48f8-9929-9ffcf8cae900"
+            name="comprimate_max { get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="1f063b39-cf36-4dc9-9423-eb0c9783ffd3"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -318,20 +875,20 @@
             </relationshipOwnedElementsInternal>
           </association>
           <association
-            Id="a084b9fb-1649-4385-8415-2426637dea6e"
+            Id="4678176a-f858-49c6-b864-433e6fca47c2"
             isDerived="false"
             sourceEndRoleName="AbsAlgorithm"
-            targetEndRoleName="BlackBoxFunction"
+            targetEndRoleName="IFunction"
             isLeaf="false"
             isAbstract="false">
-            <classMoniker
-              Id="4cf742ac-3c87-419f-83ff-620f37051964"
-              LastKnownName="BlackBoxFunction"
+            <interfaceMoniker
+              Id="62474c52-1b49-42ee-bd48-6800fada52a4"
+              LastKnownName="IFunction"
               LastKnownLocation="TestSystem_model.uml" />
             <relationshipOwnedElementsInternal>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="2c633843-86ef-416a-96a4-769357509a50"
+                  Id="24d2cbc2-d320-427e-b1c4-89fcae25b8ae"
                   name="AbsAlgorithm"
                   isLeaf="false"
                   isStatic="false"
@@ -344,8 +901,47 @@
               </associationHasOwnedEnds>
               <associationHasOwnedEnds>
                 <memberEnd
-                  Id="76a40aee-d906-4452-93ed-353c25a6b987"
-                  name="BlackBoxFunction"
+                  Id="6f947e89-1a04-4123-86ef-86e7fff6d8f9"
+                  name="IFunction"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
+          <association
+            Id="490445d4-5cb7-43b2-b026-94dca0f8ccb8"
+            isDerived="false"
+            sourceEndRoleName="AbsAlgorithm"
+            targetEndRoleName="IEnterBlackBox"
+            isLeaf="false"
+            isAbstract="false">
+            <interfaceMoniker
+              Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1"
+              LastKnownName="IEnterBlackBox"
+              LastKnownLocation="TestSystem_model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="b49553bc-b7d6-418d-8994-8289cb3b834c"
+                  name="AbsAlgorithm"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="e1f6f489-b10e-40ae-ad53-2a46dff4eb3c"
+                  name="IEnterBlackBox"
                   isLeaf="false"
                   isStatic="false"
                   isReadOnly="false"
@@ -372,8 +968,27 @@
             isComposite="false">
             <type_NamedElement>
               <undefinedTypeMoniker
-                Id="06709def-bcb9-4d74-a88c-cf97b1e948d9"
-                LastKnownName="List&lt;IEnterBackBox&gt;"
+                Id="79f0100f-7fc9-499d-99f1-c9d1f6932155"
+                LastKnownName="IEnterBackBox"
+                LastKnownLocation="TestSystem_model.uml" />
+            </type_NamedElement>
+          </property>
+          <property
+            Id="1fd0cecf-5619-463d-a5f5-093c6244033c"
+            name="blackBoxFunction"
+            visibility="Protected"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="62474c52-1b49-42ee-bd48-6800fada52a4"
+                LastKnownName="IFunction"
                 LastKnownLocation="TestSystem_model.uml" />
             </type_NamedElement>
           </property>
@@ -392,9 +1007,30 @@
               <operationHasOwnedParameters>
                 <parameter
                   Id="986cb80a-9ee3-476d-918a-a1f0d301dc65"
-                  name="IEnterBlackBox"
+                  name="parameter"
                   direction="In"
-                  isUnique="false" />
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1"
+                      LastKnownName="IEnterBlackBox"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="12d92c23-0a18-4484-b29c-dbf2c233d05a"
+                  name="function"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="62474c52-1b49-42ee-bd48-6800fada52a4"
+                      LastKnownName="IFunction"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
@@ -416,6 +1052,44 @@
                     <interfaceMoniker
                       Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
                       LastKnownName="IOutBlackBoxParam"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="f19fae92-e19a-4ce0-a311-38d8084a8df7"
+            name="SetParameter"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="90e2bdff-6401-42dd-a074-42598a2765d5"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="70956605-a2ed-40f1-8bd5-3932923f769d"
+                      LastKnownName="void"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="153197f3-0046-4c37-b317-4d11f184e1e1"
+                  name="parametr"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1"
+                      LastKnownName="IEnterBlackBox"
                       LastKnownLocation="TestSystem_model.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -488,6 +1162,44 @@
                     <interfaceMoniker
                       Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
                       LastKnownName="IOutBlackBoxParam"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="a93c45a4-0434-4410-a3f6-b15675e4a7a4"
+            name="SetParameter"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="b906040b-8337-4f49-9cc0-09413db6f583"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="70956605-a2ed-40f1-8bd5-3932923f769d"
+                      LastKnownName="void"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="2580dd55-1df1-4819-9c32-3524d4a04d92"
+                  name="parametr"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1"
+                      LastKnownName="IEnterBlackBox"
                       LastKnownLocation="TestSystem_model.uml" />
                   </type_NamedElement>
                 </parameter>
@@ -601,9 +1313,30 @@
               <operationHasOwnedParameters>
                 <parameter
                   Id="b844b018-ef07-4cf3-bbe1-565cda0c3b6e"
-                  name="List&lt;IAlgorithm&gt;"
+                  name="algorithms"
                   direction="In"
-                  isUnique="false" />
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="9b06b688-d6b6-44c5-b775-f140c4e12e23"
+                      LastKnownName="List&lt;IAlgorithm&gt;"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="805ca421-a7b7-4001-816d-97150e4d1734"
+                  name="parameters"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="3c74e78e-0ac2-4cf5-afea-708884bb795b"
+                      LastKnownName="List&lt;IDataFormat &gt;"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
@@ -855,7 +1588,33 @@
         Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
         name="IOutBlackBoxParam"
         isAbstract="false"
-        isLeaf="false" />
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="f42296f8-487d-46a1-b8cc-c3bf7fcd52af"
+            name="Cost {get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="6ebe54bf-07fd-4385-9d2b-212c01943ea6"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
     </packageHasNamedElement>
     <packageHasNamedElement>
       <Interface
@@ -972,8 +1731,104 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation
+            Id="1f052613-897d-4565-a80c-7faac618bee6"
+            name="Cost {get; }"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="58c3fb2e-aa66-4986-b032-26302b8f291a"
+                  direction="Return">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+                      LastKnownName="Double"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation
+            Id="e5684db8-43b6-4a3d-9a79-d3f5f31f130d"
+            name="SetParameter"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7ae9fb0f-c2ce-4c12-8873-888ebf198120"
+                  name="parametr"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1"
+                      LastKnownName="IEnterBlackBox"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="4ac3a50d-5048-48c1-b78e-6388ebac2b82"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="70956605-a2ed-40f1-8bd5-3932923f769d"
+                      LastKnownName="void"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="79f0100f-7fc9-499d-99f1-c9d1f6932155"
+        name="IEnterBackBox" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="6efe3573-542f-471b-bea8-6c415185ea30"
+        name="IEnt " />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2966531b-dad3-4206-ae5d-0681ae9549ac"
+        name="Double" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c3a87b73-0a89-44bd-8812-b1d4b3050e81"
+        name="List&lt;IEnterBalcBox&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="c1a61d25-146b-4873-b334-eb680769389e"
+        name="List&lt;IEnterBlackBox&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="9b06b688-d6b6-44c5-b775-f140c4e12e23"
+        name="List&lt;IAlgorithm&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="3c74e78e-0ac2-4cf5-afea-708884bb795b"
+        name="List&lt;IDataFormat &gt;" />
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
