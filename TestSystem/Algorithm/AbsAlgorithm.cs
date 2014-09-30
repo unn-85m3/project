@@ -8,7 +8,7 @@ using TestSystem.DataFormat;
 namespace TestSystem.Algorithm
 {
 
-    class AbsAlgorithm:IAlgorithm
+    abstract class AbsAlgorithm:IAlgorithm
     {
         protected IEnterBlackBoxParam parameter;
         protected String name;

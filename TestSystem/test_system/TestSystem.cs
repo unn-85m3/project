@@ -51,5 +51,11 @@ namespace TestSystem.test_system
         {
             ///throw new NotImplementedException();
         }
+
+
+        public void onEndAlgorithm(IAlgorithm alg, int time)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
