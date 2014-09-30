@@ -12,6 +12,7 @@ namespace TestSystem.Algorithm
      */
     interface IAlgorithm
     {
+        void SetCalculateListener(ICalculateListener listener);
         IOutBlackBoxParam Calculate();
         String Name {get; }
         
