@@ -18,14 +18,13 @@ namespace TestSystem.test_system
         public CalculatingThread(IAlgorithm alg)
         {
             this.alg = alg;
-            thread = new Thread(this.calc);
-            
-            
+           
         }
 
 
         public void Start()
         {
+            thread = new Thread(this.calc);
             thread.Start();
         }
 
