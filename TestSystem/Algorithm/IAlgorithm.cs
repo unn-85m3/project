@@ -14,7 +14,6 @@ namespace TestSystem.Algorithm
     {
         IOutBlackBoxParam Calculate();
         String Name {get; }
-        int length { get; }
         
     }
 }
