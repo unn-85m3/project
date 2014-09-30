@@ -7,30 +7,19 @@ using TestSystem.DataFormat;
 
 namespace TestSystem.Algorithm
 {
+
     class AbsAlgorithm:IAlgorithm
     {
-        protected List<IEnterBlackBoxParam> parameters;
+        protected IEnterBlackBoxParam parameter;
         protected String name;
-        protected AbsAlgorithm(List<IEnterBlackBoxParam> parameters)
+        protected AbsAlgorithm(IEnterBlackBoxParam parameter)
         {
-            this.parameters = parameters;
+            this.parameter = parameter;
         }
 
         public string Name
         {
             get { return name; }
-        }
-
-
-        public int length
-        {
-            get {
-                if (parameters != null)
-                {
-                    return parameters.Count;
-                }
-                throw new NullReferenceException(); 
-            }
         }
 
 
