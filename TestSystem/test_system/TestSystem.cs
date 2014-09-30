@@ -7,7 +7,7 @@ using TestSystem.Algorithm;
 
 namespace TestSystem.test_system
 {
-    class TestSystem:ITestSystem
+    class TestSystem:ITestSystem,IEndCalculate
     {
         protected List<IAlgorithm> algorithms;
         public TestSystem()
@@ -38,7 +38,18 @@ namespace TestSystem.test_system
 
         public void Test()
         {
-            throw new NotImplementedException();
+            foreach(IAlgorithm alg in algorithms)
+            {
+                
+                CalculatingThread th = new CalculatingThread(alg);
+                th.setEndListener(this);
+                th.Start();
+            }
+        }
+
+        public void onEndCalculate(IAlgorithm alg, DataFormat.IOutBlackBoxParam rez)
+        {
+            ///throw new NotImplementedException();
         }
     }
 }

@@ -12,7 +12,7 @@ namespace TestSystem.Algorithm
     {
         protected IEnterBlackBoxParam parameter;
         protected String name;
-        protected AbsAlgorithm(IEnterBlackBoxParam parameter)
+        protected AbsAlgorithm(IEnterBlackBoxParam parameter=null)
         {
             this.parameter = parameter;
         }
@@ -26,5 +26,10 @@ namespace TestSystem.Algorithm
         public abstract IOutBlackBoxParam Calculate();
 
 
+
+        public IEnterBlackBoxParam enterParam
+        {
+            set { parameter=value; }
+        }
     }
 }
