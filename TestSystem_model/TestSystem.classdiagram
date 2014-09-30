@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm4="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="690ce8dc-2d36-4a2f-9e42-e30c904e8a27" name="TestSystem" linkedPackageId="525f4b31-1acc-4158-9b8b-545652df3bb6" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <ownedCommentsInternal>
+    <comment Id="aaac63f5-9fec-414a-9cf9-b4072fc9b084">
+      <elementDefinition Id="f2ca29fb-e04b-49f1-9412-7a324faf1728" />
+      <body>Интерфейс, который наследуется классом, отвечающим за агрегирование функции Ч.Я.
+С этим интерфейсом баботают все алгоритмы</body>
+      <annotatedElements>
+        <interfaceMoniker Id="c1afe8cd-1788-4da3-a19f-46592021d54b" LastKnownName="IFunction" />
+      </annotatedElements>
+    </comment>
+  </ownedCommentsInternal>
   <packagedElements>
     <logicalClassDesignerModelHasTypes>
       <Interface Id="46e23889-e8eb-4a72-9ffe-4f8ff9d9782b" name="IDataFormat" isAbstract="false" isLeaf="false">
@@ -30,7 +40,7 @@
                 <parameter Id="e985a34f-537b-48e0-b7fe-81cf02c95bad" direction="Return" isUnique="false">
                   <elementDefinition Id="189eb104-b5c3-4ffe-a89b-24e631f7f02d" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="a2adc2f2-164e-4fec-8f93-e4c447701528" LastKnownName="IEnterBalcBox" />
+                    <referencedTypeMoniker Id="bf00b4b7-589a-4e04-b298-3fec8d27b178" LastKnownName="List&lt;IEnterBlackBox&gt;" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -143,140 +153,10 @@
       </Interface>
     </logicalClassDesignerModelHasTypes>
     <packageHasNamedElement>
-      <referencedType Id="a2adc2f2-164e-4fec-8f93-e4c447701528" name="IEnterBalcBox" isAbstract="false" isLeaf="false" cachedFullName="IEnterBalcBox">
-        <elementDefinition Id="259b4e4c-cc88-4921-a7eb-aa0cebf20b31" />
-      </referencedType>
-    </packageHasNamedElement>
-    <packageHasNamedElement>
       <referencedType Id="1a1a7a42-a414-45ad-984d-c8265af1d539" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
         <elementDefinition Id="70956605-a2ed-40f1-8bd5-3932923f769d" />
       </referencedType>
     </packageHasNamedElement>
-    <logicalClassDesignerModelHasTypes>
-      <class Id="3653aefb-91ed-4ade-8c2f-6589134d5d13" name="EnterParams" isAbstract="false" isLeaf="false" isActiveClass="false">
-        <elementDefinition Id="be65ec5a-2e72-4346-b5d5-fb11a9c080b2" />
-        <suppliersInternal>
-          <interfaceRealization Id="30fc20df-6488-46dc-9fd3-8ea51635fdeb">
-            <interfaceMoniker Id="120ec7e2-510b-48a4-9e5f-2824319a240a" LastKnownName="IEnterBlackBox" />
-            <elementDefinition Id="9adc9472-d948-48c9-aab4-0340c6c4ef16" />
-          </interfaceRealization>
-        </suppliersInternal>
-        <ownedOperationsInternal>
-          <operation Id="b276cddd-e44a-4311-82d9-17ec9724b063" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="17ecca8a-9cc4-4c92-a7f5-cc3753edd6b0" />
-          </operation>
-          <operation Id="d542721f-6fc2-442d-9496-4f1c4e1ad3c8" name=" p_in_min { get; }" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="8987268f-a734-43db-99ef-cf585428e85e" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="fbeeb20b-a743-4724-8c86-1270c09011fc" direction="Return">
-                  <elementDefinition Id="e789294f-cf88-4815-9524-5d131d01cf16" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="99abfeea-4197-405b-887b-5dd55d9f91f7" LastKnownName="Double" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="9e132d8c-3bcc-42c3-9586-b00c4928f41a" name="p_in_max { get; }" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="d224467d-d701-43b7-8ad3-83aaff18fb78" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="4269256d-0918-4832-82f0-c5a3ffd2b100" direction="Return" isUnique="false">
-                  <elementDefinition Id="fa488301-f5f5-443d-80a7-64b4a0c3717e" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="99abfeea-4197-405b-887b-5dd55d9f91f7" LastKnownName="Double" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="580ffa30-73ad-4439-9b22-e28456a0c8c7" name="p_out_min { get; }" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="5e0892c6-9919-4454-a40b-808e2410ce7f" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="c26c9a01-b4b2-4207-b1d9-e49178221f6a" direction="Return">
-                  <elementDefinition Id="0af9c628-22e3-4dd0-ae3f-8be78c59efbe" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="99abfeea-4197-405b-887b-5dd55d9f91f7" LastKnownName="Double" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="5e47b64c-91bb-4c3f-acca-91de25399305" name="p_out_max { get; }" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="3f449d66-430d-4964-a49c-a8790dc4451e" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="b4d783dc-2694-4ff5-b49a-7467823491fd" direction="Return">
-                  <elementDefinition Id="02ff2dcc-c802-4ee4-bcd0-a70954362917" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="99abfeea-4197-405b-887b-5dd55d9f91f7" LastKnownName="Double" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="418ed6de-567a-49b3-9360-1b5834dd42be" name="comprimate_min { get; }" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="97ebde9d-8c25-4d7e-84ca-1749d00c15a4" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="5076b669-6eb3-4526-8a7b-c47f7a28f7ca" direction="Return">
-                  <elementDefinition Id="e79d0a9d-2099-4c71-a0c7-e187edd7e65c" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="99abfeea-4197-405b-887b-5dd55d9f91f7" LastKnownName="Double" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="1bbddacb-5819-4b3e-bc5b-5a12ce623980" name="comprimate_max { get; }" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="7462f656-8eff-4627-84f1-d167e4000673" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="7f3e51ae-7691-4564-98b6-2ea8f90b9f33" direction="Return">
-                  <elementDefinition Id="8df8dce5-b6d7-4e40-9c9d-ca5b3ea0c292" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="99abfeea-4197-405b-887b-5dd55d9f91f7" LastKnownName="Double" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="0c90aac5-07cd-481b-b553-7ca41fa224a8" name="GetData" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="7ff4fa06-ea26-418a-bf87-d07c37cb0a4f" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="eb3759e8-168a-4cb7-8260-c8c6e22eb599" direction="Return" isUnique="false">
-                  <elementDefinition Id="84571386-1796-4b6a-87ab-3fbe4470f887" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="a2adc2f2-164e-4fec-8f93-e4c447701528" LastKnownName="IEnterBalcBox" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-          <operation Id="d613f733-1ad6-4e32-9300-c34bdb0a713c" name="SaveData" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
-            <elementDefinition Id="86933b16-b6bd-45c6-bc3a-6b93f8fdec5e" />
-            <ownedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="4fb5e50c-2cae-4d19-bb9e-9a28e79c0b90" name="IEnterBlackBox" direction="In" isUnique="false">
-                  <elementDefinition Id="d4284b22-e016-4ac6-b6b9-19b6a40e13b3" />
-                </parameter>
-              </operationHasOwnedParameters>
-              <operationHasOwnedParameters>
-                <parameter Id="e424fdfb-07b8-4a9a-ad03-55d4d29f45d9" direction="Return" isUnique="false">
-                  <elementDefinition Id="d08b85c8-2fa7-456f-823e-738a81b6f104" />
-                  <type_NamedElement>
-                    <referencedTypeMoniker Id="1a1a7a42-a414-45ad-984d-c8265af1d539" LastKnownName="void" />
-                  </type_NamedElement>
-                </parameter>
-              </operationHasOwnedParameters>
-            </ownedParameters>
-          </operation>
-        </ownedOperationsInternal>
-      </class>
-    </logicalClassDesignerModelHasTypes>
     <logicalClassDesignerModelHasTypes>
       <class Id="da12d8aa-9dab-4bae-ac4c-6c460d352f62" name="JSON_Format" isAbstract="false" isLeaf="false" isActiveClass="false">
         <elementDefinition Id="ec533dd5-ae9f-442b-85f2-e0928db30adf" />
@@ -294,7 +174,7 @@
                 <parameter Id="ed12ce40-4776-4b1d-b6cb-9beda64057f7" direction="Return" isUnique="false">
                   <elementDefinition Id="54113097-d72c-4ab0-b998-18bbb6759686" />
                   <type_NamedElement>
-                    <referencedTypeMoniker Id="a2adc2f2-164e-4fec-8f93-e4c447701528" LastKnownName="IEnterBalcBox" />
+                    <referencedTypeMoniker Id="bf00b4b7-589a-4e04-b298-3fec8d27b178" LastKnownName="List&lt;IEnterBlackBox&gt;" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -412,22 +292,6 @@
           </interfaceRealization>
         </suppliersInternal>
         <targetEnds>
-          <association Id="332ade20-01f4-418e-b845-734700a1f719" isDerived="false" sourceEndRoleName="AbsAlgorithm" targetEndRoleName="EnterParams" isLeaf="false" isAbstract="false">
-            <classMoniker Id="3653aefb-91ed-4ade-8c2f-6589134d5d13" LastKnownName="EnterParams" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="5911d206-c194-4396-ba2f-fde1e8322469" name="AbsAlgorithm" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="803c7fa5-7b1d-41d6-a6a3-2011e6b8a73e" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="444c0614-48b0-4498-b33f-7ed51745252e" name="EnterParams" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
-                  <elementDefinition Id="910e3ff4-ecde-477f-8720-1550bc9334eb" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="9ca51b9c-7e3c-472c-8475-8c0896e6f1e2" />
-          </association>
           <association Id="7a572061-381f-401e-b73b-4bc44a98616f" isDerived="false" sourceEndRoleName="AbsAlgorithm" targetEndRoleName="IFunction" isLeaf="false" isAbstract="false">
             <interfaceMoniker Id="c1afe8cd-1788-4da3-a19f-46592021d54b" LastKnownName="IFunction" />
             <relationshipOwnedElementsInternal>
@@ -443,6 +307,22 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="4678176a-f858-49c6-b864-433e6fca47c2" />
+          </association>
+          <association Id="a7f79878-1956-4df3-9a52-e230985fd865" isDerived="false" sourceEndRoleName="AbsAlgorithm" targetEndRoleName="IEnterBlackBox" isLeaf="false" isAbstract="false">
+            <interfaceMoniker Id="120ec7e2-510b-48a4-9e5f-2824319a240a" LastKnownName="IEnterBlackBox" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="ba062a4d-dc72-4ede-85d5-0dcd02a02aba" name="AbsAlgorithm" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="b49553bc-b7d6-418d-8994-8289cb3b834c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="0c170444-b060-4a3d-98f1-913a0a68dbaf" name="IEnterBlackBox" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="e1f6f489-b10e-40ae-ad53-2a46dff4eb3c" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="490445d4-5cb7-43b2-b026-94dca0f8ccb8" />
           </association>
         </targetEnds>
         <ownedAttributesInternal>
@@ -464,7 +344,7 @@
             <elementDefinition Id="866dbf94-8e64-4312-9152-0c3d25867511" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="04869f52-c883-4648-a45f-1b0c4a648ecb" name="parameters" direction="In" isUnique="false">
+                <parameter Id="04869f52-c883-4648-a45f-1b0c4a648ecb" name="parameter" direction="In" isUnique="false">
                   <elementDefinition Id="986cb80a-9ee3-476d-918a-a1f0d301dc65" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="abbaef09-3187-410c-b23b-f5a810dc6038" LastKnownName="IEnterBlackBox" />
@@ -472,7 +352,7 @@
                 </parameter>
               </operationHasOwnedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="37d82c6f-a8be-4dd0-a87d-6d30e541586a" name="function" direction="In">
+                <parameter Id="37d82c6f-a8be-4dd0-a87d-6d30e541586a" name="function" direction="In" isUnique="false">
                   <elementDefinition Id="12d92c23-0a18-4484-b29c-dbf2c233d05a" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="fae1426b-ea78-42fc-af5f-499676406061" LastKnownName="IFunction" />
@@ -489,6 +369,27 @@
                   <elementDefinition Id="90e9576c-bfe6-4adb-ab0e-528a92234283" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="bf72eb80-8c68-40d1-96b0-f4b44708483f" LastKnownName="IOutBlackBoxParam" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="4d65b88a-c619-4cef-b2c1-5e0fa5e6ec37" name="SetParameter" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="f19fae92-e19a-4ce0-a311-38d8084a8df7" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="cb1f6830-a2d1-43ef-beb1-f946c84175b5" direction="Return" isUnique="false">
+                  <elementDefinition Id="90e2bdff-6401-42dd-a074-42598a2765d5" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1a1a7a42-a414-45ad-984d-c8265af1d539" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="b9ae8092-e965-4d21-9ebb-815a266ca78b" name="parametr" direction="In" isUnique="false">
+                  <elementDefinition Id="153197f3-0046-4c37-b317-4d11f184e1e1" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="abbaef09-3187-410c-b23b-f5a810dc6038" LastKnownName="IEnterBlackBox" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -531,6 +432,27 @@
                   <elementDefinition Id="7a0c9416-0f7b-40f6-94b1-e4c53323c8fe" />
                   <type_NamedElement>
                     <referencedTypeMoniker Id="bf72eb80-8c68-40d1-96b0-f4b44708483f" LastKnownName="IOutBlackBoxParam" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+          <operation Id="098b9a87-df03-4fec-a53c-bd05b84a78cd" name="SetParameter" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="a93c45a4-0434-4410-a3f6-b15675e4a7a4" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="4219e96e-3e8e-4e43-b825-80363cc5005f" direction="Return" isUnique="false">
+                  <elementDefinition Id="b906040b-8337-4f49-9cc0-09413db6f583" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="10917b2c-930e-4947-97e2-3dcc608b1d73" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2e81f078-9224-45e0-9e0b-b04df66e06f7" name="parametr" direction="In" isUnique="false">
+                  <elementDefinition Id="2580dd55-1df1-4819-9c32-3524d4a04d92" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="783c97f1-d45a-42bb-b34d-47b5c9f568fd" LastKnownName="IEnterBlackBox" />
                   </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
@@ -591,8 +513,19 @@
             <elementDefinition Id="162311d2-b4bb-485a-9a78-e3331240cac9" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="16484110-6d79-49ef-9f31-c7ad71064746" name="List&lt;IAlgorithm&gt;" direction="In" isUnique="false">
+                <parameter Id="16484110-6d79-49ef-9f31-c7ad71064746" name="algorithms" direction="In" isUnique="false">
                   <elementDefinition Id="b844b018-ef07-4cf3-bbe1-565cda0c3b6e" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="c1e57121-9d67-4878-aac5-e1b8d872105d" LastKnownName="List&lt;IAlgorithm&gt;" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="ee696beb-3592-4eda-a9c0-cfb6ced1a437" name="parameters" direction="In" isUnique="false">
+                  <elementDefinition Id="805ca421-a7b7-4001-816d-97150e4d1734" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="20d123d9-01b0-4937-82a0-33743fb3cc5c" LastKnownName="List&lt;IDataFormat &gt;" />
+                  </type_NamedElement>
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
@@ -658,22 +591,6 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="7fd1aeba-928d-4875-9095-32195666ae82" />
-          </association>
-          <association Id="dcfe25ae-a6a9-48c8-9045-4c4d729fa0d4" isDerived="false" sourceEndRoleName="Form1" targetEndRoleName="EnterParams" isLeaf="false" isAbstract="false">
-            <classMoniker Id="3653aefb-91ed-4ade-8c2f-6589134d5d13" LastKnownName="EnterParams" />
-            <relationshipOwnedElementsInternal>
-              <associationHasOwnedEnds>
-                <memberEnd Id="e2e3c410-6c88-4df2-8010-4d73fff63eec" name="Form1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="false" isNavigableOwned="false">
-                  <elementDefinition Id="3d55e17b-3dff-4f29-8d3d-9d0b9e3cfab3" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-              <associationHasOwnedEnds>
-                <memberEnd Id="637042ac-cd2c-46ac-bb30-2d851c2fd027" name="EnterParams" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="true">
-                  <elementDefinition Id="736125f9-fed6-47af-906b-196cc22ec880" />
-                </memberEnd>
-              </associationHasOwnedEnds>
-            </relationshipOwnedElementsInternal>
-            <elementDefinition Id="54ee7632-89f7-4800-8ce0-76765b08893d" />
           </association>
           <association Id="58623e6d-e866-4a87-b577-224702e7f0b6" isDerived="false" sourceEndRoleName="Form1" targetEndRoleName="BasicAlgorithm" isLeaf="false" isAbstract="false">
             <classMoniker Id="15638972-4a5a-444c-bc6c-b8fb6989dadb" LastKnownName="BasicAlgorithm" />
@@ -820,6 +737,27 @@
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
+          <operation Id="757b9a3a-6756-49ae-a1d6-7c6499c17b95" name="SetParameter" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="e5684db8-43b6-4a3d-9a79-d3f5f31f130d" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="bb969494-b0cc-4676-b1ef-0d3c863e3847" name="parametr" direction="In" isUnique="false">
+                  <elementDefinition Id="7ae9fb0f-c2ce-4c12-8873-888ebf198120" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="abbaef09-3187-410c-b23b-f5a810dc6038" LastKnownName="IEnterBlackBox" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="08182bb3-2988-457f-841f-6f7aa6bd1baa" direction="Return" isUnique="false">
+                  <elementDefinition Id="4ac3a50d-5048-48c1-b78e-6388ebac2b82" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="1a1a7a42-a414-45ad-984d-c8265af1d539" LastKnownName="void" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </logicalClassDesignerModelHasTypes>
@@ -871,6 +809,31 @@
     <packageHasNamedElement>
       <referencedType Id="6b7a69bf-51fd-4abc-95aa-babc79f4dabf" name="Double" isAbstract="false" isLeaf="false" cachedFullName="Double">
         <elementDefinition Id="2966531b-dad3-4206-ae5d-0681ae9549ac" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="bf00b4b7-589a-4e04-b298-3fec8d27b178" name="List&lt;IEnterBlackBox&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;IEnterBlackBox&gt;">
+        <elementDefinition Id="c1a61d25-146b-4873-b334-eb680769389e" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="c1e57121-9d67-4878-aac5-e1b8d872105d" name="List&lt;IAlgorithm&gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;IAlgorithm&gt;">
+        <elementDefinition Id="9b06b688-d6b6-44c5-b775-f140c4e12e23" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="20d123d9-01b0-4937-82a0-33743fb3cc5c" name="List&lt;IDataFormat &gt;" isAbstract="false" isLeaf="false" cachedFullName="List&lt;IDataFormat &gt;">
+        <elementDefinition Id="3c74e78e-0ac2-4cf5-afea-708884bb795b" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="10917b2c-930e-4947-97e2-3dcc608b1d73" name="void" isAbstract="false" isLeaf="false" cachedFullName="void">
+        <elementDefinition Id="70956605-a2ed-40f1-8bd5-3932923f769d" />
+      </referencedType>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <referencedType Id="783c97f1-d45a-42bb-b34d-47b5c9f568fd" name="IEnterBlackBox" isAbstract="false" isLeaf="false" cachedFullName="TestSystem_model::IEnterBlackBox">
+        <elementDefinition Id="8d36696e-bdbe-48cb-96ba-5f03fe5c3dc1" />
       </referencedType>
     </packageHasNamedElement>
   </packagedElements>
