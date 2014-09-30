@@ -9,14 +9,14 @@
         <OperationElementListCompartment Id="d5ca0468-25c9-488c-ad5c-6ab153d9d115" absoluteBounds="0.51500000000000012, 1.1011718675494193, 1.4700000000000002, 0.52148435761531187" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </interfaceShape>
-    <interfaceShape Id="0f7fc7da-1fd9-4ae2-b76c-4131e8976802" isExpanded="false" absoluteBounds="5.75, 0.5, 1.5, 0.5" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
+    <interfaceShape Id="0f7fc7da-1fd9-4ae2-b76c-4131e8976802" absoluteBounds="5.75, 0.5, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="207, 223, 191">
       <interfaceMoniker Id="120ec7e2-510b-48a4-9e5f-2824319a240a" LastKnownName="IEnterBlackBox" />
       <nestedChildShapes>
         <AttributeElementListCompartment Id="2f71fbc7-e10d-47ba-b84e-8b910311cd5c" absoluteBounds="5.765, 0.89000000000000012, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
         <OperationElementListCompartment Id="fe0ec5e3-4408-471c-adc4-41d81dd33abb" isExpanded="false" absoluteBounds="5.765, 1.1011718675494193, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </interfaceShape>
-    <associationConnector edgePoints="[(2 : 1.54882811258237); (3.16666666666667 : 1.54882811258237 : JumpStart); (3.33333333333333 : 1.54882811258237 : JumpEnd); (6.5 : 1.54882811258237); (6.5 : 1)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(2 : 1.15625); (4.41666666666667 : 1.15625 : JumpStart); (4.58333333333333 : 1.15625 : JumpEnd); (5.75 : 1.15625)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="cb61c007-abe1-44d0-802d-26395cba395b" />
       <relativeChildShapes />
       <nodes>
@@ -46,7 +46,7 @@
         <OperationElementListCompartment Id="46b6dfb4-fb34-4fe1-9b03-f61c82fd8b27" absoluteBounds="7.265, 3.171484357615312, 1.7200000000000002, 0.68164060264825821" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(7.6562485 : 2.25); (7.6562485 : 0.75); (7.25 : 0.75)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(7.6874975 : 2.25); (7.6874975 : 1.21875); (7.25 : 1.21875)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="a7f79878-1956-4df3-9a52-e230985fd865" />
       <relativeChildShapes />
       <nodes>
@@ -144,7 +144,7 @@
         <classShapeMoniker Id="b4e6d13e-006b-4d73-b79c-1fae4ef62630" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2 : 4.95117186754942); (8.16666666666667 : 4.95117186754942 : JumpStart); (8.33333333333333 : 4.95117186754942 : JumpEnd); (10.875 : 4.95117186754942); (10.875 : 3.34765622516473)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(2 : 5.05176030132413); (8.16666666666667 : 5.05176030132413 : JumpStart); (8.33333333333333 : 5.05176030132413 : JumpEnd); (10.875 : 5.05176030132413); (10.875 : 3.34765622516473)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="a29e9a10-102f-4a2a-92cc-3533a3a5c6b8" />
       <relativeChildShapes />
       <nodes>
@@ -152,7 +152,7 @@
         <classShapeMoniker Id="9d975e6c-5d45-4d6a-8724-d50302027ee9" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2 : 4.69433343377471); (6.375 : 4.69433343377471); (6.375 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(2 : 4.74462765066206); (6.375 : 4.74462765066206); (6.375 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="58623e6d-e866-4a87-b577-224702e7f0b6" />
       <relativeChildShapes />
       <nodes>
@@ -160,7 +160,7 @@
         <classShapeMoniker Id="6149509f-6a7d-443a-a913-149a6b6960a2" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2 : 5.20801030132413); (8.25 : 5.20801030132413); (8.25 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(2 : 5.25830451821148); (8.25 : 5.25830451821148); (8.25 : 4.375)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="5af15632-cd08-4469-8eb5-12e2dd7efacc" />
       <relativeChildShapes />
       <nodes>
@@ -182,7 +182,7 @@
         <OperationElementListCompartment Id="aacc89e8-250d-43df-ade2-6d66f55cc5cf" absoluteBounds="4.515, 2.6011718675494193, 1.4700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </interfaceShape>
-    <associationConnector edgePoints="[(7.25 : 2.5); (6 : 2.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
+    <associationConnector edgePoints="[(7.25 : 2.66796872516473); (6 : 2.66796872516473)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="113, 111, 110" sourceMultiplicity="1" targetMultiplicity="1">
       <associationMoniker Id="7a572061-381f-401e-b73b-4bc44a98616f" />
       <relativeChildShapes />
       <nodes>
