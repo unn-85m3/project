@@ -154,6 +154,22 @@
             </relationshipOwnedElementsInternal>
             <elementDefinition Id="9ca51b9c-7e3c-472c-8475-8c0896e6f1e2" />
           </association>
+          <association Id="c697d3ab-c87b-46c2-bf69-e7c9320a5f11" isDerived="false" sourceEndRoleName="AbsAlgorithm" targetEndRoleName="BlackBoxFunction" isLeaf="false" isAbstract="false">
+            <classMoniker Id="737f79ab-aad7-4b6e-98df-5ecdfec1170f" LastKnownName="BlackBoxFunction" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd Id="5f7d6bfa-611b-4a8e-a83c-dbfee7f6de80" name="AbsAlgorithm" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Shared" isComposite="false" isNavigableOwned="false">
+                  <elementDefinition Id="2c633843-86ef-416a-96a4-769357509a50" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd Id="6dee1f3e-0323-476e-b17e-24ce97f0cc52" name="BlackBoxFunction" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+                  <elementDefinition Id="76a40aee-d906-4452-93ed-353c25a6b987" />
+                </memberEnd>
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+            <elementDefinition Id="a084b9fb-1649-4385-8415-2426637dea6e" />
+          </association>
         </targetEnds>
         <ownedAttributesInternal>
           <property Id="470ddbbb-19cf-49b9-859c-be793ab39d10" name="parameters" visibility="Protected" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
@@ -168,14 +184,24 @@
             <elementDefinition Id="866dbf94-8e64-4312-9152-0c3d25867511" />
             <ownedParameters>
               <operationHasOwnedParameters>
-                <parameter Id="a53436f4-882d-406b-90cb-567bc49d537b" name="List&lt;EnterParams&gt;" direction="In" isUnique="false">
-                  <elementDefinition Id="51455527-66db-4760-8660-52f2a5e44ca0" />
+                <parameter Id="04869f52-c883-4648-a45f-1b0c4a648ecb" name="IEnterBlackBox" direction="In" isUnique="false">
+                  <elementDefinition Id="986cb80a-9ee3-476d-918a-a1f0d301dc65" />
                 </parameter>
               </operationHasOwnedParameters>
             </ownedParameters>
           </operation>
           <operation Id="5f4e835a-1ca7-4c35-a62f-d8612c6a8b1c" name="Calculate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="e6a4e518-43ac-4309-b83d-c6ba6d908756" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="aab0482c-43e0-4749-99f2-77c1731a45cc" direction="Return" isUnique="false">
+                  <elementDefinition Id="90e9576c-bfe6-4adb-ab0e-528a92234283" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="bf72eb80-8c68-40d1-96b0-f4b44708483f" LastKnownName="IOutBlackBoxParam" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
           </operation>
         </ownedOperationsInternal>
       </class>
@@ -208,6 +234,16 @@
         <ownedOperations>
           <operation Id="64afff3f-a849-4e70-afb8-4aad2b8571c4" name="Calculate" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
             <elementDefinition Id="bfc4a33b-0e43-46f9-97e0-84509fa6c428" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="a804f249-b01e-48ed-8606-8fc8a68049a0" direction="Return" isUnique="false">
+                  <elementDefinition Id="7a0c9416-0f7b-40f6-94b1-e4c53323c8fe" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="bf72eb80-8c68-40d1-96b0-f4b44708483f" LastKnownName="IOutBlackBoxParam" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
           </operation>
         </ownedOperations>
       </Interface>
@@ -388,6 +424,91 @@
         <elementDefinition Id="06709def-bcb9-4d74-a88c-cf97b1e948d9" />
       </referencedType>
     </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="974fbe44-61bf-4730-8a47-edc6298d0063" name="IOutBlackBoxParam" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570" />
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="bf72eb80-8c68-40d1-96b0-f4b44708483f" name="IOutBlackBoxParam" isAbstract="false" isLeaf="false" cachedFullName="TestSystem_model::IOutBlackBoxParam">
+        <elementDefinition Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <Interface Id="c1afe8cd-1788-4da3-a19f-46592021d54b" name="IFunction" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="62474c52-1b49-42ee-bd48-6800fada52a4" />
+        <ownedOperations>
+          <operation Id="e02e403b-1e2c-4606-b945-cbf6735d6bfb" name="Calculate" isLeaf="false" isStatic="false" isAbstract="true" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="3bb57a12-111e-47e9-af9e-7c4150f5a8ac" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="d45c4c5d-0bac-435b-9e40-d702d517899b" direction="Return" isUnique="false">
+                  <elementDefinition Id="d75e8a56-3537-4ba2-a5c3-6d6aa63b7197" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="be743477-b0e2-48a1-8466-b17749a0419e" LastKnownName="IOutBlacBoxParam" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="77e32df8-316c-4242-bdc0-70e14e18d6ee" name="Double x1" direction="In" isUnique="false">
+                  <elementDefinition Id="fa26cc2b-ca87-4bec-9471-5fd9dc4d7902" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="293f8147-e104-4763-bb73-998c14b219a3" name="Double x2" direction="In" isUnique="false">
+                  <elementDefinition Id="f76eb287-dda8-4c07-93a2-b2a39452c0c9" />
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </logicalClassDesignerModelHasTypes>
+    <packageHasNamedElement>
+      <referencedType Id="be743477-b0e2-48a1-8466-b17749a0419e" name="IOutBlacBoxParam" isAbstract="false" isLeaf="false" cachedFullName="IOutBlacBoxParam">
+        <elementDefinition Id="f5bed14a-8813-4353-bc0e-16208dbe87cd" />
+      </referencedType>
+    </packageHasNamedElement>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="737f79ab-aad7-4b6e-98df-5ecdfec1170f" name="BlackBoxFunction" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="4cf742ac-3c87-419f-83ff-620f37051964" />
+        <suppliersInternal>
+          <interfaceRealization Id="919b59c7-918f-43b3-a1f9-7d0a6f404833">
+            <interfaceMoniker Id="c1afe8cd-1788-4da3-a19f-46592021d54b" LastKnownName="IFunction" />
+            <elementDefinition Id="a9134260-ae11-4b4c-a52b-069312f2eb9b" />
+          </interfaceRealization>
+          <interfaceRealization Id="7c4c9c5f-5a6b-454e-b481-9b2b6b0a3cd8">
+            <interfaceMoniker Id="974fbe44-61bf-4730-8a47-edc6298d0063" LastKnownName="IOutBlackBoxParam" />
+            <elementDefinition Id="d55b8aef-1e73-4753-85c3-7ab9dabb4f5a" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation Id="3a300153-f6f4-43e0-aff9-2f861fd8ee75" name="Calculate" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="c5fe977f-5c33-4abd-8f80-bf5f129beae0" />
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="2643151a-e075-427f-a681-829f31d32e35" name="Double x1" direction="In" isUnique="false">
+                  <elementDefinition Id="37832f85-a787-4db8-a408-056969ed5bb4" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="1d9038f1-37f6-4b92-b418-e0b590c64243" name="Double x2" direction="In" isUnique="false">
+                  <elementDefinition Id="eb90fba5-b831-47a9-adc6-f6c839bccd6e" />
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter Id="6e73b8e9-6a23-4f0e-813e-6707a324506c" direction="Return" isUnique="false">
+                  <elementDefinition Id="83b47505-873c-4104-b908-0d38dc91bd66" />
+                  <type_NamedElement>
+                    <referencedTypeMoniker Id="be743477-b0e2-48a1-8466-b17749a0419e" LastKnownName="IOutBlacBoxParam" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
   </packagedElements>
   <package Id="525f4b31-1acc-4158-9b8b-545652df3bb6" name="TestSystem_model">
     <elementDefinition Id="219dedf5-d731-4d2c-b73b-45bbd7589ff0" />

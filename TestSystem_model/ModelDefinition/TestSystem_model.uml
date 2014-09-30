@@ -317,6 +317,45 @@
               </associationHasOwnedEnds>
             </relationshipOwnedElementsInternal>
           </association>
+          <association
+            Id="a084b9fb-1649-4385-8415-2426637dea6e"
+            isDerived="false"
+            sourceEndRoleName="AbsAlgorithm"
+            targetEndRoleName="BlackBoxFunction"
+            isLeaf="false"
+            isAbstract="false">
+            <classMoniker
+              Id="4cf742ac-3c87-419f-83ff-620f37051964"
+              LastKnownName="BlackBoxFunction"
+              LastKnownLocation="TestSystem_model.uml" />
+            <relationshipOwnedElementsInternal>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="2c633843-86ef-416a-96a4-769357509a50"
+                  name="AbsAlgorithm"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="Shared"
+                  isComposite="false"
+                  isNavigableOwned="false" />
+              </associationHasOwnedEnds>
+              <associationHasOwnedEnds>
+                <memberEnd
+                  Id="76a40aee-d906-4452-93ed-353c25a6b987"
+                  name="BlackBoxFunction"
+                  isLeaf="false"
+                  isStatic="false"
+                  isReadOnly="false"
+                  isDerived="false"
+                  isDerivedUnion="false"
+                  aggregation="None"
+                  isComposite="false" />
+              </associationHasOwnedEnds>
+            </relationshipOwnedElementsInternal>
+          </association>
         </targetEnds>
         <ownedAttributesInternal>
           <property
@@ -352,8 +391,8 @@
             <ownedParameters>
               <operationHasOwnedParameters>
                 <parameter
-                  Id="51455527-66db-4760-8660-52f2a5e44ca0"
-                  name="List&lt;EnterParams&gt;"
+                  Id="986cb80a-9ee3-476d-918a-a1f0d301dc65"
+                  name="IEnterBlackBox"
                   direction="In"
                   isUnique="false" />
               </operationHasOwnedParameters>
@@ -366,7 +405,23 @@
             isStatic="false"
             isAbstract="false"
             concurrency="Sequential"
-            isQuery="false" />
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="90e9576c-bfe6-4adb-ab0e-528a92234283"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
+                      LastKnownName="IOutBlackBoxParam"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperationsInternal>
       </class>
     </packageHasNamedElement>
@@ -422,7 +477,23 @@
             isStatic="false"
             isAbstract="true"
             concurrency="Sequential"
-            isQuery="false" />
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="7a0c9416-0f7b-40f6-94b1-e4c53323c8fe"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <interfaceMoniker
+                      Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
+                      LastKnownName="IOutBlackBoxParam"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
         </ownedOperations>
       </Interface>
     </packageHasNamedElement>
@@ -778,6 +849,131 @@
       <undefinedType
         Id="06709def-bcb9-4d74-a88c-cf97b1e948d9"
         name="List&lt;IEnterBackBox&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
+        name="IOutBlackBoxParam"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="62474c52-1b49-42ee-bd48-6800fada52a4"
+        name="IFunction"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="3bb57a12-111e-47e9-af9e-7c4150f5a8ac"
+            name="Calculate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d75e8a56-3537-4ba2-a5c3-6d6aa63b7197"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="f5bed14a-8813-4353-bc0e-16208dbe87cd"
+                      LastKnownName="IOutBlacBoxParam"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="fa26cc2b-ca87-4bec-9471-5fd9dc4d7902"
+                  name="Double x1"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="f76eb287-dda8-4c07-93a2-b2a39452c0c9"
+                  name="Double x2"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="f5bed14a-8813-4353-bc0e-16208dbe87cd"
+        name="IOutBlacBoxParam" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="4cf742ac-3c87-419f-83ff-620f37051964"
+        name="BlackBoxFunction"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <suppliersInternal>
+          <interfaceRealization
+            Id="a9134260-ae11-4b4c-a52b-069312f2eb9b">
+            <interfaceMoniker
+              Id="62474c52-1b49-42ee-bd48-6800fada52a4"
+              LastKnownName="IFunction"
+              LastKnownLocation="TestSystem_model.uml" />
+          </interfaceRealization>
+          <interfaceRealization
+            Id="d55b8aef-1e73-4753-85c3-7ab9dabb4f5a">
+            <interfaceMoniker
+              Id="5bd0a9e9-0cd2-4b08-aeda-b2a183503570"
+              LastKnownName="IOutBlackBoxParam"
+              LastKnownLocation="TestSystem_model.uml" />
+          </interfaceRealization>
+        </suppliersInternal>
+        <ownedOperationsInternal>
+          <operation
+            Id="c5fe977f-5c33-4abd-8f80-bf5f129beae0"
+            name="Calculate"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="false"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="37832f85-a787-4db8-a408-056969ed5bb4"
+                  name="Double x1"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="eb90fba5-b831-47a9-adc6-f6c839bccd6e"
+                  name="Double x2"
+                  direction="In"
+                  isUnique="false" />
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="83b47505-873c-4104-b908-0d38dc91bd66"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="f5bed14a-8813-4353-bc0e-16208dbe87cd"
+                      LastKnownName="IOutBlacBoxParam"
+                      LastKnownLocation="TestSystem_model.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperationsInternal>
+      </class>
     </packageHasNamedElement>
   </packagedElements>
   <primitiveType
