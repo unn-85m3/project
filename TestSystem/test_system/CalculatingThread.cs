@@ -31,11 +31,17 @@ namespace TestSystem.test_system
 
         protected void calc()
         {
+            DateTime dd = DateTime.Now;
+
             IOutBlackBoxParam data = alg.Calculate();
+
+            TimeSpan ime =  DateTime.Now - dd;
             if (listener != null)
             {
-                listener.onEndCalculate(alg, data);
+                listener.onEndCalculate(alg, data, ime.Milliseconds);
             }
+
+            
         }
 
         public void setEndListener(IEndCalculate listener)

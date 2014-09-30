@@ -10,6 +10,6 @@ namespace TestSystem.test_system
 {
     interface IEndCalculate
     {
-        void onEndCalculate(IAlgorithm alg,IOutBlackBoxParam rez);
+        void onEndCalculate(IAlgorithm alg,IOutBlackBoxParam rez,int time);
     }
 }

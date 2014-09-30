@@ -47,7 +47,7 @@ namespace TestSystem.test_system
             }
         }
 
-        public void onEndCalculate(IAlgorithm alg, DataFormat.IOutBlackBoxParam rez)
+        public void onEndCalculate(IAlgorithm alg, DataFormat.IOutBlackBoxParam rez, int time)
         {
             ///throw new NotImplementedException();
         }
