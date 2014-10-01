@@ -37,62 +37,51 @@
             this.ClientSize = new System.Drawing.Size(599, 383);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
 
         }
 
         private void Create_TabPages(System.Collections.Generic.List<Algorithm.IAlgorithm> Algorithms)
         {
             this.tabControl_Algorithms = new System.Windows.Forms.TabControl();
-            //System.Collections.Generic.List<System.Windows.Forms.TabPage> this.tabPage = new System.Windows.Forms.TabPage();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Count];
             this.tabControl_Algorithms.SuspendLayout();
             // 
             // tabControl_Algorithms
             // 
-            this.tabControl_Algorithms.Controls.Add(this.tabPage1);
-            this.tabControl_Algorithms.Controls.Add(this.tabPage2);
+            for (int i = 0; i < Algorithms.Count; i++)
+            {
+                this.tabPages[i] = new System.Windows.Forms.TabPage();
+                this.tabControl_Algorithms.Controls.Add(this.tabPages[i]);
+            }
             this.tabControl_Algorithms.Location = new System.Drawing.Point(13, 13);
             this.tabControl_Algorithms.Name = "tabControl_Algorithms";
             this.tabControl_Algorithms.SelectedIndex = 0;
             this.tabControl_Algorithms.Size = new System.Drawing.Size(574, 358);
             this.tabControl_Algorithms.TabIndex = 0;
             // 
-            // tabPage1
+            // tabPages
             // 
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(566, 332);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(192, 74);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            for (int i = 0; i < Algorithms.Count; i++)
+            {
+                this.tabPages[i].Location = new System.Drawing.Point(4, 22);
+                this.tabPages[i].Name = Algorithms[i].Name;
+                this.tabPages[i].Padding = new System.Windows.Forms.Padding(3);
+                //this.tabPages[i].Size = new System.Drawing.Size(566, 332);
+                this.tabPages[i].TabIndex = i;
+                this.tabPages[i].Text = Algorithms[i].Name;
+                this.tabPages[i].UseVisualStyleBackColor = true;
+            }
 
             this.Controls.Add(this.tabControl_Algorithms);
             this.tabControl_Algorithms.ResumeLayout(false);
             this.ResumeLayout(false);
         }
 
-        private void Create_TabPage(string name, int tab_index)
-        {
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-        }
-
         #endregion
 
         private System.Windows.Forms.TabControl tabControl_Algorithms;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage[] tabPages;
 
     }
 }

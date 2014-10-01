@@ -8,11 +8,16 @@ namespace TestSystem.Algorithm
 {
     class Benchmark_Algorithm : AbsAlgorithm
     {
-        protected string name = "Эталонный алгоритм";
+        private string name = "Эталонный алгоритм";
 
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
             throw new NotImplementedException();
+        }
+
+        public override string Name
+        {
+            get { return this.name; }
         }
     }
 }
