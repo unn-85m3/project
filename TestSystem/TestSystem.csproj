@@ -60,6 +60,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\AbsAlgorithm.cs" />
+    <Compile Include="Algorithm\Benchmark_Algorithm.cs" />
+    <Compile Include="Algorithm\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
     <Compile Include="BackBoxFunction\BlackBoxFunction.cs" />
     <Compile Include="BackBoxFunction\IFunction.cs" />

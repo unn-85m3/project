@@ -14,8 +14,17 @@ namespace TestSystem
     {
         public Form1()
         {
+            Create_Algorithms();
             InitializeComponent();
-            ///
         }
+
+        private void Create_Algorithms()
+        {
+            List<Algorithm.IAlgorithm> Algorithms = new List<Algorithm.IAlgorithm>();
+            Algorithms.Add(new Algorithm.Benchmark_Algorithm());
+            Algorithms.Add(new Algorithm.Genetic_Algorithm());
+
+            Create_TabPages(Algorithms);
+        }        
     }
 }
