@@ -14,12 +14,10 @@ namespace TestSystem.Algorithm
     abstract class AbsAlgorithm:IAlgorithm
     {
         protected IEnterBlackBoxParam parameter; ///парамтры, в рамках которых проводится оптимизация
-        private string name="Имя";/// имя алгоритма+имя автора
+        protected String name="Имя";/// имя алгоритма+имя автора
         protected IFunction function;///функция для оптимизации
-
-        protected AbsAlgorithm() { }     //Заглушка
-        
-                
+                                     
+                                     
         /// <summary>
         /// конструктор
         /// </summary>
@@ -31,9 +29,9 @@ namespace TestSystem.Algorithm
             
         }
 
-        public virtual string Name
+        public string Name
         {
-            get { return this.name; }
+            get { return name; }
         }
 
         /// <summary>

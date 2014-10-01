@@ -14,9 +14,13 @@ namespace DataFormat
         {
             BlackBoxParameters qwe = new BlackBoxParameters();
 
-            qwe.NewParam(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13);
+            qwe.NewParam("bb1", "1", "2", "3", "4", "5", "6");
 
-            qwe.NewParam(13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1);
+            qwe.NewParam("bb2", "6", "5", "4", "3", "2", "1");
+
+            qwe.NewNextParam(1, "bb3", "237", "823", "5459", "223410", "12341", "122");
+
+            qwe.NewNextParam(1, "bb4", "74", "348", "649", "1045", "1561", "1342");
 
             qwe.SaveFile("tratata");
 

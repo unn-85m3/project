@@ -8,16 +8,11 @@ namespace TestSystem.Algorithm
 {
     class Genetic_Algorithm : AbsAlgorithm
     {
-        private string name = "Генетический алгоритм";
+        protected string name = "Генетический алгоритм";
 
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
             throw new NotImplementedException();
-        }
-
-        public override string Name
-        {
-            get { return this.name; }
         }
     }
 }

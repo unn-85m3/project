@@ -41,48 +41,7 @@
 
         }
 
-        private void Create_TabPages(System.Collections.Generic.List<Algorithm.IAlgorithm> Algorithms)
-        {
-            this.tabControl_Algorithms = new System.Windows.Forms.TabControl();
-            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Count];
-            this.tabControl_Algorithms.SuspendLayout();
-            // 
-            // tabControl_Algorithms
-            // 
-            for (int i = 0; i < Algorithms.Count; i++)
-            {
-                this.tabPages[i] = new System.Windows.Forms.TabPage();
-                this.tabControl_Algorithms.Controls.Add(this.tabPages[i]);
-            }
-            this.tabControl_Algorithms.Location = new System.Drawing.Point(13, 13);
-            this.tabControl_Algorithms.Name = "tabControl_Algorithms";
-            this.tabControl_Algorithms.SelectedIndex = 0;
-            this.tabControl_Algorithms.Size = new System.Drawing.Size(574, 358);
-            this.tabControl_Algorithms.TabIndex = 0;
-            // 
-            // tabPages
-            // 
-            for (int i = 0; i < Algorithms.Count; i++)
-            {
-                this.tabPages[i].Location = new System.Drawing.Point(4, 22);
-                this.tabPages[i].Name = Algorithms[i].Name;
-                this.tabPages[i].Padding = new System.Windows.Forms.Padding(3);
-                //this.tabPages[i].Size = new System.Drawing.Size(566, 332);
-                this.tabPages[i].TabIndex = i;
-                this.tabPages[i].Text = Algorithms[i].Name;
-                this.tabPages[i].UseVisualStyleBackColor = true;
-            }
-
-            this.Controls.Add(this.tabControl_Algorithms);
-            this.tabControl_Algorithms.ResumeLayout(false);
-            this.ResumeLayout(false);
-        }
-
         #endregion
-
-        private System.Windows.Forms.TabControl tabControl_Algorithms;
-        private System.Windows.Forms.TabPage[] tabPages;
-
     }
 }
 
