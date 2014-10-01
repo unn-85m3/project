@@ -18,40 +18,26 @@ namespace DataFormat
         struct Parameter
         {
             // FUNCTION INPUT
-            [DataMember(Name = "pin")]
-            public double Pin;     // input pressure
-            [DataMember(Name = "pout")]
-            public double Pout;    // output pressure
-            [DataMember(Name = "qout")]
-            public double Qout;    // output quotation?
-            [DataMember(Name = "tin")]
-            public double Tin;     // input temperature
-            [DataMember(Name = "cin")]
-            public double Cin;     // input calorific
-            [DataMember(Name = "din")]
-            public double Din;     // input density
-
-            // FUNCTION OUTPUT
-            [DataMember(Name = "qin")]
-            public double Qin;     // input quatation?
-            [DataMember(Name = "tout")]
-            public double Tout;    // output temperature
-            [DataMember(Name = "opcosts")]
-            public double OpCosts; // operating costs
-            [DataMember(Name = "cacosts")]
-            public double CaCosts; // capital costs
-            [DataMember(Name = "expan")]
-            public double Expan;   // expansion coefficient
-            [DataMember(Name = "cout")]
-            public double Cout;    // output calorific
-            [DataMember(Name = "dout")]
-            public double Dout;    // output density
+            [DataMember(Name = "black box name")]
+            public String Name;
+            [DataMember(Name = "input pressure")]
+            public String Pin;
+            [DataMember(Name = "output pressure")]
+            public String Pout;
+            [DataMember(Name = "output quotation")]
+            public String Qout;
+            [DataMember(Name = "input temperature")]
+            public String Tin;
+            [DataMember(Name = "input calorific")]
+            public String Cin;
+            [DataMember(Name = "input density")]
+            public String Din;
         };
 
         List<Parameter> Params;
 
         /// <summary>
-        /// Fucking constructor.
+        /// Constructor.
         /// </summary>
         public BlackBoxParameters()
         {
@@ -61,28 +47,21 @@ namespace DataFormat
         /// <summary>
         /// Add new parameter collection.
         /// </summary>
+        /// <param name="Name">name of black box</param>
         /// <param name="Pin">input pressure</param>
         /// <param name="Pout">output pressure</param>
         /// <param name="Qout">output quotation?</param>
         /// <param name="Tin">input temperature</param>
         /// <param name="Cin">input calorific</param>
         /// <param name="Din">input density</param>
-        /// <param name="Qin">input quatation?</param>
-        /// <param name="Tout">output temperature</param>
-        /// <param name="OpCosts">operating costs</param>
-        /// <param name="CaCosts">capital costs</param>
-        /// <param name="Expan">expansion coefficient</param>
-        /// <param name="Cout">output calorific</param>
-        /// <param name="Dout">output density</param>
-        /// <returns>new collection's index</returns>
         public int NewParam( // add new parameter collection
-            double Pin, double Pout, double Qout, double Tin, double Cin, double Din, // "input"
-            double Qin, double Tout, double OpCosts, double CaCosts, double Expan, double Cout, double Dout // "output"
+            String Name, String Pin, String Pout, String Qout, String Tin, String Cin, String Din
             )
         {
             Parameter newParam;
             
             // "input"
+            newParam.Name = Name;
             newParam.Pin = Pin;
             newParam.Pout = Pout;
             newParam.Qout = Qout;
@@ -90,14 +69,14 @@ namespace DataFormat
             newParam.Cin = Cin;
             newParam.Din = Din;
 
-            // "output"
+            /*// "output"
             newParam.Qin = Qin;
             newParam.Tout = Tout;
             newParam.OpCosts = OpCosts;
             newParam.CaCosts = CaCosts;
             newParam.Expan = Expan;
             newParam.Cout = Cout;
-            newParam.Dout = Dout;
+            newParam.Dout = Dout;*/
 
             Params.Add(newParam);
             return Params.Count(); // return new collection's index
