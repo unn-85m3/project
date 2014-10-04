@@ -15,7 +15,7 @@ namespace DataFormat
         /// Structure for storing a set of parameters.
         /// </summary>
         [DataContract]
-        class Parameters
+        struct BlackBox
         {
             // FUNCTION INPUT
             [DataMember(Name = "black box name")]
@@ -34,25 +34,64 @@ namespace DataFormat
             public String Din;
         };
 
+        /// <summary>
+        /// Structure for all black boxes' parameters.
+        /// </summary>
         [DataContract]
-        class ChosenBBParameters : Parameters
+        struct BlackBoxVarLimitation
         {
-            [DataMember(Name = "next black boxes")]
-            public List<Parameters> NextBBoxes;
+            [DataMember(Name = "x1")]
+            public String X1;
+            [DataMember(Name = "x2")]
+            public String X2;
+            [DataMember(Name = "x1/x2")]
+            public String X1X2;
+
+            [DataMember(Name = "black boxes")]
+            public List<BlackBox> BlackBoxes;
         };
 
-        List<ChosenBBParameters> Params;
+        //List<BlackBoxVarLimitation> Params;
+        BlackBoxVarLimitation Params;
 
         /// <summary>
-        /// Constructor.
+        /// Constructor. Add new situation
         /// </summary>
-        public BlackBoxParameters()
+        /// <param name="x1">limit variable X1</param>
+        /// <param name="x2">limit variable X2</param>
+        /// <param name="x1x2">limit variable X1/X2</param>
+        public BlackBoxParameters(String x1, String x2, String x1x2)
         {
-            Params = new List<ChosenBBParameters>();
+            //Params = new List<BlackBoxVarLimitation>();
+            Params = new BlackBoxVarLimitation();
+            Params.X1 = Convert.ToString(x1);
+            Params.X2 = Convert.ToString(x2);
+            Params.X1X2 = Convert.ToString(x1x2);
+            Params.BlackBoxes = new List<BlackBox>();
         }
 
         /// <summary>
-        /// Add new parameter in collection of Black Boxes.
+        /// Add new situation
+        /// </summary>
+        /// <param name="x1">limit variable X1</param>
+        /// <param name="x2">limit variable X2</param>
+        /// <param name="x1x2">limit variable X1/X2</param>
+        /// <returns>index of new situation</returns>
+        //public int NewLimit(String x1, String x2, String x1x2)
+        //{
+        //    BlackBoxVarLimitation NewLim = new BlackBoxVarLimitation();
+
+        //    NewLim.X1 = Convert.ToString(x1);
+        //    NewLim.X2 = Convert.ToString(x2);
+        //    NewLim.X1X2 = Convert.ToString(x1x2);
+
+        //    Params.Add(NewLim);
+
+        //    return Params.Count();
+        //}
+
+        /// <summary>
+        /// Add new black box.
         /// </summary>
         /// <param name="Name">name of black box</param>
         /// <param name="Pin">input pressure</param>
@@ -61,26 +100,27 @@ namespace DataFormat
         /// <param name="Tin">input temperature</param>
         /// <param name="Cin">input calorific</param>
         /// <param name="Din">input density</param>
-        /// <returns>index of new element</returns>
+        /// <returns>index of new black box</returns>
         public int NewParam( // add new parameter collection
+            //int Index, 
             String Name, String Pin, String Pout, String Qout, String Tin, String Cin, String Din
             )
         {
-            ChosenBBParameters newParam = new ChosenBBParameters();
+            BlackBox newParam = new BlackBox();
             
             // "input"
-            newParam.Name = Name;
-            newParam.Pin = Pin;
-            newParam.Pout = Pout;
-            newParam.Qout = Qout;
-            newParam.Tin = Tin;
-            newParam.Cin = Cin;
-            newParam.Din = Din;
+            newParam.Name = Convert.ToString(Name);
+            newParam.Pin = Convert.ToString(Pin);
+            newParam.Pout = Convert.ToString(Pout);
+            newParam.Qout = Convert.ToString(Qout);
+            newParam.Tin = Convert.ToString(Tin);
+            newParam.Cin = Convert.ToString(Cin);
+            newParam.Din = Convert.ToString(Din);
 
-            newParam.NextBBoxes = new List<Parameters>();
-
-            Params.Add(newParam);
-            return Params.Count(); // return new collection's index
+            //Params[Index].NextBBoxes.Add(newParam);
+            Params.BlackBoxes.Add(newParam);
+            //return Params[Index].NextBBoxes.Count(); // return new collection's index
+            return Params.BlackBoxes.Count(); // return new collection's index
         }
 
         /// <summary>
@@ -95,36 +135,36 @@ namespace DataFormat
         /// <param name="Cin">input calorific</param>
         /// <param name="Din">input density</param>
         /// <returns>index of new element</returns>
-        public int NewNextParam(int BoxIndex, String Name, String Pin, String Pout, String Qout, String Tin, String Cin, String Din)
-        {
-            Parameters newNextParam = new Parameters();
+        //public int NewNextParam(int BoxIndex, String Name, String Pin, String Pout, String Qout, String Tin, String Cin, String Din)
+        //{
+        //    BlackBox newNextParam = new BlackBox();
 
-            // "input"
-            newNextParam.Name = Name;
-            newNextParam.Pin = Pin;
-            newNextParam.Pout = Pout;
-            newNextParam.Qout = Qout;
-            newNextParam.Tin = Tin;
-            newNextParam.Cin = Cin;
-            newNextParam.Din = Din;
+        //    // "input"
+        //    newNextParam.Name = Name;
+        //    newNextParam.Pin = Pin;
+        //    newNextParam.Pout = Pout;
+        //    newNextParam.Qout = Qout;
+        //    newNextParam.Tin = Tin;
+        //    newNextParam.Cin = Cin;
+        //    newNextParam.Din = Din;
 
-            Params[BoxIndex].NextBBoxes.Add(newNextParam);
+        //    Params[BoxIndex].NextBBoxes.Add(newNextParam);
 
-            return Params[BoxIndex].NextBBoxes.Count();
-        }
+        //    return Params[BoxIndex].NextBBoxes.Count();
+        //}
 
         /// <summary>
         /// Print all parameter collections into text file.
         /// Not working!
         /// </summary>
-        public void PrintAllParams()
-        {
-            int MaxI = Params.Count();
-            for (int i = 0; i < MaxI; i++)
-            {
-                System.IO.File.WriteAllText("..\\Parameters.txt", "123");
-            }
-        }
+        //public void PrintAllParams()
+        //{
+        //    int MaxI = Params.Count();
+        //    for (int i = 0; i < MaxI; i++)
+        //    {
+        //        System.IO.File.WriteAllText("..\\Parameters.txt", "123");
+        //    }
+        //}
 
         /// <summary>
         /// It is a file?!
@@ -171,7 +211,8 @@ namespace DataFormat
         public void SaveFile(String filename)
         {
             MemoryStream stream = new MemoryStream();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<ChosenBBParameters>));
+            //DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<BlackBoxVarLimitation>));
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(BlackBoxVarLimitation));
             ser.WriteObject(stream, Params);
             stream.Position = 0;
             StreamReader reader = new StreamReader(stream);
@@ -187,10 +228,12 @@ namespace DataFormat
         {
             String jsondata = OutFile(filename);
             System.Type typeofthis = this.GetType();
-            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<ChosenBBParameters>));
+            //DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(List<BlackBoxVarLimitation>));
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(BlackBoxVarLimitation));
             byte[] byteArray = Encoding.ASCII.GetBytes(jsondata);
             MemoryStream stream = new MemoryStream(byteArray);
-            Params = (List<ChosenBBParameters>)ser.ReadObject(stream);
+            //Params = (List<BlackBoxVarLimitation>)ser.ReadObject(stream);
+            Params = (BlackBoxVarLimitation)ser.ReadObject(stream);
         }
     }
 }

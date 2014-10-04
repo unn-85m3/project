@@ -12,23 +12,25 @@ namespace DataFormat
     {
         static void Main(string[] args)
         {
-            BlackBoxParameters qwe = new BlackBoxParameters();
+            BlackBoxParameters qwe = new BlackBoxParameters("4-9", "45-90", "98-230");
 
-            qwe.NewParam("bb1", "1", "2", "3", "4", "5", "6");
+            int i = qwe.NewParam("bb1", "34", "x2", "23", "5465", "23", "45");
+            i = qwe.NewParam("bb2", "x1", "756", "345", "234", "56", "23");
+            i = qwe.NewParam("bb3", "546", "567", "4567.34", "656.055", "234", "444.44444");
 
-            qwe.NewParam("bb2", "6", "5", "4", "3", "2", "1");
+            BlackBoxParameters asd = new BlackBoxParameters("90-232", "23-34", "678-8900");
 
-            qwe.NewNextParam(1, "bb3", "237", "823", "5459", "223410", "12341", "122");
+            i = asd.NewParam("shaytan", "x2", "565", "443", "44", "54", "32");
+            i = asd.NewParam("shaytanama", "233", "x1", "836", "3454", "332", "67");
 
-            qwe.NewNextParam(1, "bb4", "74", "348", "649", "1045", "1561", "1342");
+            String t1 = "task1";
+            String t2 = "task2";
 
-            qwe.SaveFile("tratata");
+            qwe.SaveFile(t1);
+            asd.SaveFile(t2);
 
-            BlackBoxParameters qweqwe = new BlackBoxParameters();
-
-            qweqwe.OpenFile("tratata");
-
-
+            qwe.OpenFile(t2);
+            asd.OpenFile(t1);
         }
     }
 }

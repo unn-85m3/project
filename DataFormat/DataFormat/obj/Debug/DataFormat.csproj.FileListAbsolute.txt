@@ -1,9 +1,9 @@
 C:\Users\Admin\Documents\GitHub\DataFormat\DataFormat\bin\Debug\DataFormat.exe.config
+C:\Users\Ирина Рыжова\Source\Repos\project2\DataFormat\DataFormat\bin\Debug\DataFormat.exe.config
+C:\Users\Ирина Рыжова\Source\Repos\project2\DataFormat\DataFormat\obj\Debug\DataFormat.exe
+C:\Users\Ирина Рыжова\Source\Repos\project2\DataFormat\DataFormat\obj\Debug\DataFormat.pdb
 C:\Users\Admin\Documents\GitHub\project\DataFormat\DataFormat\bin\Debug\DataFormat.exe.config
 C:\Users\Admin\Documents\GitHub\project\DataFormat\DataFormat\bin\Debug\DataFormat.exe
 C:\Users\Admin\Documents\GitHub\project\DataFormat\DataFormat\bin\Debug\DataFormat.pdb
 C:\Users\Admin\Documents\GitHub\project\DataFormat\DataFormat\obj\Debug\DataFormat.exe
 C:\Users\Admin\Documents\GitHub\project\DataFormat\DataFormat\obj\Debug\DataFormat.pdb
-C:\Users\Ирина Рыжова\Source\Repos\project2\DataFormat\DataFormat\bin\Debug\DataFormat.exe.config
-C:\Users\Ирина Рыжова\Source\Repos\project2\DataFormat\DataFormat\obj\Debug\DataFormat.exe
-C:\Users\Ирина Рыжова\Source\Repos\project2\DataFormat\DataFormat\obj\Debug\DataFormat.pdb
