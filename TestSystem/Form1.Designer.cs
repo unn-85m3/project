@@ -28,12 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.SuspendLayout();
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(745, 466);
+            this.Name = "Form1";
+            this.Text = "Form1";
+            this.ResumeLayout(false);
+
+        }
+
+
+        private void InitTab()
+        {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPages = new System.Windows.Forms.TabPage[numb_algorithms];
-            this.dataGridViews = new System.Windows.Forms.DataGridView[numb_algorithms];
+            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Count];
+            this.dataGridViews = new System.Windows.Forms.DataGridView[Algorithms.Count];
             this.tabControl1.SuspendLayout();
 
-            for (int i = 0; i < numb_algorithms; i++)
+            for (int i = 0; i < Algorithms.Count; i++)
             {
                 tabPages[i] = new System.Windows.Forms.TabPage();
                 dataGridViews[i] = new System.Windows.Forms.DataGridView();
@@ -49,6 +65,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -57,7 +76,7 @@
             // 
             // tabPages
             // 
-            for (int i = 0; i < numb_algorithms; i++)
+            for (int i = 0; i < Algorithms.Count; i++)
             {
                 this.tabPages[i].Controls.Add(this.dataGridViews[i]);
                 this.tabPages[i].Location = new System.Drawing.Point(4, 22);
@@ -71,32 +90,27 @@
             // 
             // dataGridViews
             // 
-            for (int i = 0; i < numb_algorithms; i++)
+            for (int i = 0; i < Algorithms.Count; i++)
             {
+                this.dataGridViews[i].Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                | System.Windows.Forms.AnchorStyles.Left)
+                | System.Windows.Forms.AnchorStyles.Right)));
                 this.dataGridViews[i].ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                 this.dataGridViews[i].Location = new System.Drawing.Point(7, 7);
                 this.dataGridViews[i].Name = "dataGridView1";
                 this.dataGridViews[i].Size = new System.Drawing.Size(555, 320);
                 this.dataGridViews[i].TabIndex = 0;
             }
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(599, 383);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            
             this.tabControl1.ResumeLayout(false);
-            for (int i = 0; i < numb_algorithms; i++)
+            for (int i = 0; i < Algorithms.Count; i++)
             {
                 this.tabPages[i].ResumeLayout(false);
                 ((System.ComponentModel.ISupportInitialize)(this.dataGridViews[i])).EndInit();
             }
-            
-            this.ResumeLayout(false);
 
+            this.Controls.Add(this.tabControl1);
+            this.ResumeLayout(false);
         }
 
         #endregion
