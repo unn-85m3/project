@@ -24,7 +24,6 @@ namespace TestSystem
             Algorithms.Add(new Algorithm.Benchmark_Algorithm());
             Algorithms.Add(new Algorithm.Genetic_Algorithm());
 
-            Create_TabPages(Algorithms);
         }        
     }
 }
