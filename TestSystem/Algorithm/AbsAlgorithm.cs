@@ -41,7 +41,7 @@ namespace TestSystem.Algorithm
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
         /// </summary>
-        public IEnterBlackBoxParam enterParam
+        public IEnterBlackBoxParam EnterParam
         {
             get { return parameter; }
             set { parameter = value; }
