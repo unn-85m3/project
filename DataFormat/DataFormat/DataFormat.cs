@@ -69,6 +69,9 @@ namespace TestSystem.DataFormat
         BlackBoxVarLimitation varLimitations;
         List<IEnterBlackBoxParam> bbParams;
 
+        /// <summary>
+        /// Fucking constructor
+        /// </summary>
         public DataFormat()
         {
             varLimitations = new BlackBoxVarLimitation();
@@ -76,7 +79,7 @@ namespace TestSystem.DataFormat
         }
 
         /// <summary>
-        /// Constructor. Add new situation
+        /// Constructor. Add new limitation
         /// </summary>
         /// <param name="x1">limit variable X1</param>
         /// <param name="x2">limit variable X2</param>
@@ -194,6 +197,11 @@ namespace TestSystem.DataFormat
             return bbParams;
         }
 
+        /// <summary>
+        /// Minimum Pin
+        /// </summary>
+        /// <param name="index">index of black box</param>
+        /// <returns>minimum Pin</returns>
         public double p_in_min(int index)
         {
             String str = varLimitations.blackBoxes[index].pIn;
@@ -218,6 +226,11 @@ namespace TestSystem.DataFormat
             return var;
         }
 
+        /// <summary>
+        /// Maximum Pin
+        /// </summary>
+        /// <param name="index">index of black box</param>
+        /// <returns>maximum Pin</returns>
         public double p_in_max(int index)
         {
             String str = varLimitations.blackBoxes[index].pIn;
@@ -242,6 +255,11 @@ namespace TestSystem.DataFormat
             return var;
         }
 
+        /// <summary>
+        /// Minimum Pout
+        /// </summary>
+        /// <param name="index">index of black box</param>
+        /// <returns>minimum Pout</returns>
         public double p_oun_min(int index)
         {
             String str = varLimitations.blackBoxes[index].pOut;
@@ -266,6 +284,11 @@ namespace TestSystem.DataFormat
             return var;
         }
 
+        /// <summary>
+        /// Maximum Pout
+        /// </summary>
+        /// <param name="index">index of black box</param>
+        /// <returns>maximum Pout</returns>
         public double p_out_max(int index)
         {
             String str = varLimitations.blackBoxes[index].pOut;
@@ -290,16 +313,29 @@ namespace TestSystem.DataFormat
             return var;
         }
 
+        /// <summary>
+        /// Minimum comprimate coefficient
+        /// </summary>
+        /// <returns>minimum comprimate coefficient</returns>
         public double comprimate_min()
         {
             return LimitMin(varLimitations.x1x2);
         }
 
+        /// <summary>
+        /// Maximum comprimate coefficient
+        /// </summary>
+        /// <returns>maximum comprimate coefficient</returns>
         public double comprimate_max()
         {
             return LimitMax(varLimitations.x1x2);
         }
 
+        /// <summary>
+        /// Find the minimum on the Limitation
+        /// </summary>
+        /// <param name="lim">limitation</param>
+        /// <returns>minimum</returns>
         double LimitMin(String lim)
         {
             char[] c = lim.ToCharArray();
@@ -326,6 +362,11 @@ namespace TestSystem.DataFormat
             return cmin;
         }
 
+        /// <summary>
+        /// Find the maximum on the Limitation
+        /// </summary>
+        /// <param name="lim">limitation</param>
+        /// <returns>maximum</returns>
         double LimitMax(String lim)
         {
             char[] c = lim.ToCharArray();
@@ -356,6 +397,11 @@ namespace TestSystem.DataFormat
             return cmax;
         }
 
+        /// <summary>
+        /// Check for numeric string
+        /// </summary>
+        /// <param name="str">string to check</param>
+        /// <returns>true - it's numeric string, false - it's not</returns>
         bool IsNum(String str)
         {
             if (String.Compare("9", str) < 0)
@@ -368,6 +414,11 @@ namespace TestSystem.DataFormat
             }
         }
 
+        /// <summary>
+        /// Converts a string with dots in a string with a commas
+        /// </summary>
+        /// <param name="withdots">string with dots</param>
+        /// <returns>string with commas</returns>
         String DotToComma(String withdots)
         {
             String withcommas;
