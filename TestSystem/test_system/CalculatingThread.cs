@@ -17,20 +17,31 @@ namespace TestSystem.test_system
         IAlgorithm alg;
         ITaskPackage task;
 
+
+        /// <summary>
+        /// Инициализация потока для алгоритма
+        /// </summary>
+        /// <param name="alg">Алгоритм</param>
+        /// <param name="tasks">Задания</param>
         public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks)
         {
-            this.alg = alg;
-            
-           
+            this.alg = alg;           
         }
 
 
+        /// <summary>
+        /// Запуск потока
+        /// </summary>
         public void Start()
         {
             thread = new Thread(this.Calc);
             thread.Start();
         }
 
+
+        /// <summary>
+        /// Прогон заданий на этом алгориме
+        /// </summary>
         protected void Calc()
         {
             DateTime dd = DateTime.Now;
@@ -41,11 +52,13 @@ namespace TestSystem.test_system
             if (listener != null)
             {
                 listener.OnEndCalculate(alg,task, data, ime.Milliseconds);
-            }
-
-            
+            }           
         }
 
+        /// <summary>
+        /// Установка слушателя
+        /// </summary>
+        /// <param name="listener"></param>
         public void SetEndListener(IEndCalculate listener)
         {
             this.listener = listener;
