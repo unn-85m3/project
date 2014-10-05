@@ -19,14 +19,13 @@ namespace TestSystem.test_system
         BlackBoxFunction function;
         List<ITaskPackage> tasks;
 
-        BlackBoxFunction function;
-        List<ITaskPackage> tasks;
       /// <summary>
         /// Инициализация потока для алгоритма
         /// </summary>
         /// <param name="alg">Алгоритм</param>
         /// <param name="tasks">Задания</param>
-
+        /// <param name="function">Оптимизируемая функция</param>
+        /// 
         public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks,BlackBoxFunction function)
         {
             this.alg = alg;           
@@ -51,34 +50,31 @@ namespace TestSystem.test_system
         /// </summary>
         protected void Calc()
         {
-            int i=0;
+            int I=0;
             int n=tasks.Count;
-            
+            DateTime dd=DateTime.MinValue;
+            TimeSpan ime = TimeSpan.MinValue;
+            IOutBlackBoxParam data = null;
             foreach(ITaskPackage task in tasks)
             {
                 alg.EnterParam=task.EnterParams;
-                DateTime dd = DateTime.Now;
+                int BlackBoxesCount = task.BlackBoxes.Count;
 
-                function.Init(task.BlackBoxes[0]);
-                IOutBlackBoxParam data = alg.Calculate();
-                TimeSpan ime =  DateTime.Now - dd;
-                if (listener != null)
+                for (int i = 0; i < BlackBoxesCount;i++ )
                 {
-               
-                    if((n-i)==1)
+
+                    dd = DateTime.Now;
+                    function.Init(task.BlackBoxes[i]);
+                    data = alg.Calculate();
+                    ime = DateTime.Now - dd;
+                    if (listener != null)
                     {
-                        listener.OnEndTask(alg,task, data, ime.Milliseconds);
+                        listener.OnEndCalculate(alg, task, data, ime.Milliseconds);
                     }
-                     listener.OnEndCalculate(alg,task, data, ime.Milliseconds);
+                    I++;
                 }
-                i++;
+                listener.OnEndTask(alg, task, data, ime.Milliseconds);
             }
-
-
-
-               
-
-
             
         }
 
