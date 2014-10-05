@@ -29,7 +29,7 @@ namespace TestSystem.test_system
         /// Добавление алгоритма
         /// </summary>
         /// <param name="algorithm">Алгоритм</param>
-        public void AddAlgorithm(IAlgorithm algorithm, BlackBoxFunction function)
+        public void AddAlgorithm(IAlgorithm algorithm, List<ITaskPackage> tasks, BlackBoxFunction function)
         {
              algorithms.Add(algorithm);
              this.tasks = tasks;
