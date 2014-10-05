@@ -10,6 +10,7 @@ namespace TestSystem.Algorithm
 {
     /// <summary>
     /// От него наследуются все алгоритмы.
+    /// Уэтого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
     /// </summary>
     abstract class AbsAlgorithm:IAlgorithm
     {
@@ -17,12 +18,7 @@ namespace TestSystem.Algorithm
         private string name = "Имя";/// имя алгоритма+имя автора
         protected IFunction function;///функция для оптимизации
 
-        /// <summary>
-        /// конструктор
-        /// </summary>
-        protected AbsAlgorithm()
-        {
-        }
+     
 
 
         /// <summary>
@@ -45,8 +41,9 @@ namespace TestSystem.Algorithm
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
         /// </summary>
-        public IEnterBlackBoxParam enterParam
+        public IEnterBlackBoxParam EnterParam
         {
+            get { return parameter; }
             set { parameter = value; }
         }
 

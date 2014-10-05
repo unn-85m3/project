@@ -9,9 +9,9 @@ namespace TestSystem.test_system
 {
     interface ITestSystem
     {
-        void addAlgorithm(IAlgorithm algorithm);
-        IAlgorithm delAlgorithm(int id);
-        int length { get; }
+        void AddAlgorithm(IAlgorithm algorithm);
+        IAlgorithm DelAlgorithm(int id);
+        int Length { get; }
         void Test();
     }
 }

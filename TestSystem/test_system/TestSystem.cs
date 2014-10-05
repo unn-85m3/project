@@ -15,20 +15,20 @@ namespace TestSystem.test_system
             algorithms = new List<IAlgorithm>();
         }
 
-        public void addAlgorithm(IAlgorithm algorithm)
+        public void AddAlgorithm(IAlgorithm algorithm)
         {
              algorithms.Add(algorithm);
         }
 
 
-        public IAlgorithm delAlgorithm(int id)
+        public IAlgorithm DelAlgorithm(int id)
         {
             IAlgorithm alg = algorithms[id];
             algorithms.RemoveAt(id);
             return alg;
         }
 
-        public int length
+        public int Length
         {
             get { return algorithms.Count; }
         }
@@ -42,18 +42,18 @@ namespace TestSystem.test_system
             {
                 
                 CalculatingThread th = new CalculatingThread(alg);
-                th.setEndListener(this);
+                th.SetEndListener(this);
                 th.Start();
             }
         }
 
-        public void onEndCalculate(IAlgorithm alg, DataFormat.IOutBlackBoxParam rez, int time)
+        public void OnEndCalculate(IAlgorithm alg, DataFormat.IOutBlackBoxParam rez, int time)
         {
             ///throw new NotImplementedException();
         }
 
 
-        public void onEndAlgorithm(IAlgorithm alg, int time)
+        public void OnEndAlgorithm(IAlgorithm alg, int time)
         {
             throw new NotImplementedException();
         }
