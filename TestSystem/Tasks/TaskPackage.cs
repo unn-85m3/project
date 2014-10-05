@@ -7,7 +7,7 @@ using TestSystem.DataFormat;
 
 namespace TestSystem.Tasks
 {
-    class TaskPackage:ITaskPackage
+    class TaskPackage : ITaskPackage
     {
         private List<IBlackBox> boxes;
         private String name;

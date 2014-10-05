@@ -42,9 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\TestSystem\DataFormat\IBlackBox.cs">
+      <Link>IBlackBox.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TestSystem\DataFormat\IDataFormat.cs">
+      <Link>IDataFormat.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TestSystem\DataFormat\IEnterBlackBoxParam.cs">
+      <Link>IEnterBlackBoxParam.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TestSystem\Tasks\ITaskPackage.cs">
+      <Link>ITaskPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TestSystem\Tasks\TaskPackage.cs">
+      <Link>TaskPackage.cs</Link>
+    </Compile>
+    <Compile Include="..\..\TestSystem\Tasks\Tasks_Base.cs">
+      <Link>Tasks_Base.cs</Link>
+    </Compile>
     <Compile Include="DataFormat.cs" />
-    <Compile Include="IDataFormat.cs" />
-    <Compile Include="IEnterBlackBoxParam.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

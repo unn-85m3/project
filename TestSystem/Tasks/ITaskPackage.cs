@@ -12,7 +12,7 @@ namespace TestSystem.Tasks
         /// <summary>
         /// Список ЧЯ
         /// </summary>
-        List<IBlackBox> BlackBoxes{get;}
+        List<IBlackBox> BlackBoxes { get; }
 
         /// <summary>
         /// Параметры ЧЯ

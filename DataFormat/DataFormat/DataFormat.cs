@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
+using TestSystem.Tasks;
 
 namespace TestSystem.DataFormat
 { 
@@ -15,7 +16,7 @@ namespace TestSystem.DataFormat
         /// Structure for storing a set of parameters.
         /// </summary>
         [DataContract]
-        struct BlackBox
+        struct BlackBoxParam
         {
             // FUNCTION INPUT
             [DataMember(Name = "Info")]
@@ -25,11 +26,11 @@ namespace TestSystem.DataFormat
             [DataMember(Name = "POut")]
             public String pOut;
             [DataMember(Name = "QOut")]
-            public double qOut;
+            public String qOut;
             [DataMember(Name = "TIn")]
-            public double tIn;
+            public String tIn;
             [DataMember(Name = "DIn")]
-            public double dIn;
+            public String dIn;
         };
 
         /// <summary>
@@ -46,28 +47,119 @@ namespace TestSystem.DataFormat
             public String x1x2;
 
             [DataMember(Name = "black boxes")]
-            public List<BlackBox> blackBoxes;
+            public List<BlackBoxParam> blackBoxes;
         };
 
-        struct EnterBlackBoxParam : IEnterBlackBoxParam
+        class EnterBlackBoxParam : IEnterBlackBoxParam
         {
-            public String info;
-            public String pin;
-            public String pout;
-            public double qout;
-            public double tin;
-            public double din;
+            double x1min;
+            double x1max;
+            double x2min;
+            double x2max;
+            double x1x2_min;
+            double x1x2_max;
 
-            public double x1min;
-            public double x1max;
-            public double x2min;
-            public double x2max;
-            public double compremMin;
-            public double compremMax;
+            public EnterBlackBoxParam(double x1_min, double x1_max, double x2_min, double x2_max, double x1_x2_min, double x1_x2_max)
+            {
+                this.x1max = x1_max;
+                this.x1min = x1_min;
+                this.x2max = x2_max;
+                this.x2min = x2_min;
+                this.x1x2_max = x1_x2_max;
+                this.x1x2_min = x1_x2_min;
+            }
+
+            public Double x1_min
+            {
+                get { return x1min; }
+            }
+            
+            public Double x1_max
+            {
+                get { return x1max; }
+            }
+
+            public Double x2_min
+            {
+                get { return x2min; }
+            }
+
+            public Double x2_max
+            {
+                get { return x2max; }
+            }
+
+            public Double x2_x1_min
+            {
+                get { return x1x2_min; }
+            }
+
+            public Double x2_x1_max
+            {
+                get { return x1x2_max; }
+            }
+        };
+
+        class BlackBox : IBlackBox
+        {
+            String info;
+            String pIn;
+            String pOut;
+            String qOut;
+            String tIn;
+            String dIn;
+            String cIn;
+
+            public BlackBox(String info, String pIn, String pOut, String qOut, String tIn, String dIn, String cIn)
+            {
+                this.info = info;
+                this.pIn = pIn;
+                this.pOut = pOut;
+                this.qOut = qOut;
+                this.tIn = tIn;
+                this.dIn = dIn;
+                this.cIn = cIn;
+            }
+
+            public String Info
+            {
+                get { return info; }
+            }
+
+            public String PIn
+            {
+                get { return pIn; }
+            }
+
+            public String POut
+            {
+                get { return pOut; }
+            }
+
+            public String QOut
+            {
+                get { return qOut; }
+            }
+
+            public String TIn
+            {
+                get { return tIn; }
+            }
+
+            public String DIn
+            {
+                get { return dIn; }
+            }
+
+            public String СIn
+            {
+                get { return cIn; }
+            }
         };
 
         BlackBoxVarLimitation varLimitations;
-        List<IEnterBlackBoxParam> bbParams;
+        List<IBlackBox> bbParams;
+        String fileName;
 
         /// <summary>
         /// Fucking constructor
@@ -75,7 +167,7 @@ namespace TestSystem.DataFormat
         public DataFormat()
         {
             varLimitations = new BlackBoxVarLimitation();
-            bbParams = new List<IEnterBlackBoxParam>();
+            bbParams = new List<IBlackBox>();
         }
 
         /// <summary>
@@ -90,7 +182,7 @@ namespace TestSystem.DataFormat
             varLimitations.x1 = Convert.ToString(x1);
             varLimitations.x2 = Convert.ToString(x2);
             varLimitations.x1x2 = Convert.ToString(x1x2);
-            varLimitations.blackBoxes = new List<BlackBox>();
+            varLimitations.blackBoxes = new List<BlackBoxParam>();
         }
 
         /// <summary>
@@ -106,15 +198,15 @@ namespace TestSystem.DataFormat
         /// <returns>index of new black box</returns>
         public int NewParam(String bbName, String bbPin, String bbPout, String bbQout, String bbTin, String bbCin, String bbDin)
         {
-            BlackBox newParam = new BlackBox();
+            BlackBoxParam newParam = new BlackBoxParam();
             
             // "input"
             newParam.info = Convert.ToString(bbName);
             newParam.pIn = Convert.ToString(bbPin);
             newParam.pOut = Convert.ToString(bbPout);
-            newParam.qOut = Convert.ToDouble(bbQout);
-            newParam.tIn = Convert.ToDouble(bbTin);
-            newParam.dIn = Convert.ToDouble(bbDin);
+            newParam.qOut = Convert.ToString(bbQout);
+            newParam.tIn = Convert.ToString(bbTin);
+            newParam.dIn = Convert.ToString(bbDin);
 
             varLimitations.blackBoxes.Add(newParam);
             return varLimitations.blackBoxes.Count(); // return new collection's index
@@ -164,6 +256,7 @@ namespace TestSystem.DataFormat
         /// <param name="filename">file name</param>
         public void SaveFile(String filename)
         {
+            this.fileName = filename;
             MemoryStream stream = new MemoryStream();
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(BlackBoxVarLimitation));
             ser.WriteObject(stream, varLimitations);
@@ -187,14 +280,23 @@ namespace TestSystem.DataFormat
             varLimitations = (BlackBoxVarLimitation)ser.ReadObject(stream);
         }
 
-        public void SaveData(IEnterBlackBoxParam param)
+        public void SaveData(IBlackBox param)
         {
             bbParams.Add(param);
         }
 
-        public List<IEnterBlackBoxParam> GetData()
+        public ITaskPackage GetData()
         {
-            return bbParams;
+            EnterBlackBoxParam param = new EnterBlackBoxParam(LimitMin(varLimitations.x1), LimitMax(varLimitations.x1), 
+                LimitMin(varLimitations.x2), LimitMax(varLimitations.x2), comprimate_min(), comprimate_max());
+            foreach(BlackBoxParam bbp in varLimitations.blackBoxes)
+            {
+                BlackBox bb = new BlackBox(bbp.info, bbp.pIn, bbp.pOut, bbp.qOut, bbp.tIn, bbp.dIn, "0"); //ВНЕМАТОЧНО!!!!!
+                bbParams.Add(bb);
+            }
+
+            TaskPackage task = new TaskPackage(bbParams, param, fileName);
+            return task;
         }
 
         /// <summary>
@@ -206,7 +308,7 @@ namespace TestSystem.DataFormat
         {
             String str = varLimitations.blackBoxes[index].pIn;
             double var;
-            if (IsNum(str))
+            if (ItsNum(str))
             {
                 str = DotToComma(str);
                 var = Convert.ToDouble(str);
@@ -235,7 +337,7 @@ namespace TestSystem.DataFormat
         {
             String str = varLimitations.blackBoxes[index].pIn;
             double var;
-            if (IsNum(str))
+            if (ItsNum(str))
             {
                 str = DotToComma(str);
                 var = Convert.ToDouble(str);
@@ -264,7 +366,7 @@ namespace TestSystem.DataFormat
         {
             String str = varLimitations.blackBoxes[index].pOut;
             double var;
-            if (IsNum(str))
+            if (ItsNum(str))
             {
                 str = DotToComma(str);
                 var = Convert.ToDouble(str);
@@ -293,7 +395,7 @@ namespace TestSystem.DataFormat
         {
             String str = varLimitations.blackBoxes[index].pOut;
             double var;
-            if (IsNum(str))
+            if (ItsNum(str))
             {
                 str = DotToComma(str);
                 var = Convert.ToDouble(str);
@@ -402,7 +504,7 @@ namespace TestSystem.DataFormat
         /// </summary>
         /// <param name="str">string to check</param>
         /// <returns>true - it's numeric string, false - it's not</returns>
-        bool IsNum(String str)
+        bool ItsNum(String str)
         {
             if (String.Compare("9", str) < 0)
             {
