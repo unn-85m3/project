@@ -41,7 +41,9 @@
 
         }
 
-
+        /// <summary>
+        /// Создание вкладок и таблиц на них.
+        /// </summary>
         private void InitTab()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();

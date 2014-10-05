@@ -11,6 +11,9 @@ namespace TestSystem.DataFormat
      */
     interface IOutBlackBoxParam
     {
+        /// <summary>
+        /// Стоимость
+        /// </summary>
         Double Cost { get; }
     }
 }

@@ -19,8 +19,6 @@ namespace TestSystem.Algorithm
         protected IFunction function;///функция для оптимизации
 
      
-
-
         /// <summary>
         /// конструктор
         /// </summary>
@@ -33,6 +31,9 @@ namespace TestSystem.Algorithm
             
         }
 
+        /// <summary>
+        /// Имя алгоритма
+        /// </summary>
         public virtual string Name
         {
             get { return name; }

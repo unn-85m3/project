@@ -9,8 +9,19 @@ namespace TestSystem.Tasks
 {
     interface ITaskPackage
     {
-       List<IBlackBox> BlackBoxes{get;}
-       IEnterBlackBoxParam EnterParams { get; }
-       String Name { get; }
+        /// <summary>
+        /// Список ЧЯ
+        /// </summary>
+        List<IBlackBox> BlackBoxes{get;}
+
+        /// <summary>
+        /// Параметры ЧЯ
+        /// </summary>
+        IEnterBlackBoxParam EnterParams { get; }
+
+        /// <summary>
+        /// Имя задачи
+        /// </summary>
+        String Name { get; }
     }
 }

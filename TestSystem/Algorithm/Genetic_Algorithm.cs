@@ -12,13 +12,26 @@ namespace TestSystem.Algorithm
     {
         private string name = "Генетический алгоритм";
 
+
+        /// <summary>
+        /// конструктор
+        /// </summary>
+        /// <param name="parameter">входные параметры ф-и Ч.Я.</param>
+        /// <param name="function">Используемая ф-ция</param>
         public Genetic_Algorithm(IEnterBlackBoxParam parameter, IFunction function) : base(parameter, function) { }
 
+        /// <summary>
+        /// Здесь находится сам алгоритм отптимизации ф-и
+        /// </summary>
+        /// <returns>результат работы алгоритма</returns>
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Имя алгоритма
+        /// </summary>
         public override string Name
         {
             get { return name; }

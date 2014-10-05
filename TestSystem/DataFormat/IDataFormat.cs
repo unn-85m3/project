@@ -12,7 +12,16 @@ namespace TestSystem.DataFormat
      */
     interface IDataFormat
     {
+        /// <summary>
+        /// Сохранение чя
+        /// </summary>
+        /// <param name="param"></param>
         void SaveData(IEnterBlackBoxParam param);
+
+        /// <summary>
+        /// Забор данных чя, имени задания и ограничений
+        /// </summary>
+        /// <returns></returns>
         ITaskPackage GetData();
     }
 }

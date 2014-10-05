@@ -22,6 +22,9 @@ namespace TestSystem
             Create_Algorithms();
         }
 
+        /// <summary>
+        /// Заглушка на алгоритмы.
+        /// </summary>
         private void Create_Algorithms()
         {
             Algorithms = new List<Algorithm.IAlgorithm>();
@@ -32,6 +35,9 @@ namespace TestSystem
             Init_Table();
         }
 
+        /// <summary>
+        /// Заглушка на задания
+        /// </summary>
         private void Create_Tasks()
         {
             Tasks = new List<Tasks.Tasks_Base>();
@@ -41,6 +47,9 @@ namespace TestSystem
             Tasks.Add(new Tasks.Tasks_Base("Задача 4"));
         }
 
+        /// <summary>
+        /// Заполнение таблиц.
+        /// </summary>
         private void Init_Table()
         {
             for (int i = 0; i < Algorithms.Count; i++)
@@ -61,5 +70,7 @@ namespace TestSystem
                 }
             }
         }
+
+
     }
 }
