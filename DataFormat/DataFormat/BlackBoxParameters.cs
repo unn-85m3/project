@@ -18,7 +18,7 @@ namespace DataFormat
         struct BlackBox
         {
             // FUNCTION INPUT
-            [DataMember(Name = "black box name")]
+            [DataMember(Name = "Black box name")]
             public String Name;
             [DataMember(Name = "input pressure")]
             public String Pin;
@@ -53,6 +53,10 @@ namespace DataFormat
 
         //List<BlackBoxVarLimitation> Params;
         BlackBoxVarLimitation Params;
+
+        public BlackBoxParameters()
+        {
+        }
 
         /// <summary>
         /// Constructor. Add new situation
