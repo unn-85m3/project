@@ -15,6 +15,7 @@ namespace TestSystem.test_system
         IEndCalculate listener;
         Thread thread;
         IAlgorithm alg;
+        ITaskPackage task;
 
         public CalculatingThread(IAlgorithm alg,ITaskPackage task)
         {
@@ -39,7 +40,7 @@ namespace TestSystem.test_system
             TimeSpan ime =  DateTime.Now - dd;
             if (listener != null)
             {
-                listener.OnEndCalculate(alg, data, ime.Milliseconds);
+                listener.OnEndCalculate(alg,task, data, ime.Milliseconds);
             }
 
             
