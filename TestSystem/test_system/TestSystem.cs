@@ -10,7 +10,7 @@ using TestSystem.BackBoxFunction;
 
 namespace TestSystem.test_system
 {
-    class TestSystem:ITestSystem,IEndCalculate
+    class TestSystem:ITestSystem
     {
         protected List<IAlgorithm> algorithms;
         private List<ITaskPackage> tasks;
@@ -107,7 +107,7 @@ namespace TestSystem.test_system
                 thListener.SetListener(listener);
         }
 
-        /// <summary>
+       /* /// <summary>
         /// Окончание вычислений
         /// </summary>
         /// <param name="alg">Алгоритм</param>
@@ -128,6 +128,6 @@ namespace TestSystem.test_system
         public void OnEndTask(IAlgorithm alg,ITaskPackage task, int time)
         {
             throw new NotImplementedException();
-        }
+        }*/
     }
 }
