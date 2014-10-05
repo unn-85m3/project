@@ -16,7 +16,7 @@ namespace TestSystem.DataFormat
         /// Сохранение чя
         /// </summary>
         /// <param name="param"></param>
-        void SaveData(IEnterBlackBoxParam param);
+        void SaveData(IBlackBox param);
 
         /// <summary>
         /// Забор данных чя, имени задания и ограничений
