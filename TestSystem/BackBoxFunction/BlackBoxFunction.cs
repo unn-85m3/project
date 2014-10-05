@@ -11,6 +11,13 @@ namespace TestSystem.BackBoxFunction
     class BlackBoxFunction : IFunction, IOutBlackBoxParam
     {
         private Double cost;
+        IBlackBox blackBox;
+
+        public void Init(IBlackBox blackBox)
+        {
+
+        }
+
         public IOutBlackBoxParam Calculate(double x1, double x2)
         {
             if ((x1 - x2) < 0) throw new Exception();

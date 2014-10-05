@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using TestSystem.Algorithm;
 using TestSystem.DataFormat;
 using TestSystem.Tasks;
+using TestSystem.BackBoxFunction;
 
 namespace TestSystem.test_system
 {
@@ -15,12 +16,14 @@ namespace TestSystem.test_system
         IEndCalculate listener;
         Thread thread;
         IAlgorithm alg;
-        ITaskPackage task;
+        BlackBoxFunction function;
+        List<ITaskPackage> tasks;
 
-        public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks)
+        public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks,BlackBoxFunction function)
         {
             this.alg = alg;
-            
+            this.tasks = tasks;
+            this.function = function;
            
         }
 
@@ -33,14 +36,27 @@ namespace TestSystem.test_system
 
         protected void Calc()
         {
-            DateTime dd = DateTime.Now;
-
-            IOutBlackBoxParam data = alg.Calculate();
-
-            TimeSpan ime =  DateTime.Now - dd;
-            if (listener != null)
+            int i=0;
+            int n=tasks.Count;
+            
+            foreach(ITaskPackage task in tasks)
             {
-                listener.OnEndCalculate(alg,task, data, ime.Milliseconds);
+                alg.EnterParam=task.EnterParams;
+                DateTime dd = DateTime.Now;
+
+                function.Init(task.BlackBoxes[0]);
+                IOutBlackBoxParam data = alg.Calculate();
+                TimeSpan ime =  DateTime.Now - dd;
+                if (listener != null)
+                {
+               
+                    if((n-i)==1)
+                    {
+                        listener.OnEndTask(alg,task, data, ime.Milliseconds);
+                    }
+                     listener.OnEndCalculate(alg,task, data, ime.Milliseconds);
+                }
+                i++;
             }
 
             

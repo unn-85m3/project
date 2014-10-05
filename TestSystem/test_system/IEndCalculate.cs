@@ -12,6 +12,6 @@ namespace TestSystem.test_system
     interface IEndCalculate
     {
         void OnEndCalculate(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time);
-        void OnEndTask(IAlgorithm alg,ITaskPackage task, int time);
+        void OnEndTask(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time);
     }
 }
