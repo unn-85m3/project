@@ -12,6 +12,13 @@ namespace TestSystem.Tasks
         private List<IBlackBox> boxes;
         private String name;
         private IEnterBlackBoxParam parameters;
+
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="boxes">Список ЧЯ</param>
+        /// <param name="parameters">Параметры ЧЯ</param>
+        /// <param name="name">Имя задачи</param>
         public TaskPackage(List<IBlackBox> boxes, IEnterBlackBoxParam parameters, String name)
         {
             this.boxes = boxes;
@@ -20,17 +27,25 @@ namespace TestSystem.Tasks
         }
 
 
-
+        /// <summary>
+        /// Список ЧЯ
+        /// </summary>
         public List<IBlackBox> BlackBoxes
         {
             get { return boxes; }
         }
 
+        /// <summary>
+        /// Параметры ЧЯ
+        /// </summary>
         public IEnterBlackBoxParam EnterParams
         {
             get { return parameters; }
         }
 
+        /// <summary>
+        /// Имя задачи
+        /// </summary>
         public string Name
         {
             get {return name; }

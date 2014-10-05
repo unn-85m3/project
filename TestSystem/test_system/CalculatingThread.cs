@@ -19,21 +19,36 @@ namespace TestSystem.test_system
         BlackBoxFunction function;
         List<ITaskPackage> tasks;
 
+        BlackBoxFunction function;
+        List<ITaskPackage> tasks;
+      /// <summary>
+        /// Инициализация потока для алгоритма
+        /// </summary>
+        /// <param name="alg">Алгоритм</param>
+        /// <param name="tasks">Задания</param>
+
         public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks,BlackBoxFunction function)
         {
-            this.alg = alg;
+            this.alg = alg;           
             this.tasks = tasks;
             this.function = function;
            
         }
 
 
+        /// <summary>
+        /// Запуск потока
+        /// </summary>
         public void Start()
         {
             thread = new Thread(this.Calc);
             thread.Start();
         }
 
+
+        /// <summary>
+        /// Прогон заданий на этом алгориме
+        /// </summary>
         protected void Calc()
         {
             int i=0;
@@ -59,9 +74,18 @@ namespace TestSystem.test_system
                 i++;
             }
 
+
+
+               
+
+
             
         }
 
+        /// <summary>
+        /// Установка слушателя
+        /// </summary>
+        /// <param name="listener"></param>
         public void SetEndListener(IEndCalculate listener)
         {
             this.listener = listener;

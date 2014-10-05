@@ -34,14 +34,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(745, 466);
+            this.ClientSize = new System.Drawing.Size(657, 338);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
         }
 
-
+        /// <summary>
+        /// Создание вкладок и таблиц на них.
+        /// </summary>
         private void InitTab()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
@@ -68,10 +70,10 @@
             this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Location = new System.Drawing.Point(12, 12);
+            this.tabControl1.Location = new System.Drawing.Point(1, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(575, 359);
+            this.tabControl1.Size = new System.Drawing.Size(this.Size.Width - 17, this.Size.Height - 41);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPages
@@ -79,10 +81,10 @@
             for (int i = 0; i < Algorithms.Count; i++)
             {
                 this.tabPages[i].Controls.Add(this.dataGridViews[i]);
-                this.tabPages[i].Location = new System.Drawing.Point(4, 22);
+                this.tabPages[i].Location = new System.Drawing.Point(1, 1);
                 this.tabPages[i].Name = "tabPage1";
                 this.tabPages[i].Padding = new System.Windows.Forms.Padding(3);
-                this.tabPages[i].Size = new System.Drawing.Size(567, 333);
+                this.tabPages[i].Size = new System.Drawing.Size(this.tabControl1.Size.Width, this.tabControl1.Size.Height);
                 this.tabPages[i].TabIndex = 0;
                 this.tabPages[i].Text = Algorithms[i].Name;
                 this.tabPages[i].UseVisualStyleBackColor = true;
@@ -96,9 +98,9 @@
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right)));
                 this.dataGridViews[i].ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-                this.dataGridViews[i].Location = new System.Drawing.Point(7, 7);
+                this.dataGridViews[i].Location = new System.Drawing.Point(1, 1);
                 this.dataGridViews[i].Name = "dataGridView1";
-                this.dataGridViews[i].Size = new System.Drawing.Size(555, 320);
+                this.dataGridViews[i].Size = new System.Drawing.Size(this.tabPages[i].Size.Width - 1, this.tabPages[i].Size.Height - 1);
                 this.dataGridViews[i].TabIndex = 0;
             }
             

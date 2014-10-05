@@ -12,9 +12,20 @@ namespace TestSystem.Algorithm
      */
     interface IAlgorithm
     {
-
+        /// <summary>
+        /// через эту ф-ю можно изменить входные данные алгоритма
+        /// </summary>
         IEnterBlackBoxParam EnterParam { get; set; }
+
+        /// <summary>
+        /// Здесь находится сам алгоритм отптимизации ф-и
+        /// </summary>
+        /// <returns>результат работы алгоритма</returns>
         IOutBlackBoxParam Calculate();
+
+        /// <summary>
+        /// Имя алгоритма
+        /// </summary>
         String Name {get; }
         
     }
