@@ -70,6 +70,7 @@
     <Compile Include="DataFormat\IDataFormat.cs" />
     <Compile Include="DataFormat\IEnterBlackBoxParam.cs" />
     <Compile Include="DataFormat\IOutBlackBoxParam.cs" />
+    <Compile Include="DataFormat\OutBlackBoxParam.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
