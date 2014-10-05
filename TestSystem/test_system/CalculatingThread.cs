@@ -24,11 +24,11 @@ namespace TestSystem.test_system
 
         public void Start()
         {
-            thread = new Thread(this.Calc);
+            thread = new Thread(this.calc);
             thread.Start();
         }
 
-        protected void Calc()
+        protected void calc()
         {
             DateTime dd = DateTime.Now;
 
@@ -37,13 +37,13 @@ namespace TestSystem.test_system
             TimeSpan ime =  DateTime.Now - dd;
             if (listener != null)
             {
-                listener.OnEndCalculate(alg, data, ime.Milliseconds);
+                listener.onEndCalculate(alg, data, ime.Milliseconds);
             }
 
             
         }
 
-        public void SetEndListener(IEndCalculate listener)
+        public void setEndListener(IEndCalculate listener)
         {
             this.listener = listener;
         }
