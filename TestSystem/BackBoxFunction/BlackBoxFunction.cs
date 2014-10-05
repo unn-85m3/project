@@ -28,6 +28,9 @@ namespace TestSystem.BackBoxFunction
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public double Cost
         {
             get { return cost; }

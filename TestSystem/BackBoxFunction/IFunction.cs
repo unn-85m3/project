@@ -9,6 +9,12 @@ namespace TestSystem.BackBoxFunction
 {
     interface IFunction
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="x2"></param>
+        /// <returns></returns>
         IOutBlackBoxParam Calculate(Double x1,Double x2);
     }
 }
