@@ -15,7 +15,7 @@ namespace TestSystem.BackBoxFunction
 
         public void Init(IBlackBox blackBox)
         {
-
+            this.blackBox = blackBox;
         }
 
         public IOutBlackBoxParam Calculate(double x1, double x2)
