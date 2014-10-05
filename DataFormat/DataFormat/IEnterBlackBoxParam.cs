@@ -11,13 +11,5 @@ namespace TestSystem.DataFormat
      */
     interface IEnterBlackBoxParam
     {
-        Double x1_min { get; }
-        Double x1_max { get; }
-
-        Double x2_min { get; }
-        Double x2_max { get; }
-
-        Double x2_x1_min { get; }
-        Double x2_x1_max { get; } 
     }
 }
