@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 using TestSystem.Algorithm;
 using TestSystem.Tasks;
 using TestSystem.DataFormat;
+using TestSystem.BackBoxFunction;
 
 namespace TestSystem.test_system
 {
     class TestSystem:ITestSystem,IEndCalculate
     {
         protected List<IAlgorithm> algorithms;
-
+        private List<ITaskPackage> tasks;
+        private BlackBoxFunction function;
+        private IEndCalculate listener;
+        private Listener thListener;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -25,9 +29,11 @@ namespace TestSystem.test_system
         /// Добавление алгоритма
         /// </summary>
         /// <param name="algorithm">Алгоритм</param>
-        public void AddAlgorithm(IAlgorithm algorithm)
+        public void AddAlgorithm(IAlgorithm algorithm, BlackBoxFunction function)
         {
              algorithms.Add(algorithm);
+             this.tasks = tasks;
+             this.function = function;
         }
 
         /// <summary>
@@ -58,10 +64,46 @@ namespace TestSystem.test_system
             foreach(IAlgorithm alg in algorithms)
             {
                 
-                CalculatingThread th = new CalculatingThread(alg,null);
-                th.SetEndListener(this);
+                CalculatingThread th = new CalculatingThread(alg,tasks,function);
+                thListener = new Listener(listener);
+                th.SetEndListener(thListener);
                 th.Start();
             }
+        }
+
+
+        private class Listener:IEndCalculate
+        {
+            IEndCalculate listener;
+            public Listener(IEndCalculate listener)
+            {
+                this.listener = listener;
+            }
+
+            public void SetListener(IEndCalculate listener)
+            {
+                this.listener = listener;
+            }
+
+            public void OnEndCalculate(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time)
+            {
+                if (listener!=null)
+                    listener.OnEndCalculate(alg, task, rez, time);
+            }
+
+            public void OnEndTask(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time)
+            {
+                if (listener != null)
+                    listener.OnEndTask(alg, task, rez, time);
+            }
+        }
+
+
+        public void SetListener(IEndCalculate listener)
+        {
+            this.listener = listener;
+            if (thListener != null)
+                thListener.SetListener(listener);
         }
 
         /// <summary>
