@@ -13,7 +13,7 @@ namespace TestSystem.Algorithm
     interface IAlgorithm
     {
 
-        IEnterBlackBoxParam enterParam { set; }
+        IEnterBlackBoxParam enterParam { get; set; }
         IOutBlackBoxParam Calculate();
         String Name {get; }
         
