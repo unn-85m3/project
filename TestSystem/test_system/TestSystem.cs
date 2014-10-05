@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestSystem.Algorithm;
+using TestSystem.Tasks;
+using TestSystem.DataFormat;
 
 namespace TestSystem.test_system
 {
@@ -41,19 +43,19 @@ namespace TestSystem.test_system
             foreach(IAlgorithm alg in algorithms)
             {
                 
-                CalculatingThread th = new CalculatingThread(alg);
+                CalculatingThread th = new CalculatingThread(alg,null);
                 th.SetEndListener(this);
                 th.Start();
             }
         }
 
-        public void OnEndCalculate(IAlgorithm alg, DataFormat.IOutBlackBoxParam rez, int time)
+        public void OnEndCalculate(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time)
         {
             ///throw new NotImplementedException();
         }
 
 
-        public void OnEndAlgorithm(IAlgorithm alg, int time)
+        public void OnEndTask(IAlgorithm alg,ITaskPackage task, int time)
         {
             throw new NotImplementedException();
         }

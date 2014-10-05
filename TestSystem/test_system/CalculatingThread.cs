@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using TestSystem.Algorithm;
 using TestSystem.DataFormat;
+using TestSystem.Tasks;
 
 namespace TestSystem.test_system
 {
@@ -14,10 +15,12 @@ namespace TestSystem.test_system
         IEndCalculate listener;
         Thread thread;
         IAlgorithm alg;
+        ITaskPackage task;
 
-        public CalculatingThread(IAlgorithm alg)
+        public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks)
         {
             this.alg = alg;
+            
            
         }
 
@@ -37,7 +40,7 @@ namespace TestSystem.test_system
             TimeSpan ime =  DateTime.Now - dd;
             if (listener != null)
             {
-                listener.OnEndCalculate(alg, data, ime.Milliseconds);
+                listener.OnEndCalculate(alg,task, data, ime.Milliseconds);
             }
 
             
