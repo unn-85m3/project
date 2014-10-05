@@ -76,6 +76,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tasks\Tasks_Base.cs" />
     <Compile Include="test_system\CalculatingThread.cs" />
     <Compile Include="test_system\IEndCalculate.cs" />
     <Compile Include="test_system\ITestSystem.cs" />
