@@ -17,7 +17,7 @@ namespace TestSystem.test_system
         IAlgorithm alg;
         ITaskPackage task;
 
-        public CalculatingThread(IAlgorithm alg,ITaskPackage task)
+        public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks)
         {
             this.alg = alg;
             
