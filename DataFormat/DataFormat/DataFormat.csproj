@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackBoxParameters.cs" />
+    <Compile Include="DataFormat.cs" />
+    <Compile Include="IDataFormat.cs" />
+    <Compile Include="IEnterBlackBoxParam.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
