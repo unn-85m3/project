@@ -20,8 +20,10 @@ namespace TestSystem.test_system
         /// <summary>
         /// Конструктор
         /// </summary>
-        public TestSystem()
+        public TestSystem(List<ITaskPackage> tasks, BlackBoxFunction function)
         {
+            this.tasks = tasks;
+            this.function = function;
             algorithms = new List<IAlgorithm>();
         }
 
@@ -29,11 +31,10 @@ namespace TestSystem.test_system
         /// Добавление алгоритма
         /// </summary>
         /// <param name="algorithm">Алгоритм</param>
-        public void AddAlgorithm(IAlgorithm algorithm, List<ITaskPackage> tasks, BlackBoxFunction function)
+        public void AddAlgorithm(IAlgorithm algorithm)
         {
              algorithms.Add(algorithm);
-             this.tasks = tasks;
-             this.function = function;
+
         }
 
         /// <summary>
