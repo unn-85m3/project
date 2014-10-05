@@ -14,7 +14,7 @@ namespace TestSystem.DataFormat
 
         public double Cost
         {
-            get { throw new NotImplementedException(); }
+            get { return cost; }
         }
     }
 }
