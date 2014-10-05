@@ -25,8 +25,8 @@ namespace TestSystem
         private void Create_Algorithms()
         {
             Algorithms = new List<Algorithm.IAlgorithm>();
-            Algorithms.Add(new Algorithm.Benchmark_Algorithm());
-            Algorithms.Add(new Algorithm.Genetic_Algorithm());
+            Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
+            Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));
             Create_Tasks();
             InitTab();
             Init_Table();

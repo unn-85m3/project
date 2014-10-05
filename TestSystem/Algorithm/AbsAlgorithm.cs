@@ -28,7 +28,7 @@ namespace TestSystem.Algorithm
         /// <param name="function">Используемая ф-ция</param>
         protected AbsAlgorithm(IEnterBlackBoxParam parameter,IFunction function)
         {
-            this.enterParam = parameter;
+            this.parameter = parameter;
             this.function = function;
             
         }
@@ -41,7 +41,7 @@ namespace TestSystem.Algorithm
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
         /// </summary>
-        public IEnterBlackBoxParam enterParam
+        public IEnterBlackBoxParam EnterParam
         {
             get { return parameter; }
             set { parameter = value; }
