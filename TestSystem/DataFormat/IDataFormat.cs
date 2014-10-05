@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestSystem.Tasks;
 
 namespace TestSystem.DataFormat
 {
@@ -12,6 +13,6 @@ namespace TestSystem.DataFormat
     interface IDataFormat
     {
         void SaveData(IEnterBlackBoxParam param);
-        List<IEnterBlackBoxParam> GetData();
+        ITaskPackage GetData();
     }
 }
