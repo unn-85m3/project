@@ -42,18 +42,18 @@ namespace TestSystem
             dtf.Add(new DataFormat.DataFormat("/Tests/test_2.txt"));
             dtf.Add(new DataFormat.DataFormat("/Tests/test_3.txt"));
 
-            //dtf[0].OpenFile();
-            Tasks.Add(dtf[0].GetData());
-            //dtf[1].OpenFile();
-            Tasks.Add(dtf[1].GetData());
-            //dtf[2].OpenFile();
-            Tasks.Add(dtf[2].GetData());
+
+            foreach (var d in dtf)
+            {
+                Tasks.Add(d.GetData());
+                //dtf[0].OpenFile("/Tests/test_1.txt");
+            }
 
             Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction());
             Algorithms.SetListener(this);
 
-            foreach(var Alg in Algs)
-                Algorithms.AddAlgorithm(Alg);
+            
+            Algorithms.AddAlgorithm(Algs);
 
             InitTab();
             Algorithms.Test();
@@ -64,7 +64,7 @@ namespace TestSystem
         }
 
         /// <summary>
-        /// Заглушка на задания
+        /// Заглушка на создане строк в таблице
         /// </summary>
         private void Create_Rows()
         {
@@ -108,7 +108,8 @@ namespace TestSystem
 
 
         public void OnEndCalculate(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
-        {
+        {   
+            Init_Table(task, rez, time);
             //throw new NotImplementedException();
         }
 
