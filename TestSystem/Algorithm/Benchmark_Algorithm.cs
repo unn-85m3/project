@@ -37,23 +37,27 @@ namespace TestSystem.Algorithm
         {
             //double k = -1, cost = -1;
             int n = 0; //количество успешных вычислений функции
+            double cost = double.MaxValue;
+            IOutBlackBoxParam a;
 
-            for (double i = parametr.x1_min; i <= parametr.x1_max; i = i + h)
-                for (double j = parametr.x2_min; j <= parametr.x2_max; j = j + h)
-                    if (((j / i) <= parametr.x2_x1_max) && ((j / i) >= parametr.x2_x1_min))
+            for (double i = this.parameter.x1_min; i <= this.parameter.x1_max; i = i + h)
+                for (double j = this.parameter.x2_min; j <= this.parameter.x2_max; j = j + h)
+                    if (((j / i) <= this.parameter.x2_x1_max) && ((j / i) >= this.parameter.x2_x1_min))
                     {
                         try
                         {
-                            function.Сalculate(i, j);
+                             a = function.Calculate(i, j);
+                            
                             n++;
+                            if (n == 1)
+                                cost = a.Cost;
+                            else if (a.Cost < cost)
+                                cost = a.Cost;
                         }
                         catch
                         {
                         }
-                        /*if (n == 1)
-                            cost = k;
-                        else if (k < cost)
-                            cost = k;*/
+                        
                     }
             return new DataFormat.OutBlackBoxParam(cost);
             throw new NotImplementedException();
