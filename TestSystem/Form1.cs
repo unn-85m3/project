@@ -72,18 +72,18 @@ namespace TestSystem
         /// <summary>
         /// Заполнение таблиц.
         /// </summary>
-        private void Init_Table()
+        private void Init_Table(Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
             for (int i = 0; i < Algorithms.Length; i++)
             {
                 
                 for (int j = 0; j < Tasks.Count; j++)
                 {
-                    dataGridViews[i].Rows[j].Cells[0].Value = Tasks[j].Name;
-                    //dataGridViews[i].Rows[j].Cells[1].Value = "";
-                    //dataGridViews[i].Rows[j].Cells[2].Value = "";
-                    //dataGridViews[i].Rows[j].Cells[3].Value = "";
-                    //dataGridViews[i].Rows[j].Cells[4].Value = "";
+                    dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
+                    dataGridViews[i].Rows[j].Cells[1].Value = time;
+                    dataGridViews[i].Rows[j].Cells[2].Value = "";
+                    dataGridViews[i].Rows[j].Cells[3].Value = "";
+                    dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
                 }
             }
         }
@@ -97,7 +97,7 @@ namespace TestSystem
 
         public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
-            Init_Table();
+            Init_Table(task, rez, time);
         }
     }
 }
