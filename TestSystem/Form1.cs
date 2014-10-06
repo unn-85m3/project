@@ -11,6 +11,7 @@ using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
 
+
 namespace TestSystem
 {
     public partial class Form1 : Form, IEndCalculate
@@ -24,6 +25,8 @@ namespace TestSystem
         {
             InitializeComponent();
             Create_TestSystem();
+
+            KSModels.DllBlackBoxCalculator Calc = new KSModels.DllBlackBoxCalculator("E:/GitHub/bbs/Models/11.1.КС.r1", null); // Абсолючный путь... пздц..... бред...
         }
 
         /// <summary>
