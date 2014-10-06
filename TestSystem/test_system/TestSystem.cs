@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using TestSystem.Algorithm;
 using TestSystem.Tasks;
 using TestSystem.DataFormat;
-using TestSystem.BackBoxFunction;
+using TestSystem.BlackBoxFunction;
 
 namespace TestSystem.test_system
 {
@@ -14,13 +14,13 @@ namespace TestSystem.test_system
     {
         protected List<IAlgorithm> algorithms;
         private List<ITaskPackage> tasks;
-        private BlackBoxFunction function;
+        private BlackBoxFunction.BlackBoxFunction function;
         private IEndCalculate listener;
         private Listener thListener;
         /// <summary>
         /// Конструктор
         /// </summary>
-        public TestSystem(List<ITaskPackage> tasks, BlackBoxFunction function)
+        public TestSystem(List<ITaskPackage> tasks, BlackBoxFunction.BlackBoxFunction function)
         {
             this.tasks = tasks;
             this.function = function;

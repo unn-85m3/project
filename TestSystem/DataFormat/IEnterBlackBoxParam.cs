@@ -9,7 +9,7 @@ namespace TestSystem.DataFormat
     /**
      * интерфейс, наследуемый классом, содержащим выходные параметры чёрного ящика
      */
-    interface IEnterBlackBoxParam
+    public interface IEnterBlackBoxParam
     {
 
         /// <summary>

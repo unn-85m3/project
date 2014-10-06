@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestSystem.DataFormat
 {
-    interface IBlackBox
+    public interface IBlackBox
     {
         /// <summary>
         /// Информация о ЧЯ

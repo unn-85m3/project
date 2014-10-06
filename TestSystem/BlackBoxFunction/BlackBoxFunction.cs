@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 //using Exception;
 using TestSystem.DataFormat;
 
-namespace TestSystem.BackBoxFunction
+namespace TestSystem.BlackBoxFunction
 {
     class BlackBoxFunction : IFunction, IOutBlackBoxParam
     {

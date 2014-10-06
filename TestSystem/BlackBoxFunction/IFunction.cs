@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 
-namespace TestSystem.BackBoxFunction
+namespace TestSystem.BlackBoxFunction
 {
-    interface IFunction
+    public interface IFunction
     {
         /// <summary>
         /// 
@@ -15,6 +15,6 @@ namespace TestSystem.BackBoxFunction
         /// <param name="x1"></param>
         /// <param name="x2"></param>
         /// <returns></returns>
-        IOutBlackBoxParam Calculate(Double x1,Double x2);
+        IOutBlackBoxParam Calculate(Double x1, Double x2);
     }
 }

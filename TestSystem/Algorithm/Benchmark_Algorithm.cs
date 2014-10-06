@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
-using TestSystem.BackBoxFunction;
+using TestSystem.BlackBoxFunction;
 
 namespace TestSystem.Algorithm
 {
     class Benchmark_Algorithm : AbsAlgorithm
     {
         private string name = "Эталонный алгоритм";
-        private double h; //шаг
+        private double h = 1; //шаг
 
         public double H
         {

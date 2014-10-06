@@ -7,7 +7,7 @@ using TestSystem.DataFormat;
 
 namespace TestSystem.Tasks
 {
-    interface ITaskPackage
+    public interface ITaskPackage
     {
         /// <summary>
         /// Список ЧЯ

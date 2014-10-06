@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TestSystem.Algorithm;
 using TestSystem.DataFormat;
 using TestSystem.Tasks;
-using TestSystem.BackBoxFunction;
+using TestSystem.BlackBoxFunction;
 
 namespace TestSystem.test_system
 {
@@ -16,7 +16,7 @@ namespace TestSystem.test_system
         IEndCalculate listener;
         Thread thread;
         IAlgorithm alg;
-        BlackBoxFunction function;
+        BlackBoxFunction.BlackBoxFunction function;
         List<ITaskPackage> tasks;
 
       /// <summary>
@@ -26,7 +26,7 @@ namespace TestSystem.test_system
         /// <param name="tasks">Задания</param>
         /// <param name="function">Оптимизируемая функция</param>
         /// 
-        public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks,BlackBoxFunction function)
+        public CalculatingThread(IAlgorithm alg,List<ITaskPackage> tasks,BlackBoxFunction.BlackBoxFunction function)
         {
             this.alg = alg;           
             this.tasks = tasks;

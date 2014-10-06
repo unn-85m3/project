@@ -7,7 +7,7 @@ using TestSystem.Algorithm;
 
 namespace TestSystem.test_system
 {
-    interface ITestSystem
+    public interface ITestSystem
     {
         /// <summary>
         /// Добавление алгоритма
