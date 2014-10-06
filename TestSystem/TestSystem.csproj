@@ -64,8 +64,8 @@
     <Compile Include="Algorithm\Benchmark_Algorithm.cs" />
     <Compile Include="Algorithm\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
-    <Compile Include="BlackBoxFunction\BlackBoxFunction.cs" />
-    <Compile Include="BlackBoxFunction\IFunction.cs" />
+    <Compile Include="BlackBox\BlackBoxFunction.cs" />
+    <Compile Include="BlackBox\IFunction.cs" />
     <Compile Include="DataFormat\IBlackBox.cs" />
     <Compile Include="DataFormat\IDataFormat.cs" />
     <Compile Include="DataFormat\IEnterBlackBoxParam.cs" />

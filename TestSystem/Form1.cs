@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestSystem.test_system;
+using TestSystem.BlackBox;
 
 namespace TestSystem
 {
@@ -28,12 +29,13 @@ namespace TestSystem
         /// </summary>
         private void Create_Algorithms()
         {
+            Tasks = new List<TestSystem.Tasks.ITaskPackage>();
             DataFormat.DataFormat dtf = new DataFormat.DataFormat();
             dtf.OpenFile("/Tests/test_1.txt");
             Tasks.Add(dtf.GetData());
-            Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction.BlackBoxFunction());
+            Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction());
             Algorithms.SetListener(this);
-
+            //Algorithms.AddAlgorithm(new Algorithm.Benchmark_Algorithm(null, 
             //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
             //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));
             //Create_Tasks();

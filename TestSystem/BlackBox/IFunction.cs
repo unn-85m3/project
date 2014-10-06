@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 
-namespace TestSystem.BlackBoxFunction
+namespace TestSystem.BlackBox
 {
     public interface IFunction
     {
