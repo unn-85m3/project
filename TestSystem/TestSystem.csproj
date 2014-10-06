@@ -130,6 +130,18 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tasks\Tests\test_1.txt" />
+    <Content Include="Tasks\Tests\test_10.txt" />
+    <Content Include="Tasks\Tests\test_2.txt" />
+    <Content Include="Tasks\Tests\test_3.txt" />
+    <Content Include="Tasks\Tests\test_4.txt" />
+    <Content Include="Tasks\Tests\test_5.txt" />
+    <Content Include="Tasks\Tests\test_6.txt" />
+    <Content Include="Tasks\Tests\test_7.txt" />
+    <Content Include="Tasks\Tests\test_8.txt" />
+    <Content Include="Tasks\Tests\test_9.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
