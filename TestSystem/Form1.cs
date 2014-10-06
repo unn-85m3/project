@@ -97,8 +97,8 @@ namespace TestSystem
                     {
                         dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
                         dataGridViews[i].Rows[j].Cells[1].Value = time;
-                        dataGridViews[i].Rows[j].Cells[2].Value = "";
-                        dataGridViews[i].Rows[j].Cells[3].Value = "";
+                        dataGridViews[i].Rows[j].Cells[2].Value = "10*i + j =";
+                        dataGridViews[i].Rows[j].Cells[3].Value = 10*(i+1)+(j+1);
                         dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
                     }
                 }
