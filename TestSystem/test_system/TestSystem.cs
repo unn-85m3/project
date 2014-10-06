@@ -34,7 +34,26 @@ namespace TestSystem.test_system
         public void AddAlgorithm(IAlgorithm algorithm)
         {
              algorithms.Add(algorithm);
+        }
 
+        /// <summary>
+        /// Добавление алгоритма
+        /// </summary>
+        /// <param name="algorithm">Алгоритм</param>
+        public void AddAlgorithm(params IAlgorithm[] algorithm)
+        {
+            foreach (var alg in algorithm)
+                algorithms.Add(alg);
+        }
+
+        /// <summary>
+        /// Добавление алгоритма
+        /// </summary>
+        /// <param name="algorithm">Алгоритм</param>
+        public void AddAlgorithm(List<IAlgorithm> algorithm)
+        {
+            foreach (var alg in algorithm)
+                algorithms.Add(alg);
         }
 
         /// <summary>
