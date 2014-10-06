@@ -47,11 +47,11 @@
         private void InitTab()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Count];
-            this.dataGridViews = new System.Windows.Forms.DataGridView[Algorithms.Count];
+            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Length];
+            this.dataGridViews = new System.Windows.Forms.DataGridView[Algorithms.Length];
             this.tabControl1.SuspendLayout();
 
-            for (int i = 0; i < Algorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 tabPages[i] = new System.Windows.Forms.TabPage();
                 dataGridViews[i] = new System.Windows.Forms.DataGridView();
@@ -78,7 +78,7 @@
             // 
             // tabPages
             // 
-            for (int i = 0; i < Algorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 this.tabPages[i].Controls.Add(this.dataGridViews[i]);
                 this.tabPages[i].Location = new System.Drawing.Point(1, 1);
@@ -86,13 +86,13 @@
                 this.tabPages[i].Padding = new System.Windows.Forms.Padding(3);
                 this.tabPages[i].Size = new System.Drawing.Size(this.tabControl1.Size.Width, this.tabControl1.Size.Height);
                 this.tabPages[i].TabIndex = 0;
-                this.tabPages[i].Text = Algorithms[i].Name;
+                this.tabPages[i].Text = Algs[i].Name;
                 this.tabPages[i].UseVisualStyleBackColor = true;
             }
             // 
             // dataGridViews
             // 
-            for (int i = 0; i < Algorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 this.dataGridViews[i].Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
@@ -103,9 +103,19 @@
                 this.dataGridViews[i].Size = new System.Drawing.Size(this.tabPages[i].Size.Width - 1, this.tabPages[i].Size.Height - 1);
                 this.dataGridViews[i].TabIndex = 0;
             }
-            
+
+            for (int i = 0; i < Algorithms.Length; i++)
+            {
+                dataGridViews[i].Columns.Add("Task", "Задача");
+                dataGridViews[i].Columns.Add("Time", "t, мин.");
+                dataGridViews[i].Columns.Add("Func", "Кол-во вызовов ф-ции");
+                dataGridViews[i].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+                dataGridViews[i].Columns.Add("Cost", "Стоимость");
+            }
+
+
             this.tabControl1.ResumeLayout(false);
-            for (int i = 0; i < Algorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 this.tabPages[i].ResumeLayout(false);
                 ((System.ComponentModel.ISupportInitialize)(this.dataGridViews[i])).EndInit();
@@ -113,6 +123,8 @@
 
             this.Controls.Add(this.tabControl1);
             this.ResumeLayout(false);
+
+            Create_Rows();
         }
 
         #endregion

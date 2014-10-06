@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using TestSystem.Algorithm;
 using TestSystem.DataFormat;
 using TestSystem.Tasks;
-using TestSystem.BackBoxFunction;
+using TestSystem.BlackBox;
 
 namespace TestSystem.test_system
 {
