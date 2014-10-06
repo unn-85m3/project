@@ -36,7 +36,7 @@ namespace TestSystem.Algorithm
         {
             //double k = -1, cost = -1;
             int n = 0; //количество успешных вычислений функции
-            double cost = double.MaxValue;
+            double cost = double.MinValue;
             IOutBlackBoxParam a;
 
             for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i = i + h)
@@ -50,7 +50,7 @@ namespace TestSystem.Algorithm
                             n++;
                             if (n == 1)
                                 cost = a.Cost;
-                            else if (a.Cost < cost)
+                            else if (a.Cost > cost)
                                 cost = a.Cost;
                         }
                         catch

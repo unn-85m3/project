@@ -37,14 +37,17 @@ namespace TestSystem
 
             Tasks = new List<TestSystem.Tasks.ITaskPackage>();
 
-            DataFormat.DataFormat dtf = new DataFormat.DataFormat();
+            List<DataFormat.DataFormat> dtf = new List<DataFormat.DataFormat>();
+            dtf.Add(new DataFormat.DataFormat());
+            dtf.Add(new DataFormat.DataFormat());
+            dtf.Add(new DataFormat.DataFormat());
 
-            dtf.OpenFile("/Tests/test_1.txt");
-            Tasks.Add(dtf.GetData());
-            dtf.OpenFile("/Tests/test_2.txt");
-            Tasks.Add(dtf.GetData());
-            dtf.OpenFile("/Tests/test_3.txt");
-            Tasks.Add(dtf.GetData());
+            dtf[0].OpenFile("/Tests/test_1.txt");
+            Tasks.Add(dtf[0].GetData());
+            dtf[1].OpenFile("/Tests/test_2.txt");
+            Tasks.Add(dtf[1].GetData());
+            dtf[2].OpenFile("/Tests/test_3.txt");
+            Tasks.Add(dtf[2].GetData());
 
             Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction());
             Algorithms.SetListener(this);
