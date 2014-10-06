@@ -107,27 +107,6 @@ namespace TestSystem.test_system
                 thListener.SetListener(listener);
         }
 
-       /* /// <summary>
-        /// Окончание вычислений
-        /// </summary>
-        /// <param name="alg">Алгоритм</param>
-        /// <param name="task">Задание</param>
-        /// <param name="rez">Результат</param>
-        /// <param name="time">Время</param>
-        public void OnEndCalculate(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time)
-        {
-            ///throw new NotImplementedException();
-        }
-
-        /// <summary>
-        /// Окончание задания
-        /// </summary>
-        /// <param name="alg">Алгоритм</param>
-        /// <param name="task">Задание</param>
-        /// <param name="time">Время</param>
-        public void OnEndTask(IAlgorithm alg,ITaskPackage task, int time)
-        {
-            throw new NotImplementedException();
-        }*/
+      
     }
 }
