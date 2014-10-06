@@ -86,11 +86,11 @@ namespace TestSystem
         /// <summary>
         /// Заполнение таблиц.
         /// </summary>
-        private void Init_Table(Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
+        private void Init_Table(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
             for (int i = 0; i < Algorithms.Length; i++)
             {
-                
+                if (alg.Name == Algs[i].Name)
                 for (int j = 0; j < Tasks.Count; j++)
                 {
                     if (Tasks[j].Name == task.Name)
@@ -109,13 +109,13 @@ namespace TestSystem
 
         public void OnEndCalculate(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {   
-            Init_Table(task, rez, time);
+            Init_Table(alg, task, rez, time);
             //throw new NotImplementedException();
         }
 
         public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
-            Init_Table(task, rez, time);
+            Init_Table(alg, task, rez, time);
         }
     }
 }
