@@ -8,7 +8,7 @@ using TestSystem.BlackBox;
 
 namespace TestSystem.Algorithm
 {
-    class Benchmark_Algorithm : AbsAlgorithm
+    class Non_Benchmark_Algorithm : AbsAlgorithm
     {
         private double h = 1; //шаг
 
@@ -23,9 +23,9 @@ namespace TestSystem.Algorithm
         /// </summary>
         /// <param name="parameter">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        public Benchmark_Algorithm(IEnterBlackBoxParam parameter, IFunction function) : base(parameter, function)
+        public Non_Benchmark_Algorithm(IEnterBlackBoxParam parameter, IFunction function) : base(parameter, function)
         {
-            this.name = "Эталонный алгоритм";
+            this.name = "Неэталонный алгоритм";
         }
 
         /// <summary>

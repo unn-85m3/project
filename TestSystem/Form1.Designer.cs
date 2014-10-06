@@ -107,7 +107,7 @@
             for (int i = 0; i < Algorithms.Length; i++)
             {
                 dataGridViews[i].Columns.Add("Task", "Задача");
-                dataGridViews[i].Columns.Add("Time", "t, мин.");
+                dataGridViews[i].Columns.Add("Time", "t, мсек.");
                 dataGridViews[i].Columns.Add("Func", "Кол-во вызовов ф-ции");
                 dataGridViews[i].Columns.Add("BB", "Кол-во вызовов ЧЯ");
                 dataGridViews[i].Columns.Add("Cost", "Стоимость");

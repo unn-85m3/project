@@ -15,7 +15,7 @@ namespace TestSystem.Algorithm
     abstract class AbsAlgorithm:IAlgorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
-        private string name = "Имя";/// имя алгоритма+имя автора
+        protected string name = "Имя";/// имя алгоритма+имя автора
         protected IFunction function;///функция для оптимизации
 
      

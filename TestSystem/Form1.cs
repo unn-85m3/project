@@ -33,18 +33,29 @@ namespace TestSystem
         {
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm(null, new BlackBoxFunction()));
+            Algs.Add(new Algorithm.Non_Benchmark_Algorithm(null, new BlackBoxFunction()));
+
             Tasks = new List<TestSystem.Tasks.ITaskPackage>();
+
             DataFormat.DataFormat dtf = new DataFormat.DataFormat();
+
             dtf.OpenFile("/Tests/test_1.txt");
             Tasks.Add(dtf.GetData());
+            dtf.OpenFile("/Tests/test_2.txt");
+            Tasks.Add(dtf.GetData());
+            dtf.OpenFile("/Tests/test_3.txt");
+            Tasks.Add(dtf.GetData());
+
             Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction());
             Algorithms.SetListener(this);
-            Algorithms.AddAlgorithm(Algs[0]);
+
+            foreach(var Alg in Algs)
+                Algorithms.AddAlgorithm(Alg);
+
             InitTab();
             Algorithms.Test();
             //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
             //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));
-            //Create_Tasks();
             
             
         }
