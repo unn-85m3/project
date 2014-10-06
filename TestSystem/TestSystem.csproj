@@ -133,6 +133,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bbs_dll\BlackBoxCommon.dll" />
+    <Content Include="bbs_dll\Core.dll" />
+    <Content Include="bbs_dll\KSModels.dll" />
+    <Content Include="bbs_dll\Logger.dll" />
+    <Content Include="bbs_dll\MathTools.dll" />
+    <Content Include="bbs_dll\NumericalMethodsLibrary.dll" />
     <Content Include="Tasks\Tests\test_1.txt" />
     <Content Include="Tasks\Tests\test_10.txt" />
     <Content Include="Tasks\Tests\test_2.txt" />
@@ -143,6 +149,9 @@
     <Content Include="Tasks\Tests\test_7.txt" />
     <Content Include="Tasks\Tests\test_8.txt" />
     <Content Include="Tasks\Tests\test_9.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bbs_dll\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
