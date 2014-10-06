@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestSystem.DataFormat
 {
-    class OutBlackBoxParam : IOutBlackBoxParam
+    public class OutBlackBoxParam : IOutBlackBoxParam
     {
         private double cost;
 

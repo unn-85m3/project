@@ -10,7 +10,7 @@ namespace TestSystem.Algorithm
     /**
      * Этот интерфейс должны наследовать все алгоритмы
      */
-    interface IAlgorithm
+   public interface IAlgorithm
     {
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
