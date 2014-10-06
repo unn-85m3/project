@@ -9,18 +9,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSystem_beta", "..\TestS
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug_beta|Any CPU = debug_beta|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B63B585B-D910-4A34-A01E-A8B3AF47A920}.debug_beta|Any CPU.ActiveCfg = Debug|Any CPU
+		{B63B585B-D910-4A34-A01E-A8B3AF47A920}.debug_beta|Any CPU.Build.0 = Debug|Any CPU
 		{B63B585B-D910-4A34-A01E-A8B3AF47A920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B63B585B-D910-4A34-A01E-A8B3AF47A920}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B63B585B-D910-4A34-A01E-A8B3AF47A920}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B63B585B-D910-4A34-A01E-A8B3AF47A920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.debug_beta|Any CPU.ActiveCfg = Debug|Any CPU
+		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.debug_beta|Any CPU.Build.0 = Debug|Any CPU
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.debug_beta|Any CPU.ActiveCfg = Debug|Any CPU
+		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.debug_beta|Any CPU.Build.0 = Debug|Any CPU
 		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
