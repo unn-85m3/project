@@ -40,9 +40,9 @@ namespace TestSystem.Algorithm
             double cost = double.MaxValue;
             IOutBlackBoxParam a;
 
-            for (double i = this.parameter.x1_min; i <= this.parameter.x1_max; i = i + h)
-                for (double j = this.parameter.x2_min; j <= this.parameter.x2_max; j = j + h)
-                    if (((j / i) <= this.parameter.x2_x1_max) && ((j / i) >= this.parameter.x2_x1_min))
+            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i = i + h)
+                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j = j + h)
+                    if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
                     {
                         try
                         {
