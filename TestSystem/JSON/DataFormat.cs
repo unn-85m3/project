@@ -171,6 +171,17 @@ namespace TestSystem.DataFormat
         }
 
         /// <summary>
+        /// Fucking constructor
+        /// </summary>
+        public DataFormat(String fileName)
+        {
+            varLimitations = new BlackBoxVarLimitation();
+            bbParams = new List<IBlackBox>();
+            this.fileName = fileName;
+            OpenFile(fileName);
+        }
+
+        /// <summary>
         /// Constructor. Add new limitation
         /// </summary>
         /// <param name="x1">limit variable X1</param>

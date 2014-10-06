@@ -38,15 +38,15 @@ namespace TestSystem
             Tasks = new List<TestSystem.Tasks.ITaskPackage>();
 
             List<DataFormat.DataFormat> dtf = new List<DataFormat.DataFormat>();
-            dtf.Add(new DataFormat.DataFormat());
-            dtf.Add(new DataFormat.DataFormat());
-            dtf.Add(new DataFormat.DataFormat());
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_1.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_2.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_3.txt"));
 
-            dtf[0].OpenFile("/Tests/test_1.txt");
+            //dtf[0].OpenFile();
             Tasks.Add(dtf[0].GetData());
-            dtf[1].OpenFile("/Tests/test_2.txt");
+            //dtf[1].OpenFile();
             Tasks.Add(dtf[1].GetData());
-            dtf[2].OpenFile("/Tests/test_3.txt");
+            //dtf[2].OpenFile();
             Tasks.Add(dtf[2].GetData());
 
             Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction());
@@ -93,11 +93,14 @@ namespace TestSystem
                 
                 for (int j = 0; j < Tasks.Count; j++)
                 {
-                    dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
-                    dataGridViews[i].Rows[j].Cells[1].Value = time;
-                    dataGridViews[i].Rows[j].Cells[2].Value = "";
-                    dataGridViews[i].Rows[j].Cells[3].Value = "";
-                    dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
+                    if (Tasks[j].Name == task.Name)
+                    {
+                        dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
+                        dataGridViews[i].Rows[j].Cells[1].Value = time;
+                        dataGridViews[i].Rows[j].Cells[2].Value = "";
+                        dataGridViews[i].Rows[j].Cells[3].Value = "";
+                        dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
+                    }
                 }
             }
         }

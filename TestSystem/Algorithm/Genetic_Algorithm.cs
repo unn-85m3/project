@@ -10,7 +10,7 @@ namespace TestSystem.Algorithm
 {
     class Genetic_Algorithm : AbsAlgorithm
     {
-        private string name = "Генетический алгоритм";
+        //private string name = "Генетический алгоритм";
 
 
         /// <summary>
