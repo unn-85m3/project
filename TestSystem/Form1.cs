@@ -41,6 +41,13 @@ namespace TestSystem
             dtf.Add(new DataFormat.DataFormat("/Tests/test_1.txt"));
             dtf.Add(new DataFormat.DataFormat("/Tests/test_2.txt"));
             dtf.Add(new DataFormat.DataFormat("/Tests/test_3.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_4.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_5.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_6.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_7.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_8.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_9.txt"));
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_10.txt"));
 
 
             foreach (var d in dtf)
