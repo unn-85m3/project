@@ -68,6 +68,7 @@ namespace TestSystem.test_system
                     dd = DateTime.Now;
                     function.Init(task.BlackBoxes[i]);
                     data = alg.Calculate();
+
                     ime = DateTime.Now - dd;
                     if (listener != null)
                     {

@@ -11,7 +11,7 @@ namespace TestSystem.Algorithm
     class Benchmark_Algorithm : AbsAlgorithm
     {
         private string name = "Эталонный алгоритм";
-        private double h; //шаг
+        private double h=0.5; //шаг
 
         public double H
         {
@@ -56,11 +56,11 @@ namespace TestSystem.Algorithm
                         }
                         catch
                         {
+                            cost = Double.MinValue;
                         }
                         
                     }
             return new DataFormat.OutBlackBoxParam(cost);
-            throw new NotImplementedException();
         }
 
         /// <summary>

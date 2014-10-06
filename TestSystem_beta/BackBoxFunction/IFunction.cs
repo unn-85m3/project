@@ -7,7 +7,7 @@ using TestSystem.DataFormat;
 
 namespace TestSystem.BackBoxFunction
 {
-    interface IFunction
+    public interface IFunction
     {
         /// <summary>
         /// 

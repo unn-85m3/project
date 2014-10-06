@@ -7,10 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestSystem.BackBoxFunction;
+using TestSystem.test_system;
+using TestSystem.Tasks;
 
 namespace TestSystem
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form,IEndCalculate
     {
         private List<Algorithm.IAlgorithm> Algorithms;
         private List<Tasks.Tasks_Base> Tasks;
@@ -27,12 +30,33 @@ namespace TestSystem
         /// </summary>
         private void Create_Algorithms()
         {
+            BlackBoxFunction function = new BlackBoxFunction();
+            DataFormat.DataFormat data = new DataFormat.DataFormat();
+            data.OpenFile("Tests/test_1.txt");
+            ITaskPackage package = data.GetData();
+            List<ITaskPackage> tasks=new List<ITaskPackage>();
+            tasks.Add(package);
+            test_system.TestSystem system = new test_system.TestSystem(tasks, function);
             Algorithms = new List<Algorithm.IAlgorithm>();
-            Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
-            Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));
-            Create_Tasks();
-            InitTab();
-            Init_Table();
+            system.AddAlgorithm(new Algorithm.Benchmark_Algorithm(null, function));
+
+            system.SetListener(this);
+
+
+
+
+            system.Test();
+        }
+
+
+        public void OnEndCalculate(Algorithm.IAlgorithm alg, ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
+        {
+           
+        }
+
+        public void OnEndTask(Algorithm.IAlgorithm alg, ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
+        {
+
         }
 
         /// <summary>
@@ -70,6 +94,8 @@ namespace TestSystem
                 }
             }
         }
+
+
 
 
     }
