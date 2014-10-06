@@ -20,11 +20,10 @@ namespace TestSystem.BlackBox
 
         public IOutBlackBoxParam Calculate(double x1, double x2)
         {
-            if (( x2-x1) < 0) throw new Exception();
-            else
-            {
-                cost = (Math.Sin(x1) * Math.Cos(x2) + Math.Max(x1, x2)) / Math.Sqrt(x2-x1);
-            }
+
+
+            cost = (Math.Sin(x1) * Math.Cos(x2) + Math.Max(x1, x2)) + Math.Cos(x1) + Math.Sin(x2);
+            
             return this;
         }
 
