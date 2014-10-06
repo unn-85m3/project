@@ -10,7 +10,7 @@ namespace TestSystem.DataFormat
     /**
      * Этот интерфейс должен реализовывать класс, отвечающий за работу с файлами
      */
-    interface IDataFormat
+    public interface IDataFormat
     {
         /// <summary>
         /// Сохранение чя

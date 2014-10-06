@@ -9,7 +9,7 @@ using TestSystem.Tasks;
 
 namespace TestSystem.test_system
 {
-    interface IEndCalculate
+    public interface IEndCalculate
     {
         /// <summary>
         /// Окончание вычислений

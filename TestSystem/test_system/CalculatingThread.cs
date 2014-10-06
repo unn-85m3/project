@@ -55,8 +55,10 @@ namespace TestSystem.test_system
             DateTime dd=DateTime.MinValue;
             TimeSpan ime = TimeSpan.MinValue;
             IOutBlackBoxParam data = null;
+            int time = 0;
             foreach(ITaskPackage task in tasks)
             {
+                time = 0;
                 alg.EnterParam=task.EnterParams;
                 int BlackBoxesCount = task.BlackBoxes.Count;
 
@@ -69,11 +71,12 @@ namespace TestSystem.test_system
                     ime = DateTime.Now - dd;
                     if (listener != null)
                     {
+                        time += ime.Milliseconds;
                         listener.OnEndCalculate(alg, task, data, ime.Milliseconds);
                     }
                     I++;
                 }
-                listener.OnEndTask(alg, task, data, ime.Milliseconds);
+                listener.OnEndTask(alg, task, data, time);
             }
             
         }
