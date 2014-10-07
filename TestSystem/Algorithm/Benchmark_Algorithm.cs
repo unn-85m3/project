@@ -10,7 +10,7 @@ namespace TestSystem.Algorithm
 {
     class Benchmark_Algorithm : AbsAlgorithm
     {
-        private double h = 0.5; //шаг
+        private double h = 2; //шаг
 
         public double H
         {
@@ -23,8 +23,9 @@ namespace TestSystem.Algorithm
         /// </summary>
         /// <param name="parameter">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        public Benchmark_Algorithm(IEnterBlackBoxParam parameter, IFunction function) : base(parameter, function)
+        public Benchmark_Algorithm() 
         {
+            ///17,0814930544306
             this.name = "Эталонный алгоритм";
         }
 
@@ -39,27 +40,29 @@ namespace TestSystem.Algorithm
             double cost = double.MaxValue;
             IOutBlackBoxParam a;
 
-            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i = i + h)
-                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j = j + h)
+            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i +=  h)
+                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j +=   h)
                     if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
                     {
                         try
                         {
-                             a = function.Calculate(i, j);
+                             a = Function(i, j);
                             
-                            n++;
-                            if (n == 1)
-                                cost = a.Cost;
-                            else if (a.Cost < cost)
-                                cost = a.Cost;
+                           
                         }
-                        catch
+                        catch(Exception e)
                         {
+                            a = new OutBlackBoxParam(Double.MaxValue);  // Double.MaxValue;
                         }
+
+                        n++;
+                        if (n == 1)
+                            cost = a.Cost;
+                        else if (a.Cost < cost)
+                            cost = a.Cost;
                         
                     }
             return new DataFormat.OutBlackBoxParam(cost);
-            throw new NotImplementedException();
         }
 
         /// <summary>

@@ -14,16 +14,16 @@ namespace TestSystem.test_system
     {
         protected List<IAlgorithm> algorithms;
         private List<ITaskPackage> tasks;
-        private BlackBoxFunction function;
+       // private BlackBoxFunction function;
         private IEndCalculate listener;
         private Listener thListener;
         /// <summary>
         /// Конструктор
         /// </summary>
-        public TestSystem(List<ITaskPackage> tasks, BlackBoxFunction function)
+        public TestSystem(List<ITaskPackage> tasks)//, BlackBoxFunction function)
         {
             this.tasks = tasks;
-            this.function = function;
+           // this.function = function;
             algorithms = new List<IAlgorithm>();
         }
 
@@ -83,7 +83,8 @@ namespace TestSystem.test_system
         {
             foreach(IAlgorithm alg in algorithms)
             {
-                
+                BlackBoxFunction function = new BlackBoxFunction();
+                alg.SetFunction(function);
                 CalculatingThread th = new CalculatingThread(alg,tasks,function);
                 thListener = new Listener(listener);
                 th.SetEndListener(thListener);

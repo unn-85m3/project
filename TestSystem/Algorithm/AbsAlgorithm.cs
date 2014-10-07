@@ -12,23 +12,21 @@ namespace TestSystem.Algorithm
     /// От него наследуются все алгоритмы.
     /// Уэтого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
     /// </summary>
-    abstract class AbsAlgorithm:IAlgorithm
+    abstract class AbsAlgorithm : IAlgorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
-        protected IFunction function;///функция для оптимизации
+        private IFunction _function;///функция для оптимизации
 
-     
+
         /// <summary>
         /// конструктор
         /// </summary>
         /// <param name="parametr">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        protected AbsAlgorithm(IEnterBlackBoxParam parametr,IFunction function)
+        protected AbsAlgorithm()
         {
-            this.parametr = parametr;
-            this.function = function;
-            
+
         }
 
         /// <summary>
@@ -48,6 +46,24 @@ namespace TestSystem.Algorithm
             set { parametr = value; }
         }
 
+
+        public void SetFunction(IFunction function)
+        {
+            this.function = function;
+        }
+
+        private IFunction function
+        {
+            set { _function = value; }
+            get { return _function; }
+        }
+
+
+        protected IOutBlackBoxParam Function(Double x1, Double x2)
+        {
+            return function.Calculate(x1, x2);
+        }
+
         /// <summary>
         /// Здесь находится сам алгоритм отптимизации ф-и
         /// </summary>
@@ -56,6 +72,6 @@ namespace TestSystem.Algorithm
 
 
 
-        
+
     }
 }

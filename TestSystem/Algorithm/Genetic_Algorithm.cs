@@ -18,7 +18,7 @@ namespace TestSystem.Algorithm
         /// </summary>
         /// <param name="parameter">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        public Genetic_Algorithm(IEnterBlackBoxParam parameter, IFunction function) : base(parameter, function) { }
+        public Genetic_Algorithm() { }
 
         /// <summary>
         /// Здесь находится сам алгоритм отптимизации ф-и
