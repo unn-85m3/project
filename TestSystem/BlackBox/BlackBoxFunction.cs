@@ -80,7 +80,7 @@ namespace TestSystem.BlackBox
                     this.functions[i].POut = Parametr(blackBox.POut, x1, x2);
                     this.functions[i].QOut = Convert.ToDouble(blackBox.QOut, provider);
                     this.functions[i].TIn = Convert.ToDouble(blackBox.TIn, provider);
-                    this.functions[i].CIn = 8000;// Convert.ToDouble(blackBox.СIn, provider);
+                    this.functions[i].CIn = Convert.ToDouble(blackBox.СIn, provider);
                     this.functions[i].DIn = Convert.ToDouble(blackBox.DIn, provider);
                     this.functions[i].Calculate();
                     cost += this.functions[i].EZ;
