@@ -57,7 +57,6 @@ namespace TestSystem.test_system
             int time = 0;
             foreach(ITaskPackage task in tasks)
             {
-                time = 0;
                 alg.EnterParam=task.EnterParams;
                 int BlackBoxesCount = task.BlackBoxes.Count;
                 dd = DateTime.Now;
@@ -65,7 +64,7 @@ namespace TestSystem.test_system
                 data = alg.Calculate();
                 ime = DateTime.Now - dd;
                 if (listener != null)
-                    listener.OnEndTask(alg, task, data, time);
+                    listener.OnEndTask(alg, task, data, ime.Milliseconds);
                    /* {
                         time += ime.Milliseconds;
                         listener.OnEndCalculate(alg, task, data, ime.Milliseconds);

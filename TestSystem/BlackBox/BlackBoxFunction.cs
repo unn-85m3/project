@@ -26,17 +26,23 @@ namespace TestSystem.BlackBox
             provider.NumberDecimalSeparator = ".";
             /// provider.NumberGroupSeparator = ".";
             provider.NumberGroupSizes = new int[] { 2 };
-            functions = new List<DllBlackBoxCalculator>();
+           
           ///  function = new DllBlackBoxCalculator("C:/Users/Ирина Рыжова/Source/Repos/project/TestSystem/bbs_dll/Models/11.1.КС.r1",null);
         }
 
         public void Init(ITaskPackage task)
         {
             this.task = task;
+            int i = 0;
+            functions = new List<DllBlackBoxCalculator>();
             foreach(IBlackBox blackbox in task.BlackBoxes)
             {
-                if (blackbox.Info!="Узел")
-                 functions.Add(new DllBlackBoxCalculator(url+blackbox.Info,blackbox.Info));
+                
+                if (blackbox.Info != "Узел")
+                {
+                    functions.Add(new DllBlackBoxCalculator(url + blackbox.Info, blackbox.Info));
+                    i++;
+                }
 
 
             }
