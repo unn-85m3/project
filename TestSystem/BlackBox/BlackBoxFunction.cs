@@ -40,17 +40,11 @@ namespace TestSystem.BlackBox
             {
                 case "x1":
                     return x1;
-
-                    break;
                 case "x2":
                     return x2;
 
-                    break;
-
                 default:
                     return Convert.ToDouble(x, provider);
-
-                    break;
             }
         }
 
