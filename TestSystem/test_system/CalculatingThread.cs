@@ -50,7 +50,6 @@ namespace TestSystem.test_system
         /// </summary>
         protected void Calc()
         {
-            int I=0;
             int n=tasks.Count;
             DateTime dd=DateTime.MinValue;
             TimeSpan ime = TimeSpan.MinValue;
@@ -61,22 +60,17 @@ namespace TestSystem.test_system
                 time = 0;
                 alg.EnterParam=task.EnterParams;
                 int BlackBoxesCount = task.BlackBoxes.Count;
-
-                for (int i = 0; i < BlackBoxesCount;i++ )
-                {
-
-                    dd = DateTime.Now;
-                    function.Init(task.BlackBoxes[i]);
-                    data = alg.Calculate();
-                    ime = DateTime.Now - dd;
-                    if (listener != null)
-                    {
+                dd = DateTime.Now;
+                function.Init(task);
+                data = alg.Calculate();
+                ime = DateTime.Now - dd;
+                if (listener != null)
+                    listener.OnEndTask(alg, task, data, time);
+                   /* {
                         time += ime.Milliseconds;
                         listener.OnEndCalculate(alg, task, data, ime.Milliseconds);
-                    }
-                    I++;
-                }
-                listener.OnEndTask(alg, task, data, time);
+                    }*/
+                
             }
             
         }
