@@ -37,7 +37,7 @@ namespace TestSystem
         {
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
-            //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
+            Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
 
             Tasks = new List<TestSystem.Tasks.ITaskPackage>();
 
