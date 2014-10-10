@@ -25,8 +25,6 @@ namespace TestSystem
         {
             InitializeComponent();
             Create_TestSystem();
-
-            KSModels.DllBlackBoxCalculator Calc = new KSModels.DllBlackBoxCalculator("E:/GitHub/bbs/Models/11.1.КС.r1", null); // Абсолючный путь... пздц..... бред...
         }
 
         /// <summary>
