@@ -12,15 +12,6 @@ namespace TestSystem.test_system
     public interface IEndCalculate
     {
         /// <summary>
-        /// Окончание вычислений
-        /// </summary>
-        /// <param name="alg">Алгоритм</param>
-        /// <param name="task">Задание</param>
-        /// <param name="rez">Результат</param>
-        /// <param name="time">Время</param>
-        void OnEndCalculate(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time);
-        
-        /// <summary>
         /// Окончание задания
         /// </summary>
         /// <param name="alg">Алгоритм</param>

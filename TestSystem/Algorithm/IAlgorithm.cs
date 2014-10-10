@@ -33,6 +33,9 @@ namespace TestSystem.Algorithm
         /// Установка оптимизируемой ф-и
         /// </summary>
         void SetFunction(IFunction function);
+
+        int Calls { get; }
+        void Refresh();
         
     }
 }

@@ -17,6 +17,7 @@ namespace TestSystem.Algorithm
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
         private IFunction _function;///функция для оптимизации
+        private int calls;
 
 
         /// <summary>
@@ -26,7 +27,7 @@ namespace TestSystem.Algorithm
         /// <param name="function">Используемая ф-ция</param>
         protected AbsAlgorithm()
         {
-
+            calls = 0;
         }
 
         /// <summary>
@@ -61,6 +62,7 @@ namespace TestSystem.Algorithm
 
         protected IOutBlackBoxParam Function(Double x1, Double x2)
         {
+            calls++;
             return function.Calculate(x1, x2);
         }
 
@@ -73,5 +75,16 @@ namespace TestSystem.Algorithm
 
 
 
+
+
+        public int Calls
+        {
+            get { return calls; }
+        }
+
+        public void Refresh()
+        {
+            calls = 0;
+        }
     }
 }

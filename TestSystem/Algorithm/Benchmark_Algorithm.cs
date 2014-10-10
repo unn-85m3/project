@@ -10,7 +10,7 @@ namespace TestSystem.Algorithm
 {
     class Benchmark_Algorithm : AbsAlgorithm
     {
-        private double h = 2; //шаг
+        private double h = 1; //шаг
 
         public double H
         {
@@ -25,7 +25,6 @@ namespace TestSystem.Algorithm
         /// <param name="function">Используемая ф-ция</param>
         public Benchmark_Algorithm() 
         {
-            ///17,0814930544306
             this.name = "Эталонный алгоритм";
         }
 

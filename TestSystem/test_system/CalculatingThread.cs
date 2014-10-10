@@ -61,6 +61,7 @@ namespace TestSystem.test_system
                 int BlackBoxesCount = task.BlackBoxes.Count;
                 dd = DateTime.Now;
                 function.Init(task);
+                alg.Refresh();
                 data = alg.Calculate();
                 ime = DateTime.Now - dd;
                 if (listener != null)

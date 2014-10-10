@@ -106,11 +106,6 @@ namespace TestSystem.test_system
                 this.listener = listener;
             }
 
-            public void OnEndCalculate(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time)
-            {
-                if (listener!=null)
-                    listener.OnEndCalculate(alg, task, rez, time);
-            }
 
             public void OnEndTask(IAlgorithm alg, ITaskPackage task, IOutBlackBoxParam rez, int time)
             {
