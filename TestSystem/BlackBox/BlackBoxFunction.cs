@@ -35,7 +35,8 @@ namespace TestSystem.BlackBox
             this.task = task;
             foreach(IBlackBox blackbox in task.BlackBoxes)
             {
-                functions.Add(new DllBlackBoxCalculator(url+blackbox.Info,blackbox.Info));
+                if (blackbox.Info!="Узел")
+                 functions.Add(new DllBlackBoxCalculator(url+blackbox.Info,blackbox.Info));
 
 
             }
@@ -68,15 +69,18 @@ namespace TestSystem.BlackBox
             int i = 0;
             foreach (IBlackBox blackBox in task.BlackBoxes)
             {
-                this.functions[i].PIn = Parametr(blackBox.PIn, x1, x2);
-                this.functions[i].POut = Parametr(blackBox.POut, x1, x2);
-                this.functions[i].QOut = Convert.ToDouble(blackBox.QOut, provider);
-                this.functions[i].TIn = Convert.ToDouble(blackBox.TIn, provider);
-                this.functions[i].CIn = 8000;// Convert.ToDouble(blackBox.СIn, provider);
-                this.functions[i].DIn = Convert.ToDouble(blackBox.DIn, provider);
-                this.functions[i].Calculate();
-                cost += this.functions[i].EZ;
-                i++;
+                if (blackBox.Info != "Узел")
+                {
+                    this.functions[i].PIn = Parametr(blackBox.PIn, x1, x2);
+                    this.functions[i].POut = Parametr(blackBox.POut, x1, x2);
+                    this.functions[i].QOut = Convert.ToDouble(blackBox.QOut, provider);
+                    this.functions[i].TIn = Convert.ToDouble(blackBox.TIn, provider);
+                    this.functions[i].CIn = 8000;// Convert.ToDouble(blackBox.СIn, provider);
+                    this.functions[i].DIn = Convert.ToDouble(blackBox.DIn, provider);
+                    this.functions[i].Calculate();
+                    cost += this.functions[i].EZ;
+                    i++;
+                }
             }
           
             
