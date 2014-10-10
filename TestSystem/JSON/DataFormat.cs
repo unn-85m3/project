@@ -31,10 +31,12 @@ namespace TestSystem.DataFormat
             public String tIn;
             [DataMember(Name = "DIn")]
             public String dIn;
+            [DataMember(Name = "CIn")]
+            public String cIn;
         };
 
         /// <summary>
-        /// Structure for all black boxes' parameters.
+        /// Structure for all black boxes' parameters for this task.
         /// </summary>
         [DataContract]
         struct BlackBoxVarLimitation
@@ -44,7 +46,7 @@ namespace TestSystem.DataFormat
             [DataMember(Name = "x2")]
             public String x2;
             [DataMember(Name = "x2/x1")]
-            public String x1x2;
+            public String x2x1;
 
             [DataMember(Name = "black boxes")]
             public List<BlackBoxParam> blackBoxes;
@@ -56,17 +58,17 @@ namespace TestSystem.DataFormat
             double x1max;
             double x2min;
             double x2max;
-            double x1x2_min;
-            double x1x2_max;
+            double x2x1_min;
+            double x2x1_max;
 
-            public EnterBlackBoxParam(double x1_min, double x1_max, double x2_min, double x2_max, double x1_x2_min, double x1_x2_max)
+            public EnterBlackBoxParam(double x1_min, double x1_max, double x2_min, double x2_max, double x2_x1_min, double x2_x1_max)
             {
                 this.x1max = x1_max;
                 this.x1min = x1_min;
                 this.x2max = x2_max;
                 this.x2min = x2_min;
-                this.x1x2_max = x1_x2_max;
-                this.x1x2_min = x1_x2_min;
+                this.x2x1_max = x2_x1_max;
+                this.x2x1_min = x2_x1_min;
             }
 
             public Double x1_min
@@ -91,12 +93,12 @@ namespace TestSystem.DataFormat
 
             public Double x2_x1_min
             {
-                get { return x1x2_min; }
+                get { return x2x1_min; }
             }
 
             public Double x2_x1_max
             {
-                get { return x1x2_max; }
+                get { return x2x1_max; }
             }
         };
 
@@ -186,13 +188,13 @@ namespace TestSystem.DataFormat
         /// </summary>
         /// <param name="x1">limit variable X1</param>
         /// <param name="x2">limit variable X2</param>
-        /// <param name="x1x2">limit variable X1/X2</param>
-        public DataFormat(String x1, String x2, String x1x2)
+        /// <param name="x2x1">limit variable X2/X1</param>
+        public DataFormat(String x1, String x2, String x2x1)
         {
             varLimitations = new BlackBoxVarLimitation();
             varLimitations.x1 = Convert.ToString(x1);
             varLimitations.x2 = Convert.ToString(x2);
-            varLimitations.x1x2 = Convert.ToString(x1x2);
+            varLimitations.x2x1 = Convert.ToString(x2x1);
             varLimitations.blackBoxes = new List<BlackBoxParam>();
         }
 
@@ -272,7 +274,7 @@ namespace TestSystem.DataFormat
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(BlackBoxVarLimitation));
             ser.WriteObject(stream, varLimitations);
             stream.Position = 0;
-            StreamReader reader = new StreamReader(stream);
+            StreamReader reader = new StreamReader(stream, Encoding.UTF8);
             String jsondata = reader.ReadToEnd();
             IntoFile(filename, jsondata);
         }
@@ -284,9 +286,8 @@ namespace TestSystem.DataFormat
         public void OpenFile(String filename)
         {
             String jsondata = OutFile(filename);
-            System.Type typeofthis = this.GetType();
             DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(BlackBoxVarLimitation));
-            byte[] byteArray = Encoding.ASCII.GetBytes(jsondata);
+            byte[] byteArray = Encoding.UTF8.GetBytes(jsondata);
             MemoryStream stream = new MemoryStream(byteArray);
             varLimitations = (BlackBoxVarLimitation)ser.ReadObject(stream);
         }
@@ -302,7 +303,7 @@ namespace TestSystem.DataFormat
                 LimitMin(varLimitations.x2), LimitMax(varLimitations.x2), comprimate_min(), comprimate_max());
             foreach(BlackBoxParam bbp in varLimitations.blackBoxes)
             {
-                BlackBox bb = new BlackBox(bbp.info, bbp.pIn, bbp.pOut, bbp.qOut, bbp.tIn, bbp.dIn, "0"); //ВНЕМАТОЧНО!!!!!
+                BlackBox bb = new BlackBox(bbp.info, bbp.pIn, bbp.pOut, bbp.qOut, bbp.tIn, bbp.dIn, "8000"); //ВНЕМАТОЧНО!!!!!
                 bbParams.Add(bb);
             }
 
@@ -432,7 +433,7 @@ namespace TestSystem.DataFormat
         /// <returns>minimum comprimate coefficient</returns>
         public double comprimate_min()
         {
-            return LimitMin(varLimitations.x1x2);
+            return LimitMin(varLimitations.x2x1);
         }
 
         /// <summary>
@@ -441,7 +442,7 @@ namespace TestSystem.DataFormat
         /// <returns>maximum comprimate coefficient</returns>
         public double comprimate_max()
         {
-            return LimitMax(varLimitations.x1x2);
+            return LimitMax(varLimitations.x2x1);
         }
 
         /// <summary>
