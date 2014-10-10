@@ -23,7 +23,7 @@ namespace TestSystem.Algorithm
         /// </summary>
         /// <param name="parameter">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        public Non_Benchmark_Algorithm(IEnterBlackBoxParam parameter, IFunction function) : base(parameter, function)
+        public Non_Benchmark_Algorithm()
         {
             this.name = "Неэталонный алгоритм";
         }
@@ -45,7 +45,7 @@ namespace TestSystem.Algorithm
                     {
                         try
                         {
-                             a = function.Calculate(i, j);
+                             a = Function(i, j);
                             
                             n++;
                             if (n == 1)

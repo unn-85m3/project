@@ -16,7 +16,7 @@ namespace TestSystem.Algorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         private string name = "Имя";/// имя алгоритма+имя автора
-        protected IFunction function;///функция для оптимизации
+        private IFunction _function;///функция для оптимизации
 
      
         /// <summary>
@@ -46,6 +46,24 @@ namespace TestSystem.Algorithm
         {
             get { return parametr; }
             set { parametr = value; }
+        }
+
+
+        public void SetFunction(IFunction function)
+        {
+            this.function = function;
+        }
+
+        private IFunction function
+        {
+            set { _function = value; }
+            get { return _function; }
+        }
+
+
+        protected IOutBlackBoxParam Function(Double x1, Double x2)
+        {
+            return function.Calculate(x1, x2);
         }
 
         /// <summary>

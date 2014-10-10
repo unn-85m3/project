@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
+using TestSystem.BlackBox;
 
 namespace TestSystem.Algorithm
 {
@@ -27,6 +28,11 @@ namespace TestSystem.Algorithm
         /// Имя алгоритма
         /// </summary>
         String Name {get; }
+
+        /// <summary>
+        /// Установка оптимизируемой ф-и
+        /// </summary>
+        void SetFunction(IFunction function);
         
     }
 }

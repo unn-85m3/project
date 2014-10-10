@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
+using KSModels;
 
 
 namespace TestSystem
@@ -25,6 +26,8 @@ namespace TestSystem
         {
             InitializeComponent();
             Create_TestSystem();
+
+           /// KSModels.DllBlackBoxCalculator Calc = new KSModels.DllBlackBoxCalculator("E:/GitHub/bbs/Models/11.1.КС.r1", null); // Абсолючный путь... пздц..... бред...
         }
 
         /// <summary>
@@ -33,8 +36,8 @@ namespace TestSystem
         private void Create_TestSystem()
         {
             Algs = new List<IAlgorithm>();
-            Algs.Add(new Algorithm.Benchmark_Algorithm(null, new BlackBoxFunction()));
-            Algs.Add(new Algorithm.Non_Benchmark_Algorithm(null, new BlackBoxFunction()));
+            Algs.Add(new Algorithm.Benchmark_Algorithm());
+            //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
 
             Tasks = new List<TestSystem.Tasks.ITaskPackage>();
 
@@ -57,7 +60,7 @@ namespace TestSystem
                 //dtf[0].OpenFile("/Tests/test_1.txt");
             }
 
-            Algorithms = new test_system.TestSystem(Tasks, new BlackBoxFunction());
+            Algorithms = new test_system.TestSystem(Tasks);
             Algorithms.SetListener(this);
 
             
@@ -117,7 +120,7 @@ namespace TestSystem
 
         public void OnEndCalculate(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {   
-            Init_Table(alg, task, rez, time);
+           /// Init_Table(alg, task, rez, time);
             //throw new NotImplementedException();
         }
 
