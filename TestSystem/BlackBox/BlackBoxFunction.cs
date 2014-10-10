@@ -58,6 +58,7 @@ namespace TestSystem.BlackBox
 
                 default:
                     return Convert.ToDouble(x, provider);
+     
             }
         }
 
