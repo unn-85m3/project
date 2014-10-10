@@ -22,7 +22,7 @@ namespace TestSystem.BlackBox
             provider.NumberDecimalSeparator = ".";
             /// provider.NumberGroupSeparator = ".";
             provider.NumberGroupSizes = new int[] { 2 };
-            function = new DllBlackBoxCalculator("C:/Users/Ирина Рыжова/Source/Repos/project/TestSystem/bbs_dll/Models/11.1.КС.r1",null);
+            function = new DllBlackBoxCalculator("C:/bbs_dll/Models/11.1.КС.r1",null); // Илья! поправь здесь что бы нужный файл отткрывался)
         }
 
         public void Init(IBlackBox blackBox)
