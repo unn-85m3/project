@@ -14,7 +14,6 @@ namespace TestSystem.BlackBox
     {
         private Double cost;
         ITaskPackage task;
-        DllBlackBoxCalculator function;
         NumberFormatInfo provider;
         private static String url = "C:/bbs_dll/Models/";
         private List<DllBlackBoxCalculator> functions;

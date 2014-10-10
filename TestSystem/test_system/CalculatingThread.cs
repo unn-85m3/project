@@ -54,7 +54,6 @@ namespace TestSystem.test_system
             DateTime dd=DateTime.MinValue;
             TimeSpan ime = TimeSpan.MinValue;
             IOutBlackBoxParam data = null;
-            int time = 0;
             foreach(ITaskPackage task in tasks)
             {
                 alg.EnterParam=task.EnterParams;
@@ -65,7 +64,7 @@ namespace TestSystem.test_system
                 data = alg.Calculate();
                 ime = DateTime.Now - dd;
                 if (listener != null)
-                    listener.OnEndTask(alg, task, data, ime.Milliseconds);
+                    listener.OnEndTask(alg, task, data, ime.Hours*60*60*1000+ime.Minutes*60*1000+ime.Seconds*1000+ime.Milliseconds);
                    /* {
                         time += ime.Milliseconds;
                         listener.OnEndCalculate(alg, task, data, ime.Milliseconds);
