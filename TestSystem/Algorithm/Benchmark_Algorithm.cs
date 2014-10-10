@@ -47,7 +47,7 @@ namespace TestSystem.Algorithm
                         try
                         {
                              a = Function(i, j);
-                            
+                             n++;
                            
                         }
                         catch(Exception e)
@@ -55,7 +55,7 @@ namespace TestSystem.Algorithm
                             a = new OutBlackBoxParam(Double.MaxValue);  // Double.MaxValue;
                         }
 
-                        n++;
+                        
                         if (n == 1)
                             cost = a.Cost;
                         else if (a.Cost < cost)

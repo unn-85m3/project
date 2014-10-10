@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using System.Globalization;
+using TestSystem.Tasks;
 using KSModels;
 
 namespace TestSystem.BlackBox
@@ -12,9 +13,12 @@ namespace TestSystem.BlackBox
     class BlackBoxFunction : IFunction, IOutBlackBoxParam
     {
         private Double cost;
-        IBlackBox blackBox;
+        ITaskPackage task;
         DllBlackBoxCalculator function;
         NumberFormatInfo provider;
+        private static String url = "C:/Users/Ирина Рыжова/Source/Repos/project/TestSystem/bbs_dll/Models/";
+        private List<DllBlackBoxCalculator> functions;
+
 
         public BlackBoxFunction()
         {
@@ -22,15 +26,20 @@ namespace TestSystem.BlackBox
             provider.NumberDecimalSeparator = ".";
             /// provider.NumberGroupSeparator = ".";
             provider.NumberGroupSizes = new int[] { 2 };
-            function = new DllBlackBoxCalculator("C:/bbs_dll/Models/11.1.КС.r1",null); // Илья! поправь здесь что бы нужный файл отткрывался)
+            functions = new List<DllBlackBoxCalculator>();
+          ///  function = new DllBlackBoxCalculator("C:/Users/Ирина Рыжова/Source/Repos/project/TestSystem/bbs_dll/Models/11.1.КС.r1",null);
         }
 
-        public void Init(IBlackBox blackBox)
+        public void Init(ITaskPackage task)
         {
-            this.blackBox = blackBox;
-            
-            
-           
+            this.task = task;
+            foreach(IBlackBox blackbox in task.BlackBoxes)
+            {
+                functions.Add(new DllBlackBoxCalculator(url+blackbox.Info,blackbox.Info));
+
+
+            }
+
         }
 
 
@@ -40,35 +49,36 @@ namespace TestSystem.BlackBox
             {
                 case "x1":
                     return x1;
+
+                
                 case "x2":
                     return x2;
 
+                
+
                 default:
                     return Convert.ToDouble(x, provider);
+     
             }
         }
 
         public IOutBlackBoxParam Calculate(double x1, double x2)
         {
-            Double PIn=Parametr(blackBox.PIn,x1,x2);
-            Double POut=Parametr(blackBox.POut,x1,x2);
-            Double QOut = Convert.ToDouble(blackBox.QOut,provider);
-            Double TIn = Convert.ToDouble(blackBox.TIn, provider);
-            Double СIn = Convert.ToDouble(blackBox.СIn, provider);
-            Double DIn = Convert.ToDouble(blackBox.DIn, provider);
-
-            Double qin1=0;
-            Double tout1=0;
-            Double EZ=0;
-            Double KZ=0;
-            Double Expand=0;
-            Double cout1=0;
-            Double dout1=0;
-
-                this.function.Calculate(PIn, POut, QOut, TIn, СIn, DIn, out qin1, out tout1, out  EZ, out  KZ, out  Expand, out  cout1, out  dout1);
-            cost = EZ;
-            
-            /// cost = (Math.Sin(x1) * Math.Cos(x2) + Math.Max(x1, x2)) + Math.Cos(x1) + Math.Sin(x2);
+            cost = 0;
+            int i = 0;
+            foreach (IBlackBox blackBox in task.BlackBoxes)
+            {
+                this.functions[i].PIn = Parametr(blackBox.PIn, x1, x2);
+                this.functions[i].POut = Parametr(blackBox.POut, x1, x2);
+                this.functions[i].QOut = Convert.ToDouble(blackBox.QOut, provider);
+                this.functions[i].TIn = Convert.ToDouble(blackBox.TIn, provider);
+                this.functions[i].CIn = 8000;// Convert.ToDouble(blackBox.СIn, provider);
+                this.functions[i].DIn = Convert.ToDouble(blackBox.DIn, provider);
+                this.functions[i].Calculate();
+                cost += this.functions[i].EZ;
+                i++;
+            }
+          
             
             return this;
         }
