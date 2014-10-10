@@ -16,7 +16,7 @@ namespace TestSystem.BlackBox
         ITaskPackage task;
         DllBlackBoxCalculator function;
         NumberFormatInfo provider;
-        private static String url = "C:/Users/Ирина Рыжова/Source/Repos/project/TestSystem/bbs_dll/Models/";
+        private static String url = "C:/bbs_dll/Models/";
         private List<DllBlackBoxCalculator> functions;
 
 
