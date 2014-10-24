@@ -10,7 +10,7 @@ namespace TestSystem.Algorithm
 {
     class Non_Benchmark_Algorithm : AbsAlgorithm
     {
-        private double h = 0.5; //шаг
+        private double h = 1; //шаг
 
         public double H
         {

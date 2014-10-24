@@ -34,7 +34,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 338);
+            this.ClientSize = new System.Drawing.Size(907, 338);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -104,13 +104,22 @@
                 this.dataGridViews[i].TabIndex = 0;
             }
 
-            for (int i = 0; i < Algorithms.Length; i++)
+
+                dataGridViews[0].Columns.Add("Task", "Задача");
+                dataGridViews[0].Columns.Add("Time", "t, мсек.");
+                dataGridViews[0].Columns.Add("Func", "Кол-во вызовов ф-ции");
+                dataGridViews[0].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+                dataGridViews[0].Columns.Add("Cost", "Стоимость");
+            
+            for (int i = 1; i < Algorithms.Length; i++)
             {
                 dataGridViews[i].Columns.Add("Task", "Задача");
                 dataGridViews[i].Columns.Add("Time", "t, мсек.");
                 dataGridViews[i].Columns.Add("Func", "Кол-во вызовов ф-ции");
                 dataGridViews[i].Columns.Add("BB", "Кол-во вызовов ЧЯ");
                 dataGridViews[i].Columns.Add("Cost", "Стоимость");
+                dataGridViews[i].Columns.Add("TimePercent", "% t, мсек.");
+                dataGridViews[i].Columns.Add("CostPercent", "% Стоимость");
             }
 
 
