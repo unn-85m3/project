@@ -50,113 +50,6 @@ namespace TestSystem.DataFormat
             public List<BlackBoxParam> blackBoxes;
         };
 
-        class EnterBlackBoxParam : IEnterBlackBoxParam
-        {
-            double x1min;
-            double x1max;
-            double x2min;
-            double x2max;
-            double x1x2_min;
-            double x1x2_max;
-
-            public EnterBlackBoxParam(double x1_min, double x1_max, double x2_min, double x2_max, double x1_x2_min, double x1_x2_max)
-            {
-                this.x1max = x1_max;
-                this.x1min = x1_min;
-                this.x2max = x2_max;
-                this.x2min = x2_min;
-                this.x1x2_max = x1_x2_max;
-                this.x1x2_min = x1_x2_min;
-            }
-
-            public Double x1_min
-            {
-                get { return x1min; }
-            }
-            
-            public Double x1_max
-            {
-                get { return x1max; }
-            }
-
-            public Double x2_min
-            {
-                get { return x2min; }
-            }
-
-            public Double x2_max
-            {
-                get { return x2max; }
-            }
-
-            public Double x2_x1_min
-            {
-                get { return x1x2_min; }
-            }
-
-            public Double x2_x1_max
-            {
-                get { return x1x2_max; }
-            }
-        };
-
-        class BlackBox : IBlackBox
-        {
-            String info;
-            String pIn;
-            String pOut;
-            String qOut;
-            String tIn;
-            String dIn;
-            String cIn;
-
-            public BlackBox(String info, String pIn, String pOut, String qOut, String tIn, String dIn, String cIn)
-            {
-                this.info = info;
-                this.pIn = pIn;
-                this.pOut = pOut;
-                this.qOut = qOut;
-                this.tIn = tIn;
-                this.dIn = dIn;
-                this.cIn = cIn;
-            }
-
-            public String Info
-            {
-                get { return info; }
-            }
-
-            public String PIn
-            {
-                get { return pIn; }
-            }
-
-            public String POut
-            {
-                get { return pOut; }
-            }
-
-            public String QOut
-            {
-                get { return qOut; }
-            }
-
-            public String TIn
-            {
-                get { return tIn; }
-            }
-
-            public String DIn
-            {
-                get { return dIn; }
-            }
-
-            public String СIn
-            {
-                get { return cIn; }
-            }
-        };
-
         BlackBoxVarLimitation varLimitations;
         List<IBlackBox> bbParams;
         String fileName;
@@ -280,11 +173,19 @@ namespace TestSystem.DataFormat
             varLimitations = (BlackBoxVarLimitation)ser.ReadObject(stream);
         }
 
+        /// <summary>
+        /// Adding new bb
+        /// </summary>
+        /// <param name="param">BlackBox</param>
         public void SaveData(IBlackBox param)
         {
             bbParams.Add(param);
         }
 
+        /// <summary>
+        /// Packing new task.
+        /// </summary>
+        /// <returns>TaskPackage</returns>
         public ITaskPackage GetData()
         {
             EnterBlackBoxParam param = new EnterBlackBoxParam(LimitMin(varLimitations.x1), LimitMax(varLimitations.x1), 

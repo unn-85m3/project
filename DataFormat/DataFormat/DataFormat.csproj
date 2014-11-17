@@ -60,7 +60,9 @@
     <Compile Include="..\..\TestSystem\Tasks\Tasks_Base.cs">
       <Link>Tasks_Base.cs</Link>
     </Compile>
+    <Compile Include="BlackBox.cs" />
     <Compile Include="DataFormat.cs" />
+    <Compile Include="EnterBlackBoxParam.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
