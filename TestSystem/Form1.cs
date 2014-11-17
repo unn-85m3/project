@@ -22,7 +22,9 @@ namespace TestSystem
         private List<IAlgorithm> Algs;
         private int[] CompleateTask;
         private double[,,] BenchRez;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 60;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 1;
+        //private ToolTip[][] tt;
+        //private List<ToolTip> tt;
 
 
         public Form1()
@@ -56,6 +58,11 @@ namespace TestSystem
                 dtf.Add(new DataFormat.DataFormat("/Tests/test_" + number_task[i - 1] + ".txt"));
             }
         }
+
+        //private void CreateToolTip()
+        //{
+        //    tt = new ToolTip();
+        //}
 
         /// <summary>
         /// Заглушка на алгоритмы.

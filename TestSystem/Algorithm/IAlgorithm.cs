@@ -11,7 +11,7 @@ namespace TestSystem.Algorithm
     /**
      * Этот интерфейс должны наследовать все алгоритмы
      */
-   public interface IAlgorithm
+    public interface IAlgorithm
     {
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
@@ -28,6 +28,11 @@ namespace TestSystem.Algorithm
         /// Имя алгоритма
         /// </summary>
         String Name {get; }
+
+        /// <summary>
+        /// Параметры алгоритма (различные параметры, такие как шаг или колличество итераций) (нечто вроде версии алгоритма)
+        /// </summary>
+        string Atributs { get; }
 
         /// <summary>
         /// Установка оптимизируемой ф-и

@@ -49,6 +49,9 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Length];
             this.dataGridViews = new System.Windows.Forms.DataGridView[Algorithms.Length];
+
+            //tt = new System.Collections.Generic.List<System.Windows.Forms.ToolTip>();///////////////////////////////////////////////////////////////////
+
             this.tabControl1.SuspendLayout();
 
             for (int i = 0; i < Algorithms.Length; i++)
@@ -88,6 +91,9 @@
                 this.tabPages[i].TabIndex = 0;
                 this.tabPages[i].Text = Algs[i].Name;
                 this.tabPages[i].UseVisualStyleBackColor = true;
+
+                //tt.Add(new System.Windows.Forms.ToolTip());
+                //tt[i].SetToolTip(tabPages[i], Algs[i].Atributs);
             }
             // 
             // dataGridViews
