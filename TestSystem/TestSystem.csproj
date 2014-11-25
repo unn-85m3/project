@@ -86,6 +86,7 @@
   <ItemGroup>
     <Compile Include="Algorithm\AbsAlgorithm.cs" />
     <Compile Include="Algorithm\Benchmark_Algorithm.cs" />
+    <Compile Include="Algorithm\Complex_Algorithm.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritms.cs" />
     <Compile Include="Algorithm\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
