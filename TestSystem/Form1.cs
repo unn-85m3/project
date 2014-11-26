@@ -23,7 +23,7 @@ namespace TestSystem
         private List<IAlgorithm> Algs;
         private int[] CompleateTask;
         private double[,,] BenchRez;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 1;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 5;
         //private ToolTip[][] tt;
         //private List<ToolTip> tt;
 
@@ -74,7 +74,7 @@ namespace TestSystem
             IPoint p=l.GetPoint(Math.Sqrt(2));
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
+            Algs.Add(new Algorithm.Complex_Algorithm());
 
             CompleateTask = new int[Algs.Count];
             for (int i = 0; i < CompleateTask.Length; i++)
