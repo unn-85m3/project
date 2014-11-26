@@ -11,6 +11,7 @@ using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
 using KSModels;
+using TestSystem.Algorithm.Diagonal_Algoritm;
 
 
 namespace TestSystem
@@ -69,6 +70,8 @@ namespace TestSystem
         /// </summary>
         private void Create_TestSystem()
         {
+            Line l = new Line(new TestSystem.Algorithm.Diagonal_Algoritm.Point(-1,-1), new TestSystem.Algorithm.Diagonal_Algoritm.Point(4,4));
+            IPoint p=l.GetPoint(Math.Sqrt(2));
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
             Algs.Add(new Algorithm.Non_Benchmark_Algorithm());

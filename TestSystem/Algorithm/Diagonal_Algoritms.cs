@@ -15,7 +15,11 @@ namespace TestSystem.Algorithm
 
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
-            throw new NotImplementedException();
+            //this.parametr.
+            return null;
+            
         }
+
+        
     }
 }
