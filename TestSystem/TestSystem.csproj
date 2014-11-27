@@ -88,6 +88,10 @@
     <Compile Include="Algorithm\Benchmark_Algorithm.cs" />
     <Compile Include="Algorithm\Complex_Algorithm.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritms.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\ILine.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\IPoint.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\Line.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\Point.cs" />
     <Compile Include="Algorithm\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
     <Compile Include="Algorithm\Non_Benchmark_Algorithm.cs" />
@@ -315,9 +319,7 @@
     <Content Include="Tasks\Tests\test_8.txt" />
     <Content Include="Tasks\Tests\test_9.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Algorithm\Diagonal_Algoritm\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

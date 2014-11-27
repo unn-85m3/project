@@ -71,6 +71,7 @@ namespace TestSystem
         {
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
+            Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
             Algs.Add(new Algorithm.Complex_Algorithm());
 
             CompleateTask = new int[Algs.Count];
@@ -195,26 +196,26 @@ namespace TestSystem
         {
                     if (CompleateTask[0] >= CompleateTask[i])
                     {
-                        dataGridViews[i].Rows[j].Cells[5].Value = BenchRez[i, 0, j] / BenchRez[0, 0, j];
-                        dataGridViews[i].Rows[j].Cells[6].Value = BenchRez[i, 1, j] / BenchRez[0, 1, j];
+                        dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
+                        dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
                     }
         }
 
         private void Init_Table()
         {
-            double time = 0, count = 0;
             for (int i = 1; i < Algorithms.Length; i++)
             {
+                double time = 0, count = 0;
                 for (int j = 0; j < Tasks.Count; j++)
                     if (CompleateTask[0] >= CompleateTask[i])
                     {
-                        dataGridViews[i].Rows[j].Cells[5].Value = BenchRez[i, 0, j] / BenchRez[0, 0, j];
-                        time += BenchRez[i, 0, j] / BenchRez[0, 0, j];
-                        dataGridViews[i].Rows[j].Cells[6].Value = BenchRez[i, 1, j] / BenchRez[0, 1, j];
-                        count += BenchRez[i, 1, j] / BenchRez[0, 1, j];
+                        dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
+                        time += BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1;
+                        dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
+                        count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
                     }
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count;
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count;
+                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = 100 * time / Tasks.Count;
+                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = 100 * count / Tasks.Count;
             }
         }
 

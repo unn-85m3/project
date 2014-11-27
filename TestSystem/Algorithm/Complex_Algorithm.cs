@@ -23,6 +23,7 @@ namespace TestSystem.Algorithm
 
         public Complex_Algorithm()
         {
+            this.name = "Комплексный алгоритм";
             points = new List<PointCoord>();
             rnd = new Random();
             cg = new PointCoord();
@@ -30,7 +31,8 @@ namespace TestSystem.Algorithm
 
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
-            double cost = 0;
+            double cost = double.MaxValue;
+            points.Clear();
 
             for (int i = 0; i < MAXPOINT; i++)
             {
@@ -46,7 +48,7 @@ namespace TestSystem.Algorithm
             worstValInd = FindMaxCostIndex();
             FindCG();
 
-            for (int i = 0; i < MAXPOINT * 10; i++)
+            for (int i = 0; i < MAXPOINT * 12; i++)
             {
                 points[worstValInd] = ReflectThePoint(points[worstValInd]);
                 worstValInd = FindMaxCostIndex();
@@ -86,7 +88,14 @@ namespace TestSystem.Algorithm
                 refPoint.x2 -= Math.Abs(refPoint.x2 - point.x2);
             }
 
-            refPoint.cost = Function(refPoint.x1, refPoint.x2).Cost;
+            try
+            {
+                refPoint.cost = Function(refPoint.x1, refPoint.x2).Cost;
+            }
+            catch
+            {
+                refPoint.cost = double.MaxValue;
+            }
             //} while (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost);
 
             if (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost)
@@ -117,7 +126,7 @@ namespace TestSystem.Algorithm
             }
             cg.x1 /= i;
             cg.x2 /= i;
-            cg.cost = Function(cg.x1, cg.x2).Cost;
+            //cg.cost = Function(cg.x1, cg.x2).Cost;
         }
 
         private int FindMinCostIndex()
@@ -167,7 +176,14 @@ namespace TestSystem.Algorithm
 
             x12pc.x2 = rnd.NextDouble() * (x2a_max - x2a_min) + x2a_min;
 
-            x12pc.cost = Function(x12pc.x1, x12pc.x2).Cost;
+            try
+            {
+                x12pc.cost = Function(x12pc.x1, x12pc.x2).Cost;
+            }
+            catch
+            {
+                x12pc = RandPoint();
+            }
 
             return x12pc;
         }
