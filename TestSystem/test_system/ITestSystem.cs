@@ -16,16 +16,35 @@ namespace TestSystem.test_system
         void AddAlgorithm(IAlgorithm algorithm);
 
         /// <summary>
+        /// Добавление алгоритма
+        /// </summary>
+        /// <param name="algorithm">Алгоритм</param>
+         void AddAlgorithm(params IAlgorithm[] algorithm);
+
+        /// <summary>
+        /// Добавление алгоритма
+        /// </summary>
+        /// <param name="algorithm">Алгоритм</param>
+         void AddAlgorithm(List<IAlgorithm> algorithm);
+
+        /// <summary>
         /// Удаление алгоритма
         /// </summary>
         /// <param name="id">Идентификатор доступа</param>
         /// <returns>Возвращает удаленный алгоритм</returns>
-        IAlgorithm DelAlgorithm(int id);
+         IAlgorithm DelAlgorithm(int id);
 
         /// <summary>
-        /// Кол-во алгоритмов
+        /// Список алгоритмов
         /// </summary>
-        int Length { get; }
+        /// <returns></returns>
+         List<IAlg> GetAlgorithms { get; }
+
+
+        ///// <summary>
+        ///// Кол-во алгоритмов
+        ///// </summary>
+        //int Length { get; }
 
         /// <summary>
         /// Тест!!!

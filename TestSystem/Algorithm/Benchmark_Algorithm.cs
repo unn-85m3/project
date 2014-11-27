@@ -10,13 +10,6 @@ namespace TestSystem.Algorithm
 {
     class Benchmark_Algorithm : AbsAlgorithm
     {
-        private double h = 1; //шаг
-
-        public double H
-        {
-            get { return h; }
-            set { h = value; }
-        }
 
         /// <summary>
         /// конструктор
@@ -26,7 +19,7 @@ namespace TestSystem.Algorithm
         public Benchmark_Algorithm() 
         {
             this.name = "Эталонный алгоритм";
-            this.atributs += "Шаг алгоритма = "+ h+ ".";
+            step = "0,5"; //шаг
         }
 
         /// <summary>
@@ -40,8 +33,8 @@ namespace TestSystem.Algorithm
             double cost = double.MaxValue;
             IOutBlackBoxParam a;
 
-            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i +=  h)
-                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j +=   h)
+            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i +=  Double.Parse(step))
+                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j += Double.Parse(step))
                     if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
                     {
                         try

@@ -69,12 +69,41 @@ namespace TestSystem.test_system
         }
 
         /// <summary>
-        /// Кол-во алгоритмов
+        /// Список алгоритмов
         /// </summary>
-        public int Length
+        /// <returns></returns>
+        public List<IAlg> GetAlgorithms
         {
-            get { return algorithms.Count; }
+            get
+            {
+                List<IAlg> alg = new List<IAlg>();
+                foreach (var a in algorithms)
+                {
+                    alg.Add(a);
+                }
+                return alg;
+            }
         }
+
+        /// <summary>
+        /// Список задач
+        /// </summary>
+        /// <returns></returns>
+        public List<ITaskPackage> GetTasks
+        {
+            get
+            {
+                return tasks;
+            }
+        }
+
+        ///// <summary>
+        ///// Кол-во алгоритмов
+        ///// </summary>
+        //public int Length
+        //{
+        //    get { return algorithms.Count; }
+        //}
 
         /// <summary>
         /// Тест!!!

@@ -20,49 +20,17 @@ namespace TestSystem
         private TestSystem.test_system.TestSystem Algorithms;
         private List<Tasks.ITaskPackage> Tasks;
         private List<IAlgorithm> Algs;
-        private int[] CompleateTask;
-        private double[,,] BenchRez;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 5;
-        //private ToolTip[][] tt;
-        //private List<ToolTip> tt;
 
 
         public Form1()
         {
-            InitializeComponent();
             Create_TestSystem();
+            InitializeComponent();
+            CreateCheckBox();
+            Start_Test();
 
            /// KSModels.DllBlackBoxCalculator Calc = new KSModels.DllBlackBoxCalculator("E:/GitHub/bbs/Models/11.1.КС.r1", null); // Абсолючный путь... пздц..... бред...
         }
-
-
-
-        private void CreateTasks(List<DataFormat.DataFormat> dtf, bool array, int min, int max)
-        {
-            if (array)
-                for (int i = min; i <= max; i++)
-                {
-                    dtf.Add(new DataFormat.DataFormat("/Tests/test_" + i + ".txt"));
-                }
-            else
-            {
-                dtf.Add(new DataFormat.DataFormat("/Tests/test_" + min + ".txt"));
-                dtf.Add(new DataFormat.DataFormat("/Tests/test_" + max + ".txt"));
-            }
-        }
-
-        private void CreateTasks(List<DataFormat.DataFormat> dtf, bool array, params int[] number_task)
-        {
-            for (int i = 1; i <= number_task.Length; i++)
-            {
-                dtf.Add(new DataFormat.DataFormat("/Tests/test_" + number_task[i - 1] + ".txt"));
-            }
-        }
-
-        //private void CreateToolTip()
-        //{
-        //    tt = new ToolTip();
-        //}
 
         /// <summary>
         /// Заглушка на алгоритмы.
@@ -71,19 +39,22 @@ namespace TestSystem
         {
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Complex_Algorithm());
-
-            CompleateTask = new int[Algs.Count];
-            for (int i = 0; i < CompleateTask.Length; i++)
-                CompleateTask[i] = 0;
+            //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
 
             Tasks = new List<TestSystem.Tasks.ITaskPackage>();
 
             List<DataFormat.DataFormat> dtf = new List<DataFormat.DataFormat>();
-            CreateTasks(dtf, true, MIN_NUMBER_TASK, MAX_NUMBER_TASK);
+            dtf.Add(new DataFormat.DataFormat("/Tests/test_1.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_2.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_3.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_4.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_5.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_6.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_7.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_8.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_9.txt"));
+            //dtf.Add(new DataFormat.DataFormat("/Tests/test_10.txt"));
 
-            BenchRez = new double[Algs.Count, 2, dtf.Count];
 
             foreach (var d in dtf)
             {
@@ -96,11 +67,18 @@ namespace TestSystem
 
             
             Algorithms.AddAlgorithm(Algs);
+            //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
+            //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));
+            
+            
+        }
 
+        private void Start_Test()
+        {
+            this.groupBoxAlgorithms.Hide();
             InitTab();
             Algorithms.Test();
-            //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
-            //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));        
+
         }
 
         /// <summary>
@@ -108,16 +86,7 @@ namespace TestSystem
         /// </summary>
         private void Create_Rows()
         {
-                for (int j = 0; j < Tasks.Count; j++)
-                {
-                    dataGridViews[0].Rows.Add();
-                    dataGridViews[0].Rows[j].Cells[0].Value = Tasks[j].Name;
-                    dataGridViews[0].Rows[j].Cells[1].Value = "";
-                    dataGridViews[0].Rows[j].Cells[2].Value = "";
-                    dataGridViews[0].Rows[j].Cells[3].Value = "";
-                    dataGridViews[0].Rows[j].Cells[4].Value = "";
-                }
-            for (int i = 1; i < Algorithms.Length; i++)
+            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
             {
 
                 for (int j = 0; j < Tasks.Count; j++)
@@ -128,11 +97,14 @@ namespace TestSystem
                     dataGridViews[i].Rows[j].Cells[2].Value = "";
                     dataGridViews[i].Rows[j].Cells[3].Value = "";
                     dataGridViews[i].Rows[j].Cells[4].Value = "";
-                    dataGridViews[i].Rows[j].Cells[5].Value = "";
-                    dataGridViews[i].Rows[j].Cells[6].Value = "";
                 }
+
                 dataGridViews[i].Rows.Add();
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[0].Value = "Среднее значение";
+                dataGridViews[i].Rows[Tasks.Count].Cells[0].Value = "Шаг метода \"" + Algorithms.GetAlgorithms[0].Step + "\"";
+                dataGridViews[i].Rows[Tasks.Count].Cells[1].Value = "";
+                dataGridViews[i].Rows[Tasks.Count].Cells[2].Value = "";
+                dataGridViews[i].Rows[Tasks.Count].Cells[3].Value = "";
+                dataGridViews[i].Rows[Tasks.Count].Cells[4].Value = "";
             }
         }
 
@@ -141,83 +113,23 @@ namespace TestSystem
         /// </summary>
         private void Init_Table(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
-            for (int i = 0; i < Algorithms.Length; i++)
+            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
             {
-                if (i == 0)
-                {
-                    if (alg.Name == Algs[i].Name)
-                    {
-                        CompleateTask[i]++;
-                        for (int j = 0; j < Tasks.Count; j++)
-                        {
-                            if (Tasks[j].Name == task.Name)
-                            {
-                                //dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
-                                dataGridViews[i].Rows[j].Cells[1].Value = time;
-                                BenchRez[i, 0, j] = time;
-                                dataGridViews[i].Rows[j].Cells[2].Value = alg.Calls;
-                                //dataGridViews[i].Rows[j].Cells[3].Value = "10*i + j =";
-                                dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
-                                BenchRez[i, 1, j] = rez.Cost;
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    if (alg.Name == Algs[i].Name)
-                    {
-                        CompleateTask[i]++;
-                        for (int j = 0; j < Tasks.Count; j++)
-                        {
-                            if (Tasks[j].Name == task.Name)
-                            {
-                                //dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
-                                dataGridViews[i].Rows[j].Cells[1].Value = time;                                
-                                BenchRez[i, 0, j] = time;
-                                dataGridViews[i].Rows[j].Cells[2].Value = alg.Calls;
-                                //dataGridViews[i].Rows[j].Cells[3].Value = "10*i + j =";
-                                dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
-                                BenchRez[i, 1, j] = rez.Cost;
-                                //if (CompleateTask[0] >= CompleateTask[i])
-                                //{
-                                //    Init_Table(i, j);
-                                //}
-                                //else 
-                                //    Init_Table(i, CompleateTask[0]);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void Init_Table(int i, int j)
-        {
-                    if (CompleateTask[0] >= CompleateTask[i])
-                    {
-                        dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
-                        dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
-                    }
-        }
-
-        private void Init_Table()
-        {
-            for (int i = 1; i < Algorithms.Length; i++)
-            {
-                double time = 0, count = 0;
+                if (alg.Name == Algs[i].Name)
                 for (int j = 0; j < Tasks.Count; j++)
-                    if (CompleateTask[0] >= CompleateTask[i])
+                {
+                    if (Tasks[j].Name == task.Name)
                     {
-                        dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
-                        time += BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1;
-                        dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
-                        count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
+                        //dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
+                        dataGridViews[i].Rows[j].Cells[1].Value = time;
+                        dataGridViews[i].Rows[j].Cells[2].Value = alg.Calls;
+                        //dataGridViews[i].Rows[j].Cells[3].Value = "10*i + j =";
+                        dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
                     }
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = 100 * time / Tasks.Count;
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = 100 * count / Tasks.Count;
+                }
             }
         }
+
 
 
         public void OnEndCalculate(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
@@ -229,8 +141,6 @@ namespace TestSystem
         public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
             Init_Table(alg, task, rez, time);
-            if (CompleateTask[0] == Tasks.Count)
-                Init_Table();
         }
     }
 }

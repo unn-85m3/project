@@ -10,13 +10,15 @@ namespace TestSystem.Algorithm
 {
     class Genetic_Algorithm : AbsAlgorithm
     {
+        //private string name = "Генетический алгоритм";
+
 
         /// <summary>
         /// конструктор
         /// </summary>
         /// <param name="parameter">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        public Genetic_Algorithm() { this.name = "Генетический алгоритм";}
+        public Genetic_Algorithm() { }
 
         /// <summary>
         /// Здесь находится сам алгоритм отптимизации ф-и

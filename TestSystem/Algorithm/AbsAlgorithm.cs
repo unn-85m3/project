@@ -16,10 +16,9 @@ namespace TestSystem.Algorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
-        protected string atributs = "Параметры алгоритма: ";// Параметры алгоритма
         private IFunction _function;///функция для оптимизации
         private int calls;
-
+        protected string step = "1";
 
         /// <summary>
         /// конструктор
@@ -38,18 +37,6 @@ namespace TestSystem.Algorithm
         {
             get { return name; }
         }
-
-        /// <summary>
-        /// Параметры алгоритма (различные параметры, такие как шаг или колличество итераций) (нечто вроде версии алгоритма)
-        /// </summary>
-        public string Atributs
-        {
-            get
-            {
-                return atributs;
-            }
-        }
-
 
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
@@ -88,6 +75,8 @@ namespace TestSystem.Algorithm
 
 
 
+
+
         public int Calls
         {
             get { return calls; }
@@ -98,5 +87,17 @@ namespace TestSystem.Algorithm
             calls = 0;
         }
 
+
+        public string Step
+        {
+            get
+            {
+                return step;
+            }
+            set
+            {
+                step = value;
+            }
+        }
     }
 }
