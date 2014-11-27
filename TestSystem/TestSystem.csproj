@@ -319,8 +319,6 @@
     <Content Include="Tasks\Tests\test_8.txt" />
     <Content Include="Tasks\Tests\test_9.txt" />
   </ItemGroup>
-  <ItemGroup>
-  <Folder Include="Algorithm\Diagonal_Algoritm\" />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

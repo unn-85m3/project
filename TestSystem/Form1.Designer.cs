@@ -27,58 +27,19 @@
         /// содержимое данного метода при помощи редактора кода.
         /// </summary>
         private void InitializeComponent()
-        {            
+        {
+            this.SuspendLayout();
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(657, 338);
+            this.ClientSize = new System.Drawing.Size(907, 338);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
 
         }
-
-        private void CreateCheckBox()
-        {
-            this.groupBoxAlgorithms = new System.Windows.Forms.GroupBox();
-            this.checkBoxsAlgorithms = new System.Windows.Forms.CheckBox[Algorithms.GetAlgorithms.Count];
-            this.groupBoxAlgorithms.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            //groupBoxAlgorithms
-            // 
-            //this.groupBoxAlgorithms.Controls.Add(this.checkBoxsAlgorithms);
-            //this.groupBoxAlgorithms.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            //| System.Windows.Forms.AnchorStyles.Left)
-            //| System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxAlgorithms.Location = new System.Drawing.Point(12, 12);
-            this.groupBoxAlgorithms.Name = "groupBoxAlgorithms";
-            this.groupBoxAlgorithms.Size = new System.Drawing.Size(210, 250);
-            this.groupBoxAlgorithms.TabIndex = 0;
-            this.groupBoxAlgorithms.TabStop = false;
-            this.groupBoxAlgorithms.Text = "Algorithms";
-            // 
-            //checkBoxsAlgorithms
-            // 
-            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
-            {
-                this.checkBoxsAlgorithms[i] = new System.Windows.Forms.CheckBox();
-                this.groupBoxAlgorithms.Controls.Add(this.checkBoxsAlgorithms[i]);
-                this.checkBoxsAlgorithms[i].AutoSize = true;
-                this.checkBoxsAlgorithms[i].Location = new System.Drawing.Point(7, 20 + i * 20);
-                this.checkBoxsAlgorithms[i].Name = "checkBox" + Algorithms.GetAlgorithms[i].Name;
-                this.checkBoxsAlgorithms[i].Size = new System.Drawing.Size(80, 17);
-                this.checkBoxsAlgorithms[i].TabIndex = 0;
-                this.checkBoxsAlgorithms[i].Text = Algorithms.GetAlgorithms[i].Name;
-                this.checkBoxsAlgorithms[i].UseVisualStyleBackColor = true;
-            }
-            this.Controls.Add(this.groupBoxAlgorithms);
-            this.groupBoxAlgorithms.ResumeLayout(false);
-            this.groupBoxAlgorithms.PerformLayout();
-        }
-
 
         /// <summary>
         /// Создание вкладок и таблиц на них.
@@ -86,11 +47,14 @@
         private void InitTab()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.GetAlgorithms.Count];
-            this.dataGridViews = new System.Windows.Forms.DataGridView[Algorithms.GetAlgorithms.Count];
+            this.tabPages = new System.Windows.Forms.TabPage[Algorithms.Length];
+            this.dataGridViews = new System.Windows.Forms.DataGridView[Algorithms.Length];
+
+            //tt = new System.Collections.Generic.List<System.Windows.Forms.ToolTip>();///////////////////////////////////////////////////////////////////
+
             this.tabControl1.SuspendLayout();
 
-            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 tabPages[i] = new System.Windows.Forms.TabPage();
                 dataGridViews[i] = new System.Windows.Forms.DataGridView();
@@ -117,7 +81,7 @@
             // 
             // tabPages
             // 
-            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 this.tabPages[i].Controls.Add(this.dataGridViews[i]);
                 this.tabPages[i].Location = new System.Drawing.Point(1, 1);
@@ -127,11 +91,14 @@
                 this.tabPages[i].TabIndex = 0;
                 this.tabPages[i].Text = Algs[i].Name;
                 this.tabPages[i].UseVisualStyleBackColor = true;
+
+                //tt.Add(new System.Windows.Forms.ToolTip());
+                //tt[i].SetToolTip(tabPages[i], Algs[i].Atributs);
             }
             // 
             // dataGridViews
             // 
-            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 this.dataGridViews[i].Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
@@ -143,18 +110,27 @@
                 this.dataGridViews[i].TabIndex = 0;
             }
 
-            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
+
+                dataGridViews[0].Columns.Add("Task", "Задача");
+                dataGridViews[0].Columns.Add("Time", "t, мсек.");
+                dataGridViews[0].Columns.Add("Func", "Кол-во вызовов ф-ции");
+                dataGridViews[0].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+                dataGridViews[0].Columns.Add("Cost", "Стоимость");
+            
+            for (int i = 1; i < Algorithms.Length; i++)
             {
                 dataGridViews[i].Columns.Add("Task", "Задача");
                 dataGridViews[i].Columns.Add("Time", "t, мсек.");
                 dataGridViews[i].Columns.Add("Func", "Кол-во вызовов ф-ции");
                 dataGridViews[i].Columns.Add("BB", "Кол-во вызовов ЧЯ");
                 dataGridViews[i].Columns.Add("Cost", "Стоимость");
+                dataGridViews[i].Columns.Add("TimePercent", "% t, мсек.");
+                dataGridViews[i].Columns.Add("CostPercent", "% Стоимость");
             }
 
 
             this.tabControl1.ResumeLayout(false);
-            for (int i = 0; i < Algorithms.GetAlgorithms.Count; i++)
+            for (int i = 0; i < Algorithms.Length; i++)
             {
                 this.tabPages[i].ResumeLayout(false);
                 ((System.ComponentModel.ISupportInitialize)(this.dataGridViews[i])).EndInit();
@@ -171,8 +147,6 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage[] tabPages;
         private System.Windows.Forms.DataGridView[] dataGridViews;
-        private System.Windows.Forms.GroupBox groupBoxAlgorithms;
-        private System.Windows.Forms.CheckBox[] checkBoxsAlgorithms;
     }
 }
 
