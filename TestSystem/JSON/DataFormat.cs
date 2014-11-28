@@ -219,6 +219,7 @@ namespace TestSystem.DataFormat
             newParam.pOut = Convert.ToString(bbPout);
             newParam.qOut = Convert.ToString(bbQout);
             newParam.tIn = Convert.ToString(bbTin);
+            newParam.cIn = Convert.ToString(bbCin);
             newParam.dIn = Convert.ToString(bbDin);
 
             varLimitations.blackBoxes.Add(newParam);
@@ -303,7 +304,7 @@ namespace TestSystem.DataFormat
                 LimitMin(varLimitations.x2), LimitMax(varLimitations.x2), comprimate_min(), comprimate_max());
             foreach(BlackBoxParam bbp in varLimitations.blackBoxes)
             {
-                BlackBox bb = new BlackBox(bbp.info, bbp.pIn, bbp.pOut, bbp.qOut, bbp.tIn, bbp.dIn, "8000"); //ВНЕМАТОЧНО!!!!!
+                BlackBox bb = new BlackBox(bbp.info, bbp.pIn, bbp.pOut, bbp.qOut, bbp.tIn, bbp.dIn, /*"8000"*/bbp.cIn); //ВНЕМАТОЧНО!!!!!
                 bbParams.Add(bb);
             }
 
@@ -374,7 +375,7 @@ namespace TestSystem.DataFormat
         /// </summary>
         /// <param name="index">index of black box</param>
         /// <returns>minimum Pout</returns>
-        public double p_oun_min(int index)
+        public double p_out_min(int index)
         {
             String str = varLimitations.blackBoxes[index].pOut;
             double var;
