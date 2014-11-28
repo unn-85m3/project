@@ -16,15 +16,18 @@ namespace TestSystem.Algorithm
         };
         private List<PointCoord> points;
         private Random rnd;
-        private const int MAXPOINT = 4;
+        private const int MAXPOINT = 4; //будет ненужно
         private int bestValInd;
         private int worstValInd;
         private PointCoord cg;
+        private int h;
 
         public Complex_Algorithm()
         {
+            h = 10;
             this.name = "Комплексный алгоритм";
-            this.atributs += ""; //Параметры алгоритма указывай
+            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" + 
+                "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
             points = new List<PointCoord>();
             rnd = new Random();
             cg = new PointCoord();
