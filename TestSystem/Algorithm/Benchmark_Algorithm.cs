@@ -50,7 +50,7 @@ namespace TestSystem.Algorithm
                              n++;
                            
                         }
-                        catch(Exception e)
+                        catch
                         {
                             a = new OutBlackBoxParam(Double.MaxValue);  // Double.MaxValue;
                         }
