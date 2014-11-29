@@ -34,6 +34,7 @@ namespace TestSystem.Algorithm
         {
             rnd = new Random();
             this.name = "Диагональный метод";
+            this.atributs += " ";//Параметры алгоритма
         }
 
         public override DataFormat.IOutBlackBoxParam Calculate() // Доработать(переделать)

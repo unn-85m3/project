@@ -22,7 +22,7 @@ namespace TestSystem
         private List<IAlgorithm> Algs;
         private int[] CompleateTask;
         private double[,,] BenchRez;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 5;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 1;
         //private ToolTip[][] tt;
         //private List<ToolTip> tt;
 

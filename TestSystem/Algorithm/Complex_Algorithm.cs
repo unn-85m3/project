@@ -24,6 +24,7 @@ namespace TestSystem.Algorithm
         public Complex_Algorithm()
         {
             this.name = "Комплексный алгоритм";
+            this.atributs += ""; //Параметры алгоритма указывай
             points = new List<PointCoord>();
             rnd = new Random();
             cg = new PointCoord();

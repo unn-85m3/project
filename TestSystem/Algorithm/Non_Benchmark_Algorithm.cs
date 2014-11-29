@@ -26,7 +26,7 @@ namespace TestSystem.Algorithm
         public Non_Benchmark_Algorithm()
         {
             this.name = "Неэталонный алгоритм";
-            this.atributs += "Шаг алгоритма = " + h + ".";
+            this.atributs += "Шаг алгоритма = " + h + " Па.";//Изменять при внесении изменений
         }
 
         /// <summary>

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.toolTipTabPages = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // Form1
@@ -77,6 +79,8 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(this.Size.Width - 17, this.Size.Height - 41);
+            //this.toolTipTabPages.SetToolTip(this.tabControl1, "Результаты работы алгоритмов");
+            this.tabControl1.ShowToolTips = true;
             this.tabControl1.TabIndex = 0;
             // 
             // tabPages
@@ -91,7 +95,8 @@
                 this.tabPages[i].TabIndex = 0;
                 this.tabPages[i].Text = Algs[i].Name;
                 this.tabPages[i].UseVisualStyleBackColor = true;
-
+                //this.toolTipTabPages.SetToolTip(this.tabPages[i], Algs[i].Atributs);
+                this.tabPages[i].ToolTipText = Algs[i].Atributs;
                 //tt.Add(new System.Windows.Forms.ToolTip());
                 //tt[i].SetToolTip(tabPages[i], Algs[i].Atributs);
             }
@@ -147,6 +152,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage[] tabPages;
         private System.Windows.Forms.DataGridView[] dataGridViews;
+        private System.Windows.Forms.ToolTip toolTipTabPages;
     }
 }
 
