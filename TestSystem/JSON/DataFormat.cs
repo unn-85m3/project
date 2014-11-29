@@ -209,7 +209,7 @@ namespace TestSystem.DataFormat
         /// <param name="bbCin">input calorific</param>
         /// <param name="bbDin">input density</param>
         /// <returns>index of new black box</returns>
-        public int NewParam(String bbName, String bbPin, String bbPout, String bbQout, String bbTin, String bbCin, String bbDin)
+        public int NewParam(String bbName, String bbPin, String bbPout, String bbQout, String bbTin, String bbCin, String bbDin)  //а где cIn ????????
         {
             BlackBoxParam newParam = new BlackBoxParam();
             
