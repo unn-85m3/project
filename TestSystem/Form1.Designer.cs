@@ -116,21 +116,33 @@
             }
 
 
-                dataGridViews[0].Columns.Add("Task", "Задача");
-                dataGridViews[0].Columns.Add("Time", "t, мсек.");
-                dataGridViews[0].Columns.Add("Func", "Кол-во вызовов ф-ции");
-                dataGridViews[0].Columns.Add("BB", "Кол-во вызовов ЧЯ");
-                dataGridViews[0].Columns.Add("Cost", "Стоимость");
+            dataGridViews[0].Columns.Add("Task", "Задача");
+            this.dataGridViews[0].Columns[0].ToolTipText = "Имена файлов примеров.";
+            dataGridViews[0].Columns.Add("Time", "t, мсек.");
+            this.dataGridViews[0].Columns[1].ToolTipText = "Время работы алгоритма на данном примере.";
+            dataGridViews[0].Columns.Add("Func", "Кол-во вызовов ф-ции");
+            this.dataGridViews[0].Columns[2].ToolTipText = "Колличество вызовов функции расчета.";
+            dataGridViews[0].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+            this.dataGridViews[0].Columns[3].ToolTipText = "Колличество вызовов функции расчета черного ящика.";
+            dataGridViews[0].Columns.Add("Cost", "Стоимость");
+            this.dataGridViews[0].Columns[4].ToolTipText = "Затраты на эксплуатацию и модернизацию.";
             
             for (int i = 1; i < Algorithms.Length; i++)
             {
                 dataGridViews[i].Columns.Add("Task", "Задача");
+                this.dataGridViews[i].Columns[0].ToolTipText = "Имена файлов примеров.";
                 dataGridViews[i].Columns.Add("Time", "t, мсек.");
+                this.dataGridViews[i].Columns[1].ToolTipText = "Время работы алгоритма на данном примере.";
                 dataGridViews[i].Columns.Add("Func", "Кол-во вызовов ф-ции");
+                this.dataGridViews[i].Columns[2].ToolTipText = "Колличество вызовов функции расчета.";
                 dataGridViews[i].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+                this.dataGridViews[i].Columns[3].ToolTipText = "Колличество вызовов функции расчета черного ящика.";
                 dataGridViews[i].Columns.Add("Cost", "Стоимость");
+                this.dataGridViews[i].Columns[4].ToolTipText = "Затраты на эксплуатацию и модернизацию.";
                 dataGridViews[i].Columns.Add("TimePercent", "% t, мсек.");
-                dataGridViews[i].Columns.Add("CostPercent", "% Стоимость");
+                this.dataGridViews[i].Columns[5].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
+                dataGridViews[i].Columns.Add("CostPercent", "% Стоимость"); 
+                this.dataGridViews[i].Columns[6].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
             }
 
 
