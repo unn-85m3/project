@@ -33,10 +33,12 @@ namespace TestSystem.Algorithm
             cg = new PointCoord();
         }
 
-        public override DataFormat.IOutBlackBoxParam Calculate()
+        public override DataFormat.IOutBlackBoxParam Calculate() // алгоритм можно ускорить
         {
             double cost = double.MaxValue;
             points.Clear();
+
+
 
             for (int i = 0; i < MAXPOINT; i++)
             {
@@ -62,6 +64,16 @@ namespace TestSystem.Algorithm
             cost = points[FindMinCostIndex()].cost;
 
             return new DataFormat.OutBlackBoxParam(cost);
+        }
+
+        private void SetNumberOfPoints()
+        {
+            if (parametr.x1_max - parametr.x1_min == 0 || 
+                parametr.x2_max - parametr.x2_min == 0 || 
+                parametr.x2_x1_max - parametr.x2_x1_min == 0) // какое условие выполняется чаще? '==' или '!=' ???
+            {
+
+            }
         }
 
         private PointCoord ReflectThePoint(PointCoord point)
