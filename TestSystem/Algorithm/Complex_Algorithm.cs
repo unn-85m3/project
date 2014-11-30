@@ -38,7 +38,7 @@ namespace TestSystem.Algorithm
             double cost = double.MaxValue;
             points.Clear();
 
-
+            SetNumberOfPoints();
 
             for (int i = 0; i < MAXPOINT; i++)
             {
