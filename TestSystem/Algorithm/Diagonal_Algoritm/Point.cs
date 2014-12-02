@@ -18,14 +18,14 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         }
 
 
-        public Point(Double x, Double y)
+        public Point(Double x1, Double x2)
         {
-            this.x = x;
-            this.y = y;
+            this.x1 = x1;
+            this.x2 = x2;
         }
 
 
-        public double x
+        public double x1
         {
             get
             {
@@ -37,7 +37,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             }
         }
 
-        public double y
+        public double x2
         {
             get
             {
