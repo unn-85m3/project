@@ -17,5 +17,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
         int allLength { get; }
         List<IPlace> allPlaces { get; }
+        void Separate();
+
     }
 }

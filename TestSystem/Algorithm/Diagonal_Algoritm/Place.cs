@@ -119,6 +119,9 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             }
         }
 
+
+
+
         public Boolean inThisPlace(IPoint point)
         {
 
@@ -189,6 +192,12 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             return false;
 
 
+        }
+
+
+        public void Separate()
+        {
+            throw new NotImplementedException();
         }
 
 
