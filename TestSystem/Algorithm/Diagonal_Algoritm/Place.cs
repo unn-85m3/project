@@ -122,12 +122,57 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         public Boolean inThisPlace(IPoint point)
         {
 
-            if (Place.inPlasce(point, _parametr)&&) ;
+            if (Place.inPlace(point, _parametr) && inThis(point))
+                return true;
+            return false;
         }
 
 
+        private Boolean inThis(IPoint point)
+        {
+            Double minX1;
+            Double maxX1;
 
-        public static Boolean inPlasce(IPoint point, IEnterBlackBoxParam parametr)
+            Double maxX2;
+            Double minX2;
+
+            
+
+            if(this._point1.x1>this._point2.x1)
+            {
+                minX1=this._point2.x1;
+                maxX1=this._point1.x1;
+            }else
+            {
+                maxX1=this._point2.x1;
+                minX1=this._point1.x1;
+            }
+
+
+
+            if(this._point1.x2>this._point2.x2)
+            {
+                minX2=this._point2.x2;
+                maxX2=this._point1.x2;
+            }else
+            {
+                maxX2=this._point2.x2;
+                minX2=this._point1.x2;
+            }
+
+
+
+            if((point.x1>=minX1)&&(point.x1<=maxX1)&&(point.x2>=minX2)&&(point.x2<=maxX2))
+            {
+                return true;
+            }
+
+            return false;
+
+        }
+
+
+        public static Boolean inPlace(IPoint point, IEnterBlackBoxParam parametr)
         {
 
             if((parametr.x1_min<=point.x1)&&(parametr.x1_max>=point.x1))
