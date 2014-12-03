@@ -72,7 +72,7 @@ namespace TestSystem.Algorithm
                 parametr.x2_max - parametr.x2_min == 0 || 
                 parametr.x2_x1_max - parametr.x2_x1_min == 0) // какое условие выполняется чаще? '==' или '!=' ???
             {
-
+                // != выполняется чаще. @АГА.
             }
         }
 
@@ -151,7 +151,7 @@ namespace TestSystem.Algorithm
             double minCost = double.MaxValue;
             for (int i = 0; i < points.Count; i++) //может заменить форичем?
             {
-                if (minCost > points[i].cost)
+                if (minCost > points[i].cost) //Не  получиться, индекс не узнаешь. @АГА.
                 {
                     minCost = points[i].cost;
                     ind = i;
@@ -166,7 +166,7 @@ namespace TestSystem.Algorithm
             double maxCost = 0;
             for (int i = 0; i < points.Count; i++) //тут тоже
             {
-                if (maxCost < points[i].cost)
+                if (maxCost < points[i].cost)// тоже нет. @АГА.
                 {
                     maxCost = points[i].cost;
                     ind = i;

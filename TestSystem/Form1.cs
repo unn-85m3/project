@@ -71,7 +71,7 @@ namespace TestSystem
         {
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
+            //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
             Algs.Add(new Algorithm.Complex_Algorithm());
 
             CompleateTask = new int[Algs.Count];
