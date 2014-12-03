@@ -97,6 +97,7 @@
     <Compile Include="Algorithm\Diagonal_Algoritm\Point.cs" />
     <Compile Include="Algorithm\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
+    <Compile Include="Algorithm\ICalculateFunction.cs" />
     <Compile Include="Algorithm\Non_Benchmark_Algorithm.cs" />
     <Compile Include="BlackBox\BlackBoxFunction.cs" />
     <Compile Include="BlackBox\IFunction.cs" />

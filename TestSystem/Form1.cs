@@ -12,6 +12,8 @@ using TestSystem.BlackBox;
 using TestSystem.Algorithm;
 using KSModels;
 
+using TestSystem.Algorithm.Diagonal_Algoritm;
+
 
 namespace TestSystem
 {
@@ -22,7 +24,7 @@ namespace TestSystem
         private List<IAlgorithm> Algs;
         private int[] CompleateTask;
         private double[,,] BenchRez;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 1;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 10;
         //private ToolTip[][] tt;
         //private List<ToolTip> tt;
 
@@ -69,10 +71,13 @@ namespace TestSystem
         /// </summary>
         private void Create_TestSystem()
         {
+           
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
             //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
             Algs.Add(new Algorithm.Complex_Algorithm());
+
+           Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
 
             CompleateTask = new int[Algs.Count];
             for (int i = 0; i < CompleateTask.Length; i++)
@@ -222,7 +227,7 @@ namespace TestSystem
 
         public void OnEndCalculate(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {   
-           /// Init_Table(alg, task, rez, time);
+            ///Init_Table(alg, task, rez, time);
             //throw new NotImplementedException();
         }
 

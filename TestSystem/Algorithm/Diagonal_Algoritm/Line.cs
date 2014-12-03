@@ -52,6 +52,16 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
         private Double _length(Double x10,Double x20,Double x11,Double x21)
         {
+            if (x10 == x11)
+            {
+                return Math.Abs(x20 - x21);
+
+            }
+
+            if(x20==x21)
+            {
+                return Math.Abs(x10 - x11);
+            }
             return Math.Sqrt(Math.Pow(x10 - x11, 2) * Math.Pow(x20 - x21, 2));
         }
 
@@ -61,10 +71,10 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             Double L = length;
             if (len <= L)
             {
-                Double k = len / (L - (L-len));
+                Double k = len/L;
                 Point p = new Point();
-                p.x1 = (k * PointEnd.x1 + PointStart.x1) / (1 + k);
-                p.x2 = (k * PointEnd.x2 + PointStart.x2) / (1 + k);
+                p.x1 = (k * PointEnd.x1 + PointStart.x1); /// (1 + k);
+                p.x2 = (k * PointEnd.x2 + PointStart.x2); /// (1 + k);
                 return p;
             }
             else return null;

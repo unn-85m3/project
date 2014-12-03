@@ -59,7 +59,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             }
             set
             {
-                this._cost = cost;
+                this._cost = value;
             }
         }
     }

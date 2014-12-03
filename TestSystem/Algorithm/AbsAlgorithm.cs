@@ -12,7 +12,7 @@ namespace TestSystem.Algorithm
     /// От него наследуются все алгоритмы.
     /// Уэтого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
     /// </summary>
-    abstract class AbsAlgorithm : IAlgorithm
+    abstract class AbsAlgorithm : IAlgorithm, ICalculateFunction
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
@@ -73,7 +73,7 @@ namespace TestSystem.Algorithm
         }
 
 
-        protected IOutBlackBoxParam Function(Double x1, Double x2)
+        public IOutBlackBoxParam Function(Double x1, Double x2)
         {
             calls++;
             return function.Calculate(x1, x2);
