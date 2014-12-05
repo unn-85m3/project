@@ -35,22 +35,20 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
        private void Init(IPoint point1, IPoint point2)
         {
-            rng = new Random();
+            rng = new Random(0);
             this._point1 = point1;
             this._point2 = point2;
             places = new List<IPlace>();
 
             if (!inThisPlace(point1))
             {
-                point1.x1 = point1.x1 / 2;
-                point1.x2 = point1.x2 / 2;
+                
                 point1.cost = new OutBlackBoxParam(Double.MaxValue);
             }
 
             if (!inThisPlace(point2))
             {
-                point2.x1 = point2.x1 / 2;
-                point2.x2 = point2.x2 / 2;
+                
                 point2.cost = new OutBlackBoxParam(Double.MaxValue);
             }
         }
@@ -196,6 +194,53 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         }
 
 
+
+        private void Calculate(IPoint point, ICalculateFunction calculate)
+        {
+
+            try
+            {
+
+                point.cost = calculate.Function(point.x1, point.x2);
+
+
+            }
+            catch
+            {
+
+                try
+                {
+                    if (point.x1 > _parametr.x1_max)
+                    {
+                        point.x1 = _parametr.x1_max;
+                    }
+
+                    if (point.x1 < _parametr.x1_min)
+                    {
+                        point.x1 = _parametr.x1_min;
+                    }
+
+                    if (point.x2 < _parametr.x2_min)
+                    {
+                        point.x2 = _parametr.x2_min;
+                    }
+
+                    if (point.x2 > _parametr.x2_max)
+                    {
+                        point.x2 = _parametr.x2_max;
+                    }
+
+                    point.cost = calculate.Function(point.x1, point.x2);
+                }
+                catch
+                {
+                    point.cost = new OutBlackBoxParam(Double.MaxValue);
+                }
+
+            }
+        }
+
+
         public static Boolean inPlace(IPoint point, IEnterBlackBoxParam parametr)
         {
 
@@ -218,97 +263,102 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
         public void Separate(ICalculateFunction calculate)
         {
-            if(!isSeparated)
+            if (!isSeparated)
             {
                 ILine line = new Line(point1, point2);
-                if (point1.cost == null)
+
+                if (line.length > 0)
                 {
-                    try
+                    if (point1.cost == null)
                     {
 
-                        point1.cost = calculate.Function(point1.x1, point1.x2);
-                        setBest(point2);
+                        Calculate(point1, calculate);
+                       
+                    }
+
+                    if (point2.cost == null)
+                    {
+
+                        Calculate(point2, calculate);
+                       
 
                     }
-                    catch
-                    {
 
-                        point1.x1 = point1.x1/2;
-                        point1.x2 = point1.x2 / 2;
-                        try
-                        {
-                            point1.cost = calculate.Function(point1.x1, point1.x2);
-                        }catch
-                        {
-                            point1.cost = new OutBlackBoxParam(Double.MaxValue);
-                        }
+                    if ((point2.cost != null) && (point1.cost != null))
+                    {
+                        if (point2.cost.Cost > point1.cost.Cost)
+                            setBest(point1);
+                        else
+                            setBest(point2);
+                    }
+
+                    IPoint p = line.GetPoint(this.rng.NextDouble() * (line.length));
+                    if (p == null)
+                        p = line.GetPoint(this.rng.NextDouble() * (line.length));
+                   /* if (p == null)
+                    {
+                        isSeparated = true;
+                        return;
+                    }*/
+
+                    Calculate(p, calculate);
                     
-                    }
-                }
 
-                if (point2.cost == null)
-                {
-                    try
+                    if (p.cost==null)
                     {
-                        point2.cost = calculate.Function(point2.x1, point2.x2);
+                        Calculate(p, calculate);
+                    }
 
-                    }
-                    catch
+                    if (best == null)
                     {
-                        point2.cost = new OutBlackBoxParam(Double.MaxValue);
-                    }
+                        setBest(p);
+                    }else
+                        if  (best.cost.Cost > p.cost.Cost)
+                            setBest(p);
                     
-                }
 
-                if ((point2.cost != null) && (point1.cost != null))
-                {
-                if (point2.cost.Cost > point1.cost.Cost)
-                    setBest(point1);
-                else
-                    setBest(point2);
-                }
 
-                IPoint p=line.GetPoint( 0.1+this.rng.NextDouble()*(line.length-0.2)/2);
-               /* if (p == null)
-                {
+                    IPlace place = new Place(point1, p);
+                    this.places.Add(place);
+                    place.parent = this;
+
+                    place = new Place(p, point2);
+                    this.places.Add(place);
+                    place.parent = this;
+
+                    IPoint p3 = new Point(point1.x1, point2.x2);
+                    place = new Place(p3, p);
+                    this.places.Add(place);
+                    place.parent = this;
+
+
+                    IPoint p4 = new Point(point2.x1, point1.x2);
+                    place = new Place(p, p4);
+                    this.places.Add(place);
+                    place.parent = this;
+
+
+                    line = new Line(p3, p4);
+                   
+                    IPoint pn = line.GetPoint(this.rng.NextDouble() * (line.length));
+                    Calculate(pn, calculate);
+
+
+                    setBest(pn);
+
                     isSeparated = true;
-                    return;
                 }
-                try
-                    {
-                        p.cost = calculate.Function(point2.x1, point2.x2);
-
-                    }
-                    catch
-                    {
-                        p.cost = new OutBlackBoxParam(Double.MaxValue);
-                    }
-
-                if (best.cost.Cost > p.cost.Cost)
-                    setBest(p);*/
-                
-                
-                IPlace place = new Place(point1, p);
-                this.places.Add(place);
-                place.parent = this;
-
-                place = new Place(p, point2);
-                this.places.Add(place);
-                place.parent = this;
-
-                IPoint p3 = new Point(point1.x1, point2.x2);
-                place = new Place(p3,p);
-                this.places.Add(place);
-                place.parent = this;
+                else
+                {
 
 
-                IPoint p4 = new Point(point2.x1, point1.x2);
-                place = new Place(p, p4);
-                this.places.Add(place);
-                place.parent = this;
+                    Calculate(point1, calculate);
+                    
+                    setBest(point1);
+                }
 
-                isSeparated = true;
             }
+            
 
         }
 
@@ -327,7 +377,16 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
         private void setBest(IPoint p)
         {
-            this.best = p;
+            if ((best != null) && (best.cost != null))
+            {
+                if (best.cost.Cost > p.cost.Cost)
+                    this.best = p;
+            }
+            else
+            {
+                this.best = p;
+            }
+            
         }
 
         public IPoint bestPoint

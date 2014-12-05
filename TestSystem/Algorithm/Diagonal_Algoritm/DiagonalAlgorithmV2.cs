@@ -13,6 +13,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         public DiagonalAlgorithmV2()
         {
             this.name = "Диагональный алгоритм";
+            this.atributs += "";
         }
 
         public override DataFormat.IOutBlackBoxParam Calculate()
@@ -25,12 +26,27 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             place.Separate(this);
             best = place.bestPoint.cost.Cost;
             int j = 0;
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 40; i++)
             {
+                if ((place.allPlaces.Count-1) < j)
+                {
+                    j = place.allPlaces.Count - 1;
+                    if (place.allPlaces.Count == 0)
+                        break;
+                }
                 IPlace pl= place.allPlaces[j];
                 if (!pl.IsSeparated)
                 {
+
+
                     pl.Separate(this);
+
+                   
+                    if(pl.bestPoint.cost.Cost==Double.MaxValue)
+                    {
+                        pl.parent.removePlace(pl);
+                    }
+
                     if ((best > pl.bestPoint.cost.Cost) && (pl.bestPoint.cost.Cost > 0))
                         best = pl.bestPoint.cost.Cost;
                 }

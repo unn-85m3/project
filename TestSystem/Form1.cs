@@ -24,7 +24,7 @@ namespace TestSystem
         private List<IAlgorithm> Algs;
         private int[] CompleateTask;
         private double[,,] BenchRez;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 10;
+        private int MIN_NUMBER_TASK = 6, MAX_NUMBER_TASK = 10;
         //private ToolTip[][] tt;
         //private List<ToolTip> tt;
 
@@ -75,9 +75,10 @@ namespace TestSystem
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
             //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Complex_Algorithm());
+            //Algs.Add(new Algorithm.Complex_Algorithm());
+            Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
 
-           Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
+
 
             CompleateTask = new int[Algs.Count];
             for (int i = 0; i < CompleateTask.Length; i++)
@@ -87,6 +88,7 @@ namespace TestSystem
 
             List<DataFormat.DataFormat> dtf = new List<DataFormat.DataFormat>();
             CreateTasks(dtf, true, MIN_NUMBER_TASK, MAX_NUMBER_TASK);
+            //CreateTasks(dtf, false, 6);
 
             BenchRez = new double[Algs.Count, 2, dtf.Count];
 

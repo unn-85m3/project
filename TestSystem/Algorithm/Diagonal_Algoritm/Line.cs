@@ -73,8 +73,8 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             {
                 Double k = len/L;
                 Point p = new Point();
-                p.x1 = (k * PointEnd.x1 + PointStart.x1); /// (1 + k);
-                p.x2 = (k * PointEnd.x2 + PointStart.x2); /// (1 + k);
+                p.x1 = (k * (PointEnd.x1 - PointStart.x1) + PointStart.x1); /// (1 + k);
+                p.x2 = (k * (PointEnd.x2-PointStart.x2) + PointStart.x2); /// (1 + k);
                 return p;
             }
             else return null;

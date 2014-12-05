@@ -55,7 +55,9 @@ namespace TestSystem.Algorithm
                             a = new OutBlackBoxParam(Double.MaxValue);  // Double.MaxValue;
                         }
 
-                        
+
+                        //a = Function(34.946777049892944, 50.93829138975363);
+
                         if (n == 1)
                             cost = a.Cost;
                         else if (a.Cost < cost)

@@ -87,9 +87,9 @@ namespace TestSystem.BlackBox
                     i++;
                 }
             }
-          
-            
-            return this;
+
+            OutBlackBoxParam param = new OutBlackBoxParam(cost);
+            return param;
         }
 
         /// <summary>
