@@ -98,54 +98,16 @@ namespace TestSystem.Algorithm
             calls = 0;
         }
 
-        public int SetAreaOfTheRegion()
+        protected int SetAreaOfTheRegion(int h) //я просто оставлю это здесь
         {
-            if (parametr.x1_max - parametr.x1_min == 0)
-            {
-                if (parametr.x2_max - parametr.x2_min == 0)
-                {
-                    double buf = parametr.x2_max / parametr.x1_max;
-                    if ((parametr.x2_x1_min <= buf) || (parametr.x2_x1_max > buf))
+            int n = 0;
+            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i += h)
+                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j += h)
+                    if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
                     {
-                        //точка
-                        return 1;
+                        n++;
                     }
-                }
-                else
-                {
-                    //вертикальный отрезок
-                    return 2;
-                }
-            }
-            else
-            {
-                if (parametr.x2_max - parametr.x2_min == 0)
-                {
-                    //горизонтальный отрезок
-                    return 3;
-                }
-                else
-                {
-                    if (parametr.x2_x1_max - parametr.x2_x1_min == 0)
-                    {
-                        //диагональный отрезок
-                        return 4;
-                    }
-                    else
-                    {
-                        if (parametr.x2_x1_max >= parametr.x2_max / parametr.x1_min)
-                        {
-                            if (parametr.x2_x1_min <= parametr.x1_max / parametr.x2_min)
-                            {
-                                //весь прямоугольник
-                                return 5;
-                            }
-
-                        }
-                    }
-                }
-            }
-            return 0;
+            return n;
         }
     }
 }

@@ -21,13 +21,13 @@ namespace TestSystem.Algorithm
         private int worstValInd;
         private PointCoord cg;
         private int h;
+        private int area;
 
         public Complex_Algorithm()
         {
-            h = 10;
+            h = 1;
             this.name = "Комплексный алгоритм";
-            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
-                "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
+            this.atributs += "шаг алгоритма равен " + h + " Па"; //Параметры алгоритма указывай
             points = new List<PointCoord>();
             rnd = new Random();
             cg = new PointCoord();
@@ -38,25 +38,23 @@ namespace TestSystem.Algorithm
             double cost = double.MaxValue;
             points.Clear();
 
-            SetNumberOfPoints();
-            h = 0;
-            //h = (int)((parametr.x1_max - parametr.x1_min + parametr.x2_max - parametr.x2_min) / 2 * ((int)(parametr.x2_x1_max - parametr.x2_x1_min) + 1)) + 4;
-            int n = 1;
-            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i += n)
-                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j += n)
-                    if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
-                    {
-                        h++;
-                    }
+            area = SetAreaOfTheRegion(h);
+            
+            //for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i += h)
+            //    for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j += h)
+            //        if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
+            //        {
+            //            area++;
+            //        }
 
-            h = Math.Max(h / 5, 10);
+            area = Math.Max(area / 5, 10);
 
-            for (int i = 0; i < h; i++)
+            for (int i = 0; i < area; i++)
             {
                 points.Add(RandPoint());
             }
 
-            for (int i = 0; i < h / 4; i++)
+            for (int i = 0; i < area / 4; i++)
             {
                 points.RemoveAt(FindMaxCostIndex());
             }
@@ -65,7 +63,7 @@ namespace TestSystem.Algorithm
             worstValInd = FindMaxCostIndex();
             FindCG();
 
-            for (int i = 0; i < h * 5; i++)
+            for (int i = 0; i < area * 5; i++)
             {
                 points[worstValInd] = ReflectThePoint(points[worstValInd]);
                 worstValInd = FindMaxCostIndex();
@@ -75,16 +73,6 @@ namespace TestSystem.Algorithm
             cost = points[FindMinCostIndex()].cost;
 
             return new DataFormat.OutBlackBoxParam(cost);
-        }
-
-        private void SetNumberOfPoints()
-        {
-            if (parametr.x1_max - parametr.x1_min == 0 ||
-                parametr.x2_max - parametr.x2_min == 0 ||
-                parametr.x2_x1_max - parametr.x2_x1_min == 0) // какое условие выполняется чаще? '==' или '!=' ???
-            {
-                // != выполняется чаще. @АГА.
-            }
         }
 
         private PointCoord ReflectThePoint(PointCoord point)
