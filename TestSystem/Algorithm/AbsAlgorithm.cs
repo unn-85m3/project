@@ -12,7 +12,7 @@ namespace TestSystem.Algorithm
     /// От него наследуются все алгоритмы.
     /// Уэтого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
     /// </summary>
-    abstract class AbsAlgorithm : IAlgorithm, ICalculateFunction
+    abstract class AbsAlgorithm : IAlgorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
@@ -98,5 +98,54 @@ namespace TestSystem.Algorithm
             calls = 0;
         }
 
+        public int SetAreaOfTheRegion()
+        {
+            if (parametr.x1_max - parametr.x1_min == 0)
+            {
+                if (parametr.x2_max - parametr.x2_min == 0)
+                {
+                    double buf = parametr.x2_max / parametr.x1_max;
+                    if ((parametr.x2_x1_min <= buf) || (parametr.x2_x1_max > buf))
+                    {
+                        //точка
+                        return 1;
+                    }
+                }
+                else
+                {
+                    //вертикальный отрезок
+                    return 2;
+                }
+            }
+            else
+            {
+                if (parametr.x2_max - parametr.x2_min == 0)
+                {
+                    //горизонтальный отрезок
+                    return 3;
+                }
+                else
+                {
+                    if (parametr.x2_x1_max - parametr.x2_x1_min == 0)
+                    {
+                        //диагональный отрезок
+                        return 4;
+                    }
+                    else
+                    {
+                        if (parametr.x2_x1_max >= parametr.x2_max / parametr.x1_min)
+                        {
+                            if (parametr.x2_x1_min <= parametr.x1_max / parametr.x2_min)
+                            {
+                                //весь прямоугольник
+                                return 5;
+                            }
+
+                        }
+                    }
+                }
+            }
+            return 0;
+        }
     }
 }
