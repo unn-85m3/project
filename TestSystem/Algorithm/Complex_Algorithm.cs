@@ -26,7 +26,7 @@ namespace TestSystem.Algorithm
         {
             h = 10;
             this.name = "Комплексный алгоритм";
-            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" + 
+            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
                 "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
             points = new List<PointCoord>();
             rnd = new Random();
@@ -39,13 +39,24 @@ namespace TestSystem.Algorithm
             points.Clear();
 
             SetNumberOfPoints();
+            h = 0;
+            //h = (int)((parametr.x1_max - parametr.x1_min + parametr.x2_max - parametr.x2_min) / 2 * ((int)(parametr.x2_x1_max - parametr.x2_x1_min) + 1)) + 4;
+            int n = 1;
+            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i += n)
+                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j += n)
+                    if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
+                    {
+                        h++;
+                    }
 
-            for (int i = 0; i < MAXPOINT; i++)
+            h = Math.Max(h / 5, 10);
+
+            for (int i = 0; i < h; i++)
             {
                 points.Add(RandPoint());
             }
 
-            for (int i = 0; i < MAXPOINT / 4; i++)
+            for (int i = 0; i < h / 4; i++)
             {
                 points.RemoveAt(FindMaxCostIndex());
             }
@@ -54,7 +65,7 @@ namespace TestSystem.Algorithm
             worstValInd = FindMaxCostIndex();
             FindCG();
 
-            for (int i = 0; i < MAXPOINT * 12; i++)
+            for (int i = 0; i < h * 5; i++)
             {
                 points[worstValInd] = ReflectThePoint(points[worstValInd]);
                 worstValInd = FindMaxCostIndex();
@@ -68,8 +79,8 @@ namespace TestSystem.Algorithm
 
         private void SetNumberOfPoints()
         {
-            if (parametr.x1_max - parametr.x1_min == 0 || 
-                parametr.x2_max - parametr.x2_min == 0 || 
+            if (parametr.x1_max - parametr.x1_min == 0 ||
+                parametr.x2_max - parametr.x2_min == 0 ||
                 parametr.x2_x1_max - parametr.x2_x1_min == 0) // какое условие выполняется чаще? '==' или '!=' ???
             {
                 // != выполняется чаще. @АГА.
@@ -97,7 +108,7 @@ namespace TestSystem.Algorithm
             {
                 refPoint.x2 = cg.x2 - rnd.NextDouble() * (point.x2 - cg.x2);
             }
-                
+
             if (!IsFeasiblePoint(refPoint))
             {
                 refPoint.x1 -= Math.Abs(refPoint.x1 - point.x1);
@@ -180,12 +191,13 @@ namespace TestSystem.Algorithm
             Double x2a_min;
             Double x2a_max;
             PointCoord x12pc = new PointCoord();
-            
-            do {
+
+            do
+            {
                 x12pc.x1 = rnd.NextDouble() * (parametr.x1_max - parametr.x1_min) + parametr.x1_min;
                 x2a_min = parametr.x2_x1_min * x12pc.x1;
                 x2a_max = parametr.x2_x1_max * x12pc.x1;
-            } while(x2a_max < parametr.x2_min || x2a_min > parametr.x2_max);
+            } while (x2a_max < parametr.x2_min || x2a_min > parametr.x2_max);
 
             if (x2a_min < parametr.x2_min) x2a_min = parametr.x2_min;
             if (x2a_max > parametr.x2_max) x2a_max = parametr.x2_max;
