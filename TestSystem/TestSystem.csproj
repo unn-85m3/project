@@ -76,6 +76,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bbs_dll\NumericalMethodsLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="Saver">
+      <HintPath>.\Saver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -321,6 +324,7 @@
     <Content Include="bbs_dll\Models\9.2.ЛУ.r2\MathTools.dll" />
     <Content Include="bbs_dll\Models\9.2.ЛУ.r2\RealBlackBox2.dll" />
     <Content Include="bbs_dll\NumericalMethodsLibrary.dll" />
+    <Content Include="Saver.dll" />
     <Content Include="Tasks\Tests\test_1.txt" />
     <Content Include="Tasks\Tests\test_10.txt" />
     <Content Include="Tasks\Tests\test_11.txt" />
