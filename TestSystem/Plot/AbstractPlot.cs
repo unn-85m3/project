@@ -13,6 +13,12 @@ namespace TestSystem.Plot
         {
             this.points = points;
         }
-        
+
+
+        public abstract void AddPoint(IPoint point);
+
+        public abstract void DeletePoint(IPoint point);
+
+        public abstract void Clear();
     }
 }

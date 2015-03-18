@@ -9,5 +9,9 @@ namespace TestSystem.Plot
     interface IPlot
     {
         void AddPoint(IPoint point);
+
+        void DeletePoint(IPoint point);
+
+        void Clear();
     }
 }
