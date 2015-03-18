@@ -86,11 +86,21 @@ namespace TestSystem.Algorithm
             }
         }
 
-        public IOutBlackBoxParam Function(Double x1, Double x2, Int32 name = 0)
+        public IOutBlackBoxParam Function(Double x1, Double x2, Int32 id = 0)
+        {
+            calls++;
+            IOutBlackBoxParam p = function.Calculate(x1, x2);
+            Point point = new Point(x1, x2, id);
+            point.cost = p.Cost;
+            this._points.Add(point);
+            return p;
+        }
+
+        public IOutBlackBoxParam Function(Double x1, Double x2)
         {
             calls++;
             IOutBlackBoxParam p=function.Calculate(x1, x2);
-            Point point = new Point(x1, x2, name);
+            Point point = new Point(x1, x2);
             point.cost = p.Cost;
             this._points.Add(point);
             return p;

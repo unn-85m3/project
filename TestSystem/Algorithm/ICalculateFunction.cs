@@ -10,5 +10,6 @@ namespace TestSystem.Algorithm
     interface ICalculateFunction
     {
         IOutBlackBoxParam Function(Double x1, Double x2);
+        IOutBlackBoxParam Function(Double x1, Double x2,int id);
     }
 }
