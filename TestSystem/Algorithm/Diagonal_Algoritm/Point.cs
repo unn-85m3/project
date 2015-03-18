@@ -13,18 +13,34 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         private Double _y;
         private IOutBlackBoxParam _cost=null;
         private Double _cost_d=0;
+        private int name;
         public Point()
         {
 
         }
 
 
-        public Point(Double x1, Double x2)
+        public Point(Double x1, Double x2, int name)
         {
             this.x1 = x1;
             this.x2 = x2;
+            this.name = name;
         }
 
+        /// <summary>
+        /// Set Of Points
+        /// </summary>
+        public int sop
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                this.name = value;
+            }
+        }
 
         public double x1
         {
