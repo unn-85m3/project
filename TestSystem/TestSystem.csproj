@@ -127,6 +127,8 @@
     <Compile Include="Plot\IPlot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Saver\ISaver.cs" />
+    <Compile Include="Saver\Saver.cs" />
     <Compile Include="Tasks\ITaskPackage.cs" />
     <Compile Include="Tasks\TaskPackage.cs" />
     <Compile Include="Tasks\Tasks_Base.cs" />
@@ -134,6 +136,11 @@
     <Compile Include="test_system\IEndCalculate.cs" />
     <Compile Include="test_system\ITestSystem.cs" />
     <Compile Include="test_system\TestSystem.cs" />
+    <Compile Include="Vars.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Vars.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -160,6 +167,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Vars.xsc">
+      <DependentUpon>Vars.xsd</DependentUpon>
+    </None>
+    <None Include="Vars.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Vars.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Vars.xss">
+      <DependentUpon>Vars.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -182,6 +200,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Base.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bbs_dll\BlackBoxCommon.dll" />
     <Content Include="bbs_dll\Core.dll" />
     <Content Include="bbs_dll\KSModels.dll" />
@@ -324,7 +345,6 @@
     <Content Include="bbs_dll\Models\9.2.ЛУ.r2\MathTools.dll" />
     <Content Include="bbs_dll\Models\9.2.ЛУ.r2\RealBlackBox2.dll" />
     <Content Include="bbs_dll\NumericalMethodsLibrary.dll" />
-    <Content Include="Saver.dll" />
     <Content Include="Tasks\Tests\test_1.txt" />
     <Content Include="Tasks\Tests\test_10.txt" />
     <Content Include="Tasks\Tests\test_11.txt" />
