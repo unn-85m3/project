@@ -25,7 +25,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 10;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 2;
 
 
 
