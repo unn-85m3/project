@@ -99,5 +99,13 @@ namespace TestSystem.BlackBox
         {
             get { return cost; }
         }
+
+
+        public string WhatTask()
+        {
+            if(task!=null)
+            return task.Name;
+            return "";
+        }
     }
 }
