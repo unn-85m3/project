@@ -27,20 +27,13 @@ namespace TestSystem.Algorithm
         private Saver.Saver saver;
 
 
-        //строка для подключения Microsoft.ACE.OLEDB.12.0;Data Source=|DataDirectory|\Base.accdb;Persist Security Info=True
+       
         //
         /// <summary>
         /// конструктор
         /// </summary>
         /// <param name="parametr">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
-        protected AbsAlgorithm(OleDbConnection connector)
-        {
-            calls = 0;
-            _points = new List<IPoint>();
-            saver = new Saver.Saver(connector);
-           
-        }
 
         protected AbsAlgorithm()
         {
