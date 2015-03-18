@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSystem", "TestSystem.cs
 EndProject
 Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "TestSystem_model", "..\TestSystem_model\TestSystem_model.modelproj", "{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSystem_beta", "..\TestSystem_beta\TestSystem_beta.csproj", "{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		debug_beta|Any CPU = debug_beta|Any CPU
@@ -26,12 +24,6 @@ Global
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8058E1CF-7B44-48FB-8317-E3C8B9BFA240}.Release|Any CPU.Build.0 = Release|Any CPU
-		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.debug_beta|Any CPU.ActiveCfg = Debug|Any CPU
-		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.debug_beta|Any CPU.Build.0 = Debug|Any CPU
-		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{030436B0-4EB1-4BB0-84DF-E9E4086CFC17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
