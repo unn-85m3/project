@@ -86,7 +86,7 @@ namespace TestSystem.Algorithm
             }
         }
 
-        public IOutBlackBoxParam Function(Double x1, Double x2, Int32 name)
+        public IOutBlackBoxParam Function(Double x1, Double x2, Int32 name = 0)
         {
             calls++;
             IOutBlackBoxParam p=function.Calculate(x1, x2);
