@@ -25,7 +25,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 3;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 10;
 
 
 
@@ -171,7 +171,6 @@ namespace TestSystem
                         }
                     }
                 }
-
                 else
                 {
                     if (alg.Name == Algs[i].Name)
@@ -250,9 +249,10 @@ namespace TestSystem
 
         private void Init_Table()
         {
-            double time = 0, count = 0;
+            
             for (int i = 1; i < Algorithms.Length; i++)
             {
+                double time = 0, count = 0;
                 for (int j = 0; j < CompleateTask[i]; j++)
                     if (CompleateTask[0] >= CompleateTask[i])
                     {
@@ -260,9 +260,35 @@ namespace TestSystem
                         time += BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1;
                         dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
                         count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
+
+
+
+                        if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100 > 0)
+                        {
+                            dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Red;
+                        }
+                        else dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Green;
+
+                        if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100 > 0)
+                        {
+                            dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Red;
+                        }
+                        else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Green;
+
                     }
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count;
-                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count;
+                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count * 100;
+                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count * 100;
+                if (time / Tasks.Count > 0)
+                {
+                    dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Red;
+                }
+                else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Green;
+
+                if (count / Tasks.Count > 0)
+                {
+                    dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
+                }
+                else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Green;
             }
         }
 
@@ -283,7 +309,8 @@ namespace TestSystem
         {
             int row = e.RowIndex;
             PAGE = tabControl1.SelectedIndex;
-            Drawer.Drawer.DrawGraphics(Algorithms, PAGE, row);
+            Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
+
         }
     }
 }
