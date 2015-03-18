@@ -16,6 +16,8 @@ namespace TestSystem.Algorithm
         {
             public PointInRect PIR, p1, p2;
             public double x1, y1, x2, y2;
+            public void CreatPoint(double x, double y, DataFormat.OutBlackBoxParam cost) { PIR.x = x; PIR.y = y; PIR.cost = cost; }
+            public void CreatPoint(double x, double y) { PIR.x = x; PIR.y = y; }
             public void CreatRectangle(double x1, double y1, double x2, double y2) { this.x1 = x1; this.y1 = y1; this.x2 = x2; this.y2 = y2; }
             public void CreatRectangle(PointInRect p1, PointInRect p2) { this.p1 = p1; this.p2 = p2; }
         }
@@ -34,6 +36,7 @@ namespace TestSystem.Algorithm
         {
             rnd = new Random();
             this.name = "Диагональный метод";
+            this.atributs += "";//Параметры алгоритма
         }
 
         public override DataFormat.IOutBlackBoxParam Calculate() // Доработать(переделать)

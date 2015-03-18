@@ -26,6 +26,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -74,6 +75,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="system.windows.forms.datavisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -88,12 +90,16 @@
     <Compile Include="Algorithm\Benchmark_Algorithm.cs" />
     <Compile Include="Algorithm\Complex_Algorithm.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritms.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\DiagonalAlgorithmV2.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\ILine.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\IPlace.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\IPoint.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Line.cs" />
+    <Compile Include="Algorithm\Diagonal_Algoritm\Place.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Point.cs" />
     <Compile Include="Algorithm\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
+    <Compile Include="Algorithm\ICalculateFunction.cs" />
     <Compile Include="Algorithm\Non_Benchmark_Algorithm.cs" />
     <Compile Include="BlackBox\BlackBoxFunction.cs" />
     <Compile Include="BlackBox\IFunction.cs" />
@@ -102,6 +108,7 @@
     <Compile Include="DataFormat\IEnterBlackBoxParam.cs" />
     <Compile Include="DataFormat\IOutBlackBoxParam.cs" />
     <Compile Include="DataFormat\OutBlackBoxParam.cs" />
+    <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,6 +116,9 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="JSON\DataFormat.cs" />
+    <Compile Include="Plot\Plot3D.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tasks\ITaskPackage.cs" />
@@ -120,6 +130,9 @@
     <Compile Include="test_system\TestSystem.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plot\Plot3D.resx">
+      <DependentUpon>Plot3D.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -310,17 +323,65 @@
     <Content Include="bbs_dll\NumericalMethodsLibrary.dll" />
     <Content Include="Tasks\Tests\test_1.txt" />
     <Content Include="Tasks\Tests\test_10.txt" />
+    <Content Include="Tasks\Tests\test_11.txt" />
+    <Content Include="Tasks\Tests\test_12.txt" />
+    <Content Include="Tasks\Tests\test_13.txt" />
+    <Content Include="Tasks\Tests\test_14.txt" />
+    <Content Include="Tasks\Tests\test_15.txt" />
+    <Content Include="Tasks\Tests\test_16.txt" />
+    <Content Include="Tasks\Tests\test_17.txt" />
+    <Content Include="Tasks\Tests\test_18.txt" />
+    <Content Include="Tasks\Tests\test_19.txt" />
     <Content Include="Tasks\Tests\test_2.txt" />
+    <Content Include="Tasks\Tests\test_20.txt" />
+    <Content Include="Tasks\Tests\test_21.txt" />
+    <Content Include="Tasks\Tests\test_22.txt" />
+    <Content Include="Tasks\Tests\test_23.txt" />
+    <Content Include="Tasks\Tests\test_24.txt" />
+    <Content Include="Tasks\Tests\test_25.txt" />
+    <Content Include="Tasks\Tests\test_26.txt" />
+    <Content Include="Tasks\Tests\test_27.txt" />
+    <Content Include="Tasks\Tests\test_28.txt" />
+    <Content Include="Tasks\Tests\test_29.txt" />
     <Content Include="Tasks\Tests\test_3.txt" />
+    <Content Include="Tasks\Tests\test_30.txt" />
+    <Content Include="Tasks\Tests\test_31.txt" />
+    <Content Include="Tasks\Tests\test_32.txt" />
+    <Content Include="Tasks\Tests\test_33.txt" />
+    <Content Include="Tasks\Tests\test_34.txt" />
+    <Content Include="Tasks\Tests\test_35.txt" />
+    <Content Include="Tasks\Tests\test_36.txt" />
+    <Content Include="Tasks\Tests\test_37.txt" />
+    <Content Include="Tasks\Tests\test_38.txt" />
+    <Content Include="Tasks\Tests\test_39.txt" />
     <Content Include="Tasks\Tests\test_4.txt" />
+    <Content Include="Tasks\Tests\test_40.txt" />
+    <Content Include="Tasks\Tests\test_41.txt" />
+    <Content Include="Tasks\Tests\test_42.txt" />
+    <Content Include="Tasks\Tests\test_43.txt" />
+    <Content Include="Tasks\Tests\test_44.txt" />
+    <Content Include="Tasks\Tests\test_45.txt" />
+    <Content Include="Tasks\Tests\test_46.txt" />
+    <Content Include="Tasks\Tests\test_47.txt" />
+    <Content Include="Tasks\Tests\test_48.txt" />
+    <Content Include="Tasks\Tests\test_49.txt" />
     <Content Include="Tasks\Tests\test_5.txt" />
+    <Content Include="Tasks\Tests\test_50.txt" />
+    <Content Include="Tasks\Tests\test_51.txt" />
+    <Content Include="Tasks\Tests\test_52.txt" />
+    <Content Include="Tasks\Tests\test_53.txt" />
+    <Content Include="Tasks\Tests\test_54.txt" />
+    <Content Include="Tasks\Tests\test_55.txt" />
+    <Content Include="Tasks\Tests\test_56.txt" />
+    <Content Include="Tasks\Tests\test_57.txt" />
+    <Content Include="Tasks\Tests\test_58.txt" />
+    <Content Include="Tasks\Tests\test_59.txt" />
     <Content Include="Tasks\Tests\test_6.txt" />
+    <Content Include="Tasks\Tests\test_60.txt" />
     <Content Include="Tasks\Tests\test_7.txt" />
     <Content Include="Tasks\Tests\test_8.txt" />
     <Content Include="Tasks\Tests\test_9.txt" />
   </ItemGroup>
-  <ItemGroup>
-  <Folder Include="Algorithm\Diagonal_Algoritm\" />
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

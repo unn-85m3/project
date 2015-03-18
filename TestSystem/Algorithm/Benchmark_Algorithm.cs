@@ -25,8 +25,8 @@ namespace TestSystem.Algorithm
         /// <param name="function">Используемая ф-ция</param>
         public Benchmark_Algorithm() 
         {
-            this.name = "Эталонный алгоритм";
-            this.atributs += "Шаг алгоритма = "+ h+ ".";
+            this.name = "Простой алгоритм";
+            this.atributs += "Шаг алгоритма = "+ h+ " Па.";//Изменять при внесении изменений
         }
 
         /// <summary>
@@ -50,12 +50,14 @@ namespace TestSystem.Algorithm
                              n++;
                            
                         }
-                        catch(Exception e)
+                        catch
                         {
                             a = new OutBlackBoxParam(Double.MaxValue);  // Double.MaxValue;
                         }
 
-                        
+
+                        //a = Function(34.946777049892944, 50.93829138975363);
+
                         if (n == 1)
                             cost = a.Cost;
                         else if (a.Cost < cost)

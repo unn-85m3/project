@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
+using TestSystem.Algorithm.Diagonal_Algoritm;
 
 namespace TestSystem.Algorithm
 {
@@ -12,13 +13,15 @@ namespace TestSystem.Algorithm
     /// От него наследуются все алгоритмы.
     /// Уэтого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
     /// </summary>
-    abstract class AbsAlgorithm : IAlgorithm
+    abstract class AbsAlgorithm : IAlgorithm, ICalculateFunction
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
         protected string atributs = "Параметры алгоритма: ";// Параметры алгоритма
         private IFunction _function;///функция для оптимизации
         private int calls;
+        public static Double STEP = 1;
+        private List<IPoint> _points;
 
 
         /// <summary>
@@ -29,6 +32,7 @@ namespace TestSystem.Algorithm
         protected AbsAlgorithm()
         {
             calls = 0;
+            _points = new List<IPoint>();
         }
 
         /// <summary>
@@ -73,10 +77,23 @@ namespace TestSystem.Algorithm
         }
 
 
-        protected IOutBlackBoxParam Function(Double x1, Double x2)
+        public List<IPoint> points
+        {
+            get
+            {
+
+                return _points;
+            }
+        }
+
+        public IOutBlackBoxParam Function(Double x1, Double x2)
         {
             calls++;
-            return function.Calculate(x1, x2);
+            IOutBlackBoxParam p=function.Calculate(x1, x2);
+            Point point = new Point(x1, x2);
+            point.cost = p;
+            this._points.Add(point);
+            return p;
         }
 
         /// <summary>
@@ -98,5 +115,16 @@ namespace TestSystem.Algorithm
             calls = 0;
         }
 
+        public int SetAreaOfTheRegion(Double h)
+        {
+            int n = 0;
+            for (double i = this.parametr.x1_min; i <= this.parametr.x1_max; i += h)
+                for (double j = this.parametr.x2_min; j <= this.parametr.x2_max; j += h)
+                    if (((j / i) <= this.parametr.x2_x1_max) && ((j / i) >= this.parametr.x2_x1_min))
+                    {
+                        n++;
+                    }
+            return n;
+        }
     }
 }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.toolTipTabPages = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // Form1
@@ -77,6 +79,8 @@
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(this.Size.Width - 17, this.Size.Height - 41);
+            //this.toolTipTabPages.SetToolTip(this.tabControl1, "Результаты работы алгоритмов");
+            this.tabControl1.ShowToolTips = true;
             this.tabControl1.TabIndex = 0;
             // 
             // tabPages
@@ -91,7 +95,8 @@
                 this.tabPages[i].TabIndex = 0;
                 this.tabPages[i].Text = Algs[i].Name;
                 this.tabPages[i].UseVisualStyleBackColor = true;
-
+                //this.toolTipTabPages.SetToolTip(this.tabPages[i], Algs[i].Atributs);
+                this.tabPages[i].ToolTipText = Algs[i].Atributs;
                 //tt.Add(new System.Windows.Forms.ToolTip());
                 //tt[i].SetToolTip(tabPages[i], Algs[i].Atributs);
             }
@@ -108,24 +113,49 @@
                 this.dataGridViews[i].Name = "dataGridView1";
                 this.dataGridViews[i].Size = new System.Drawing.Size(this.tabPages[i].Size.Width - 1, this.tabPages[i].Size.Height - 1);
                 this.dataGridViews[i].TabIndex = 0;
+                this.dataGridViews[i].CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViews_CellDoubleClick);
             }
 
 
-                dataGridViews[0].Columns.Add("Task", "Задача");
-                dataGridViews[0].Columns.Add("Time", "t, мсек.");
-                dataGridViews[0].Columns.Add("Func", "Кол-во вызовов ф-ции");
-                dataGridViews[0].Columns.Add("BB", "Кол-во вызовов ЧЯ");
-                dataGridViews[0].Columns.Add("Cost", "Стоимость");
-            
+            dataGridViews[0].Columns.Add("Task", "Задача");
+            this.dataGridViews[0].Columns[0].ToolTipText = "Имена файлов примеров.";
+            dataGridViews[0].Columns.Add("Time", "t, мсек.");
+            this.dataGridViews[0].Columns[1].ToolTipText = "Время работы алгоритма на данном примере.";
+            dataGridViews[0].Columns.Add("Func", "Кол-во вызовов ф-ции");
+            this.dataGridViews[0].Columns[2].ToolTipText = "Колличество вызовов функции расчета.";
+            dataGridViews[0].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+            this.dataGridViews[0].Columns[3].ToolTipText = "Колличество вызовов функции расчета черного ящика.";
+            dataGridViews[0].Columns.Add("Cost", "Стоимость");
+            this.dataGridViews[0].Columns[4].ToolTipText = "Затраты на эксплуатацию и модернизацию.";
+
+            foreach (System.Windows.Forms.DataGridViewColumn column in dataGridViews[0].Columns)
+            {
+                column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            }
+            //dataGridViews[0].SortedColumn. = false;
+
+
             for (int i = 1; i < Algorithms.Length; i++)
             {
                 dataGridViews[i].Columns.Add("Task", "Задача");
+                this.dataGridViews[i].Columns[0].ToolTipText = "Имена файлов примеров.";
                 dataGridViews[i].Columns.Add("Time", "t, мсек.");
+                this.dataGridViews[i].Columns[1].ToolTipText = "Время работы алгоритма на данном примере.";
                 dataGridViews[i].Columns.Add("Func", "Кол-во вызовов ф-ции");
+                this.dataGridViews[i].Columns[2].ToolTipText = "Колличество вызовов функции расчета.";
                 dataGridViews[i].Columns.Add("BB", "Кол-во вызовов ЧЯ");
+                this.dataGridViews[i].Columns[3].ToolTipText = "Колличество вызовов функции расчета черного ящика.";
                 dataGridViews[i].Columns.Add("Cost", "Стоимость");
+                this.dataGridViews[i].Columns[4].ToolTipText = "Затраты на эксплуатацию и модернизацию.";
                 dataGridViews[i].Columns.Add("TimePercent", "% t, мсек.");
-                dataGridViews[i].Columns.Add("CostPercent", "% Стоимость");
+                this.dataGridViews[i].Columns[5].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
+                dataGridViews[i].Columns.Add("CostPercent", "% Стоимость"); 
+                this.dataGridViews[i].Columns[6].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
+
+                foreach (System.Windows.Forms.DataGridViewColumn column in dataGridViews[i].Columns)
+                {
+                    column.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+                }
             }
 
 
@@ -147,6 +177,7 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage[] tabPages;
         private System.Windows.Forms.DataGridView[] dataGridViews;
+        private System.Windows.Forms.ToolTip toolTipTabPages;
     }
 }
 

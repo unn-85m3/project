@@ -43,38 +43,28 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         {
             get
             {
-                return _length(PointStart.x1, PointStart.x2, PointEnd.x1, PointEnd.x2);
+                return _length(PointStart.x, PointStart.y, PointEnd.x, PointEnd.y);
             }
-                //return Math.Sqrt(Math.Pow(PointStart.x - PointEnd.x1, 2)*Math.Pow(PointStart.x2-PointEnd.x2,2)  ); }
+                //return Math.Sqrt(Math.Pow(PointStart.x - PointEnd.x, 2)*Math.Pow(PointStart.y-PointEnd.y,2)  ); }
 
         }
 
 
-        private Double _length(Double x10,Double x20,Double x11,Double x21)
+        private Double _length(Double x0,Double y0,Double x1,Double y1)
         {
-            if (x10 == x11)
-            {
-                return Math.Abs(x20 - x21);
-
-            }
-
-            if(x20==x21)
-            {
-                return Math.Abs(x10 - x11);
-            }
-            return Math.Sqrt(Math.Pow(x10 - x11, 2) * Math.Pow(x20 - x21, 2));
+            return Math.Sqrt(Math.Pow(x0 - x1, 2) * Math.Pow(y0 - y1, 2));
         }
 
         public IPoint GetPoint(double leng)
         {
-            Double len = leng;
+            Double len = leng * leng;
             Double L = length;
             if (len <= L)
             {
-                Double k = len/L;
+                Double k = len / (L - (L-len));
                 Point p = new Point();
-                p.x1 = (k * (PointEnd.x1 - PointStart.x1) + PointStart.x1); /// (1 + k);
-                p.x2 = (k * (PointEnd.x2-PointStart.x2) + PointStart.x2); /// (1 + k);
+                p.x = (k * PointEnd.x + PointStart.x) / (1 + k);
+                p.y = (k * PointEnd.y + PointStart.y) / (1 + k);
                 return p;
             }
             else return null;
@@ -84,7 +74,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         {
             get
             {
-                return ax2/ax1;
+                return ay/ax;
             }
         }
 
@@ -92,23 +82,23 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         {
             get
             {
-                return (PointStart.x2 - k * PointStart.x1) / ax1;
+                return (PointStart.y - k * PointStart.x) / ax;
             }
         }
 
-        private Double ax1
+        private Double ax
         {
             get
             {
-                return PointEnd.x1 - PointStart.x1;
+                return PointEnd.x - PointStart.x;
             }
         }
 
-        private Double ax2
+        private Double ay
         {
             get
             {
-                return PointEnd.x2 - PointStart.x2;
+                return PointEnd.y - PointStart.y;
             }
         }
     }

@@ -11,7 +11,6 @@ using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
 using KSModels;
-
 using TestSystem.Algorithm.Diagonal_Algoritm;
 
 
@@ -24,9 +23,9 @@ namespace TestSystem
         private List<IAlgorithm> Algs;
         private int[] CompleateTask;
         private double[,,] BenchRez;
-        private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 3;
-
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 5;
+        //private ToolTip[][] tt;
+        //private List<ToolTip> tt;
 
 
         public Form1()
@@ -71,15 +70,11 @@ namespace TestSystem
         /// </summary>
         private void Create_TestSystem()
         {
-           
+            Line l = new Line(new TestSystem.Algorithm.Diagonal_Algoritm.Point(-1,-1), new TestSystem.Algorithm.Diagonal_Algoritm.Point(4,4));
+            IPoint p=l.GetPoint(Math.Sqrt(2));
             Algs = new List<IAlgorithm>();
             Algs.Add(new Algorithm.Benchmark_Algorithm());
-            //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
             Algs.Add(new Algorithm.Complex_Algorithm());
-            Algs.Add(new Algorithm.Genetic_Algorithm());
-
-
 
             CompleateTask = new int[Algs.Count];
             for (int i = 0; i < CompleateTask.Length; i++)
@@ -89,7 +84,6 @@ namespace TestSystem
 
             List<DataFormat.DataFormat> dtf = new List<DataFormat.DataFormat>();
             CreateTasks(dtf, true, MIN_NUMBER_TASK, MAX_NUMBER_TASK);
-            //CreateTasks(dtf, false, 6);
 
             BenchRez = new double[Algs.Count, 2, dtf.Count];
 
@@ -158,7 +152,7 @@ namespace TestSystem
                         CompleateTask[i]++;
                         for (int j = 0; j < Tasks.Count; j++)
                         {
-                            if (dataGridViews[i].Rows[j].Cells[0].Value.ToString() == task.Name)
+                            if (Tasks[j].Name == task.Name)
                             {
                                 //dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
                                 dataGridViews[i].Rows[j].Cells[1].Value = time;
@@ -178,24 +172,21 @@ namespace TestSystem
                         CompleateTask[i]++;
                         for (int j = 0; j < Tasks.Count; j++)
                         {
-                            if (dataGridViews[i].Rows[j].Cells[0].Value.ToString() == task.Name)
+                            if (Tasks[j].Name == task.Name)
                             {
                                 //dataGridViews[i].Rows[j].Cells[0].Value = task.Name;
-                                dataGridViews[i].Rows[j].Cells[1].Value = time;
+                                dataGridViews[i].Rows[j].Cells[1].Value = time;                                
+                                BenchRez[i, 0, j] = time;
                                 dataGridViews[i].Rows[j].Cells[2].Value = alg.Calls;
                                 //dataGridViews[i].Rows[j].Cells[3].Value = "10*i + j =";
                                 dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
+                                BenchRez[i, 1, j] = rez.Cost;
                                 //if (CompleateTask[0] >= CompleateTask[i])
                                 //{
                                 //    Init_Table(i, j);
                                 //}
                                 //else 
                                 //    Init_Table(i, CompleateTask[0]);
-                            }
-                            if (Tasks[j].Name == task.Name)
-                            {
-                                BenchRez[i, 0, j] = time;
-                                BenchRez[i, 1, j] = rez.Cost;
                             }
                         }
                     }
@@ -207,67 +198,33 @@ namespace TestSystem
         {
                     if (CompleateTask[0] >= CompleateTask[i])
                     {
-                        dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
-                        dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
+                        dataGridViews[i].Rows[j].Cells[5].Value = BenchRez[i, 0, j] / BenchRez[0, 0, j];
+                        dataGridViews[i].Rows[j].Cells[6].Value = BenchRez[i, 1, j] / BenchRez[0, 1, j];
                     }
         }
-
-        //private void Init_Table()
-        //{
-        //    for (int i = 1; i < Algorithms.Length; i++)
-        //    {
-        //        double time = 0, count = 0;
-
-        //        for (int j = 0; j < Tasks.Count; j++)
-        //            if (BenchRez[i, 0, j] != 0)
-        //            {
-        //                for (int k = 0; k < Tasks.Count; k++)
-        //                {
-        //                    if (Tasks[j].Name == dataGridViews[i].Rows[k].Cells[0].Value.ToString())
-        //                    {
-        //                        if (CompleateTask[0] >= CompleateTask[i])
-        //                        {
-        //                            dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
-        //                            time += BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1;
-        //                            dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
-        //                            count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //            else break;
-        //        for (int k = 0; k < Tasks.Count; k++)
-        //        {
-        //            if ("Среднее значение" == dataGridViews[i].Rows[k].Cells[0].Value.ToString())
-        //            {
-        //                dataGridViews[i].Rows[k].Cells[5].Value = 100 * time / Tasks.Count;
-        //                dataGridViews[i].Rows[k].Cells[6].Value = 100 * count / Tasks.Count;
-        //            }
-        //        }
-        //    }
-        //}
 
         private void Init_Table()
         {
             double time = 0, count = 0;
             for (int i = 1; i < Algorithms.Length; i++)
             {
-                for (int j = 0; j < CompleateTask[i]; j++)
+                for (int j = 0; j < Tasks.Count; j++)
                     if (CompleateTask[0] >= CompleateTask[i])
                     {
-                        dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
-                        time += BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1;
-                        dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
-                        count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
+                        dataGridViews[i].Rows[j].Cells[5].Value = BenchRez[i, 0, j] / BenchRez[0, 0, j];
+                        time += BenchRez[i, 0, j] / BenchRez[0, 0, j];
+                        dataGridViews[i].Rows[j].Cells[6].Value = BenchRez[i, 1, j] / BenchRez[0, 1, j];
+                        count += BenchRez[i, 1, j] / BenchRez[0, 1, j];
                     }
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count;
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count;
             }
         }
 
+
         public void OnEndCalculate(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {   
-            ///Init_Table(alg, task, rez, time);
+           /// Init_Table(alg, task, rez, time);
             //throw new NotImplementedException();
         }
 
@@ -276,13 +233,6 @@ namespace TestSystem
             Init_Table(alg, task, rez, time);
             if (CompleateTask[0] == Tasks.Count)
                 Init_Table();
-        }
-
-        private void dataGridViews_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int row = e.RowIndex;
-            PAGE = tabControl1.SelectedIndex;
-            Drawer.Drawer.DrawGraphics(Algorithms, PAGE, row);
         }
     }
 }

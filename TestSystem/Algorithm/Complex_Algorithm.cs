@@ -16,28 +16,56 @@ namespace TestSystem.Algorithm
         };
         private List<PointCoord> points;
         private Random rnd;
-        private const int MAXPOINT = 4;
+        private const int MAXPOINT = 4; //будет ненужно
         private int bestValInd;
         private int worstValInd;
         private PointCoord cg;
+        private int h;
 
         public Complex_Algorithm()
         {
+            h = 10;
+            this.name = "Комплексный алгоритм";
+            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
+                "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
             points = new List<PointCoord>();
-            rnd = new Random();
+            rnd = new Random(0);
             cg = new PointCoord();
         }
 
-        public override DataFormat.IOutBlackBoxParam Calculate()
+        public override DataFormat.IOutBlackBoxParam Calculate() // алгоритм можно ускорить
         {
-            double cost = 0;
+            double cost = double.MaxValue;
+            points.Clear();
 
-            for (int i = 0; i < MAXPOINT; i++)
+            SetNumberOfPoints();
+
+            h = this.SetAreaOfTheRegion(STEP);
+            //h = (int)((parametr.x1_max - parametr.x1_min + parametr.x2_max - parametr.x2_min) / 2 * ((int)(parametr.x2_x1_max - parametr.x2_x1_min) + 1)) + 4;
+
+            if (h == 1)
+            {
+                cost = Function(parametr.x1_min, parametr.x2_min).Cost;
+                return new DataFormat.OutBlackBoxParam(cost);
+            }
+
+            if (h < 6) // если кол-во точек <  точек которые мы хотим отражать, то просто найти лучшую без использования алгоритма.
+            {
+                double[] tmp = new double[h];
+                for (int i = 0; i < h; i++)
+                {
+                    //tmp[i] = Function(x1, x2).Cost;
+                }
+            }
+
+            h = Math.Max(h / 6, 10);
+
+            for (int i = 0; i < h; i++)
             {
                 points.Add(RandPoint());
             }
 
-            for (int i = 0; i < MAXPOINT / 4; i++)
+            for (int i = 0; i < h / 4; i++)
             {
                 points.RemoveAt(FindMaxCostIndex());
             }
@@ -46,7 +74,7 @@ namespace TestSystem.Algorithm
             worstValInd = FindMaxCostIndex();
             FindCG();
 
-            for (int i = 0; i < MAXPOINT * 10; i++)
+            for (int i = 0; i < h * 5; i++)
             {
                 points[worstValInd] = ReflectThePoint(points[worstValInd]);
                 worstValInd = FindMaxCostIndex();
@@ -56,6 +84,16 @@ namespace TestSystem.Algorithm
             cost = points[FindMinCostIndex()].cost;
 
             return new DataFormat.OutBlackBoxParam(cost);
+        }
+
+        private void SetNumberOfPoints()
+        {
+            if (parametr.x1_max - parametr.x1_min == 0 ||
+                parametr.x2_max - parametr.x2_min == 0 ||
+                parametr.x2_x1_max - parametr.x2_x1_min == 0) // какое условие выполняется чаще? '==' или '!=' ???
+            {
+                // != выполняется чаще. @АГА.
+            }
         }
 
         private PointCoord ReflectThePoint(PointCoord point)
@@ -79,14 +117,21 @@ namespace TestSystem.Algorithm
             {
                 refPoint.x2 = cg.x2 - rnd.NextDouble() * (point.x2 - cg.x2);
             }
-                
+
             if (!IsFeasiblePoint(refPoint))
             {
                 refPoint.x1 -= Math.Abs(refPoint.x1 - point.x1);
                 refPoint.x2 -= Math.Abs(refPoint.x2 - point.x2);
             }
 
-            refPoint.cost = Function(refPoint.x1, refPoint.x2).Cost;
+            try
+            {
+                refPoint.cost = Function(refPoint.x1, refPoint.x2).Cost;
+            }
+            catch
+            {
+                refPoint.cost = double.MaxValue;
+            }
             //} while (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost);
 
             if (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost)
@@ -117,7 +162,7 @@ namespace TestSystem.Algorithm
             }
             cg.x1 /= i;
             cg.x2 /= i;
-            cg.cost = Function(cg.x1, cg.x2).Cost;
+            //cg.cost = Function(cg.x1, cg.x2).Cost;
         }
 
         private int FindMinCostIndex()
@@ -126,7 +171,7 @@ namespace TestSystem.Algorithm
             double minCost = double.MaxValue;
             for (int i = 0; i < points.Count; i++) //может заменить форичем?
             {
-                if (minCost > points[i].cost)
+                if (minCost > points[i].cost) //Не  получиться, индекс не узнаешь. @АГА.
                 {
                     minCost = points[i].cost;
                     ind = i;
@@ -141,7 +186,7 @@ namespace TestSystem.Algorithm
             double maxCost = 0;
             for (int i = 0; i < points.Count; i++) //тут тоже
             {
-                if (maxCost < points[i].cost)
+                if (maxCost < points[i].cost)// тоже нет. @АГА.
                 {
                     maxCost = points[i].cost;
                     ind = i;
@@ -155,19 +200,27 @@ namespace TestSystem.Algorithm
             Double x2a_min;
             Double x2a_max;
             PointCoord x12pc = new PointCoord();
-            
-            do {
+
+            do
+            {
                 x12pc.x1 = rnd.NextDouble() * (parametr.x1_max - parametr.x1_min) + parametr.x1_min;
                 x2a_min = parametr.x2_x1_min * x12pc.x1;
                 x2a_max = parametr.x2_x1_max * x12pc.x1;
-            } while(x2a_max < parametr.x2_min || x2a_min > parametr.x2_max);
+            } while (x2a_max < parametr.x2_min || x2a_min > parametr.x2_max);
 
             if (x2a_min < parametr.x2_min) x2a_min = parametr.x2_min;
             if (x2a_max > parametr.x2_max) x2a_max = parametr.x2_max;
 
             x12pc.x2 = rnd.NextDouble() * (x2a_max - x2a_min) + x2a_min;
 
-            x12pc.cost = Function(x12pc.x1, x12pc.x2).Cost;
+            try
+            {
+                x12pc.cost = Function(x12pc.x1, x12pc.x2).Cost;
+            }
+            catch
+            {
+                x12pc = RandPoint();
+            }
 
             return x12pc;
         }

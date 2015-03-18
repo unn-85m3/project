@@ -16,6 +16,7 @@ namespace TestSystem
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+           // Application.Run(new Plot.Plot3D(null));
             Application.Run(new Form1());
         }
     }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
+using TestSystem.Algorithm.Diagonal_Algoritm;
 
 namespace TestSystem.Algorithm
 {
@@ -38,6 +39,9 @@ namespace TestSystem.Algorithm
         /// Установка оптимизируемой ф-и
         /// </summary>
         void SetFunction(IFunction function);
+
+
+        List<IPoint> points { get; }
 
         int Calls { get; }
         void Refresh();

@@ -8,10 +8,10 @@ using TestSystem.DataFormat;
 
 namespace TestSystem.Algorithm.Diagonal_Algoritm
 {
-    interface IPoint
+    public interface IPoint
     {
-        Double x { get; set; }
-        Double y { get; set; }
+        Double x1 { get; set; }
+        Double x2 { get; set; }
         IOutBlackBoxParam cost { get; set;}
 
     }
