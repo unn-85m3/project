@@ -93,7 +93,7 @@
     <Compile Include="Algorithm\Diagonal_Algoritm\DiagonalAlgorithmV2.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\ILine.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\IPlace.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\IPoint.cs" />
+    <Compile Include="IPoint.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Line.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Place.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Point.cs" />

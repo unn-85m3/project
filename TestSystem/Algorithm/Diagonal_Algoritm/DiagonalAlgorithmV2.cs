@@ -27,7 +27,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             int n = this.SetAreaOfTheRegion(STEP);
            
             place.Separate(this);
-            best = place.bestPoint.cost.Cost;
+            best = place.bestPoint.cost;
 
             int j = 0;
             for (int i = 0; i < n; i++)
@@ -54,20 +54,20 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
                     {
                         pl.parent.removePlace(pl);
                     }*/
-                    if(pl.bestPoint.cost.Cost==Double.MaxValue)
+                    if(pl.bestPoint.cost==Double.MaxValue)
                     {
                         pl.parent.removePlace(pl);
                     }
 
-                    if ((best > pl.bestPoint.cost.Cost) && (pl.bestPoint.cost.Cost > 0))
+                    if ((best > pl.bestPoint.cost) && (pl.bestPoint.cost > 0))
                     {
-                        best = pl.bestPoint.cost.Cost;
+                        best = pl.bestPoint.cost;
                         bestCounter = 0;
                         bestCounterLong=0;
                     }
                     else
                     {
-                        if ( Math.Abs( pl.bestPoint.cost.Cost-best)<0.1)
+                        if ( Math.Abs( pl.bestPoint.cost-best)<0.1)
                         {
                             bestCounter++;
                             if (bestCounter>3)

@@ -27,7 +27,7 @@ namespace TestSystem.Plot
             this.points = points;
             foreach (IPoint point in points)
             {
-                _points.Add(new Point3D((float)point.x1, (float)point.x2, (float)point.cost.Cost));
+                _points.Add(new Point3D((float)point.x1, (float)point.x2, (float)point.cost));
                // _pointsF.Add(new PointF());
             }
             

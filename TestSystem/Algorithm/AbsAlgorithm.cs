@@ -91,7 +91,7 @@ namespace TestSystem.Algorithm
             calls++;
             IOutBlackBoxParam p=function.Calculate(x1, x2);
             Point point = new Point(x1, x2);
-            point.cost = p;
+            point.cost = p.Cost;
             this._points.Add(point);
             return p;
         }

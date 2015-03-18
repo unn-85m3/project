@@ -43,13 +43,13 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             if (!inThisPlace(point1))
             {
                 
-                point1.cost = new OutBlackBoxParam(Double.MaxValue);
+                point1.cost = Double.MaxValue;
             }
 
             if (!inThisPlace(point2))
             {
                 
-                point2.cost = new OutBlackBoxParam(Double.MaxValue);
+                point2.cost = Double.MaxValue;
             }
         }
         public void addPlace(IPlace place)
@@ -223,14 +223,14 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
                 try
                 {
 
-                    point.cost = calculate.Function(point.x1, point.x2);
+                    point.cost = calculate.Function(point.x1, point.x2).Cost;
 
 
                 }
                 catch
                 {
 
-                    point.cost = new OutBlackBoxParam(Double.MaxValue);
+                    point.cost = Double.MaxValue;
 
                 }
             }
@@ -280,7 +280,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
                     line = new Line(p3, p4);
                     IPoint pn = GetPoint(line, calculate);
 
-                    if(p.cost.Cost>pn.cost.Cost)
+                    if(p.cost>pn.cost)
                     {
                         p = pn;
                     }
@@ -418,7 +418,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             Calculate(left, calculate);
             Calculate(right, calculate);
             
-            if(left.cost.Cost<right.cost.Cost)
+            if(left.cost<right.cost)
             {
                 main=left;
             }else
@@ -427,7 +427,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
                    isLef = false;
             }
 
-            if (main.cost.Cost > point.cost.Cost)
+            if (main.cost > point.cost)
             {
                 return point;
             }
@@ -442,7 +442,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
                     left = line.GetPoint(llPoint);
                     if (left == null) return main;
                     Calculate(left,calculate);
-                    if (left.cost.Cost < main.cost.Cost)
+                    if (left.cost < main.cost)
                     {
                         main = left;
                     }
@@ -454,7 +454,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
                     right = line.GetPoint(rlPoint);
                     if (right == null) return main;
                     Calculate(right, calculate);
-                    if (right.cost.Cost < main.cost.Cost)
+                    if (right.cost < main.cost)
                     {
                         main = right;
                     }
@@ -487,7 +487,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         {
             if ((best != null) && (best.cost != null)&&(p!=null))
             {
-                if (best.cost.Cost > p.cost.Cost)
+                if (best.cost > p.cost)
                     this.best = p;
             }
             else

@@ -12,6 +12,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
         private Double _x;
         private Double _y;
         private IOutBlackBoxParam _cost=null;
+        private Double _cost_d=0;
         public Point()
         {
 
@@ -49,9 +50,21 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             }
         }
 
+        public Double cost
+        {
+            get
+            {
+                return _cost_d;
+            }
+            set
+            {
+                
+                _cost_d = value;
+            }
+        }
 
 
-        public IOutBlackBoxParam cost
+       /* public IOutBlackBoxParam cost
         {
             get
             {
@@ -59,8 +72,9 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             }
             set
             {
+                _cost_d = value.Cost;
                 this._cost = value;
             }
-        }
+        }*/
     }
 }
