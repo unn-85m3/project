@@ -16,5 +16,6 @@ namespace TestSystem.BlackBox
         /// <param name="x2"></param>
         /// <returns></returns>
         IOutBlackBoxParam Calculate(Double x1, Double x2);
+        String WhatTask();
     }
 }
