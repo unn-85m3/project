@@ -9,7 +9,7 @@ using TestSystem.test_system;
 
 namespace TestSystem.Drawer
 {
-    class Form_Draw: Form, IPlot, IEndCalculate
+    class Form_Draw: Form, IEndCalculate
     {
         private System.Windows.Forms.PictureBox pictureBox1;
 
@@ -53,21 +53,6 @@ namespace TestSystem.Drawer
         public Form_Draw()
         {
             InitializeComponent();
-        }
-
-        public void AddPoint(IPoint point)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeletePoint(IPoint point)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Clear()
-        {
-            throw new NotImplementedException();
         }
 
         public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
