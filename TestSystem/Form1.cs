@@ -33,8 +33,6 @@ namespace TestSystem
         {
             InitializeComponent();
             Create_TestSystem();
-
-           /// KSModels.DllBlackBoxCalculator Calc = new KSModels.DllBlackBoxCalculator("E:/GitHub/bbs/Models/11.1.КС.r1", null); // Абсолючный путь... пздц..... бред...
         }
 
 
@@ -262,33 +260,49 @@ namespace TestSystem
                         count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
 
 
-
-                        if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100 > 0)
+                        if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) == 0) dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Yellow;
+                        else
                         {
-                            dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Red;
+                            if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100 > 0)
+                            {
+                                dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Red;
+                            }
+                            else dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.GreenYellow;
                         }
-                        else dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Green;
 
-                        if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100 > 0)
+                        if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) == 0) dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Yellow;
+                        else
                         {
-                            dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Red;
+                            if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100 > 0)
+                            {
+                                dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Red;
+                            }
+                            else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.GreenYellow;
                         }
-                        else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Green;
 
                     }
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count * 100;
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count * 100;
-                if (time / Tasks.Count > 0)
-                {
-                    dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Red;
-                }
-                else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Green;
 
-                if (count / Tasks.Count > 0)
+                if (time / Tasks.Count == 0) dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Yellow;
+                else
                 {
-                    dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
+                    if (time / Tasks.Count > 0)
+                    {
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Red;
+                    }
+                    else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.GreenYellow;
                 }
-                else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Green;
+
+                if (count / Tasks.Count == 0) dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Yellow;
+                else
+                {
+                    if (count / Tasks.Count > 0)
+                    {
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
+                    }
+                    else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.GreenYellow;
+                }
             }
         }
 
@@ -309,7 +323,8 @@ namespace TestSystem
         {
             int row = e.RowIndex;
             PAGE = tabControl1.SelectedIndex;
-            Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
+            if(PAGE != 0 && row < dataGridViews[PAGE].RowCount - 2)
+                Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
 
         }
     }

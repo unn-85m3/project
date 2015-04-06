@@ -16,7 +16,11 @@ namespace TestSystem.Drawer
 
         public static void DrawGraphics(List<Tasks.ITaskPackage> Tasks, List<Algorithm.IAlgorithm> Alghoritms, int Alghoritm, int Task)
         {
-            System.Collections.Generic.Dictionary<string, System.Windows.Forms.Form> newMDIChild = new Dictionary<string,System.Windows.Forms.Form>();
+            List<TestSystem.Tasks.ITaskPackage> temp = new List<TestSystem.Tasks.ITaskPackage>();
+
+            TestSystem.test_system.TestSystem tst = new test_system.TestSystem(temp);
+
+            System.Collections.Generic.Dictionary<string, Form_Draw> newMDIChild = new Dictionary<string, Form_Draw>();
 
             string tmp = Alghoritms[Alghoritm].Name + " - " + Tasks[Task].Name;
 
@@ -27,20 +31,20 @@ namespace TestSystem.Drawer
             //    }
             if (!newMDIChild.ContainsKey(tmp))
             {
-                newMDIChild[tmp] = new System.Windows.Forms.Form();
+                newMDIChild[tmp] = new Form_Draw();
                 newMDIChild[tmp].Name = tmp;
                 newMDIChild[tmp].Text = tmp;
                 newMDIChild[tmp].ClientSize = new System.Drawing.Size(500, 400);
 
-                List<TestSystem.Tasks.ITaskPackage> temp = new List<TestSystem.Tasks.ITaskPackage>();
+                
                 temp.Add(Tasks[Task]);
-                TestSystem.test_system.TestSystem tst = new test_system.TestSystem(temp);
+                tst.SetListener(newMDIChild[tmp]);
                 tst.AddAlgorithm(Alghoritms[0]);
-                tst.Test();
+                //tst.Test();
 
-                tst.DelAlgorithm(tst.Length - 1);
+                //tst.DelAlgorithm(tst.Length - 1);
                 tst.AddAlgorithm(Alghoritms[Alghoritm]);
-                tst.Test();
+                
 
                 //newMDIChild[tmp].MdiParent = Form1.ActiveForm;
             }
@@ -51,6 +55,7 @@ namespace TestSystem.Drawer
 
                 
                 newMDIChild[tmp].Show();
+                tst.Test();
         }
     }
 }
