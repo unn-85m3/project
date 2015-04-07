@@ -7,7 +7,7 @@ namespace TestSystem.Plot
 {
     interface IToolFactory
     {
-        public IColoring CreateColoring();
-        public INormalize CreateNormalize();
+        IColoring CreateColoring();
+        INormalize CreateNormalize();
     }
 }
