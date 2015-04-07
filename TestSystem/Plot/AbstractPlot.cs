@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestSystem.BlackBox;
 using TestSystem.Drawer;
+using TestSystem.Tasks;
 
 namespace TestSystem.Plot
 {
     abstract class AbstractPlot:Form_Draw, IPlot
     {
-        protected List<IPoint> points;
-        public AbstractPlot(List<IPoint> points)
+        
+        public AbstractPlot(IFunction function, ITaskPackage task, IToolFactory factory)
         {
-            this.points = points;
+            
         }
 
 
