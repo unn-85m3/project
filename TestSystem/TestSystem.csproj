@@ -126,6 +126,7 @@
     <Compile Include="Plot\AbstractPlot.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Plot\Coloring.cs" />
     <Compile Include="Plot\IColoring.cs" />
     <Compile Include="Plot\INormalize.cs" />
     <Compile Include="Plot\IPlot.cs" />

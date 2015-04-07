@@ -7,6 +7,6 @@ namespace TestSystem.Plot
 {
     interface INormalize
     {
-        void Normalization(IPoint);
+        void Normalization(IPoint point);
     }
 }
