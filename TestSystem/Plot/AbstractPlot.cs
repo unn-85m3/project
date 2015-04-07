@@ -11,8 +11,8 @@ namespace TestSystem.Plot
 {
     abstract class AbstractPlot:Form_Draw, IPlot
     {
-        
-        public AbstractPlot(IFunction function, ITaskPackage task, IToolFactory factory)
+        IToolFactory factory;
+        public AbstractPlot(IFunction function, ITaskPackage task)
         {
             
         }
