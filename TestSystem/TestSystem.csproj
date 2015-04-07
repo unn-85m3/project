@@ -130,6 +130,8 @@
     <Compile Include="Plot\INormalize.cs" />
     <Compile Include="Plot\IPlot.cs" />
     <Compile Include="Plot\IToolFactory.cs" />
+    <Compile Include="Plot\Normalize.cs" />
+    <Compile Include="Plot\ToolFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Saver\ISaver.cs" />
