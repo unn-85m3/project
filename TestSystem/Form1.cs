@@ -11,7 +11,6 @@ using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
 using TestSystem.Plot;
-using TestSystem.BlackBox;
 using KSModels;
 
 using TestSystem.Algorithm.Diagonal_Algoritm;

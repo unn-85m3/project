@@ -14,7 +14,7 @@ namespace TestSystem.Algorithm
             public Double x2;
             public Double cost;
         };
-        private List<PointCoord> points;
+        private List<PointCoord> points_Coord;
         private Random rnd;
         private const int MAXPOINT = 4; //будет ненужно
         private int bestValInd;
@@ -28,7 +28,7 @@ namespace TestSystem.Algorithm
             this.name = "Комплексный алгоритм";
             this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
                 "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
-            points = new List<PointCoord>();
+            points_Coord = new List<PointCoord>();
             rnd = new Random(0);
             cg = new PointCoord();
         }
@@ -36,7 +36,7 @@ namespace TestSystem.Algorithm
         public override DataFormat.IOutBlackBoxParam Calculate() // алгоритм можно ускорить
         {
             double cost = double.MaxValue;
-            points.Clear();
+            points_Coord.Clear();
 
             SetNumberOfPoints();
 
@@ -62,12 +62,12 @@ namespace TestSystem.Algorithm
 
             for (int i = 0; i < h; i++)
             {
-                points.Add(RandPoint());
+                points_Coord.Add(RandPoint());
             }
 
             for (int i = 0; i < h / 4; i++)
             {
-                points.RemoveAt(FindMaxCostIndex());
+                points_Coord.RemoveAt(FindMaxCostIndex());
             }
 
             bestValInd = FindMinCostIndex();
@@ -76,12 +76,12 @@ namespace TestSystem.Algorithm
 
             for (int i = 0; i < h * 5; i++)
             {
-                points[worstValInd] = ReflectThePoint(points[worstValInd]);
+                points_Coord[worstValInd] = ReflectThePoint(points_Coord[worstValInd]);
                 worstValInd = FindMaxCostIndex();
                 FindCG();
             }
 
-            cost = points[FindMinCostIndex()].cost;
+            cost = points_Coord[FindMinCostIndex()].cost;
 
             return new DataFormat.OutBlackBoxParam(cost);
         }
@@ -154,7 +154,7 @@ namespace TestSystem.Algorithm
             int i = 0;
             cg.x1 = 0;
             cg.x2 = 0;
-            foreach (var x in points)
+            foreach (var x in points_Coord)
             {
                 cg.x1 += x.x1;
                 cg.x2 += x.x2;
@@ -169,11 +169,11 @@ namespace TestSystem.Algorithm
         {
             int ind = 0;
             double minCost = double.MaxValue;
-            for (int i = 0; i < points.Count; i++) //может заменить форичем?
+            for (int i = 0; i < points_Coord.Count; i++) //может заменить форичем?
             {
-                if (minCost > points[i].cost) //Не  получиться, индекс не узнаешь. @АГА.
+                if (minCost > points_Coord[i].cost) //Не  получиться, индекс не узнаешь. @АГА.
                 {
-                    minCost = points[i].cost;
+                    minCost = points_Coord[i].cost;
                     ind = i;
                 }
             }
@@ -184,11 +184,11 @@ namespace TestSystem.Algorithm
         {
             int ind = 0;
             double maxCost = 0;
-            for (int i = 0; i < points.Count; i++) //тут тоже
+            for (int i = 0; i < points_Coord.Count; i++) //тут тоже
             {
-                if (maxCost < points[i].cost)// тоже нет. @АГА.
+                if (maxCost < points_Coord[i].cost)// тоже нет. @АГА.
                 {
-                    maxCost = points[i].cost;
+                    maxCost = points_Coord[i].cost;
                     ind = i;
                 }
             }
