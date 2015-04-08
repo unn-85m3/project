@@ -26,9 +26,57 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 5;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 20;
 
+        protected class PlotPoint : IPoint
+        {
+            private double _x1;
+            private double _x2;
+            private double _cost;
 
+            public PlotPoint(double x1, double x2, double cost)
+            {
+                this._x1 = x1;
+                this._x2 = x2;
+                this._cost = cost;
+            }
+
+            public double x1
+            {
+                get
+                {
+                    return _x1;
+                }
+                set
+                {
+                    _x1 = value;
+                }
+            }
+
+            public double x2
+            {
+                get
+                {
+                    return _x2;
+                }
+                set
+                {
+                    _x2 = value;
+                }
+            }
+
+            public double cost
+            {
+                get
+                {
+                    return _cost;
+                }
+                set
+                {
+                    _cost = value;
+                }
+            }
+        }
 
         public Form1()
         {
@@ -112,9 +160,17 @@ namespace TestSystem
             Plot.Plot plot = new Plot.Plot(fn, Tasks[3].EnterParams);
             plot.Show();
             plot.StartCalculate();
+            plot.DoubleClick += plot_DoubleClick;
             
             //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
             //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));        
+        }
+
+        void plot_DoubleClick(object sender, EventArgs e)
+        {
+            IPoint point = new PlotPoint(42, 52, 0);
+            ((IPlot)sender).AddPoint(point);
+
         }
 
         /// <summary>

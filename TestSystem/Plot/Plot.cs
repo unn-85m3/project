@@ -144,6 +144,11 @@ namespace TestSystem.Plot
                 }
             }
         }
+
+        protected override IPoint CreatePoint(double x1, double x2, double cost)
+        {
+            return new PlotPoint(x1, x2, cost);
+        }
     }
 
 
