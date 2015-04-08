@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
+using TestSystem.Plot;
+using TestSystem.BlackBox;
 using KSModels;
 
 using TestSystem.Algorithm.Diagonal_Algoritm;
@@ -25,7 +27,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 2;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 20;
 
 
 
@@ -104,7 +106,14 @@ namespace TestSystem
             Algorithms.AddAlgorithm(Algs);
 
             InitTab();
-            Algorithms.Test();
+           // Algorithms.Test();
+
+            BlackBox.BlackBoxFunction fn=new BlackBox.BlackBoxFunction();
+            fn.Init(Tasks[6]);
+            Plot.Plot plot = new Plot.Plot(fn, Tasks[6].EnterParams);
+            plot.Show();
+            plot.StartCalculate();
+            
             //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
             //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));        
         }
@@ -317,6 +326,7 @@ namespace TestSystem
             Init_Table(alg, task, rez, time);
             if (CompleateTask[0] == Tasks.Count)
                 Init_Table();
+         
         }
 
         private void dataGridViews_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
