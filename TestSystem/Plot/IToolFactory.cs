@@ -8,7 +8,7 @@ namespace TestSystem.Plot
 {
     interface IToolFactory
     {
-        public IColoring CreateColoring(Form form);
-        public INormalize CreateNormalize(Form form);
+        IColoring CreateColoring(Form form);
+        INormalize CreateNormalize(Form form);
     }
 }
