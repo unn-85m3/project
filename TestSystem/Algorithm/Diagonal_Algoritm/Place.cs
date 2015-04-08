@@ -379,12 +379,12 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
         protected IPoint GetPoint(ILine line, ICalculateFunction calculate)
         {
-            if (line.PointStart.cost == null)
+            if (line.PointStart.cost == null) //обрати внимание: Предупреждение	8	Результатом выражения всегда является "false", так как значение типа "double" не может быть пустым значением типа "double?"
             {
                 Calculate(line.PointStart, calculate);
             }
 
-            if (line.PointEnd.cost == null)
+            if (line.PointEnd.cost == null) //обрати внимание: Предупреждение	8	Результатом выражения всегда является "false", так как значение типа "double" не может быть пустым значением типа "double?"
             {
                 Calculate(line.PointStart, calculate);
             }
@@ -485,7 +485,7 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
 
         private void setBest(IPoint p)
         {
-            if ((best != null) && (best.cost != null)&&(p!=null))
+            if ((best != null) && (best.cost != null) && (p != null)) //обрати внимание: Предупреждение	8	Результатом выражения всегда является "true", так как значение типа "double" не может быть пустым значением типа "double?"
             {
                 if (best.cost > p.cost)
                     this.best = p;
