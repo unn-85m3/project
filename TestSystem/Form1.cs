@@ -27,7 +27,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 2;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 5;
 
 
 
@@ -109,8 +109,8 @@ namespace TestSystem
            // Algorithms.Test();
 
             BlackBox.BlackBoxFunction fn=new BlackBox.BlackBoxFunction();
-            fn.Init(Tasks[1]);
-            Plot.Plot plot = new Plot.Plot(fn, Tasks[1].EnterParams);
+            fn.Init(Tasks[3]);
+            Plot.Plot plot = new Plot.Plot(fn, Tasks[3].EnterParams);
             plot.Show();
             plot.StartCalculate();
             
