@@ -131,6 +131,7 @@
     <Compile Include="Plot\Plot.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Plot\PlotPoint.cs" />
     <Compile Include="Plot\ToolFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

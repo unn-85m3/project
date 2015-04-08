@@ -49,6 +49,12 @@ namespace TestSystem.Plot
                     g.FillEllipse(Brushes.Red, (float)point.x1, (float)point.x2, (float)5, (float)5);
                 }
             }
+
+
+            public void SetForm_Draw(Drawer.Form_Draw frmd)
+            {
+                throw new NotImplementedException();
+            }
         }
 
     }

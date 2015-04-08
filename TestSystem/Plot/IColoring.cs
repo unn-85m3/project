@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TestSystem.Drawer;
 
 namespace TestSystem.Plot
 {
@@ -11,5 +12,7 @@ namespace TestSystem.Plot
          * передаётся 5 точек, 5я - центральная
          **/
         void ColoringSurface(List<IPoint> points);
+
+        void SetForm_Draw(Form_Draw frmd);
     }
 }

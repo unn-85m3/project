@@ -16,9 +16,9 @@ namespace TestSystem.Drawer
 
         public static void DrawGraphics(List<Tasks.ITaskPackage> Tasks, List<Algorithm.IAlgorithm> Alghoritms, int Alghoritm, int Task)
         {
-            List<TestSystem.Tasks.ITaskPackage> temp = new List<TestSystem.Tasks.ITaskPackage>();
+            //List<TestSystem.Tasks.ITaskPackage> temp = new List<TestSystem.Tasks.ITaskPackage>();
 
-            TestSystem.test_system.TestSystem tst = new test_system.TestSystem(temp);
+            //TestSystem.test_system.TestSystem tst = new test_system.TestSystem(temp);
 
             System.Collections.Generic.Dictionary<string, Form_Draw> newMDIChild = new Dictionary<string, Form_Draw>();
 
@@ -35,15 +35,15 @@ namespace TestSystem.Drawer
                 newMDIChild[tmp].Name = tmp;
                 newMDIChild[tmp].Text = tmp;
                 newMDIChild[tmp].ClientSize = new System.Drawing.Size(500, 400);
-
+                newMDIChild[tmp].UpdateComponent();
                 
-                temp.Add(Tasks[Task]);
-                tst.SetListener(newMDIChild[tmp]);
-                tst.AddAlgorithm(Alghoritms[0]);
+                //temp.Add(Tasks[Task]);
+                //tst.SetListener(newMDIChild[tmp]);
+                //tst.AddAlgorithm(Alghoritms[0]);
                 //tst.Test();
 
                 //tst.DelAlgorithm(tst.Length - 1);
-                tst.AddAlgorithm(Alghoritms[Alghoritm]);
+                //tst.AddAlgorithm(Alghoritms[Alghoritm]);
                 
 
                 //newMDIChild[tmp].MdiParent = Form1.ActiveForm;
@@ -55,7 +55,9 @@ namespace TestSystem.Drawer
 
                 
                 newMDIChild[tmp].Show();
-                tst.Test();
+                newMDIChild[tmp].draw();
+                
+                //tst.Test();
         }
     }
 }
