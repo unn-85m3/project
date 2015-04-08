@@ -117,7 +117,7 @@ namespace TestSystem.Plot
             // 
             // AbstractPlot
             // 
-            this.ClientSize = new System.Drawing.Size(896, 465);
+            this.ClientSize = new System.Drawing.Size(384, 361);
             this.Name = "AbstractPlot";
             this.ResumeLayout(false);
 
