@@ -13,7 +13,7 @@ namespace TestSystem.Drawer
     class Form_Draw: Form//, IEndCalculate
     {   
         public static Bitmap image;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        protected System.Windows.Forms.PictureBox pictureBox1;
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -95,18 +95,23 @@ namespace TestSystem.Drawer
             c = new List<IPoint>();
             p = new PlotPoint(350, 20, 255);
             c.Add(p);
-            p = new PlotPoint(350, 350, 255 * 255);
+            p = new PlotPoint(360, 130, 255 * 255);
             c.Add(p);
             clr.ColoringSurface(c);
 
             c = new List<IPoint>();
             p = new PlotPoint(150, 20, 255);
             c.Add(p);
-            p = new PlotPoint(200, 20, 255 * 255);
+            p = new PlotPoint(180, 20, 255 * 255);
             c.Add(p);
-            p = new PlotPoint(150, 150, 0);
-            c.Add(p); 
-            p = new PlotPoint(200, 150, 255);
+            p = new PlotPoint(150, 120, 0);
+            c.Add(p);
+            p = new PlotPoint(180, 120, 255);
+            c.Add(p);
+            clr.ColoringSurface(c);
+
+            c = new List<IPoint>();
+            p = new PlotPoint(300, 20, 0);
             c.Add(p);
             clr.ColoringSurface(c);
         }

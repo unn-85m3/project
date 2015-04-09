@@ -47,6 +47,10 @@ namespace TestSystem.Plot
             {
                 LineRun(0);
             }
+            else if (points.Count == 1)
+            {
+                PointRun(0);
+            }
             //LinearGradientBrush linGrBrush = new LinearGradientBrush(new Point((int)points[0].x1, (int)points[0].x2), new Point((int)points[1].x1, (int)points[1].x2), Color_min, Color_max);
 
             //    frmd.GetGraphics().FillRectangle(linGrBrush, (int)points[0].x1, (int)points[0].x2, (int)Math.Abs(points[0].x1 - points[1].x1), (int)Math.Abs(points[0].x2 - points[1].x2));
@@ -60,6 +64,11 @@ namespace TestSystem.Plot
         //    if 
         //}
 
+        private void PointRun(int start)
+        {   
+            frmd.SetImagePoint((int)p[start].x1, (int)p[start].x2, CostToColor(p[start].cost));
+        }
+
         private void LineRun(int start)
         {
             int x1_min = (int)Math.Min(p[start + 0].x1, p[start + 1].x1);
@@ -69,6 +78,7 @@ namespace TestSystem.Plot
 
             for (int y = y1_min; y <= y1_max; y++)
                 for (int x = x1_min; x <= x1_max; x++)
+                    if (InLine(x, y, 0))
                 frmd.SetImagePoint(x, y, Color.FromArgb((int)ShadeBackgroundPixelLine(x, y)));
         }
 
@@ -84,6 +94,13 @@ namespace TestSystem.Plot
                 for (int x = x1_min; x <= x1_max; x++)
                     if (InTreangle(x, y, start))
                         frmd.SetImagePoint(x, y, Color.FromArgb((int)ShadeBackgroundPixel(x, y)));
+        }
+
+        private bool InLine(int x, int y, int start)
+        {
+            if (Math.Abs(Math.Sqrt(Math.Pow((p[start + 0].x1 - x), 2) + Math.Pow((p[start + 0].x2 - y), 2)) + Math.Sqrt(Math.Pow((p[start + 1].x1 - x), 2) + Math.Pow((p[start + 1].x2 - y), 2)) - Math.Sqrt(Math.Pow((p[start + 1].x1 - p[start + 0].x1), 2) + Math.Pow((p[start + 1].x2 - p[start + 0].x2), 2))) < 0.02)
+                return true;
+            else return false;
         }
 
         private bool InTreangle(int x, int y, int start)
@@ -116,12 +133,12 @@ namespace TestSystem.Plot
             {
                 if (y_max == y_min)
                 {
-                    l1 = ((x - x_min) + (y - y_min)) / 2;
+                    l1 = ((x - x_min) + (y - y_min));
                     l2 = 1 - l1;
                 }
                 else
                 {
-                    l1 = ((x - x_min) + (y - y_min) / (y_max - y_min)) / 2;
+                    l1 = ((x - x_min) + (double)(y - y_min) / (y_max - y_min));
                     l2 = 1 - l1;
                 }
             }
@@ -129,12 +146,12 @@ namespace TestSystem.Plot
             {
                 if (y_max == y_min)
                 {
-                    l1 = ((x - x_min) / (x_max - x_min) + (y - y_min)) / 2;
+                    l1 = ((double)(x - x_min) / (x_max - x_min) + (y - y_min));
                     l2 = 1 - l1;
                 }
                 else
                 {
-                    l1 = ((x - x_min) / (x_max - x_min) + (y - y_min) / (y_max - y_min)) / 2;
+                    l1 = ((double)(x - x_min) / (x_max - x_min) + (double)(y - y_min) / (y_max - y_min)) / 2;
                     l2 = 1 - l1;
                 }
             }
