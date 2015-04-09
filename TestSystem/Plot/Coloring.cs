@@ -12,6 +12,8 @@ namespace TestSystem.Plot
     {
         Form_Draw frmd;
         List<IPoint> p;
+        double mult = 200;
+
 
         public Coloring() { }
 
@@ -156,16 +158,17 @@ namespace TestSystem.Plot
                 }
             }
 
-            if ((int)p[0].cost > 256 * 256 * 256)
+            c1 = (int)(p[0].cost * mult);
+            if (c1 > 256 * 256 * 256)
                 c1 = 256 * 256 * 256 - 1;
-            else if ((int)p[0].cost < 0)
+            else if (c1 < 0)
                 c1 = 0;
-            else c1 = (int)p[0].cost;
-            if ((int)p[1].cost > 256 * 256 * 256)
+
+            c2 = (int)(p[1].cost * mult);
+            if (c2 > 256 * 256 * 256)
                 c2 = 256 * 256 * 256 - 1;
-            if ((int)p[1].cost < 0)
+            else if (c2 < 0)
                 c2 = 0;
-            else c2 = (int)p[1].cost;
 
             pixelValue = (UInt32)0xFF000000 |
                     ((UInt32)(l1 * ((c1 & 0x00FF0000) >> 16) + l2 * ((c2 & 0x00FF0000) >> 16)) << 16) |
@@ -190,21 +193,24 @@ namespace TestSystem.Plot
             if (l1 >= 0 && l1 <= 1 && l2 >= 0 && l2 <= 1 && l3 >= 0 && l3 <= 1)
             {
                 int c1, c2, c3;
-                if ((int)p[0].cost > 256 * 256 * 256)
+
+                c1 = (int)(p[0].cost * mult);
+                if (c1 > 256 * 256 * 256)
                     c1 = 256 * 256 * 256 - 1;
-                else if ((int)p[0].cost < 0)
+                else if (c1 < 0)
                     c1 = 0;
-                else c1 = (int)p[0].cost;
-                if ((int)p[1].cost > 256 * 256 * 256)
+
+                c2 = (int)(p[1].cost * mult);
+                if (c2 > 256 * 256 * 256)
                     c2 = 256 * 256 * 256 - 1;
-                if ((int)p[1].cost < 0)
+                else if (c2 < 0)
                     c2 = 0;
-                else c2 = (int)p[1].cost;
-                if ((int)p[2].cost > 256 * 256 * 256)
+
+                c3 = (int)(p[2].cost * mult);
+                if (c3 > 256 * 256 * 256)
                     c3 = 256 * 256 * 256 - 1;
-                if ((int)p[2].cost < 0)
+                else if (c3 < 0)
                     c3 = 0;
-                else c3 = (int)p[2].cost;
 
                 pixelValue = (UInt32)0xFF000000 |
                     ((UInt32)(l1 * ((c1 & 0x00FF0000) >> 16) + l2 * ((c2 & 0x00FF0000) >> 16) + l3 * ((c3 & 0x00FF0000) >> 16)) << 16) |
@@ -222,6 +228,19 @@ namespace TestSystem.Plot
                 return Color.FromArgb(0, 0, 0);
             else
                 return Color.FromArgb(255, 255, 255);
+        }
+
+
+        public double MultColor
+        {
+            get
+            {
+                return mult;
+            }
+            set
+            {
+                mult = value;
+            }
         }
     }
 }

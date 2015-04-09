@@ -16,11 +16,13 @@ namespace TestSystem.Drawer
 
         public static void DrawGraphics(List<Tasks.ITaskPackage> Tasks, List<Algorithm.IAlgorithm> Alghoritms, int Alghoritm, int Task)
         {
+            BlackBox.BlackBoxFunction fn = new BlackBox.BlackBoxFunction();
+            fn.Init(Tasks[Task]);
             //List<TestSystem.Tasks.ITaskPackage> temp = new List<TestSystem.Tasks.ITaskPackage>();
 
             //TestSystem.test_system.TestSystem tst = new test_system.TestSystem(temp);
 
-            System.Collections.Generic.Dictionary<string, Form_Draw> newMDIChild = new Dictionary<string, Form_Draw>();
+            System.Collections.Generic.Dictionary<string, Plot.Plot> newMDIChild = new Dictionary<string, Plot.Plot>();
 
             string tmp = Alghoritms[Alghoritm].Name + " - " + Tasks[Task].Name;
 
@@ -31,7 +33,7 @@ namespace TestSystem.Drawer
             //    }
             if (!newMDIChild.ContainsKey(tmp))
             {
-                newMDIChild[tmp] = new Form_Draw();
+                newMDIChild[tmp] = new Plot.Plot(fn, Tasks[Task].EnterParams);
                 newMDIChild[tmp].Name = tmp;
                 newMDIChild[tmp].Text = tmp;
                 newMDIChild[tmp].ClientSize = new System.Drawing.Size(500, 400);
@@ -55,7 +57,7 @@ namespace TestSystem.Drawer
 
                 
                 newMDIChild[tmp].Show();
-                newMDIChild[tmp].draw();
+                newMDIChild[tmp].StartCalculate();
                 
                 //tst.Test();
         }

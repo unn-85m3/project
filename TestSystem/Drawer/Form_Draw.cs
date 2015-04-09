@@ -71,8 +71,11 @@ namespace TestSystem.Drawer
 
         public void SetImagePoint(int x, int y, Color clr)
         {
-            image.SetPixel(x, y, clr);
-            pictureBox1.Image = image;
+            if (x < image.Size.Width && y < image.Size.Height && x > 0 && y > 0)
+            {
+                image.SetPixel(x, y, clr);
+                pictureBox1.Image = image;
+            }
         }
 
         public Form_Draw()

@@ -24,9 +24,6 @@ namespace TestSystem.Plot
         Boolean isNormal = false;
         List<Control> pointsObjs;
 
-        public static Bitmap image;
-        protected System.Windows.Forms.PictureBox pictureBox1;
-
         /// <summary>
         /// Требуется переменная конструктора.
         /// </summary>
@@ -47,59 +44,30 @@ namespace TestSystem.Plot
 
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-
-            this.Controls.Add(this.pictureBox1);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-
-            image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-
+            this.pictureBox1.Size = new System.Drawing.Size(769, 424);
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // AbstractPlot
             // 
-            this.ClientSize = new System.Drawing.Size(384, 361);
+            this.ClientSize = new System.Drawing.Size(769, 422);
             this.Name = "AbstractPlot";
+            this.Click += new System.EventHandler(this.AbstractPlot_Click);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+
         }
 
-        public void UpdateComponent()
-        {
-            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            pictureBox1.Image = image;
-        }
-
-        public void SetImage(Image img)
-        {
-            pictureBox1.Image = img;
-        }
-
-        public void SetImagePoint(int x, int y, Color clr)
-        {
-            image.SetPixel(x, y, clr);
-            pictureBox1.Image = image;
-        }
-
-        public AbstractPlot()
+        public AbstractPlot():base()
         {
             InitializeComponent();
         }
 
-        public AbstractPlot(IFunction function, IEnterBlackBoxParam param)
+        public AbstractPlot(IFunction function, IEnterBlackBoxParam param):base()
         {
             userPoints = new List<IPoint>();
             this.function = function;
@@ -111,7 +79,19 @@ namespace TestSystem.Plot
             InitializeComponent();
         }
 
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ClickToForm();
+        }
+
         void AbstractPlot_Click(object sender, EventArgs e)
+        {
+            ClickToForm();
+        }
+
+        protected void ClickToForm()
         {
             if (points != null)
             {
@@ -227,10 +207,7 @@ namespace TestSystem.Plot
             coloring = factory.CreateColoring(this);
             normalize = factory.CreateNormalize(this);
             points = Calculate(function, param);
-            
-            
-            
-            
+            //ClickToForm();
         }
 
         protected abstract List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters);

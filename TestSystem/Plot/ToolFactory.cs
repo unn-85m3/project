@@ -36,6 +36,8 @@ namespace TestSystem.Plot
         protected class TempColoring : IColoring
         {
             Form form;
+            double mult = 1;
+
             public TempColoring(Form form)
             {
                 this.form = form;
@@ -65,6 +67,18 @@ namespace TestSystem.Plot
             public void SetForm_Draw(Drawer.Form_Draw frmd)
             {
                 throw new NotImplementedException();
+            }
+
+            public double MultColor
+            {
+                get
+                {
+                    return mult;
+                }
+                set
+                {
+                    mult = value;
+                }
             }
         }
 
