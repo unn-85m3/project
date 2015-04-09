@@ -12,7 +12,7 @@ using TestSystem.Tasks;
 
 namespace TestSystem.Plot
 {
-    abstract class AbstractPlot:Form, IPlot
+    abstract class AbstractPlot:Form_Draw, IPlot
     {
         IToolFactory factory;
         protected List<IPoint> userPoints;

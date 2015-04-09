@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TestSystem.Drawer;
 
 namespace TestSystem.Plot
 {
@@ -21,9 +22,9 @@ namespace TestSystem.Plot
             return FACTORY;
         }
 
-        public IColoring CreateColoring(System.Windows.Forms.Form form)
+        public IColoring CreateColoring(Form_Draw form)
         {
-            return new TempColoring(form);
+            return new Coloring(form);
         }
 
         public INormalize CreateNormalize(System.Windows.Forms.Form form)
