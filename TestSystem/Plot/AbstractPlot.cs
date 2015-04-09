@@ -14,6 +14,7 @@ namespace TestSystem.Plot
 {
     abstract class AbstractPlot:Form_Draw, IPlot
     {
+        private static Bitmap image;
         IToolFactory factory;
         protected List<IPoint> userPoints;
         List<List<IPoint>> points;
@@ -60,6 +61,9 @@ namespace TestSystem.Plot
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
+            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
+            image = new Bitmap(1000, 1000);
+            pictureBox1.Image = image;
         }
 
         public AbstractPlot():base()
@@ -93,6 +97,7 @@ namespace TestSystem.Plot
 
         protected void ClickToForm()
         {
+            this.ClearBitmap();
             if (points != null)
             {
                 int maxI = points.Count;

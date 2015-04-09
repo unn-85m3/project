@@ -11,8 +11,8 @@ using TestSystem.test_system;
 namespace TestSystem.Drawer
 {
     class Form_Draw: Form//, IEndCalculate
-    {   
-        public static Bitmap image;
+    {
+        private static Bitmap image;
         protected System.Windows.Forms.PictureBox pictureBox1;
 
         /// <summary>
@@ -53,15 +53,18 @@ namespace TestSystem.Drawer
             this.Controls.Add(this.pictureBox1);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-
-            image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
         }
 
         public void UpdateComponent()
         {
             this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            image = new Bitmap(1000, 1000);
             pictureBox1.Image = image;
+        }
+
+        public void ClearBitmap()
+        {
+            image = new Bitmap(1000, 1000);
         }
 
         public void SetImage(Image img)
@@ -81,6 +84,8 @@ namespace TestSystem.Drawer
         public Form_Draw()
         {
             InitializeComponent();
+
+            image = new Bitmap(1000, 1000);
         }
 
         public void draw()

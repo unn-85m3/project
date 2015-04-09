@@ -26,12 +26,12 @@ namespace TestSystem.Plot
         public void SetForm_Draw(Form_Draw frmd)
         {
             this.frmd = frmd;
+            frmd.ClearBitmap();
         }
 
         public void ColoringSurface(List<IPoint> points)
         {
             p = points;
-
             if (points.Count > 2)
             {
                 if (points.Count == 3)
