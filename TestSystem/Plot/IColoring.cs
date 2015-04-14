@@ -14,5 +14,7 @@ namespace TestSystem.Plot
         void ColoringSurface(List<IPoint> points);
 
         void SetForm_Draw(Form_Draw frmd);
+
+        double MultColor { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace TestSystem.Plot
 {
     abstract class AbstractPlot:Form_Draw, IPlot
     {
+        private static Bitmap image;
         IToolFactory factory;
         protected List<IPoint> userPoints;
         List<List<IPoint>> points;
@@ -23,7 +24,54 @@ namespace TestSystem.Plot
         INormalize normalize;
         Boolean isNormal = false;
         List<Control> pointsObjs;
-        public AbstractPlot(IFunction function, IEnterBlackBoxParam param)
+
+        /// <summary>
+        /// Требуется переменная конструктора.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Освободить все используемые ресурсы.
+        /// </summary>
+        /// <param name="disposing">истинно, если управляемый ресурс должен быть удален; иначе ложно.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        private void InitializeComponent()
+        {
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Size = new System.Drawing.Size(769, 424);
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // AbstractPlot
+            // 
+            this.ClientSize = new System.Drawing.Size(769, 422);
+            this.Name = "AbstractPlot";
+            this.Click += new System.EventHandler(this.AbstractPlot_Click);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+
+            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
+            image = new Bitmap(1000, 1000);
+            pictureBox1.Image = image;
+        }
+
+        public AbstractPlot():base()
+        {
+            InitializeComponent();
+        }
+
+        public AbstractPlot(IFunction function, IEnterBlackBoxParam param):base()
         {
             userPoints = new List<IPoint>();
             this.function = function;
@@ -32,10 +80,24 @@ namespace TestSystem.Plot
             this.Click += AbstractPlot_Click;
             pointsObjs = new List<Control>();
             //this.Paint += AbstractPlot_Paint;
+            InitializeComponent();
+        }
+
+
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            ClickToForm();
         }
 
         void AbstractPlot_Click(object sender, EventArgs e)
         {
+            ClickToForm();
+        }
+
+        protected void ClickToForm()
+        {
+            this.ClearBitmap();
             if (points != null)
             {
                 int maxI = points.Count;
@@ -150,10 +212,7 @@ namespace TestSystem.Plot
             coloring = factory.CreateColoring(this);
             normalize = factory.CreateNormalize(this);
             points = Calculate(function, param);
-            
-            
-            
-            
+            //ClickToForm();
         }
 
         protected abstract List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters);
@@ -194,18 +253,6 @@ namespace TestSystem.Plot
         public void Clear()
         {
             userPoints.Clear();
-        }
-
-        private void InitializeComponent()
-        {
-            this.SuspendLayout();
-            // 
-            // AbstractPlot
-            // 
-            this.ClientSize = new System.Drawing.Size(384, 361);
-            this.Name = "AbstractPlot";
-            this.ResumeLayout(false);
-
         }
     }
 }

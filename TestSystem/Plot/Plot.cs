@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using TestSystem.BlackBox;
@@ -10,11 +11,16 @@ namespace TestSystem.Plot
 {
     class Plot:AbstractPlot
     {
+        private static Bitmap image;
         List<List<IPoint>> points;
         double h = 1;
+
         public Plot(IFunction function, IEnterBlackBoxParam task)
             : base(function, task)
         {
+            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
+            image = new Bitmap(1000, 1000);
+            pictureBox1.Image = image;
             points = new List<List<IPoint>>();
         }
 

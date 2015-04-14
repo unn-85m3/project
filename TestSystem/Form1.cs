@@ -156,8 +156,8 @@ namespace TestSystem
             //Algorithms.Test();
 
             BlackBox.BlackBoxFunction fn = new BlackBox.BlackBoxFunction();
-            fn.Init(Tasks[7]);
-            Plot.Plot plot = new Plot.Plot(fn, Tasks[7].EnterParams);
+            fn.Init(Tasks[6]);
+            Plot.Plot plot = new Plot.Plot(fn, Tasks[6].EnterParams);
             plot.Show();
             plot.StartCalculate();
             plot.DoubleClick += plot_DoubleClick;

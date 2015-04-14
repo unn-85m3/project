@@ -11,9 +11,9 @@ using TestSystem.test_system;
 namespace TestSystem.Drawer
 {
     class Form_Draw: Form//, IEndCalculate
-    {   
-        public static Bitmap image;
-        private System.Windows.Forms.PictureBox pictureBox1;
+    {
+        private static Bitmap image;
+        protected System.Windows.Forms.PictureBox pictureBox1;
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -53,15 +53,18 @@ namespace TestSystem.Drawer
             this.Controls.Add(this.pictureBox1);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
-
-            image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
         }
 
         public void UpdateComponent()
         {
             this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            image = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            image = new Bitmap(1000, 1000);
             pictureBox1.Image = image;
+        }
+
+        public void ClearBitmap()
+        {
+            image = new Bitmap(1000, 1000);
         }
 
         public void SetImage(Image img)
@@ -71,13 +74,18 @@ namespace TestSystem.Drawer
 
         public void SetImagePoint(int x, int y, Color clr)
         {
-            image.SetPixel(x, y, clr);
-            pictureBox1.Image = image;
+            if (x < image.Size.Width && y < image.Size.Height && x > 0 && y > 0)
+            {
+                image.SetPixel(x, y, clr);
+                pictureBox1.Image = image;
+            }
         }
 
         public Form_Draw()
         {
             InitializeComponent();
+
+            image = new Bitmap(1000, 1000);
         }
 
         public void draw()
@@ -95,18 +103,23 @@ namespace TestSystem.Drawer
             c = new List<IPoint>();
             p = new PlotPoint(350, 20, 255);
             c.Add(p);
-            p = new PlotPoint(350, 350, 255 * 255);
+            p = new PlotPoint(360, 130, 255 * 255);
             c.Add(p);
             clr.ColoringSurface(c);
 
             c = new List<IPoint>();
             p = new PlotPoint(150, 20, 255);
             c.Add(p);
-            p = new PlotPoint(200, 20, 255 * 255);
+            p = new PlotPoint(180, 20, 255 * 255);
             c.Add(p);
-            p = new PlotPoint(150, 150, 0);
-            c.Add(p); 
-            p = new PlotPoint(200, 150, 255);
+            p = new PlotPoint(150, 120, 0);
+            c.Add(p);
+            p = new PlotPoint(180, 120, 255);
+            c.Add(p);
+            clr.ColoringSurface(c);
+
+            c = new List<IPoint>();
+            p = new PlotPoint(300, 20, 0);
             c.Add(p);
             clr.ColoringSurface(c);
         }
