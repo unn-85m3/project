@@ -16,7 +16,7 @@ namespace TestSystem.Plot
         Double mX1=0;
         Double mX2=0;
 
-        public Normalize(Form form,Double koef=20)
+        public Normalize(Form form,Double koef=10)
         {
             this.form = form;
             mX1 = mX2 = koef;
@@ -29,12 +29,18 @@ namespace TestSystem.Plot
                 X1 = point.x1 * (-1);
                 X2 = point.x2 * (-1);
             }
-            point.x1 += X1;
-            point.x2 += X2;
+            else
+            {
+               
+            }
+
             point.x1 *= mX1;
             point.x2 *= mX2;
-            point.x1+=100;
-            point.x2 +=100;
+             /* point.x1 += X1;
+              point.x2 += X2;
+             
+              point.x1+=100;
+              point.x2 +=100;*/
             N++;
         }
     }

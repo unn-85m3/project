@@ -26,7 +26,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 15;
+        private int MIN_NUMBER_TASK = 4, MAX_NUMBER_TASK = 10;
 
         protected class PlotPoint : IPoint
         {
@@ -153,14 +153,14 @@ namespace TestSystem
             Algorithms.AddAlgorithm(Algs);
 
             InitTab();
-            //Algorithms.Test();
+            Algorithms.Test();
 
-            BlackBox.BlackBoxFunction fn = new BlackBox.BlackBoxFunction();
-            fn.Init(Tasks[6]);
-            Plot.Plot plot = new Plot.Plot(fn, Tasks[6].EnterParams);
-            plot.Show();
-            plot.StartCalculate();
-            plot.DoubleClick += plot_DoubleClick;
+            //BlackBox.BlackBoxFunction fn = new BlackBox.BlackBoxFunction();
+            //fn.Init(Tasks[6]);
+            //Plot.Plot plot = new Plot.Plot(fn, Tasks[6].EnterParams);
+            //plot.Show();
+            //plot.StartCalculate();
+            //plot.DoubleClick += plot_DoubleClick;
             
             //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
             //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));        

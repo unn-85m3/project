@@ -45,25 +45,24 @@ namespace TestSystem.Plot
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbstractPlot));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Size = new System.Drawing.Size(769, 424);
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // AbstractPlot
             // 
             this.ClientSize = new System.Drawing.Size(769, 422);
             this.Name = "AbstractPlot";
+            this.Shown += new System.EventHandler(this.AbstractPlot_Shown);
             this.Click += new System.EventHandler(this.AbstractPlot_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
-            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            image = new Bitmap(1000, 1000);
-            pictureBox1.Image = image;
         }
 
         public AbstractPlot():base()
@@ -87,12 +86,12 @@ namespace TestSystem.Plot
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            ClickToForm();
+            //ClickToForm();
         }
 
         void AbstractPlot_Click(object sender, EventArgs e)
         {
-            ClickToForm();
+            //ClickToForm();
         }
 
         protected void ClickToForm()
@@ -253,6 +252,11 @@ namespace TestSystem.Plot
         public void Clear()
         {
             userPoints.Clear();
+        }
+
+        private void AbstractPlot_Shown(object sender, EventArgs e)
+        {
+            ClickToForm();
         }
     }
 }
