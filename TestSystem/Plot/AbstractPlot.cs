@@ -12,7 +12,7 @@ using TestSystem.Tasks;
 
 namespace TestSystem.Plot
 {
-    abstract class AbstractPlot:Form_Draw, IPlot
+    class AbstractPlot:Form_Draw, IPlot
     {
         private static Bitmap image;
         IToolFactory factory;
@@ -52,16 +52,19 @@ namespace TestSystem.Plot
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(3, 341);
+            this.pictureBox1.Size = new System.Drawing.Size(1000, 1000);
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // AbstractPlot
             // 
-            this.ClientSize = new System.Drawing.Size(769, 422);
+            this.ClientSize = new System.Drawing.Size(600, 450);
             this.Name = "AbstractPlot";
             this.Shown += new System.EventHandler(this.AbstractPlot_Shown);
             this.Click += new System.EventHandler(this.AbstractPlot_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -72,6 +75,7 @@ namespace TestSystem.Plot
 
         public AbstractPlot(IFunction function, IEnterBlackBoxParam param):base()
         {
+            DrawLegeng();
             userPoints = new List<IPoint>();
             this.function = function;
             this.param = param;
@@ -214,8 +218,8 @@ namespace TestSystem.Plot
             //ClickToForm();
         }
 
-        protected abstract List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters);
-        protected abstract IPoint CreatePoint(Double x1, Double x2, Double cost);
+        protected virtual List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters) { throw new NotImplementedException(); }
+        protected virtual IPoint CreatePoint(Double x1, Double x2, Double cost) { throw new NotImplementedException(); }
 
         public void AddPoint(IPoint value)
         {

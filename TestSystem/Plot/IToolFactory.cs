@@ -10,6 +10,6 @@ namespace TestSystem.Plot
     interface IToolFactory
     {
         IColoring CreateColoring(Form_Draw form);
-        INormalize CreateNormalize(Form form);
+        INormalize CreateNormalize(Form_Draw form);
     }
 }

@@ -15,17 +15,23 @@ namespace TestSystem.Plot
         double mult = 1000;
 
 
-        public Coloring() { }
+        public Coloring() 
+        {
+            if (frmd != null)
+                frmd.Mult_color(mult);
+        }
 
 
         public Coloring(Form_Draw frmd)
         {
             this.frmd = frmd;
+            frmd.Mult_color(mult);
         }
 
         public void SetForm_Draw(Form_Draw frmd)
         {
             this.frmd = frmd;
+            frmd.Mult_color(mult);
             frmd.ClearBitmap();
         }
 

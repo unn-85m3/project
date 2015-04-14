@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using TestSystem.Drawer;
 
 namespace TestSystem.Plot
 {
@@ -16,10 +17,11 @@ namespace TestSystem.Plot
         Double mX1=0;
         Double mX2=0;
 
-        public Normalize(Form form,Double koef=10)
+        public Normalize(Form_Draw form, Double koef = 10)
         {
             this.form = form;
             mX1 = mX2 = koef;
+            form.Zoom_draw((int)koef);
         }
 
         public void Normalization(IPoint point)

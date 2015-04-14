@@ -27,7 +27,7 @@ namespace TestSystem.Plot
             return new Coloring(form);
         }
 
-        public INormalize CreateNormalize(System.Windows.Forms.Form form)
+        public INormalize CreateNormalize(Form_Draw form)
         {
             return new Normalize(form);
         }

@@ -11,15 +11,16 @@ namespace TestSystem.Plot
 {
     class Plot:AbstractPlot
     {
-        private static Bitmap image;
+        private static Bitmap image = new Bitmap(100, 100);
         List<List<IPoint>> points;
         double h = 0.4;
 
         public Plot(IFunction function, IEnterBlackBoxParam task)
             : base(function, task)
         {
-            this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            image = new Bitmap(1000, 1000);
+            X = (int)task.x1_max + 1;
+            Y = (int)task.x2_max + 1;
+            image = new Bitmap((int)task.x1_max + 1, (int)task.x2_max + 1);
             pictureBox1.Image = image;
             points = new List<List<IPoint>>();
         }
@@ -154,6 +155,25 @@ namespace TestSystem.Plot
         protected override IPoint CreatePoint(double x1, double x2, double cost)
         {
             return new PlotPoint(x1, x2, cost);
+        }
+
+        private void InitializeComponent()
+        {
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            // 
+            // Plot
+            // 
+            this.ClientSize = new System.Drawing.Size(600, 450);
+            this.Name = "Plot";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
     }
 

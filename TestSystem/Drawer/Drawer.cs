@@ -34,9 +34,10 @@ namespace TestSystem.Drawer
             if (!newMDIChild.ContainsKey(tmp))
             {
                 newMDIChild[tmp] = new Plot.Plot(fn, Tasks[Task].EnterParams);
+                //newMDIChild[tmp].Size_draw(Tasks[Task].EnterParams.x1_max, Tasks[Task].EnterParams.x2_max);
                 newMDIChild[tmp].Name = tmp;
                 newMDIChild[tmp].Text = tmp;
-                newMDIChild[tmp].ClientSize = new System.Drawing.Size(500, 400);
+                //newMDIChild[tmp].ClientSize = new System.Drawing.Size(500, 400);
                 newMDIChild[tmp].UpdateComponent();
                 
                 //temp.Add(Tasks[Task]);
