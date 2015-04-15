@@ -58,7 +58,7 @@ namespace TestSystem.Plot
             // 
             // AbstractPlot
             // 
-            this.ClientSize = new System.Drawing.Size(600, 450);
+            this.ClientSize = new System.Drawing.Size(695, 460);
             this.Name = "AbstractPlot";
             this.Shown += new System.EventHandler(this.AbstractPlot_Shown);
             this.Click += new System.EventHandler(this.AbstractPlot_Click);

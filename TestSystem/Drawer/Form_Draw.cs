@@ -17,9 +17,16 @@ namespace TestSystem.Drawer
         private Panel panel1;
         private Panel panel2;
         private PictureBox pictureBox2;
+        private Panel panel3;
+        private TrackBar trackBar1;
 
         protected int X = 100, Y = 100;
         double mult_color = 1;
+        protected int numb_point = 10;
+        protected List<Button> bts;
+        protected List<IPoint> ptAlg;
+        private RadioButton radioButton2;
+        private RadioButton radioButton1;
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -45,18 +52,25 @@ namespace TestSystem.Drawer
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(410, 360);
+            this.pictureBox1.Size = new System.Drawing.Size(502, 369);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -68,21 +82,23 @@ namespace TestSystem.Drawer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(410, 360);
+            this.panel1.Size = new System.Drawing.Size(504, 371);
             this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel2.AutoScroll = true;
             this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(420, 12);
+            this.panel2.Location = new System.Drawing.Point(521, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(160, 360);
+            this.panel2.Size = new System.Drawing.Size(160, 371);
             this.panel2.TabIndex = 2;
             // 
             // pictureBox2
@@ -90,14 +106,62 @@ namespace TestSystem.Drawer
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(140, 360);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox2.Size = new System.Drawing.Size(160, 371);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
+            // panel3
+            // 
+            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel3.Controls.Add(this.radioButton2);
+            this.panel3.Controls.Add(this.radioButton1);
+            this.panel3.Controls.Add(this.trackBar1);
+            this.panel3.Location = new System.Drawing.Point(12, 389);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(670, 60);
+            this.panel3.TabIndex = 3;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(417, 26);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(193, 17);
+            this.radioButton2.TabIndex = 2;
+            this.radioButton2.Text = "Отображать лишь текущую точку";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Checked = true;
+            this.radioButton1.Location = new System.Drawing.Point(417, 3);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(249, 17);
+            this.radioButton1.TabIndex = 1;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "Отображать все точки с первой по текущую";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.trackBar1.Location = new System.Drawing.Point(3, 3);
+            this.trackBar1.Minimum = 1;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Size = new System.Drawing.Size(408, 45);
+            this.trackBar1.TabIndex = 0;
+            this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
+            this.trackBar1.Value = 1;
+            this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            // 
             // Form_Draw
             // 
-            this.ClientSize = new System.Drawing.Size(600, 450);
+            this.ClientSize = new System.Drawing.Size(695, 460);
+            this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "Form_Draw";
@@ -105,8 +169,10 @@ namespace TestSystem.Drawer
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,10 +227,10 @@ namespace TestSystem.Drawer
             //linGrBrush.GammaCorrection = true;
             gr.FillRectangle(linGrBrushG, 0, panel2.Size.Height / 2 - 1, panel2.Size.Width / 2, panel2.Size.Height / 4);
 
-            LinearGradientBrush linGrBrushB = new LinearGradientBrush(new Point(0, 3 * panel2.Size.Height / 4-1), new Point(0, panel2.Size.Height), Color.Blue, Color.Black);
+            LinearGradientBrush linGrBrushB = new LinearGradientBrush(new Point(0, 3 * panel2.Size.Height / 4-2), new Point(0, panel2.Size.Height), Color.Blue, Color.Black);
 
             //linGrBrush.GammaCorrection = true;
-            gr.FillRectangle(linGrBrushB, 0, 3 * panel2.Size.Height / 4 - 1, panel2.Size.Width / 2, panel2.Size.Height / 4);
+            gr.FillRectangle(linGrBrushB, 0, 3 * panel2.Size.Height / 4 - 2, panel2.Size.Width / 2, panel2.Size.Height / 4);
 
             DrawText(gr, "Exception", panel2.Size.Width / 2, 0, 120, 20);
 
@@ -258,6 +324,55 @@ namespace TestSystem.Drawer
         public Graphics GetGraphics()
         {
             return pictureBox1.CreateGraphics();
+        }
+
+        public void SetDrawNumberPoint(List<IPoint> pt)
+        {
+            ptAlg = pt;
+            numb_point = pt.Count;
+            trackBar1.Maximum = numb_point;
+            bts = new List<Button>(numb_point);
+        }
+
+        private void CreatButton()
+        {
+            if(ptAlg != null)
+                for (int i = 0; i < numb_point; i++)
+                {
+                    bts[i] = new Button();
+                    this.panel1.Controls.Add(this.bts[i]);
+                    // 
+                    // bts[i]
+                    // 
+                    this.bts[i].Visible = false;
+                    this.bts[i].Location = new System.Drawing.Point((int)ptAlg[i].x1 - 2, (int)ptAlg[i].x2 - 2);
+                    this.bts[i].Name = "bts"+i;
+                    this.bts[i].Size = new System.Drawing.Size(4, 4);
+                    this.bts[i].TabIndex = 1;
+                    this.bts[i].Text = " ";
+                    this.bts[i].UseVisualStyleBackColor = true;
+                    this.bts[i].ForeColor = Color.Red;
+                }
+        }
+
+        private void trackBar1_Scroll(object sender, EventArgs e)
+        {
+            if (bts != null)
+            {
+                for (int i = 0; i < bts.Count; i++)
+                {
+                    bts[i].Visible = false;
+                }
+                if (radioButton1.Checked == true)
+                    for (int i = 0; i < trackBar1.Value; i++)
+                    {
+                        bts[i].Visible = true;
+                    }
+                else if (radioButton2.Checked == true)
+                {
+                    bts[trackBar1.Value - 1].Visible = true;
+                }
+            }
         }
 
         //public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)

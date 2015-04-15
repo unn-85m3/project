@@ -164,11 +164,13 @@ namespace TestSystem.Plot
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox1.Size = new System.Drawing.Size(410, 360);
             // 
             // Plot
             // 
-            this.ClientSize = new System.Drawing.Size(600, 450);
+            this.ClientSize = new System.Drawing.Size(695, 460);
             this.Name = "Plot";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

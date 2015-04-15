@@ -12,7 +12,7 @@ namespace TestSystem.Plot
     {
         Form_Draw frmd;
         List<IPoint> p;
-        double mult = 1000;
+        double mult = 10000;
 
 
         public Coloring() 
