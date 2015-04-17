@@ -7,6 +7,7 @@ using System.Text;
 using System.Windows.Forms;
 using TestSystem.Plot;
 using TestSystem.test_system;
+using System.Windows.Input;
 
 namespace TestSystem.Drawer
 {
@@ -85,6 +86,7 @@ namespace TestSystem.Drawer
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             // 
             // panel1
             // 
@@ -169,7 +171,7 @@ namespace TestSystem.Drawer
             this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trackBar1.Location = new System.Drawing.Point(3, 2);
             this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Size = new System.Drawing.Size(380, 42);
+            this.trackBar1.Size = new System.Drawing.Size(380, 45);
             this.trackBar1.TabIndex = 0;
             this.trackBar1.TickStyle = System.Windows.Forms.TickStyle.Both;
             this.trackBar1.Scroll += new System.EventHandler(this.trackBar1_Scroll);
@@ -475,6 +477,25 @@ namespace TestSystem.Drawer
         {
             if (this.ClientSize.Width < 685) this.ClientSize = new System.Drawing.Size(685, this.ClientSize.Height);
             if (this.ClientSize.Height < 500) this.ClientSize = new System.Drawing.Size(this.ClientSize.Width, 500);
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            {
+                pictureBox1.Height *= 2;
+                pictureBox1.Width *= 2;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;    
+            }
+
+            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            {
+                pictureBox1.Height /= 2;
+                pictureBox1.Width /= 2;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            }
         }
 
         //public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
