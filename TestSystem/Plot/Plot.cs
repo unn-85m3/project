@@ -170,7 +170,7 @@ namespace TestSystem.Plot
             // 
             // Plot
             // 
-            this.ClientSize = new System.Drawing.Size(695, 460);
+            this.ClientSize = new System.Drawing.Size(685, 500);
             this.Name = "Plot";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

@@ -58,7 +58,7 @@ namespace TestSystem.Plot
             // 
             // AbstractPlot
             // 
-            this.ClientSize = new System.Drawing.Size(695, 460);
+            this.ClientSize = new System.Drawing.Size(685, 500);
             this.Name = "AbstractPlot";
             this.Shown += new System.EventHandler(this.AbstractPlot_Shown);
             this.Click += new System.EventHandler(this.AbstractPlot_Click);
@@ -215,6 +215,8 @@ namespace TestSystem.Plot
             coloring = factory.CreateColoring(this);
             normalize = factory.CreateNormalize(this);
             points = Calculate(function, param);
+            SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
+
             //ClickToForm();
         }
 
