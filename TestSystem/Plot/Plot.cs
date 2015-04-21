@@ -160,20 +160,39 @@ namespace TestSystem.Plot
         private void InitializeComponent()
         {
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
-            // pictureBox1
+            // button1
             // 
-            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.None;
-            this.pictureBox1.Size = new System.Drawing.Size(1000, 1000);
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Plot
             // 
             this.ClientSize = new System.Drawing.Size(685, 500);
             this.Name = "Plot";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
 
         }
     }

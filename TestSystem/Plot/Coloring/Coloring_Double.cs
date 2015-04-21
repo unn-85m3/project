@@ -32,7 +32,7 @@ namespace TestSystem.Plot
         {
             this.frmd = frmd;
             frmd.Mult_color(mult);
-            frmd.ClearBitmap();
+            //frmd.ClearBitmap();
         }
 
         public void ColoringSurface(List<IPoint> points)

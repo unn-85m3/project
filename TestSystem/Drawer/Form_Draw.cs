@@ -14,14 +14,14 @@ namespace TestSystem.Drawer
     class Form_Draw: Form//, IEndCalculate
     {
         protected PictureBox pictureBox1;
-        private PictureBox pictureBox2;
-        private Panel panel1;
-        private Panel panel2;
-        private Panel panel3;
-        private Panel panel4;
-        private TrackBar trackBar1;
-        private RadioButton radioButton1;
-        private RadioButton radioButton2;
+        protected PictureBox pictureBox2;
+        protected Panel panel1;
+        protected Panel panel2;
+        protected Panel panel3;
+        protected Panel panel4;
+        protected TrackBar trackBar1;
+        protected RadioButton radioButton1;
+        protected RadioButton radioButton2;
         private Label label3;
         private Label label2;
         private Label label1;
@@ -29,11 +29,12 @@ namespace TestSystem.Drawer
 
 
         protected int X = 100, Y = 100;
-        double mult_color = 1, mult_point = 1, zoom = 1;
+        protected double mult_color = 1, mult_point = 1, zoom = 1;
         protected int numb_point = 10;
         private static Bitmap image;
         protected List<Button> bts = new List<Button>();
         protected List<IPoint> ptAlg = new List<IPoint>();
+        protected Button button1;
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -69,6 +70,7 @@ namespace TestSystem.Drawer
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -110,9 +112,9 @@ namespace TestSystem.Drawer
             this.panel2.AutoScroll = true;
             this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(508, 12);
+            this.panel2.Location = new System.Drawing.Point(510, 85);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(160, 412);
+            this.panel2.Size = new System.Drawing.Size(160, 340);
             this.panel2.TabIndex = 2;
             // 
             // pictureBox2
@@ -120,7 +122,7 @@ namespace TestSystem.Drawer
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(160, 412);
+            this.pictureBox2.Size = new System.Drawing.Size(160, 340);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -170,6 +172,7 @@ namespace TestSystem.Drawer
             // trackBar1
             // 
             this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.trackBar1.Enabled = false;
             this.trackBar1.Location = new System.Drawing.Point(3, 2);
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(380, 45);
@@ -181,7 +184,8 @@ namespace TestSystem.Drawer
             // 
             this.radioButton2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(5, 33);
+            this.radioButton2.Enabled = false;
+            this.radioButton2.Location = new System.Drawing.Point(6, 33);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(193, 17);
             this.radioButton2.TabIndex = 2;
@@ -194,7 +198,8 @@ namespace TestSystem.Drawer
             this.radioButton1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(5, 5);
+            this.radioButton1.Enabled = false;
+            this.radioButton1.Location = new System.Drawing.Point(6, 5);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(249, 17);
             this.radioButton1.TabIndex = 1;
@@ -210,12 +215,24 @@ namespace TestSystem.Drawer
             this.panel4.Controls.Add(this.radioButton2);
             this.panel4.Location = new System.Drawing.Point(410, 429);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(258, 59);
+            this.panel4.Size = new System.Drawing.Size(260, 59);
             this.panel4.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.button1.Location = new System.Drawing.Point(509, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(161, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "Draw";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form_Draw
             // 
             this.ClientSize = new System.Drawing.Size(685, 500);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
@@ -237,23 +254,23 @@ namespace TestSystem.Drawer
 
         }
 
-        public void UpdateComponent()
+        public void UpdateComponent(int x, int y)
         {
             //this.pictureBox1.Size = new System.Drawing.Size(this.Size.Width, this.Size.Height);
-            image = new Bitmap(100, 100);
+            image = new Bitmap(x, y);
             pictureBox1.Image = image;
         }
 
-        public void ClearBitmap()
-        {
-            if (X*Y < 65535) // && Y < 65535)
-            {
-                X = Convert.ToInt32(X);
-                Y = Convert.ToInt32(Y);
-                image = new Bitmap(X, Y);
-            }
-            else { X /= 2; Y /= 2; ClearBitmap(); }
-        }
+        //public void ClearBitmap()
+        //{
+        //    if (X*Y < 65535) // && Y < 65535)
+        //    {
+        //        X = Convert.ToInt32(X);
+        //        Y = Convert.ToInt32(Y);
+        //        image = new Bitmap(X, Y);
+        //    }
+        //    else { X /= 2; Y /= 2; ClearBitmap(); }
+        //}
 
         public void SetImage(Image img)
         {
@@ -392,6 +409,11 @@ namespace TestSystem.Drawer
         public Graphics GetGraphics()
         {
             return pictureBox1.CreateGraphics();
+        }
+
+        public Graphics GetImage()
+        {
+            return Graphics.FromImage(image);
         }
 
         public void SetDrawNumberPoint(List<IPoint> pt)
@@ -627,6 +649,11 @@ namespace TestSystem.Drawer
                         this.bts[i].Size = new System.Drawing.Size((int)(this.bts[i].Size.Width / zoom), (int)(this.bts[i].Size.Height / zoom));
                     }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
 
         //public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)

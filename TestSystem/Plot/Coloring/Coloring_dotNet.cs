@@ -32,33 +32,78 @@ namespace TestSystem.Plot
         {
             this.frmd = frmd;
             frmd.Mult_color(mult);
-            frmd.ClearBitmap();
+            //frmd.ClearBitmap();
         }
 
         public void ColoringSurface(List<IPoint> points)
         {
-            p = points;
-            List<PointF> point = new List<PointF>();
-            for (int i = 0; i < p.Count; i++)
-                point.Add(new PointF((float)p[i].x1, (float)p[i].x2));
-            PointF[] pt = point.ToArray();
+            if (points.Count > 0)
+            {
+                if (points.Count == 1 && points[0].x1 != 0 && points[0].x2 != 0)
+                {
+                    p = points;
+                    List<PointF> point = new List<PointF>();
+                    point.Add(new PointF((float)p[0].x1, (float)p[0].x2));
+                    PointF[] pt = point.ToArray();
 
-            GraphicsPath path = new GraphicsPath();
-            path.AddLines(pt);
+                    GraphicsPath path = new GraphicsPath();
+                    path.AddLines(pt);
 
-            PathGradientBrush pthGrBrush = new PathGradientBrush(path);
+                    PathGradientBrush pthGrBrush = new PathGradientBrush(path);
 
-            //pthGrBrush.CenterColor = Color.FromArgb(255, 255, 0, 0);
+                    //pthGrBrush.CenterColor = Color.FromArgb(255, 255, 0, 0);
 
-            List<Color> clr = new List<Color>();
-            for (int i = 0; i < p.Count; i++)
-                clr.Add(CostToColor(p[i].cost));
-            Color[] colors = clr.ToArray();
+                    List<Color> clr = new List<Color>();
+                    clr.Add(CostToColor(p[0].cost));
+                    Color[] colors = clr.ToArray();
 
 
-            pthGrBrush.SurroundColors = colors;
+                    pthGrBrush.SurroundColors = colors;
 
-            frmd.GetGraphics().FillPath(pthGrBrush, path);
+                    Graphics g = frmd.GetImage();
+
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                    g.FillPath(pthGrBrush, path);
+
+                    g.Flush();
+                }
+                else if (points[0].x1 != 0)
+                {
+                    p = points;
+                    List<PointF> point = new List<PointF>();
+                    for (int i = 0; i < p.Count; i++)
+                        point.Add(new PointF((float)p[i].x1, (float)p[i].x2));
+                    PointF[] pt = point.ToArray();
+
+                    GraphicsPath path = new GraphicsPath();
+                    path.AddLines(pt);
+
+                    PathGradientBrush pthGrBrush = new PathGradientBrush(path);
+
+                    //pthGrBrush.CenterColor = Color.FromArgb(255, 255, 0, 0);
+
+                    List<Color> clr = new List<Color>();
+                    for (int i = 0; i < p.Count; i++)
+                        clr.Add(CostToColor(p[i].cost));
+                    Color[] colors = clr.ToArray();
+
+
+                    pthGrBrush.SurroundColors = colors;
+
+                    Graphics g = frmd.GetImage();
+
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    g.PixelOffsetMode = PixelOffsetMode.HighQuality;
+
+                    g.FillPath(pthGrBrush, path);
+
+                    g.Flush();
+                }
+            }
         }
 
         private Color CostToColor(double cost)

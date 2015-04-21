@@ -47,6 +47,12 @@ namespace TestSystem.Plot
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AbstractPlot));
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -55,6 +61,10 @@ namespace TestSystem.Plot
             this.pictureBox1.Size = new System.Drawing.Size(1000, 1000);
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // button1
+            // 
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // AbstractPlot
             // 
             this.ClientSize = new System.Drawing.Size(685, 500);
@@ -62,6 +72,15 @@ namespace TestSystem.Plot
             this.Shown += new System.EventHandler(this.AbstractPlot_Shown);
             this.Click += new System.EventHandler(this.AbstractPlot_Click);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,7 +118,7 @@ namespace TestSystem.Plot
 
         protected void ClickToForm()
         {
-            this.ClearBitmap();
+            //this.ClearBitmap();
             if (points != null)
             {
                 int maxI = points.Count;
@@ -157,6 +176,11 @@ namespace TestSystem.Plot
 
         void AbstractPlot_Paint(object sender, PaintEventArgs e)
         {
+            //Paint();
+        }
+
+        private void Paint()
+        {
             if (points != null)
             {
                 int maxI = points.Count;
@@ -213,7 +237,10 @@ namespace TestSystem.Plot
         {
             coloring = factory.CreateColoring(this);
             normalize = factory.CreateNormalize(this);
+            X *= (int)mult_point; // МАсштабирование!!!!!!!!!!!!!
+            Y *= (int)mult_point;
             points = Calculate(function, param);
+            Paint();
             SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
 
             //ClickToForm();
@@ -253,6 +280,15 @@ namespace TestSystem.Plot
         private void AbstractPlot_Shown(object sender, EventArgs e)
         {
             ClickToForm();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            StartCalculate();
+            DrawAll();
+            trackBar1.Enabled = true;
+            radioButton1.Enabled = true;
+            radioButton2.Enabled = true;
         }
     }
 }

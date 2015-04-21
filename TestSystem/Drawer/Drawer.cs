@@ -37,8 +37,9 @@ namespace TestSystem.Drawer
                 //newMDIChild[tmp].Size_draw(Tasks[Task].EnterParams.x1_max, Tasks[Task].EnterParams.x2_max);
                 newMDIChild[tmp].Name = tmp;
                 newMDIChild[tmp].Text = tmp;
+                
                 //newMDIChild[tmp].ClientSize = new System.Drawing.Size(500, 400);
-                newMDIChild[tmp].UpdateComponent();
+                newMDIChild[tmp].UpdateComponent((int)Tasks[Task].EnterParams.x1_max + 1, (int)Tasks[Task].EnterParams.x2_max + 1);
                 
                 //temp.Add(Tasks[Task]);
                 //tst.SetListener(newMDIChild[tmp]);
@@ -58,8 +59,8 @@ namespace TestSystem.Drawer
 
                 
                 newMDIChild[tmp].Show();
-                newMDIChild[tmp].StartCalculate();
-                newMDIChild[tmp].DrawAll();
+                //newMDIChild[tmp].StartCalculate();
+                //newMDIChild[tmp].DrawAll();
                 
                 //tst.Test();
         }
