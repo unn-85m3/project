@@ -225,18 +225,9 @@ namespace TestSystem.Plot
         public void AddPoint(IPoint value)
         {
 
-            IPoint point = CreatePoint(value.x1,value.x2,value.cost);
+            IPoint point = CreatePoint(value.x1, value.x2, value.cost);
             normalize.Normalization(point);
-            Button btn = new Button();
-            btn.BackColor = Color.Red;
-            btn.Height = 7;
-            btn.Width = 7;
-            ToolTip toolTip = new ToolTip();
-            btn.Location = new Point((int)point.x1, (int)point.x2); 
-            toolTip.SetToolTip(btn,point.x1.ToString()+" "+point.x2.ToString()+" "+point.cost.ToString());
-            this.Controls.Add(btn);
-            pointsObjs.Add(btn);
-            userPoints.Add(point);
+            SetDrawNumberPoint(point);
         }
 
         private IPoint tempFind;

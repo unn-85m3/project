@@ -14,10 +14,10 @@ namespace TestSystem.Plot
         Double X1;
         Double X2;
 
-        Double mX1=0;
-        Double mX2=0;
+        Double mX1=100;
+        Double mX2=100;
 
-        public Normalize(Form_Draw form, Double koef = 10)
+        public Normalize(Form_Draw form, Double koef = 100)
         {
             this.form = form;
             mX1 = mX2 = koef;
@@ -39,11 +39,13 @@ namespace TestSystem.Plot
 
             point.x1 *= mX1;
             point.x2 *= mX2;
-             /* point.x1 += X1;
-              point.x2 += X2;
+            point.x1 = Math.Round(point.x1);
+            point.x2 = Math.Round(point.x2);
+            /* point.x1 += X1;
+             point.x2 += X2;
              
-              point.x1+=100;
-              point.x2 +=100;*/
+             point.x1+=100;
+             point.x2 +=100;*/
             N++;
         }
     }
