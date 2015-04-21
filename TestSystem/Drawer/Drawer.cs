@@ -59,6 +59,7 @@ namespace TestSystem.Drawer
                 
                 newMDIChild[tmp].Show();
                 newMDIChild[tmp].StartCalculate();
+                newMDIChild[tmp].DrawAll();
                 
                 //tst.Test();
         }

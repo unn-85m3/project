@@ -124,6 +124,7 @@
     <Compile Include="Plot\AbstractPlot.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Plot\Coloring\Coloring_dotNet.cs" />
     <Compile Include="Plot\Coloring\Coloring_Double.cs" />
     <Compile Include="Plot\Draw_points.cs" />
     <Compile Include="Plot\Coloring\IColoring.cs" />

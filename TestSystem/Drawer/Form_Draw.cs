@@ -32,8 +32,8 @@ namespace TestSystem.Drawer
         double mult_color = 1, mult_point = 1, zoom = 1;
         protected int numb_point = 10;
         private static Bitmap image;
-        protected List<Button> bts;
-        protected List<IPoint> ptAlg;
+        protected List<Button> bts = new List<Button>();
+        protected List<IPoint> ptAlg = new List<IPoint>();
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -271,7 +271,7 @@ namespace TestSystem.Drawer
             }
         }
 
-        protected void DrawLegeng()
+        protected void DrawLegend()
         {
             Bitmap img = new Bitmap(panel2.Size.Width, panel2.Size.Height);
 
@@ -328,8 +328,6 @@ namespace TestSystem.Drawer
 
             image = new Bitmap(1000, 1000);
 
-            DrawLegeng();
-
         }
 
         //public void Size_draw(double x, double y)
@@ -347,7 +345,7 @@ namespace TestSystem.Drawer
         public void Mult_color(double mult)
         {
             mult_color = mult; 
-            DrawLegeng();
+            DrawLegend();
         }
 
         public void Mult_point(double mult)
@@ -403,9 +401,27 @@ namespace TestSystem.Drawer
             label3.Text = numb_point.ToString();
             trackBar1.Maximum = numb_point;
             bts = new List<Button>(numb_point);
+            CreateButtons();
+
+            //DrawAxe();
+        }
+
+        public void SetDrawNumberPoint(IPoint pt)
+        {
+            ptAlg.Add(pt);
+            numb_point = ptAlg.Count;
+            label3.Text = numb_point.ToString();
+            trackBar1.Maximum = numb_point;
             CreateButton();
 
+            //DrawAxe();
+        }
+
+        public void DrawAll()
+        {
             DrawAxe();
+
+            DrawLegend();
         }
 
         private void DrawAxe()
@@ -456,6 +472,37 @@ namespace TestSystem.Drawer
                 for (int i = 0; i < size; i++)
                     for (int j = 0; j < size; j++)
                         back.SetPixel(i, j, Color.Red);
+
+                int last = bts.Count;
+                    bts.Add(new Button());
+                    this.panel1.Controls.Add(this.bts[last]);
+                    // 
+                    // bts[i]
+                    // 
+                    this.bts[last].Visible = false;
+                    this.bts[last].Location = new System.Drawing.Point((int)(ptAlg[last].x1) - 2, (int)(ptAlg[last].x2) - 2);
+                    this.bts[last].Name = "bts"+last;
+                    this.bts[last].Size = new System.Drawing.Size(size, size);
+                    this.bts[last].TabIndex = 1;
+                    this.bts[last].Text = " ";
+                    toolTip1.SetToolTip(this.bts[last], "Стоимость полученная в этой точке: "+ptAlg[last].cost);
+                    this.bts[last].UseVisualStyleBackColor = true;
+                    this.bts[last].BackgroundImage = back;
+                    //this.bts[i].BackColor = Color.Red;
+                    this.bts[last].BringToFront();
+                
+            }
+        }
+
+        private void CreateButtons()
+        {
+            if (ptAlg != null)
+            {
+                int size = 4;
+                Bitmap back = new Bitmap(size, size);
+                for (int i = 0; i < size; i++)
+                    for (int j = 0; j < size; j++)
+                        back.SetPixel(i, j, Color.Red);
                 for (int i = 0; i < numb_point; i++)
                 {
                     bts.Add(new Button());
@@ -465,11 +512,11 @@ namespace TestSystem.Drawer
                     // 
                     this.bts[i].Visible = false;
                     this.bts[i].Location = new System.Drawing.Point((int)(ptAlg[i].x1) - 2, (int)(ptAlg[i].x2) - 2);
-                    this.bts[i].Name = "bts"+i;
+                    this.bts[i].Name = "bts" + i;
                     this.bts[i].Size = new System.Drawing.Size(size, size);
                     this.bts[i].TabIndex = 1;
                     this.bts[i].Text = " ";
-                    toolTip1.SetToolTip(this.bts[i], "Стоимость полученная в этой точке: "+ptAlg[i].cost);
+                    toolTip1.SetToolTip(this.bts[i], "Стоимость полученная в этой точке: " + ptAlg[i].cost);
                     this.bts[i].UseVisualStyleBackColor = true;
                     this.bts[i].BackgroundImage = back;
                     //this.bts[i].BackColor = Color.Red;

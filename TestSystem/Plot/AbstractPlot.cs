@@ -74,7 +74,7 @@ namespace TestSystem.Plot
 
         public AbstractPlot(IFunction function, IEnterBlackBoxParam param):base()
         {
-            DrawLegeng();
+            DrawLegend();
             userPoints = new List<IPoint>();
             this.function = function;
             this.param = param;
