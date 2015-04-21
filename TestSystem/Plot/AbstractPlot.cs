@@ -52,7 +52,6 @@ namespace TestSystem.Plot
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(3, 341);
             this.pictureBox1.Size = new System.Drawing.Size(1000, 1000);
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 

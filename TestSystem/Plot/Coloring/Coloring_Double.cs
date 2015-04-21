@@ -8,21 +8,21 @@ using TestSystem.Drawer;
 
 namespace TestSystem.Plot
 {
-    class Coloring : IColoring
+    class Coloring_Double : IColoring
     {
         Form_Draw frmd;
         List<IPoint> p;
         double mult = 10000;
 
 
-        public Coloring() 
+        public Coloring_Double() 
         {
             if (frmd != null)
                 frmd.Mult_color(mult);
         }
 
 
-        public Coloring(Form_Draw frmd)
+        public Coloring_Double(Form_Draw frmd)
         {
             this.frmd = frmd;
             frmd.Mult_color(mult);

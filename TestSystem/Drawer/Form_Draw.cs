@@ -13,26 +13,27 @@ namespace TestSystem.Drawer
 {
     class Form_Draw: Form//, IEndCalculate
     {
-        private static Bitmap image;
-        protected System.Windows.Forms.PictureBox pictureBox1;
+        protected PictureBox pictureBox1;
+        private PictureBox pictureBox2;
         private Panel panel1;
         private Panel panel2;
-        private PictureBox pictureBox2;
         private Panel panel3;
+        private Panel panel4;
         private TrackBar trackBar1;
-        protected List<Button> bts;
-        protected List<IPoint> ptAlg;
-        private RadioButton radioButton2;
         private RadioButton radioButton1;
-        private ToolTip toolTip1;
-
-        protected int X = 100, Y = 100;
-        double mult_color = 1, mult_point = 1;
-        protected int numb_point = 10;
+        private RadioButton radioButton2;
         private Label label3;
         private Label label2;
         private Label label1;
-        private Panel panel4;
+        private ToolTip toolTip1;
+
+
+        protected int X = 100, Y = 100;
+        double mult_color = 1, mult_point = 1, zoom = 1;
+        protected int numb_point = 10;
+        private static Bitmap image;
+        protected List<Button> bts;
+        protected List<IPoint> ptAlg;
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -245,7 +246,13 @@ namespace TestSystem.Drawer
 
         public void ClearBitmap()
         {
-            image = new Bitmap(X, Y);
+            if (X*Y < 65535) // && Y < 65535)
+            {
+                X = Convert.ToInt32(X);
+                Y = Convert.ToInt32(Y);
+                image = new Bitmap(X, Y);
+            }
+            else { X /= 2; Y /= 2; ClearBitmap(); }
         }
 
         public void SetImage(Image img)
@@ -290,27 +297,27 @@ namespace TestSystem.Drawer
             //linGrBrush.GammaCorrection = true;
             gr.FillRectangle(linGrBrushB, 0, 3 * panel2.Size.Height / 4 - 2, panel2.Size.Width / 2, panel2.Size.Height / 4);
 
-            DrawText(gr, "Exception", panel2.Size.Width / 2, 0, 120, 20);
+            DrawText(gr, "Exception", panel2.Size.Width / 2, 0, 120, 20, 12);
 
-            DrawText(gr, ((256 * 256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 4 - 10, 120, 20);
+            DrawText(gr, ((256 * 256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 4 - 10, 120, 20, 12);
 
-            DrawText(gr, ((256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 2 - 10, 120, 20); 
+            DrawText(gr, ((256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 2 - 10, 120, 20, 12); 
 
-            DrawText(gr, (255 / mult_color).ToString(), panel2.Size.Width / 2, 3 * panel2.Size.Height / 4 - 10, 120, 20); 
+            DrawText(gr, (255 / mult_color).ToString(), panel2.Size.Width / 2, 3 * panel2.Size.Height / 4 - 10, 120, 20, 12); 
 
-            DrawText(gr, 0.ToString(), panel2.Size.Width / 2, panel2.Size.Height - 20, 120, 20);
+            DrawText(gr, 0.ToString(), panel2.Size.Width / 2, panel2.Size.Height - 20, 120, 20, 12);
 
             pictureBox2.Image = img;
         }
 
-        private void DrawText(Graphics g, string str, int x, int y, int width, int height)
+        private void DrawText(Graphics g, string str, int x, int y, int width, int height, int FrontSize)
         {
             RectangleF rectf = new RectangleF(x, y, width, height);
 
             g.SmoothingMode = SmoothingMode.AntiAlias;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
-            g.DrawString(str, new Font("Tahoma", 12), Brushes.Black, rectf);
+            g.DrawString(str, new Font("Tahoma", FrontSize), Brushes.Black, rectf);
 
             g.Flush();
         }
@@ -348,41 +355,41 @@ namespace TestSystem.Drawer
             mult_point = mult;
         }
 
-        public void draw()
-        {
-            IColoring clr = new Coloring(this);
-            List<IPoint> c = new List<IPoint>();
-            IPoint p = new PlotPoint(20, 20, 255);
-            c.Add(p);
-            p = new PlotPoint(350, 350, 255 * 255);
-            c.Add(p);
-            p = new PlotPoint(20, 350, 255 * 255 * 255);
-            c.Add(p);
-            clr.ColoringSurface(c);
+        //public void draw()
+        //{
+        //    IColoring clr = new Coloring_Double(this);
+        //    List<IPoint> c = new List<IPoint>();
+        //    IPoint p = new PlotPoint(20, 20, 255);
+        //    c.Add(p);
+        //    p = new PlotPoint(350, 350, 255 * 255);
+        //    c.Add(p);
+        //    p = new PlotPoint(20, 350, 255 * 255 * 255);
+        //    c.Add(p);
+        //    clr.ColoringSurface(c);
 
-            c = new List<IPoint>();
-            p = new PlotPoint(350, 20, 255);
-            c.Add(p);
-            p = new PlotPoint(360, 130, 255 * 255);
-            c.Add(p);
-            clr.ColoringSurface(c);
+        //    c = new List<IPoint>();
+        //    p = new PlotPoint(350, 20, 255);
+        //    c.Add(p);
+        //    p = new PlotPoint(360, 130, 255 * 255);
+        //    c.Add(p);
+        //    clr.ColoringSurface(c);
 
-            c = new List<IPoint>();
-            p = new PlotPoint(150, 20, 255);
-            c.Add(p);
-            p = new PlotPoint(180, 20, 255 * 255);
-            c.Add(p);
-            p = new PlotPoint(150, 120, 0);
-            c.Add(p);
-            p = new PlotPoint(180, 120, 255);
-            c.Add(p);
-            clr.ColoringSurface(c);
+        //    c = new List<IPoint>();
+        //    p = new PlotPoint(150, 20, 255);
+        //    c.Add(p);
+        //    p = new PlotPoint(180, 20, 255 * 255);
+        //    c.Add(p);
+        //    p = new PlotPoint(150, 120, 0);
+        //    c.Add(p);
+        //    p = new PlotPoint(180, 120, 255);
+        //    c.Add(p);
+        //    clr.ColoringSurface(c);
 
-            c = new List<IPoint>();
-            p = new PlotPoint(300, 20, 0);
-            c.Add(p);
-            clr.ColoringSurface(c);
-        }
+        //    c = new List<IPoint>();
+        //    p = new PlotPoint(300, 20, 0);
+        //    c.Add(p);
+        //    clr.ColoringSurface(c);
+        //}
 
         public Graphics GetGraphics()
         {
@@ -397,11 +404,58 @@ namespace TestSystem.Drawer
             trackBar1.Maximum = numb_point;
             bts = new List<Button>(numb_point);
             CreateButton();
+
+            DrawAxe();
+        }
+
+        private void DrawAxe()
+        {
+            int distance = 5;
+            for (int i = 0; i < image.Size.Width; i++)
+            {
+                image.SetPixel(i, distance, Color.Black);
+            }
+            for (int i = 0; i < image.Size.Height; i++)
+            {
+                image.SetPixel(distance, i, Color.Black);
+            }
+            for (int i = 0; i < distance; i++)
+            {
+                image.SetPixel(i + image.Size.Width - distance, i, Color.Black);
+                image.SetPixel(i + image.Size.Width - distance, 2 * distance - i, Color.Black);
+            }
+            for (int i = 0; i < distance; i++)
+            {
+                image.SetPixel(i, i + image.Size.Height - distance, Color.Black);
+                image.SetPixel(2 * distance - i, i + image.Size.Height - distance, Color.Black);
+            }
+
+            for (int i = 0; i < image.Size.Width; i++)
+            {
+                image.SetPixel(i, 0, Color.Black);
+                image.SetPixel(i, image.Size.Height-1, Color.Black);
+            }
+            for (int i = 0; i < image.Size.Height; i++)
+            {
+                image.SetPixel(0, i, Color.Black);
+                image.SetPixel(image.Size.Width-1, i, Color.Black);
+            }
+
+            Graphics gr = Graphics.FromImage(image); //хз что не так...
+            DrawText(gr, "X", 0, image.Size.Width - distance, distance, distance, 10);
+            DrawText(gr, "Y", image.Size.Height - distance, 0, distance, distance, 10);
+            pictureBox1.Image = image;
         }
 
         private void CreateButton()
         {
             if(ptAlg != null)
+            {
+                int size = 4;
+                Bitmap back = new Bitmap(size,size);
+                for (int i = 0; i < size; i++)
+                    for (int j = 0; j < size; j++)
+                        back.SetPixel(i, j, Color.Red);
                 for (int i = 0; i < numb_point; i++)
                 {
                     bts.Add(new Button());
@@ -412,13 +466,16 @@ namespace TestSystem.Drawer
                     this.bts[i].Visible = false;
                     this.bts[i].Location = new System.Drawing.Point((int)(ptAlg[i].x1) - 2, (int)(ptAlg[i].x2) - 2);
                     this.bts[i].Name = "bts"+i;
-                    this.bts[i].Size = new System.Drawing.Size(4, 4);
+                    this.bts[i].Size = new System.Drawing.Size(size, size);
                     this.bts[i].TabIndex = 1;
                     this.bts[i].Text = " ";
                     toolTip1.SetToolTip(this.bts[i], "Стоимость полученная в этой точке: "+ptAlg[i].cost);
                     this.bts[i].UseVisualStyleBackColor = true;
-                    this.bts[i].BackColor = Color.Red;
+                    this.bts[i].BackgroundImage = back;
+                    //this.bts[i].BackColor = Color.Red;
+                    this.bts[i].BringToFront();
                 }
+            }
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -483,18 +540,45 @@ namespace TestSystem.Drawer
         {
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
+                zoom *= 2;
                 pictureBox1.Height *= 2;
                 pictureBox1.Width *= 2;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;    
+                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                if (ptAlg != null)
+                    for (int i = 0; i < numb_point; i++)
+                    {
+                        this.bts[i].Location = new System.Drawing.Point((this.bts[i].Location.X) * 2, (this.bts[i].Location.Y) * 2);
+                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width * 2, this.bts[i].Size.Height * 2);
+                    }
             }
 
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
+                zoom /= 2;
                 pictureBox1.Height /= 2;
                 pictureBox1.Width /= 2;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                if (ptAlg != null)
+                    for (int i = 0; i < numb_point; i++)
+                    {
+                        this.bts[i].Location = new System.Drawing.Point((this.bts[i].Location.X) / 2, (this.bts[i].Location.Y) / 2);
+                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width / 2, this.bts[i].Size.Height / 2);
+                    }
+            }
+            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            {
+                pictureBox1.Height = (int)(pictureBox1.Height / zoom);
+                pictureBox1.Width = (int)(pictureBox1.Width / zoom);
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                if (ptAlg != null)
+                    for (int i = 0; i < numb_point; i++)
+                    {
+                        this.bts[i].Location = new System.Drawing.Point((int)((this.bts[i].Location.X) / zoom), (int)((this.bts[i].Location.Y) / zoom));
+                        this.bts[i].Size = new System.Drawing.Size((int)(this.bts[i].Size.Width / zoom), (int)(this.bts[i].Size.Height / zoom));
+                    }
             }
         }
 
