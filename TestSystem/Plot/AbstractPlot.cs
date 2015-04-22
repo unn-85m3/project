@@ -267,7 +267,7 @@ namespace TestSystem.Plot
                 //Y *= (int)mult_point;
                 points = Calculate(function, param);
                 Paint();
-               /// SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
+                //SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
 
                 //ClickToForm();
             }

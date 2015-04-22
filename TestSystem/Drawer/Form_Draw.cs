@@ -287,11 +287,11 @@ namespace TestSystem.Drawer
                     // 
                     this.bts[last].Visible = false;
                     this.bts[last].Location = new System.Drawing.Point((int)(ptAlg[last].x1) - 2, (int)(ptAlg[last].x2) - 2);
-                    this.bts[last].Name = "bts"+last;
+                    this.bts[last].Name = "bts" + last;
                     this.bts[last].Size = new System.Drawing.Size(size, size);
                     this.bts[last].TabIndex = 1;
                     this.bts[last].Text = " ";
-                    toolTip1.SetToolTip(this.bts[last], "Стоимость полученная в этой точке: "+ptAlg[last].cost);
+                    toolTip1.SetToolTip(this.bts[last], "Стоимость полученная в этой точке: " + ptAlg[last].cost);
                     this.bts[last].UseVisualStyleBackColor = true;
                     this.bts[last].BackgroundImage = back;
                     //this.bts[i].BackColor = Color.Red;
@@ -394,44 +394,43 @@ namespace TestSystem.Drawer
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 zoom *= 2;
+                if (ptAlg != null)
+                    for (int i = 0; i < numb_point; i++)
+                    {
+                        this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2) * zoom), (int)((ptAlg[i].x2 - 2) * zoom));
+                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width * 2, this.bts[i].Size.Height * 2);
+                    }
                 pictureBox1.Height *= 2;
                 pictureBox1.Width *= 2;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-                if (ptAlg != null)
-                    for (int i = 0; i < numb_point; i++)
-                    {
-                        this.bts[i].Location = new System.Drawing.Point((this.bts[i].Location.X) * 2, (this.bts[i].Location.Y) * 2);
-                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width * 2, this.bts[i].Size.Height * 2);
-                    }
             }
 
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
                 zoom /= 2;
+                if (ptAlg != null)
+                    for (int i = 0; i < numb_point; i++)
+                    {
+                        this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2) * zoom), (int)((ptAlg[i].x2 - 2) * zoom));
+                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width / 2, this.bts[i].Size.Height / 2);
+                    }
                 pictureBox1.Height /= 2;
                 pictureBox1.Width /= 2;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-                if (ptAlg != null)
-                    for (int i = 0; i < numb_point; i++)
-                    {
-                        this.bts[i].Location = new System.Drawing.Point((this.bts[i].Location.X) / 2, (this.bts[i].Location.Y) / 2);
-                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width / 2, this.bts[i].Size.Height / 2);
-                    }
             }
             else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
             {
-                pictureBox1.Height = (int)(pictureBox1.Height / zoom);
-                pictureBox1.Width = (int)(pictureBox1.Width / zoom);
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                 if (ptAlg != null)
                     for (int i = 0; i < numb_point; i++)
                     {
-                        this.bts[i].Location = new System.Drawing.Point((int)((this.bts[i].Location.X) / zoom), (int)((this.bts[i].Location.Y) / zoom));
-                        this.bts[i].Size = new System.Drawing.Size((int)(this.bts[i].Size.Width / zoom), (int)(this.bts[i].Size.Height / zoom));
+                        this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2)), (int)((ptAlg[i].x2 - 2)));
+                        this.bts[i].Size = new System.Drawing.Size(4, 4);
                     }
+                pictureBox1.Height = (int)(pictureBox1.Height / zoom);
+                pictureBox1.Width = (int)(pictureBox1.Width / zoom);
+                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                 zoom = 1;
             }
         }
