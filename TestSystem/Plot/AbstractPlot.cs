@@ -179,6 +179,15 @@ namespace TestSystem.Plot
             //Paint();
         }
 
+
+        private void addToList(List<IPoint> targetPoints,IPoint point)
+        {
+            if ((point.x1 != 0) && (point.x2 != 0))
+            {
+                targetPoints.Add(point);
+            }
+        }
+
         private void Paint()
         {
             if (points != null)
@@ -203,8 +212,11 @@ namespace TestSystem.Plot
                         {
                             if (j < maxJ - 1)
                             {
-                                focusPoints.Add(points[i][j]);
-                                focusPoints.Add(points[i][j + 1]);
+
+                                addToList(focusPoints, points[i][j]);
+                                addToList(focusPoints, points[i][j + 1]);
+                               // focusPoints.Add(points[i][j]);
+                               // focusPoints.Add(points[i][j + 1]);
                             }
 
 
@@ -212,21 +224,25 @@ namespace TestSystem.Plot
                         }
                         else
                         {
-                            focusPoints.Add(points[i][j]);
+                            addToList(focusPoints, points[i][j]);
+                           /// focusPoints.Add(points[i][j]);
                         }
 
 
                         if (i < maxI - 1)
                         {
-                            focusPoints.Add(points[i + 1][j]);
+                            addToList(focusPoints, points[i + 1][j]);
+                            //focusPoints.Add(points[i + 1][j]);
                         }
 
                         if ((i < maxI - 1) && (j < maxJ - 1))
                         {
-                            focusPoints.Add(points[i + 1][j + 1]);
+                            addToList(focusPoints, points[i + 1][j + 1]);
+                            //focusPoints.Add(points[i + 1][j + 1]);
                         }
 
-                        coloring.ColoringSurface(focusPoints);
+                        if (focusPoints.Count>0)
+                            coloring.ColoringSurface(focusPoints);
 
                     }
                 }
@@ -251,7 +267,7 @@ namespace TestSystem.Plot
                 //Y *= (int)mult_point;
                 points = Calculate(function, param);
                 Paint();
-                SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
+               /// SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
 
                 //ClickToForm();
             }

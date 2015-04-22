@@ -252,16 +252,16 @@ namespace TestSystem.Drawer
                 image.SetPixel(2 * distance - i, i + image.Size.Height - distance, Color.Black);
             }
 
-            for (int i = 0; i < image.Size.Width; i++)
-            {
-                image.SetPixel(i, 0, Color.Black);
-                image.SetPixel(i, image.Size.Height-1, Color.Black);
-            }
-            for (int i = 0; i < image.Size.Height; i++)
-            {
-                image.SetPixel(0, i, Color.Black);
-                image.SetPixel(image.Size.Width-1, i, Color.Black);
-            }
+            //for (int i = 0; i < image.Size.Width; i++)
+            //{
+            //    image.SetPixel(i, 0, Color.Black);
+            //    image.SetPixel(i, image.Size.Height-1, Color.Black);
+            //}
+            //for (int i = 0; i < image.Size.Height; i++)
+            //{
+            //    image.SetPixel(0, i, Color.Black);
+            //    image.SetPixel(image.Size.Width-1, i, Color.Black);
+            //}
 
             Graphics gr = Graphics.FromImage(image); //хз что не так...
             DrawText(gr, "X", 0, image.Size.Width - distance, distance*2, distance*2, 10);

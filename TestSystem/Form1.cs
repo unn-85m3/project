@@ -13,7 +13,17 @@ using TestSystem.Algorithm;
 using TestSystem.Plot;
 using KSModels;
 
+using Microsoft.Office.Interop;
+using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+
+
+
+
 using TestSystem.Algorithm.Diagonal_Algoritm;
+
+
 
 
 namespace TestSystem
@@ -26,7 +36,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 20;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 2;
 
         protected class PlotPoint : IPoint
         {
@@ -81,7 +91,6 @@ namespace TestSystem
         public Form1()
         {
             InitializeComponent();
-            Create_TestSystem();
         }
 
 
@@ -311,6 +320,110 @@ namespace TestSystem
         //    }
         //}
 
+
+        public void ExportToExcel(/*DataGridView grid*/)
+        {
+            ApplicationClass Excel = new ApplicationClass();
+            XlReferenceStyle RefStyle = Excel.ReferenceStyle;
+            Excel.Visible = true;
+            Workbook wb = null;
+            String TemplatePath = System.Windows.Forms.Application.StartupPath + @"\Экспорт данных.xlt";
+            try
+            {
+                wb = Excel.Workbooks.Add(TemplatePath); // !!! 
+            }
+            catch (System.Exception ex)
+            {
+                throw new Exception("Не удалось загрузить шаблон для экспорта " + TemplatePath + "\n" + ex.Message);
+            }
+            /*Worksheet ws1 = wb.Worksheets.get_Item(1) as Worksheet;
+            for (int j = 0; j < grid.Columns.Count; ++j)
+            {
+                (ws1.Cells[1, j + 1] as Range).Value2 = grid.Columns[j].HeaderText;
+                for (int i = 0; i < grid.Rows.Count; ++i)
+                {
+                    object Val = grid.Rows[i].Cells[j].Value;
+                    if (Val != null)
+                        (ws1.Cells[i + 2, j + 1] as Range).Value2 = Val.ToString();
+                }
+            }
+            ws1.Columns.EntireColumn.AutoFit();*/
+
+            for (int k = 0; k < Algorithms.Length; k++)
+            {
+                Worksheet ws2 = wb.Worksheets.get_Item(k + 1) as Worksheet;
+                for (int j = 0; j < dataGridViews[k].Columns.Count; ++j)
+                {
+                    (ws2.Cells[1, j + 1] as Range).Value2 = dataGridViews[k].Columns[j].HeaderText;
+                    for (int i = 0; i < dataGridViews[k].Rows.Count; ++i)
+                    {
+                        object Val = dataGridViews[k].Rows[i].Cells[j].Value;
+                        if (Val != null)
+                            (ws2.Cells[i + 2, j + 1] as Range).Value2 = Val.ToString();
+                    }
+                }
+                ws2.Columns.EntireColumn.AutoFit();
+            }
+            /* Worksheet ws2 = wb.Worksheets.get_Item(2) as Worksheet;
+             for (int j = 0; j < grid.Columns.Count; ++j)
+             {
+                 (ws2.Cells[1, j + 1] as Range).Value2 = grid.Columns[j].HeaderText;
+                 for (int i = 0; i < grid.Rows.Count; ++i)
+                 {
+                     object Val = grid.Rows[i].Cells[j].Value;
+                     if (Val != null)
+                         (ws2.Cells[i + 2, j + 1] as Range).Value2 = Val.ToString();
+                 }
+             }
+             ws2.Columns.EntireColumn.AutoFit();
+
+             Worksheet ws3 = wb.Worksheets.get_Item(3) as Worksheet;
+             for (int j = 0; j < grid.Columns.Count; ++j)
+             {
+                 (ws3.Cells[1, j + 1] as Range).Value2 = grid.Columns[j].HeaderText;
+                 for (int i = 0; i < grid.Rows.Count; ++i)
+                 {
+                     object Val = grid.Rows[i].Cells[j].Value;
+                     if (Val != null)
+                         (ws3.Cells[i + 2, j + 1] as Range).Value2 = Val.ToString();
+                 }
+             }
+             ws3.Columns.EntireColumn.AutoFit();
+
+             Worksheet ws4 = wb.Worksheets.get_Item(4) as Worksheet;
+             for (int j = 0; j < grid.Columns.Count; ++j)
+             {
+                 (ws4.Cells[1, j + 1] as Range).Value2 = grid.Columns[j].HeaderText;
+                 for (int i = 0; i < grid.Rows.Count; ++i)
+                 {
+                     object Val = grid.Rows[i].Cells[j].Value;
+                     if (Val != null)
+                         (ws1.Cells[i + 2, j + 1] as Range).Value2 = Val.ToString();
+                 }
+             }
+             ws1.Columns.EntireColumn.AutoFit();*/
+
+
+            Excel.ReferenceStyle = RefStyle;
+            ReleaseExcel(Excel as Object);
+        }
+
+        private void ReleaseExcel(object excel)
+        {
+            // Уничтожение объекта Excel.
+            Marshal.ReleaseComObject(excel);
+            // Вызываем сборщик мусора для немедленной очистки памяти
+            GC.GetTotalMemory(true);
+        }
+
+
+        /////////////////////////////////////////////////////
+
+
+
+
+
+
         private void Init_Table()
         {
             
@@ -402,12 +515,47 @@ namespace TestSystem
         {
             buttonStart.Enabled = false;
             Algorithms.Test();
+            button1.Enabled = true;
+            button2.Enabled = true;
+        }
+
+        private void buttonShow_Click(object sender, EventArgs e)
+        {
+            bool test = false;
+            int.TryParse(maskedTextBox1.Text, out MIN_NUMBER_TASK);
+
+            int.TryParse(maskedTextBox2.Text, out MAX_NUMBER_TASK);
+
+            if (MIN_NUMBER_TASK > 60 || MIN_NUMBER_TASK < 1 || MAX_NUMBER_TASK > 60 || MAX_NUMBER_TASK < 1 || MAX_NUMBER_TASK < MIN_NUMBER_TASK)
+            {
+                MessageBox.Show("Введено не верное число(а)! Числа должны быть в диапазоне от 1 до 60. Начальное значение < Конечного");
+            }
+            else test = true;
+
+            if (test)
+            {
+                buttonShow.Enabled = false;
+                buttonStart.Enabled = true;
+                Create_TestSystem();
+            }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (CompleateTask[CompleateTask.Length - 1] >= Algs.Count * Tasks.Count)
-                buttonStart.Enabled = true;
+            //if (CompleateTask[CompleateTask.Length - 1] >= Algs.Count * Tasks.Count)
+            //    buttonStart.Enabled = true;
+        }
+
+       
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("C:/Users/Ирина Рыжова/Desktop/project 1/TestSystem/bin/Release/Result Exel/Result.accdb", "");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExportToExcel();
         }
     }
 }
