@@ -132,6 +132,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="JSON\DataFormat.cs" />
+    <Compile Include="Logger\ICalculateListener.cs" />
+    <Compile Include="Logger\ILogger.cs" />
+    <Compile Include="Logger\Logger.cs" />
     <Compile Include="Plot\AbstractPlot.cs">
       <SubType>Form</SubType>
     </Compile>
