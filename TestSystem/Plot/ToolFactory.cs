@@ -24,7 +24,7 @@ namespace TestSystem.Plot
 
         public IColoring CreateColoring(Form_Draw form)
         {
-            return new Coloring_dotNet(form);
+            return new Coloring_Double(form); //Coloring_dotNet(form);
         }
 
         public INormalize CreateNormalize(Form_Draw form)

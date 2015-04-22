@@ -13,7 +13,7 @@ namespace TestSystem.Plot
     {
         private static Bitmap image = new Bitmap(100, 100);
         List<List<IPoint>> points;
-        double h = 1;
+        double h = 0.4;
 
         public Plot(IFunction function, IEnterBlackBoxParam task)
             : base(function, task)
