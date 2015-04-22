@@ -8,6 +8,7 @@ using TestSystem.BlackBox;
 using TestSystem.Algorithm.Diagonal_Algoritm;
 using System.Data.OleDb;
 using Saver;
+using Logger;
 
 namespace TestSystem.Algorithm
 {
@@ -25,6 +26,8 @@ namespace TestSystem.Algorithm
         public static Double STEP = 1;
         private List<IPoint> _points;
         private Saver.Saver saver;
+
+        protected Logger.Logger log;
 
 
        
@@ -106,7 +109,7 @@ namespace TestSystem.Algorithm
         public IOutBlackBoxParam Function(Double x1, Double x2)
         {
             calls++;
-            IOutBlackBoxParam p=function.Calculate(x1, x2);
+            IOutBlackBoxParam p = function.Calculate(x1, x2);
             Point point = new Point(x1, x2);
             point.cost = p.Cost;
             this._points.Add(point);
@@ -142,6 +145,11 @@ namespace TestSystem.Algorithm
                         n++;
                     }
             return n;
+        }
+
+        public void setCalculateListener(Logger.ICalculateListener listener)
+        {
+
         }
     }
 }
