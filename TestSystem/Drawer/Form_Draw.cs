@@ -397,7 +397,7 @@ namespace TestSystem.Drawer
                 pictureBox1.Height *= 2;
                 pictureBox1.Width *= 2;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                 if (ptAlg != null)
                     for (int i = 0; i < numb_point; i++)
                     {
@@ -412,7 +412,7 @@ namespace TestSystem.Drawer
                 pictureBox1.Height /= 2;
                 pictureBox1.Width /= 2;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                 if (ptAlg != null)
                     for (int i = 0; i < numb_point; i++)
                     {
@@ -425,13 +425,14 @@ namespace TestSystem.Drawer
                 pictureBox1.Height = (int)(pictureBox1.Height / zoom);
                 pictureBox1.Width = (int)(pictureBox1.Width / zoom);
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
                 if (ptAlg != null)
                     for (int i = 0; i < numb_point; i++)
                     {
                         this.bts[i].Location = new System.Drawing.Point((int)((this.bts[i].Location.X) / zoom), (int)((this.bts[i].Location.Y) / zoom));
                         this.bts[i].Size = new System.Drawing.Size((int)(this.bts[i].Size.Width / zoom), (int)(this.bts[i].Size.Height / zoom));
                     }
+                zoom = 1;
             }
         }
 

@@ -13,7 +13,7 @@ namespace TestSystem.Plot
     {
         Form_Draw frmd;
         List<IPoint> p;
-        double mult = 10000;
+        double mult = 1;
 
         public Coloring_dotNet() 
         {
@@ -110,7 +110,7 @@ namespace TestSystem.Plot
         {
             cost *= mult;
             if (cost < 256 * 256 * 256)
-                return Color.FromArgb((int)cost % 256, (((int)cost  / 256) % 256), ((int)cost / 256 / 256) % 256);
+                return Color.FromArgb((((int)cost / 256 / 256) % 256), (((int)cost  / 256) % 256), (int)cost % 256);
             else if (cost < 0)
                 return Color.FromArgb(0, 0, 0);
             else

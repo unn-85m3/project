@@ -119,9 +119,11 @@
     <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="JSON\DataFormat.cs" />
     <Compile Include="Plot\AbstractPlot.cs">
@@ -161,6 +163,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Plot\AbstractPlot.resx">
       <DependentUpon>AbstractPlot.cs</DependentUpon>
