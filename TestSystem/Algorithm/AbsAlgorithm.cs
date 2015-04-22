@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm.Diagonal_Algoritm;
+using System.Data.OleDb;
+using Saver;
 
 namespace TestSystem.Algorithm
 {
@@ -22,17 +24,22 @@ namespace TestSystem.Algorithm
         private int calls;
         public static Double STEP = 1;
         private List<IPoint> _points;
+        private Saver.Saver saver;
 
 
+       
+        //
         /// <summary>
         /// конструктор
         /// </summary>
         /// <param name="parametr">входные параметры ф-и Ч.Я.</param>
         /// <param name="function">Используемая ф-ция</param>
+
         protected AbsAlgorithm()
         {
             calls = 0;
             _points = new List<IPoint>();
+            
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using TestSystem.test_system;
 using TestSystem.BlackBox;
 using TestSystem.Algorithm;
+using TestSystem.Plot;
 using KSModels;
 
 using TestSystem.Algorithm.Diagonal_Algoritm;
@@ -25,16 +26,62 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 10;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 20;
 
+        protected class PlotPoint : IPoint
+        {
+            private double _x1;
+            private double _x2;
+            private double _cost;
 
+            public PlotPoint(double x1, double x2, double cost)
+            {
+                this._x1 = x1;
+                this._x2 = x2;
+                this._cost = cost;
+            }
+
+            public double x1
+            {
+                get
+                {
+                    return _x1;
+                }
+                set
+                {
+                    _x1 = value;
+                }
+            }
+
+            public double x2
+            {
+                get
+                {
+                    return _x2;
+                }
+                set
+                {
+                    _x2 = value;
+                }
+            }
+
+            public double cost
+            {
+                get
+                {
+                    return _cost;
+                }
+                set
+                {
+                    _cost = value;
+                }
+            }
+        }
 
         public Form1()
         {
             InitializeComponent();
             Create_TestSystem();
-
-           /// KSModels.DllBlackBoxCalculator Calc = new KSModels.DllBlackBoxCalculator("E:/GitHub/bbs/Models/11.1.КС.r1", null); // Абсолючный путь... пздц..... бред...
         }
 
 
@@ -81,7 +128,7 @@ namespace TestSystem
 
 
 
-            CompleateTask = new int[Algs.Count];
+            CompleateTask = new int[Algs.Count+1];
             for (int i = 0; i < CompleateTask.Length; i++)
                 CompleateTask[i] = 0;
 
@@ -106,9 +153,24 @@ namespace TestSystem
             Algorithms.AddAlgorithm(Algs);
 
             InitTab();
-            Algorithms.Test();
+            //Algorithms.Test();
+
+            //BlackBox.BlackBoxFunction fn = new BlackBox.BlackBoxFunction();
+            //fn.Init(Tasks[6]);
+            //Plot.Plot plot = new Plot.Plot(fn, Tasks[6].EnterParams);
+            //plot.Show();
+            //plot.StartCalculate();
+            //plot.DoubleClick += plot_DoubleClick;
+            
             //Algorithms.Add(new Algorithm.Benchmark_Algorithm(null,null));
             //Algorithms.Add(new Algorithm.Genetic_Algorithm(null, null));        
+        }
+
+        void plot_DoubleClick(object sender, EventArgs e)
+        {
+            IPoint point = new PlotPoint(42, 52, 0);
+            ((IPlot)sender).AddPoint(point);
+
         }
 
         /// <summary>
@@ -156,6 +218,7 @@ namespace TestSystem
                     if (alg.Name == Algs[i].Name)
                     {
                         CompleateTask[i]++;
+                        CompleateTask[CompleateTask.Length - 1]++;
                         for (int j = 0; j < Tasks.Count; j++)
                         {
                             if (dataGridViews[i].Rows[j].Cells[0].Value.ToString() == task.Name)
@@ -176,6 +239,7 @@ namespace TestSystem
                     if (alg.Name == Algs[i].Name)
                     {
                         CompleateTask[i]++;
+                        CompleateTask[CompleateTask.Length - 1]++;
                         for (int j = 0; j < Tasks.Count; j++)
                         {
                             if (dataGridViews[i].Rows[j].Cells[0].Value.ToString() == task.Name)
@@ -262,33 +326,49 @@ namespace TestSystem
                         count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
 
 
-
-                        if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100 > 0)
+                        if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) == 0) dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Yellow;
+                        else
                         {
-                            dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Red;
+                            if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100 > 0)
+                            {
+                                dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Red;
+                            }
+                            else dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.GreenYellow;
                         }
-                        else dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Green;
 
-                        if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100 > 0)
+                        if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) == 0) dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Yellow;
+                        else
                         {
-                            dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Red;
+                            if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100 > 0)
+                            {
+                                dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Red;
+                            }
+                            else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.GreenYellow;
                         }
-                        else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Green;
 
                     }
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count * 100;
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count * 100;
-                if (time / Tasks.Count > 0)
-                {
-                    dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Red;
-                }
-                else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Green;
 
-                if (count / Tasks.Count > 0)
+                if (time / Tasks.Count == 0) dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Yellow;
+                else
                 {
-                    dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
+                    if (time / Tasks.Count > 0)
+                    {
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Red;
+                    }
+                    else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.GreenYellow;
                 }
-                else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Green;
+
+                if (count / Tasks.Count == 0) dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Yellow;
+                else
+                {
+                    if (count / Tasks.Count > 0)
+                    {
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
+                    }
+                    else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.GreenYellow;
+                }
             }
         }
 
@@ -303,14 +383,31 @@ namespace TestSystem
             Init_Table(alg, task, rez, time);
             if (CompleateTask[0] == Tasks.Count)
                 Init_Table();
+         
         }
 
         private void dataGridViews_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(buttonStart.Enabled == false)
+                if (CompleateTask[CompleateTask.Length - 1] >= Algs.Count * Tasks.Count)
+                    buttonStart.Enabled = true;
+
             int row = e.RowIndex;
             PAGE = tabControl1.SelectedIndex;
-            Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
+            if(PAGE != 0 && row < dataGridViews[PAGE].RowCount - 2)
+                Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
+        }
 
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            buttonStart.Enabled = false;
+            Algorithms.Test();
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (CompleateTask[CompleateTask.Length - 1] >= Algs.Count * Tasks.Count)
+                buttonStart.Enabled = true;
         }
     }
 }

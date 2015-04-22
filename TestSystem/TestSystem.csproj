@@ -11,6 +11,8 @@
     <AssemblyName>TestSystem</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>опубликовать\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -23,10 +25,8 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +47,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BlackBoxCommon, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -67,10 +69,6 @@
     <Reference Include="MathTools, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bbs_dll\MathTools.dll</HintPath>
-    </Reference>
-    <Reference Include="MWArray, Version=2.14.0.0, Culture=neutral, PublicKeyToken=e1d84a0da19db86f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\MATLAB\R2013a\toolbox\dotnetbuilder\bin\win64\v2.0\MWArray.dll</HintPath>
     </Reference>
     <Reference Include="NumericalMethodsLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -97,6 +95,12 @@
     <Compile Include="Algorithm\Diagonal_Algoritm\DiagonalAlgorithmV2.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\ILine.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\IPlace.cs" />
+    <Compile Include="Drawer\Form_Draw.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Drawer\Form_Draw.Designer.cs">
+      <DependentUpon>Form_Draw.cs</DependentUpon>
+    </Compile>
     <Compile Include="IPoint.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Line.cs" />
     <Compile Include="Algorithm\Diagonal_Algoritm\Place.cs" />
@@ -115,15 +119,33 @@
     <Compile Include="Drawer\Drawer.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="JSON\DataFormat.cs" />
-    <Compile Include="Plot\AbstractPlot.cs" />
+    <Compile Include="Plot\AbstractPlot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plot\Coloring\Coloring_dotNet.cs" />
+    <Compile Include="Plot\Coloring\Coloring_Double.cs" />
+    <Compile Include="Plot\Draw_points.cs" />
+    <Compile Include="Plot\Coloring\IColoring.cs" />
+    <Compile Include="Plot\Normalize\INormalize.cs" />
     <Compile Include="Plot\IPlot.cs" />
+    <Compile Include="Plot\IToolFactory.cs" />
+    <Compile Include="Plot\Normalize\Normalize.cs" />
+    <Compile Include="Plot\Plot.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Plot\PlotPoint.cs" />
+    <Compile Include="Plot\ToolFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Saver\ISaver.cs" />
+    <Compile Include="Saver\Saver.cs" />
     <Compile Include="Tasks\ITaskPackage.cs" />
     <Compile Include="Tasks\TaskPackage.cs" />
     <Compile Include="Tasks\Tasks_Base.cs" />
@@ -131,8 +153,23 @@
     <Compile Include="test_system\IEndCalculate.cs" />
     <Compile Include="test_system\ITestSystem.cs" />
     <Compile Include="test_system\TestSystem.cs" />
+    <Compile Include="Vars.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Vars.xsd</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Drawer\Form_Draw.resx">
+      <DependentUpon>Form_Draw.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plot\AbstractPlot.resx">
+      <DependentUpon>AbstractPlot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Plot\Plot.resx">
+      <DependentUpon>Plot.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -157,6 +194,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Vars.xsc">
+      <DependentUpon>Vars.xsd</DependentUpon>
+    </None>
+    <None Include="Vars.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Vars.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Vars.xss">
+      <DependentUpon>Vars.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -179,6 +227,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Base.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="bbs_dll\BlackBoxCommon.dll" />
     <Content Include="bbs_dll\Core.dll" />
     <Content Include="bbs_dll\KSModels.dll" />
