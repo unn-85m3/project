@@ -8,6 +8,6 @@ namespace TestSystem.Logger
 {
     interface ICalculateListener
     {
-        public void onCalculate(double x1, double x2, double cost);
+        void onCalculate(double x1, double x2, double cost);
     }
 }
