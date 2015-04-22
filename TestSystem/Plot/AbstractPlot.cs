@@ -233,17 +233,29 @@ namespace TestSystem.Plot
             }
         }
 
-        public void StartCalculate()
+        public void StartCalculate() // Я изменил слегка(что-бы масштабирование работало нормально)
         {
-            coloring = factory.CreateColoring(this);
-            normalize = factory.CreateNormalize(this);
-            X *= (int)mult_point; // МАсштабирование!!!!!!!!!!!!!
-            Y *= (int)mult_point;
-            points = Calculate(function, param);
-            Paint();
-            SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
+            StartCalc(100);
+        }
 
-            //ClickToForm();
+        private void StartCalc(double mult)
+        {
+            if ((int)(param.x1_max * param.x2_max * mult) < 65536)
+            {
+                coloring = factory.CreateColoring(this);
+                normalize = factory.CreateNormalize(this, mult);
+                X = (int)(X * mult);
+                Y = (int)(Y * mult);
+                UpdateComponent(X, Y);
+                //X *= (int)mult_point; // МАсштабирование!!!!!!!!!!!!!
+                //Y *= (int)mult_point;
+                points = Calculate(function, param);
+                Paint();
+                SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
+
+                //ClickToForm();
+            }
+            else StartCalc(mult/2);
         }
 
         protected virtual List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters) { throw new NotImplementedException(); }
@@ -289,6 +301,7 @@ namespace TestSystem.Plot
             trackBar1.Enabled = true;
             radioButton1.Enabled = true;
             radioButton2.Enabled = true;
+            button1.Enabled = false;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace TestSystem.Plot
         {
             this.form = form;
             mX1 = mX2 = koef;
-            form.Zoom_draw((int)koef);
+            //form.Zoom_draw((int)koef);
             form.Mult_point(koef);
         }
 

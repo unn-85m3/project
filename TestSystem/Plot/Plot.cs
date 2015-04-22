@@ -18,10 +18,11 @@ namespace TestSystem.Plot
         public Plot(IFunction function, IEnterBlackBoxParam task)
             : base(function, task)
         {
-            X = (int)task.x1_max + 1;
-            Y = (int)task.x2_max + 1;
-            image = new Bitmap((int)task.x1_max + 1, (int)task.x2_max + 1);
-            pictureBox1.Image = image;
+            X = (int)((task.x1_max + 1));
+            Y = (int)((task.x2_max + 1));
+            UpdateComponent(X, Y);
+            //image = new Bitmap((int)task.x1_max + 1, (int)task.x2_max + 1);
+            //pictureBox1.Image = image;
             points = new List<List<IPoint>>();
         }
 

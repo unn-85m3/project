@@ -11,5 +11,6 @@ namespace TestSystem.Plot
     {
         IColoring CreateColoring(Form_Draw form);
         INormalize CreateNormalize(Form_Draw form);
+        INormalize CreateNormalize(Form_Draw form, Double koef);
     }
 }

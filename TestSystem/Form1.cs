@@ -26,7 +26,7 @@ namespace TestSystem
         private int[] CompleateTask;
         private double[,,] BenchRez;
         private int PAGE = 0;
-        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 38;
+        private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 20;
 
         protected class PlotPoint : IPoint
         {
@@ -128,7 +128,7 @@ namespace TestSystem
 
 
 
-            CompleateTask = new int[Algs.Count];
+            CompleateTask = new int[Algs.Count+1];
             for (int i = 0; i < CompleateTask.Length; i++)
                 CompleateTask[i] = 0;
 
@@ -218,6 +218,7 @@ namespace TestSystem
                     if (alg.Name == Algs[i].Name)
                     {
                         CompleateTask[i]++;
+                        CompleateTask[CompleateTask.Length - 1]++;
                         for (int j = 0; j < Tasks.Count; j++)
                         {
                             if (dataGridViews[i].Rows[j].Cells[0].Value.ToString() == task.Name)
@@ -238,6 +239,7 @@ namespace TestSystem
                     if (alg.Name == Algs[i].Name)
                     {
                         CompleateTask[i]++;
+                        CompleateTask[CompleateTask.Length - 1]++;
                         for (int j = 0; j < Tasks.Count; j++)
                         {
                             if (dataGridViews[i].Rows[j].Cells[0].Value.ToString() == task.Name)
@@ -386,11 +388,26 @@ namespace TestSystem
 
         private void dataGridViews_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            if(buttonStart.Enabled == false)
+                if (CompleateTask[CompleateTask.Length - 1] >= Algs.Count * Tasks.Count)
+                    buttonStart.Enabled = true;
+
             int row = e.RowIndex;
             PAGE = tabControl1.SelectedIndex;
             if(PAGE != 0 && row < dataGridViews[PAGE].RowCount - 2)
                 Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
+        }
 
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            buttonStart.Enabled = false;
+            Algorithms.Test();
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (CompleateTask[CompleateTask.Length - 1] >= Algs.Count * Tasks.Count)
+                buttonStart.Enabled = true;
         }
     }
 }

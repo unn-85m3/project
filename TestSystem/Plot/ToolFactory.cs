@@ -32,6 +32,10 @@ namespace TestSystem.Plot
             return new Normalize(form);
         }
 
+        public INormalize CreateNormalize(Form_Draw form, Double koef)
+        {
+            return new Normalize(form, koef);
+        }
 
         protected class TempColoring : IColoring
         {

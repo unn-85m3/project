@@ -31,26 +31,53 @@
             this.components = new System.ComponentModel.Container();
             this.toolTipTabPages = new System.Windows.Forms.ToolTip(this.components);
             this.button1 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonStart = new System.Windows.Forms.Button();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.button1.Location = new System.Drawing.Point(820, 12);
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.button1.Location = new System.Drawing.Point(12, 32);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
             this.button1.Text = "Save in Exel";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.buttonStart);
+            this.panel1.Controls.Add(this.button1);
+            this.panel1.Location = new System.Drawing.Point(847, 12);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(99, 308);
+            this.panel1.TabIndex = 1;
+            // 
+            // buttonStart
+            // 
+            this.buttonStart.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.buttonStart.Location = new System.Drawing.Point(12, 3);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.TabIndex = 1;
+            this.buttonStart.Text = "Start Tests";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(907, 338);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(958, 332);
+            this.Controls.Add(this.panel1);
             this.Name = "Form1";
             this.Text = "Test system";
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -90,7 +117,7 @@
             this.tabControl1.Location = new System.Drawing.Point(1, 1);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(this.Size.Width - 107, this.Size.Height - 41);
+            this.tabControl1.Size = new System.Drawing.Size(this.Size.Width - 137, this.Size.Height - 41);
             //this.toolTipTabPages.SetToolTip(this.tabControl1, "Результаты работы алгоритмов");
             this.tabControl1.ShowToolTips = true;
             this.tabControl1.TabIndex = 0;
@@ -191,6 +218,8 @@
         private System.Windows.Forms.DataGridView[] dataGridViews;
         private System.Windows.Forms.ToolTip toolTipTabPages;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button buttonStart;
     }
 }
 
