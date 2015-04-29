@@ -23,11 +23,11 @@ namespace TestSystem.Algorithm
         protected string atributs = "Параметры алгоритма: ";// Параметры алгоритма
         private IFunction _function;///функция для оптимизации
         private int calls;
-        public static Double STEP = 1;
+        public Double STEP = 1;
         private List<IPoint> _points;
         private Saver.Saver saver;
 
-        protected Logger.Logger log;
+        protected List<Logger.ICalculateListener> listeners;
 
 
        
@@ -42,7 +42,17 @@ namespace TestSystem.Algorithm
         {
             calls = 0;
             _points = new List<IPoint>();
+            listeners = new List<Logger.ICalculateListener>();
             
+        }
+
+        protected AbsAlgorithm(double step)
+        {
+            STEP = step;
+            calls = 0;
+            _points = new List<IPoint>();
+            listeners = new List<Logger.ICalculateListener>();
+
         }
 
         /// <summary>
@@ -51,6 +61,12 @@ namespace TestSystem.Algorithm
         public virtual string Name
         {
             get { return name; }
+        }
+
+        public double Step
+        {
+            get { return STEP; }
+            set { STEP = value; }
         }
 
         /// <summary>
@@ -78,6 +94,7 @@ namespace TestSystem.Algorithm
         public void SetFunction(IFunction function)
         {
             this.function = function;
+            
         }
 
         private IFunction function
@@ -113,6 +130,7 @@ namespace TestSystem.Algorithm
             Point point = new Point(x1, x2);
             point.cost = p.Cost;
             this._points.Add(point);
+            call(x1, x2, p.Cost,function.WhatTask());
             return p;
         }
 
@@ -147,9 +165,23 @@ namespace TestSystem.Algorithm
             return n;
         }
 
+        private void call(double x1, double x2, double cost, String name)
+        {
+            int n = listeners.Count;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (listeners[i]!=null)
+                {
+                    listeners[i].onCalculate(x1, x2, cost, name);
+                }
+                
+            }
+        }
+
         public void setCalculateListener(Logger.ICalculateListener listener)
         {
-
+            listeners.Add(listener);
         }
     }
 }

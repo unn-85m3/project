@@ -24,6 +24,7 @@ namespace TestSystem.Plot
         INormalize normalize;
         Boolean isNormal = false;
         List<Control> pointsObjs;
+        double mult = 100;
 
         /// <summary>
         /// Требуется переменная конструктора.
@@ -61,13 +62,33 @@ namespace TestSystem.Plot
             this.pictureBox1.Size = new System.Drawing.Size(1000, 1000);
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Size = new System.Drawing.Size(160, 330);
+            // 
+            // panel1
+            // 
+            this.panel1.Size = new System.Drawing.Size(491, 403);
+            // 
+            // panel2
+            // 
+            this.panel2.Size = new System.Drawing.Size(160, 330);
+            // 
+            // panel3
+            // 
+            this.panel3.Location = new System.Drawing.Point(14, 423);
+            // 
+            // panel4
+            // 
+            this.panel4.Location = new System.Drawing.Point(413, 423);
+            // 
             // button1
             // 
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // AbstractPlot
             // 
-            this.ClientSize = new System.Drawing.Size(685, 500);
+            this.ClientSize = new System.Drawing.Size(685, 526);
             this.Name = "AbstractPlot";
             this.Shown += new System.EventHandler(this.AbstractPlot_Shown);
             this.Click += new System.EventHandler(this.AbstractPlot_Click);
@@ -93,6 +114,7 @@ namespace TestSystem.Plot
 
         public AbstractPlot(IFunction function, IEnterBlackBoxParam param):base()
         {
+           
             DrawLegend();
             userPoints = new List<IPoint>();
             this.function = function;
@@ -101,6 +123,7 @@ namespace TestSystem.Plot
             this.Click += AbstractPlot_Click;
             pointsObjs = new List<Control>();
             //this.Paint += AbstractPlot_Paint;
+            normalize = factory.CreateNormalize(this, mult);
             InitializeComponent();
         }
 
@@ -251,7 +274,7 @@ namespace TestSystem.Plot
 
         public void StartCalculate() // Я изменил слегка(что-бы масштабирование работало нормально)
         {
-            StartCalc(100);
+            StartCalc(mult);
         }
 
         private void StartCalc(double mult)

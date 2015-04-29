@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace TestSystem.Logger
 {
-    interface ICalculateListener
+    public interface ICalculateListener
     {
-        void onCalculate(double x1, double x2, double cost);
+        void onCalculate(double x1, double x2, double cost,String name);
     }
 }

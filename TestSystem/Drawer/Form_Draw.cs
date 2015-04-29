@@ -33,6 +33,7 @@ namespace TestSystem.Drawer
         protected int numb_point = 0;
         private static Bitmap image;
         protected List<Button> bts = new List<Button>();
+        protected List<Bitmap> bms = new List<Bitmap>();
         protected List<IPoint> ptAlg = new List<IPoint>();
         protected Button button1;
 
@@ -137,12 +138,6 @@ namespace TestSystem.Drawer
         //    if (Y < y) Y = (int)(y + 1);
         //}
 
-        public void Zoom_draw(int zoom)
-        {
-            //X *= (int)zoom;
-            //Y *= (int)zoom;
-        }
-
         public void Mult_color(double mult)
         {
             mult_color = mult; 
@@ -206,7 +201,7 @@ namespace TestSystem.Drawer
             numb_point = pt.Count;
             label3.Text = numb_point.ToString();
             trackBar1.Maximum = numb_point;
-            bts = new List<Button>(numb_point);
+            //bts = new List<Button>(numb_point);
             CreateButtons();
 
             //DrawAxe();
@@ -223,11 +218,22 @@ namespace TestSystem.Drawer
             //DrawAxe();
         }
 
+        public void ClearDrawNumberPoints()
+        {
+            ptAlg = null;
+            numb_point = 0;
+            label3.Text = numb_point.ToString();
+            trackBar1.Maximum = numb_point;
+        }
+
         public void DrawAll()
         {
             DrawAxe();
 
             DrawLegend();
+
+            CreateBmps();
+            DrawBmps();
         }
 
         private void DrawAxe()
@@ -271,32 +277,32 @@ namespace TestSystem.Drawer
 
         private void CreateButton()
         {
-            if(ptAlg != null)
+            if (ptAlg != null)
             {
                 int size = 4;
-                Bitmap back = new Bitmap(size,size);
+                Bitmap back = new Bitmap(size, size);
                 for (int i = 0; i < size; i++)
                     for (int j = 0; j < size; j++)
                         back.SetPixel(i, j, Color.Red);
 
                 int last = bts.Count;
-                    bts.Add(new Button());
-                    this.panel1.Controls.Add(this.bts[last]);
-                    // 
-                    // bts[i]
-                    // 
-                    this.bts[last].Visible = false;
-                    this.bts[last].Location = new System.Drawing.Point((int)(ptAlg[last].x1) - 2, (int)(ptAlg[last].x2) - 2);
-                    this.bts[last].Name = "bts" + last;
-                    this.bts[last].Size = new System.Drawing.Size(size, size);
-                    this.bts[last].TabIndex = 1;
-                    this.bts[last].Text = " ";
-                    toolTip1.SetToolTip(this.bts[last], "Стоимость полученная в этой точке: " + ptAlg[last].cost);
-                    this.bts[last].UseVisualStyleBackColor = true;
-                    this.bts[last].BackgroundImage = back;
-                    //this.bts[i].BackColor = Color.Red;
-                    this.bts[last].BringToFront();
-                
+                bts.Add(new Button());
+                this.panel1.Controls.Add(this.bts[last]);
+                // 
+                // bts[i]
+                // 
+                this.bts[last].Visible = false;
+                this.bts[last].Location = new System.Drawing.Point((int)(ptAlg[last].x1) - 2, (int)(ptAlg[last].x2) - 2);
+                this.bts[last].Name = "bts" + last;
+                this.bts[last].Size = new System.Drawing.Size(size, size);
+                this.bts[last].TabIndex = 1;
+                this.bts[last].Text = " ";
+                toolTip1.SetToolTip(this.bts[last], "Стоимость полученная в этой точке: " + ptAlg[last].cost);
+                this.bts[last].UseVisualStyleBackColor = true;
+                this.bts[last].BackgroundImage = back;
+                //this.bts[i].BackColor = Color.Red;
+                this.bts[last].BringToFront();
+
             }
         }
 
@@ -331,11 +337,45 @@ namespace TestSystem.Drawer
             }
         }
 
+        private void CreateBmps()
+        {
+            if (ptAlg != null)
+            {
+                int best = 0; 
+                
+                // 
+                // bts[i]
+                // 
+                for (int i = 0; i < numb_point; i++)
+                {
+                    bms.Add(new Bitmap("1.png"));
+                    if (ptAlg[best].cost > ptAlg[i].cost)
+                        best = i;
+                    //bts[i].MakeTransparent(Color.Red);
+
+                    DrawPlus(i);
+                }
+                if (numb_point > 0)
+                    label4.Text = "Лучшее значение было полученно в точке №" + (best + 1) + ". И cost = " + ptAlg[best].cost;
+            }
+        }
+
+        private void DrawBmps()
+        {
+            pictureBox1.CreateGraphics().DrawImage(image, 0, 0);
+            for (int i = 0; i < bms.Count; i++)
+            {
+                pictureBox1.CreateGraphics().DrawImage(bms[i], 0, 0);
+            }
+        }
+
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            if (bts != null)
+            if (bms != null)
             {
                 label2.Text = trackBar1.Value.ToString();
+                if (trackBar1.Value > 0)
+                    label2.Text += (". Cost = " + ptAlg[trackBar1.Value - 1].cost);
                 for (int i = 0; i < bts.Count; i++)
                 {
                     bts[i].Visible = false;
@@ -344,33 +384,39 @@ namespace TestSystem.Drawer
                     for (int i = 0; i < trackBar1.Value; i++)
                     {
                         bts[i].Visible = true;
+                        //ShowAllPointTo(trackBar1.Value);
                     }
                 else if (radioButton2.Checked == true)
                 {
-                    bts[trackBar1.Value].Visible = true;
+                    if (trackBar1.Value > 0)
+                        bts[trackBar1.Value - 1].Visible = true;
+                    //ShowOnePointTo(trackBar1.Value - 1);
                 }
             }
         }
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (bts != null)
+            if (bms != null)
             {
                 for (int i = 0; i < bts.Count; i++)
                 {
                     bts[i].Visible = false;
                 }
                 if (radioButton1.Checked == true)
+                {
+                    //ShowAllPointTo(trackBar1.Value);
                     for (int i = 0; i < trackBar1.Value; i++)
                     {
                         bts[i].Visible = true;
                     }
+                }
             }
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (bts != null)
+            if (bms != null)
             {
                 for (int i = 0; i < bts.Count; i++)
                 {
@@ -378,11 +424,42 @@ namespace TestSystem.Drawer
                 }
                 if (radioButton2.Checked == true)
                 {
-                    bts[trackBar1.Value].Visible = true;
+                    //ShowOnePointTo(trackBar1.Value - 1);
+                    if (trackBar1.Value > 0)
+                        bts[trackBar1.Value - 1].Visible = true;
                 }
+
             }
         }
 
+        private void ShowOnePointTo(int numb)
+        {
+            for (int i = 0; i < bms.Count; i++)
+            {
+                bms[i].MakeTransparent(Color.Red);
+            }
+            bms[numb].MakeTransparent(Color.White);
+            DrawBmps();
+        }
+
+        private void ShowAllPointTo(int numb)
+        {
+            for (int i = 0; i < numb; i++)
+            {
+                bms[i].MakeTransparent(Color.White);
+            }
+            for (int i = numb; i < bms.Count; i++)
+                    bms[i].MakeTransparent(Color.Red);
+            DrawBmps();
+        }
+
+        private void DrawPlus(int numb)
+        {
+            Graphics fig = Graphics.FromImage(bms[numb]);
+            fig.FillEllipse(new SolidBrush(Color.Red), (int)ptAlg[numb].x1, (int)ptAlg[numb].x2, 5, 5);
+            bms[numb].MakeTransparent(Color.Red);
+        }
+        
         private void Form_Draw_Resize(object sender, EventArgs e)
         {
             if (this.ClientSize.Width < 685) this.ClientSize = new System.Drawing.Size(685, this.ClientSize.Height);

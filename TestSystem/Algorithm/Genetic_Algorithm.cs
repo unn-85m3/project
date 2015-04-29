@@ -47,6 +47,21 @@ namespace TestSystem.Algorithm
 
         }
 
+        public Genetic_Algorithm(double step)
+            : base(step)
+        {
+            this.name = "Генетический алгоритм";
+            this.atributs += ""; //ЗАПОЛНИ!!!!!!!!!!!!!
+            //    ga_size = 4;
+            //    ga_T = 3;
+            ////  ga_Nc = Nc;
+            ////  ga_Nm = Nm;
+            //    genom_x = new List<double>(ga_size);
+            //    genom_y = new List<double>(ga_size);
+            //    genom_fitness = new List<double>(ga_size);
+
+        }
+
         /// <summary>
         /// Здесь находится сам алгоритм отптимизации ф-и
         /// </summary>

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestSystem.Logger;
 using TestSystem.test_system;
 
 namespace TestSystem.Drawer
@@ -14,9 +15,10 @@ namespace TestSystem.Drawer
         private string NameAlg, NameTask;
         private List<IPoint> Point;
 
-        public static void DrawGraphics(List<Tasks.ITaskPackage> Tasks, List<Algorithm.IAlgorithm> Alghoritms, int Alghoritm, int Task)
+        public static void DrawGraphics(List<Tasks.ITaskPackage> Tasks, List<Algorithm.IAlgorithm> Alghoritms, int Alghoritm, int Task, List<ILogger> log=null)
         {
             BlackBox.BlackBoxFunction fn = new BlackBox.BlackBoxFunction();
+            ILogger logger=null;
             fn.Init(Tasks[Task]);
             //List<TestSystem.Tasks.ITaskPackage> temp = new List<TestSystem.Tasks.ITaskPackage>();
 
@@ -25,6 +27,11 @@ namespace TestSystem.Drawer
             System.Collections.Generic.Dictionary<string, Plot.Plot> newMDIChild = new Dictionary<string, Plot.Plot>();
 
             string tmp = Alghoritms[Alghoritm].Name + " - " + Tasks[Task].Name;
+            if (log != null)
+            {
+                logger = log[Alghoritm];
+            }
+            
 
             //foreach (System.Windows.Forms.Form frm in System.Windows.Forms.Application.OpenForms)
             //    if (frm.Name == tmp)
@@ -33,7 +40,18 @@ namespace TestSystem.Drawer
             //    }
             if (!newMDIChild.ContainsKey(tmp))
             {
-                newMDIChild[tmp] = new Plot.Plot(fn, Tasks[Task].EnterParams);
+                  Plot.Plot plot= new Plot.Plot(fn, Tasks[Task].EnterParams);
+                  newMDIChild[tmp] = plot;
+
+                if ((logger!=null) && (logger.HaveTask(Tasks[Task].Name)))
+                {
+                    List<IPoint> points=logger.GetLog(Tasks[Task].Name);
+                    foreach(IPoint point in points)
+                    {
+                        plot.AddPoint(point);
+                    }
+                    
+                }
                 //newMDIChild[tmp].Size_draw(Tasks[Task].EnterParams.x1_max, Tasks[Task].EnterParams.x2_max);
                 newMDIChild[tmp].Name = tmp;
                 newMDIChild[tmp].Text = tmp;

@@ -29,6 +29,13 @@ namespace TestSystem.Algorithm
             this.atributs += "Шаг алгоритма = "+ h+ " Па.";//Изменять при внесении изменений
         }
 
+        public Benchmark_Algorithm(double step)
+            : base(step)
+        {
+            this.name = "Простой алгоритм";
+            this.atributs += "Шаг алгоритма = " + h + " Па.";//Изменять при внесении изменений
+        }
+
         /// <summary>
         /// Здесь находится сам алгоритм оптимизации ф-и
         /// </summary>
@@ -36,6 +43,8 @@ namespace TestSystem.Algorithm
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
             //double k = -1, cost = -1;
+            h = this.Step;
+            this.atributs += "Шаг алгоритма = " + h + " Па.";
             int n = 0; //количество успешных вычислений функции
             double cost = double.MaxValue;
             IOutBlackBoxParam a;

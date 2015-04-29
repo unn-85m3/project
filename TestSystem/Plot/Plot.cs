@@ -6,6 +6,7 @@ using System.Text;
 using TestSystem.BlackBox;
 using TestSystem.DataFormat;
 using TestSystem.Tasks;
+using TestSystem.Plot;
 
 namespace TestSystem.Plot
 {

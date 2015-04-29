@@ -14,6 +14,9 @@ namespace TestSystem.Algorithm
      */
     public interface IAlgorithm
     {
+
+        void setCalculateListener(Logger.ICalculateListener listener);
+
         /// <summary>
         /// через эту ф-ю можно изменить входные данные алгоритма
         /// </summary>
@@ -31,6 +34,11 @@ namespace TestSystem.Algorithm
         String Name {get; }
 
         /// <summary>
+        /// Шаг алгоритма
+        /// </summary>
+        double Step { get; set; }
+
+        /// <summary>
         /// Параметры алгоритма (различные параметры, такие как шаг или колличество итераций) (нечто вроде версии алгоритма)
         /// </summary>
         string Atributs { get; }
@@ -45,6 +53,6 @@ namespace TestSystem.Algorithm
 
         int Calls { get; }
         void Refresh();
-        
+
     }
 }

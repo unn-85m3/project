@@ -8,6 +8,7 @@ namespace TestSystem.Logger
 {
     interface ILogger
     {
-
+        bool HaveTask(String key);
+        List<IPoint> GetLog(String key);
     }
 }

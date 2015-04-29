@@ -12,16 +12,13 @@ using TestSystem.BlackBox;
 using TestSystem.Algorithm;
 using TestSystem.Plot;
 using KSModels;
-
 using Microsoft.Office.Interop;
 using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
-
-
-
-
+using TestSystem.Logger;
 using TestSystem.Algorithm.Diagonal_Algoritm;
+using System.IO;
 
 
 
@@ -37,6 +34,7 @@ namespace TestSystem
         private double[,,] BenchRez;
         private int PAGE = 0;
         private int MIN_NUMBER_TASK = 1, MAX_NUMBER_TASK = 2;
+        private List<ILogger> log;
 
         protected class PlotPoint : IPoint
         {
@@ -90,7 +88,9 @@ namespace TestSystem
 
         public Form1()
         {
+            log = new List<ILogger>();
             InitializeComponent();
+            
         }
 
 
@@ -127,13 +127,34 @@ namespace TestSystem
         /// </summary>
         private void Create_TestSystem()
         {
-           
+            double step = 1;
+            double.TryParse(maskedTextBox3.Text, out step);
             Algs = new List<IAlgorithm>();
-            Algs.Add(new Algorithm.Benchmark_Algorithm());
+            Algs.Add(new Algorithm.Benchmark_Algorithm(step));
             //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
-            Algs.Add(new Algorithm.Complex_Algorithm());
-            Algs.Add(new Algorithm.Genetic_Algorithm());
+            Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
+            Algs.Add(new Algorithm.Complex_Algorithm(step));
+            Algs.Add(new Algorithm.Genetic_Algorithm(step));
+            //Algs.Add(new Algorithm.Benchmark_Algorithm());
+            ////Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
+            //Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
+            //Algs.Add(new Algorithm.Complex_Algorithm());
+            //Algs.Add(new Algorithm.Genetic_Algorithm());
+            //
+            //foreach (IAlgorithm alg in Algs)
+            //{
+            //    alg.Step = step;
+            //}
+
+            if (checkBox1.Checked)
+            {
+                foreach (IAlgorithm alg in Algs)
+                {
+                    Logger.Logger logger = new Logger.Logger();
+                    log.Add(logger);
+                    alg.setCalculateListener(logger);
+                }
+            }
 
 
 
@@ -493,10 +514,31 @@ namespace TestSystem
 
         public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
         {
+            /*if (lg == null)
+                lg = new Logger.Logger();*/
+            
+           /* for(int i = 0; i < alg.points.Count; i++)
+            {
+                lg.onCalculate(alg.points[i].x1, alg.points[i].x2, alg.points[i].cost, task.Name); //ЭТО ВЕРНО?!
+            }*/
+
+            if(checkBox2.Checked)
+                SaveTxt(alg, task.Name);
+
             Init_Table(alg, task, rez, time);
             if (CompleateTask[0] == Tasks.Count)
                 Init_Table();
-         
+            
+        }
+
+        private void SaveTxt(Algorithm.IAlgorithm alg, string taskName)
+        {
+            string file = (@"Результаты\" + alg.Name + "_" + taskName.Substring(7) + ".txt");
+            using (StreamWriter write_text = new StreamWriter(file, false))
+            {
+                for (int i = 0; i < alg.points.Count; i++)
+                    write_text.WriteLine("x = " + alg.points[i].x1 + " y = " + alg.points[i].x2 + " cost = " + alg.points[i].cost); //Записываем в файл текст из текстового поля
+            }
         }
 
         private void dataGridViews_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -508,7 +550,7 @@ namespace TestSystem
             int row = e.RowIndex;
             PAGE = tabControl1.SelectedIndex;
             if(PAGE != 0 && row < dataGridViews[PAGE].RowCount - 2)
-                Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row);
+                Drawer.Drawer.DrawGraphics(Tasks, Algs, PAGE, row,log);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
@@ -535,6 +577,11 @@ namespace TestSystem
             if (test)
             {
                 buttonShow.Enabled = false;
+                checkBox1.Enabled = false;
+                checkBox2.Enabled = false;
+                maskedTextBox1.Enabled = false;
+                maskedTextBox2.Enabled = false; 
+                maskedTextBox3.Enabled = false;
                 buttonStart.Enabled = true;
                 Create_TestSystem();
             }
@@ -556,6 +603,11 @@ namespace TestSystem
         private void button1_Click(object sender, EventArgs e)
         {
             ExportToExcel();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

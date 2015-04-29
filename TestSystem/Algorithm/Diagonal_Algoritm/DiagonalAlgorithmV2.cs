@@ -16,6 +16,13 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             this.atributs += ""; //ЗАПОЛНИ!!!!!!
         }
 
+        public DiagonalAlgorithmV2(double step)
+            : base(step)
+        {
+            this.name = "Диагональный алгоритм";
+            this.atributs += ""; //ЗАПОЛНИ!!!!!!
+        }
+
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
             IPoint p1=new Point(parametr.x1_min,parametr.x2_min);

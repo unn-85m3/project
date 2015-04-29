@@ -35,6 +35,7 @@ namespace TestSystem.Drawer
             this.panel2 = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -66,28 +67,29 @@ namespace TestSystem.Drawer
             // 
             // panel1
             // 
-            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.AutoScroll = true;
             this.panel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.panel1.BackColor = System.Drawing.SystemColors.Control;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(491, 412);
+            this.panel1.Size = new System.Drawing.Size(490, 402);
             this.panel1.TabIndex = 1;
             // 
             // panel2
             // 
-            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.AutoScroll = true;
             this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Location = new System.Drawing.Point(510, 85);
+            this.panel2.Location = new System.Drawing.Point(509, 85);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(160, 340);
+            this.panel2.Size = new System.Drawing.Size(160, 329);
             this.panel2.TabIndex = 2;
             // 
             // pictureBox2
@@ -95,7 +97,7 @@ namespace TestSystem.Drawer
             this.pictureBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox2.Location = new System.Drawing.Point(0, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(160, 340);
+            this.pictureBox2.Size = new System.Drawing.Size(160, 329);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
@@ -103,20 +105,29 @@ namespace TestSystem.Drawer
             // panel3
             // 
             this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.trackBar1);
-            this.panel3.Location = new System.Drawing.Point(13, 429);
+            this.panel3.Location = new System.Drawing.Point(14, 423);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(393, 59);
+            this.panel3.Size = new System.Drawing.Size(393, 91);
             this.panel3.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(10, 68);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(0, 13);
+            this.label4.TabIndex = 6;
             // 
             // label3
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(359, 43);
+            this.label3.Location = new System.Drawing.Point(363, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(13, 13);
             this.label3.TabIndex = 5;
@@ -126,7 +137,7 @@ namespace TestSystem.Drawer
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(187, 43);
+            this.label2.Location = new System.Drawing.Point(129, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(13, 13);
             this.label2.TabIndex = 4;
@@ -136,7 +147,7 @@ namespace TestSystem.Drawer
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 43);
+            this.label1.Location = new System.Drawing.Point(10, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(13, 13);
             this.label1.TabIndex = 3;
@@ -146,7 +157,7 @@ namespace TestSystem.Drawer
             // 
             this.trackBar1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.trackBar1.Enabled = false;
-            this.trackBar1.Location = new System.Drawing.Point(3, 2);
+            this.trackBar1.Location = new System.Drawing.Point(3, 5);
             this.trackBar1.Maximum = 0;
             this.trackBar1.Name = "trackBar1";
             this.trackBar1.Size = new System.Drawing.Size(380, 45);
@@ -187,7 +198,7 @@ namespace TestSystem.Drawer
             this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.Controls.Add(this.radioButton1);
             this.panel4.Controls.Add(this.radioButton2);
-            this.panel4.Location = new System.Drawing.Point(410, 429);
+            this.panel4.Location = new System.Drawing.Point(412, 423);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(260, 59);
             this.panel4.TabIndex = 4;
@@ -195,7 +206,7 @@ namespace TestSystem.Drawer
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(509, 13);
+            this.button1.Location = new System.Drawing.Point(508, 13);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(161, 23);
             this.button1.TabIndex = 5;
@@ -205,7 +216,7 @@ namespace TestSystem.Drawer
             // 
             // Form_Draw
             // 
-            this.ClientSize = new System.Drawing.Size(685, 500);
+            this.ClientSize = new System.Drawing.Size(684, 526);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -227,6 +238,8 @@ namespace TestSystem.Drawer
             this.PerformLayout();
 
         }
+
+        protected System.Windows.Forms.Label label4;
 
     }
 }

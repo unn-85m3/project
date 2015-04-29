@@ -17,7 +17,7 @@ namespace TestSystem.Plot
         Double mX1=100;
         Double mX2=100;
 
-        public Normalize(Form_Draw form, Double koef = 10)
+        public Normalize(Form_Draw form, Double koef = 1)
         {
             this.form = form;
             mX1 = mX2 = koef;

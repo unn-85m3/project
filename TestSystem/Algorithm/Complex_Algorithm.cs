@@ -33,6 +33,18 @@ namespace TestSystem.Algorithm
             cg = new PointCoord();
         }
 
+        public Complex_Algorithm(double step)
+            : base(step)
+        {
+            h = 10;
+            this.name = "Комплексный алгоритм";
+            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
+                "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
+            points_Coord = new List<PointCoord>();
+            rnd = new Random(0);
+            cg = new PointCoord();
+        }
+
         public override DataFormat.IOutBlackBoxParam Calculate() // алгоритм можно ускорить
         {
             double cost = double.MaxValue;
