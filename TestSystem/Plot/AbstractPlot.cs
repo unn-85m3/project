@@ -127,6 +127,15 @@ namespace TestSystem.Plot
             InitializeComponent();
         }
 
+        public IPoint Min
+        {
+            get { return new PlotPoint(param.x1_min, param.x2_min, param.x2_x1_min); }
+        }
+
+        public IPoint Max
+        {
+            get { return new PlotPoint(param.x1_max, param.x2_max, param.x2_x1_max); }
+        }
 
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -278,8 +287,8 @@ namespace TestSystem.Plot
         }
 
         private void StartCalc(double mult)
-        {
-            if ((int)(param.x1_max * param.x2_max * mult) < 65536)
+        {   //если coloring_doNet
+            //if ((int)(param.x1_max * param.x2_max * mult) < 65536) 
             {
                 coloring = factory.CreateColoring(this);
                 normalize = factory.CreateNormalize(this, mult);
@@ -294,7 +303,7 @@ namespace TestSystem.Plot
 
                 //ClickToForm();
             }
-            else StartCalc(mult/2);
+            //else StartCalc(mult/2);
         }
 
         protected virtual List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters) { throw new NotImplementedException(); }

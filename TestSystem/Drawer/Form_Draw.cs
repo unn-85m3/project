@@ -28,7 +28,7 @@ namespace TestSystem.Drawer
         private ToolTip toolTip1;
 
 
-        protected int X = 100, Y = 100;
+        protected int X = 100, Y = 100, x_small = 10, y_small = 10;
         protected double mult_color = 1, mult_point = 1, zoom = 1;
         protected int numb_point = 0;
         private static Bitmap image;
@@ -232,8 +232,11 @@ namespace TestSystem.Drawer
 
             DrawLegend();
 
-            CreateBmps();
-            DrawBmps();
+            CreateBitmaps();
+            if (radioButton1.Checked == true)
+                DrawBmps(trackBar1.Value);
+            else if (radioButton2.Checked == true)
+                DrawBmp(trackBar1.Value);
         }
 
         private void DrawAxe()
@@ -337,36 +340,49 @@ namespace TestSystem.Drawer
             }
         }
 
-        private void CreateBmps()
+        private void CreateBitmaps()
         {
             if (ptAlg != null)
             {
                 int best = 0; 
                 
                 // 
-                // bts[i]
+                // bms[i]
                 // 
                 for (int i = 0; i < numb_point; i++)
                 {
-                    bms.Add(new Bitmap("1.png"));
+                    //bms.Add(new Bitmap("1.png"));
+                    bms.Add(new Bitmap(x_small, y_small));
                     if (ptAlg[best].cost > ptAlg[i].cost)
                         best = i;
                     //bts[i].MakeTransparent(Color.Red);
 
-                    DrawPlus(i);
+                    DrawEllipse(i);
+                    //DrawLine(i);
                 }
                 if (numb_point > 0)
                     label4.Text = "Лучшее значение было полученно в точке №" + (best + 1) + ". И cost = " + ptAlg[best].cost;
             }
         }
 
-        private void DrawBmps()
+        private void DrawBmps(int n)
         {
+            if(!(n< bms.Count)) n = bms.Count;
+
             pictureBox1.CreateGraphics().DrawImage(image, 0, 0);
-            for (int i = 0; i < bms.Count; i++)
+            for (int i = 0; i < n; i++)
             {
-                pictureBox1.CreateGraphics().DrawImage(bms[i], 0, 0);
+                pictureBox1.CreateGraphics().DrawImage(bms[i], (int)((ptAlg[i].x1 - x_small / 2)*zoom), (int)((ptAlg[i].x2 - y_small / 2)*zoom));
             }
+        }
+
+        private void DrawBmp(int n)
+        {
+            if (!(n < bms.Count)) n = bms.Count;
+
+            pictureBox1.CreateGraphics().DrawImage(image, 0, 0);
+            if (n > 0)
+                pictureBox1.CreateGraphics().DrawImage(bms[n - 1], (int)((ptAlg[n - 1].x1 - x_small / 2)*zoom), (int)((ptAlg[n - 1].x2 - y_small / 2)*zoom));
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -376,22 +392,23 @@ namespace TestSystem.Drawer
                 label2.Text = trackBar1.Value.ToString();
                 if (trackBar1.Value > 0)
                     label2.Text += (". Cost = " + ptAlg[trackBar1.Value - 1].cost);
-                for (int i = 0; i < bts.Count; i++)
-                {
-                    bts[i].Visible = false;
-                }
-                if (radioButton1.Checked == true)
-                    for (int i = 0; i < trackBar1.Value; i++)
-                    {
-                        bts[i].Visible = true;
-                        //ShowAllPointTo(trackBar1.Value);
-                    }
-                else if (radioButton2.Checked == true)
-                {
-                    if (trackBar1.Value > 0)
-                        bts[trackBar1.Value - 1].Visible = true;
-                    //ShowOnePointTo(trackBar1.Value - 1);
-                }
+                ////for (int i = 0; i < bts.Count; i++)
+                ////{
+                ////    bts[i].Visible = false;
+                ////}
+                //if (radioButton1.Checked == true)
+                //    //for (int i = 0; i < trackBar1.Value; i++)
+                //    {
+                //    //    bts[i].Visible = true;
+                //        ShowAllPointTo(trackBar1.Value);
+                //    }
+                //else if (radioButton2.Checked == true)
+                //{
+                //    //if (trackBar1.Value > 0)
+                //    //    bts[trackBar1.Value - 1].Visible = true;
+                //    ShowOnePointTo(trackBar1.Value);
+                //}
+                pictureBox1.Invalidate();
             }
         }
 
@@ -399,17 +416,17 @@ namespace TestSystem.Drawer
         {
             if (bms != null)
             {
-                for (int i = 0; i < bts.Count; i++)
-                {
-                    bts[i].Visible = false;
-                }
+                //for (int i = 0; i < bts.Count; i++)
+                //{
+                //    bts[i].Visible = false;
+                //}
                 if (radioButton1.Checked == true)
                 {
-                    //ShowAllPointTo(trackBar1.Value);
-                    for (int i = 0; i < trackBar1.Value; i++)
-                    {
-                        bts[i].Visible = true;
-                    }
+                    ShowAllPointTo(trackBar1.Value);
+                    //for (int i = 0; i < trackBar1.Value; i++)
+                    //{
+                    //    bts[i].Visible = true;
+                    //}
                 }
             }
         }
@@ -418,15 +435,15 @@ namespace TestSystem.Drawer
         {
             if (bms != null)
             {
-                for (int i = 0; i < bts.Count; i++)
-                {
-                    bts[i].Visible = false;
-                }
+                //for (int i = 0; i < bts.Count; i++)
+                //{
+                //    bts[i].Visible = false;
+                //}
                 if (radioButton2.Checked == true)
                 {
-                    //ShowOnePointTo(trackBar1.Value - 1);
-                    if (trackBar1.Value > 0)
-                        bts[trackBar1.Value - 1].Visible = true;
+                    ShowOnePointTo(trackBar1.Value);
+                    //if (trackBar1.Value > 0)
+                    //    bts[trackBar1.Value - 1].Visible = true;
                 }
 
             }
@@ -434,30 +451,35 @@ namespace TestSystem.Drawer
 
         private void ShowOnePointTo(int numb)
         {
-            for (int i = 0; i < bms.Count; i++)
-            {
-                bms[i].MakeTransparent(Color.Red);
-            }
-            bms[numb].MakeTransparent(Color.White);
-            DrawBmps();
+            //for (int i = 0; i < bms.Count; i++)
+            //{
+            //    bms[i].MakeTransparent(Color.Red);
+            //}
+            //bms[numb].MakeTransparent(Color.White);
+            DrawBmp(numb);
         }
 
         private void ShowAllPointTo(int numb)
         {
-            for (int i = 0; i < numb; i++)
-            {
-                bms[i].MakeTransparent(Color.White);
-            }
-            for (int i = numb; i < bms.Count; i++)
-                    bms[i].MakeTransparent(Color.Red);
-            DrawBmps();
+            //for (int i = 0; i < numb; i++)
+            //{
+            //    bms[i].MakeTransparent(Color.White);
+            //}
+            //for (int i = numb; i < bms.Count; i++)
+            //        bms[i].MakeTransparent(Color.Red);
+            DrawBmps(numb);
         }
 
-        private void DrawPlus(int numb)
+        private void DrawEllipse(int numb)
         {
             Graphics fig = Graphics.FromImage(bms[numb]);
-            fig.FillEllipse(new SolidBrush(Color.Red), (int)ptAlg[numb].x1, (int)ptAlg[numb].x2, 5, 5);
-            bms[numb].MakeTransparent(Color.Red);
+            fig.FillEllipse(new SolidBrush(Color.Red), 0, 0, x_small, y_small);
+        }
+
+        private void DrawLine(int numb)
+        {
+            Graphics fig = Graphics.FromImage(bms[numb]);
+            fig.DrawLine(new Pen(Color.Red), 0, 0, 50, 50);
         }
         
         private void Form_Draw_Resize(object sender, EventArgs e)
@@ -468,53 +490,86 @@ namespace TestSystem.Drawer
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
-            {
-                zoom *= 2;
-                if (ptAlg != null)
-                    for (int i = 0; i < numb_point; i++)
-                    {
-                        this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2) * zoom), (int)((ptAlg[i].x2 - 2) * zoom));
-                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width * 2, this.bts[i].Size.Height * 2);
-                    }
-                pictureBox1.Height *= 2;
-                pictureBox1.Width *= 2;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            }
+            //trackBar1.Enabled = false;
+            //radioButton1.Enabled = false;
+            //radioButton2.Enabled = false;
+            //if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            //{
+            //    zoom *= 2;
+            //    if (ptAlg != null)
+            //        //for (int i = 0; i < numb_point; i++)
+            //        //{
+            //        //    this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2) * zoom), (int)((ptAlg[i].x2 - 2) * zoom));
+            //        //    this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width * 2, this.bts[i].Size.Height * 2);
+            //        //}
+            //    pictureBox1.Height *= 2;
+            //    pictureBox1.Width *= 2;
+            //    //pictureBox1.Location = new Point(0, 0);
+            //    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //    //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            //}
 
-            else if (e.Button == System.Windows.Forms.MouseButtons.Right)
-            {
-                zoom /= 2;
-                if (ptAlg != null)
-                    for (int i = 0; i < numb_point; i++)
-                    {
-                        this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2) * zoom), (int)((ptAlg[i].x2 - 2) * zoom));
-                        this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width / 2, this.bts[i].Size.Height / 2);
-                    }
-                pictureBox1.Height /= 2;
-                pictureBox1.Width /= 2;
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-            }
-            else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
-            {
-                if (ptAlg != null)
-                    for (int i = 0; i < numb_point; i++)
-                    {
-                        this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2)), (int)((ptAlg[i].x2 - 2)));
-                        this.bts[i].Size = new System.Drawing.Size(4, 4);
-                    }
-                pictureBox1.Height = (int)(pictureBox1.Height / zoom);
-                pictureBox1.Width = (int)(pictureBox1.Width / zoom);
-                //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
-                zoom = 1;
-            }
+            //else if (e.Button == System.Windows.Forms.MouseButtons.Right)
+            //{
+            //    zoom /= 2;
+            //    if (ptAlg != null)
+            //        //for (int i = 0; i < numb_point; i++)
+            //        //{
+            //        //    this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2) * zoom), (int)((ptAlg[i].x2 - 2) * zoom));
+            //        //    this.bts[i].Size = new System.Drawing.Size(this.bts[i].Size.Width / 2, this.bts[i].Size.Height / 2);
+            //        //}
+            //    pictureBox1.Height /= 2;
+            //    pictureBox1.Width /= 2;
+            //    //pictureBox1.Location = new Point(0, 0);
+            //    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //    //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            //}
+            //else if (e.Button == System.Windows.Forms.MouseButtons.Middle)
+            //{
+            //    trackBar1.Enabled = true;
+            //    radioButton1.Enabled = true;
+            //    radioButton2.Enabled = true;
+
+            //    if (ptAlg != null)
+            //        //for (int i = 0; i < numb_point; i++)
+            //        //{
+            //        //    this.bts[i].Location = new System.Drawing.Point((int)((ptAlg[i].x1 - 2)), (int)((ptAlg[i].x2 - 2)));
+            //        //    this.bts[i].Size = new System.Drawing.Size(4, 4);
+            //        //}
+            //    pictureBox1.Height = (int)(pictureBox1.Height / zoom);
+            //    pictureBox1.Width = (int)(pictureBox1.Width / zoom);
+            //    //pictureBox1.Location = new Point(0, 0);
+            //    //pictureBox1.BackgroundImageLayout = ImageLayout.Stretch;
+            //    zoom = 1;
+            //}
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            if (bms != null)
+            {
+                //for (int i = 0; i < bts.Count; i++)
+                //{
+                //    bts[i].Visible = false;
+                //}
+                if (radioButton1.Checked == true)
+                //for (int i = 0; i < trackBar1.Value; i++)
+                {
+                    //    bts[i].Visible = true;
+                    ShowAllPointTo(trackBar1.Value);
+                }
+                else if (radioButton2.Checked == true)
+                {
+                    //if (trackBar1.Value > 0)
+                    //    bts[trackBar1.Value - 1].Visible = true;
+                    ShowOnePointTo(trackBar1.Value);
+                }
+            }
         }
 
         //public void OnEndTask(Algorithm.IAlgorithm alg, Tasks.ITaskPackage task, DataFormat.IOutBlackBoxParam rez, int time)
