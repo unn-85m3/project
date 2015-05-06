@@ -50,25 +50,34 @@ namespace TestSystem.Plot
                 }
                 else if (points.Count > 2)
                 {
+                    //p = p.OrderBy(x => Math.Atan2(x.x1, x.x2)).ToList();
+
                     List<PointF> point = new List<PointF>();
                     for (int i = 0; i < p.Count; i++)
                         point.Add(new PointF((float)p[i].x1, (float)p[i].x2));
                     PointF[] pt = point.ToArray();
 
                     GraphicsPath path = new GraphicsPath();
-                    path.AddLines(pt);
+                    path.AddPolygon(pt);
 
                     PathGradientBrush pthGrBrush = new PathGradientBrush(path);
 
                     //pthGrBrush.CenterColor = Color.FromArgb(255, 255, 0, 0);
 
+                    double c = 0;
+
                     List<Color> clr = new List<Color>();
                     for (int i = 0; i < p.Count; i++)
+                    {
                         clr.Add(CostToColor(p[i].cost));
+                        c += (p[i].cost);
+                    }
                     Color[] colors = clr.ToArray();
 
 
                     pthGrBrush.SurroundColors = colors;
+                    c = (c == double.MaxValue ? double.MaxValue : c / p.Count);
+                    pthGrBrush.CenterColor = CostToColor(c);
 
                     Graphics g = frmd.GetImage();
 
@@ -80,6 +89,7 @@ namespace TestSystem.Plot
 
                     g.Flush();
                 }
+
             }
         }
 

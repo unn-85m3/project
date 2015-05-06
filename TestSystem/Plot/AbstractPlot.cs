@@ -189,14 +189,14 @@ namespace TestSystem.Plot
                         }
 
 
-                        if (i < maxI - 1)
-                        {
-                            focusPoints.Add(points[i + 1][j]);
-                        }
-
                         if ((i < maxI - 1) && (j < maxJ - 1))
                         {
                             focusPoints.Add(points[i + 1][j + 1]);
+                        }
+
+                        if (i < maxI - 1)
+                        {
+                            focusPoints.Add(points[i + 1][j]);
                         }
 
                         coloring.ColoringSurface(focusPoints);
@@ -260,17 +260,17 @@ namespace TestSystem.Plot
                            /// focusPoints.Add(points[i][j]);
                         }
 
+                        if ((i < maxI - 1) && (j < maxJ - 1))
+                        {
+                            addToList(focusPoints, points[i + 1][j + 1]);
+                            //focusPoints.Add(points[i + 1][j + 1]);
+                        }
+
 
                         if (i < maxI - 1)
                         {
                             addToList(focusPoints, points[i + 1][j]);
                             //focusPoints.Add(points[i + 1][j]);
-                        }
-
-                        if ((i < maxI - 1) && (j < maxJ - 1))
-                        {
-                            addToList(focusPoints, points[i + 1][j + 1]);
-                            //focusPoints.Add(points[i + 1][j + 1]);
                         }
 
                         if (focusPoints.Count>0)
@@ -339,7 +339,7 @@ namespace TestSystem.Plot
 
         private void AbstractPlot_Shown(object sender, EventArgs e)
         {
-            ClickToForm();
+            Paint();
         }
 
         private void button1_Click(object sender, EventArgs e)

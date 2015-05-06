@@ -392,23 +392,23 @@ namespace TestSystem.Drawer
                 label2.Text = trackBar1.Value.ToString();
                 if (trackBar1.Value > 0)
                     label2.Text += (". Cost = " + ptAlg[trackBar1.Value - 1].cost);
-                ////for (int i = 0; i < bts.Count; i++)
-                ////{
-                ////    bts[i].Visible = false;
-                ////}
-                //if (radioButton1.Checked == true)
-                //    //for (int i = 0; i < trackBar1.Value; i++)
-                //    {
-                //    //    bts[i].Visible = true;
-                //        ShowAllPointTo(trackBar1.Value);
-                //    }
-                //else if (radioButton2.Checked == true)
+                //for (int i = 0; i < bts.Count; i++)
                 //{
-                //    //if (trackBar1.Value > 0)
-                //    //    bts[trackBar1.Value - 1].Visible = true;
-                //    ShowOnePointTo(trackBar1.Value);
+                //    bts[i].Visible = false;
                 //}
-                pictureBox1.Invalidate();
+                if (radioButton1.Checked == true)
+                //for (int i = 0; i < trackBar1.Value; i++)
+                {
+                    //    bts[i].Visible = true;
+                    ShowAllPointTo(trackBar1.Value);
+                }
+                else if (radioButton2.Checked == true)
+                {
+                    //if (trackBar1.Value > 0)
+                    //    bts[trackBar1.Value - 1].Visible = true;
+                    ShowOnePointTo(trackBar1.Value);
+                }
+                //pictureBox1.Invalidate();
             }
         }
 
