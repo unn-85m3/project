@@ -290,7 +290,6 @@ namespace TestSystem.Plot
         {   //если coloring_doNet
             //if ((int)(param.x1_max * param.x2_max * mult) < 65536) 
             {
-                coloring = factory.CreateColoring(this);
                 normalize = factory.CreateNormalize(this, mult);
                 X = (int)(X * mult);
                 Y = (int)(Y * mult);
@@ -298,12 +297,27 @@ namespace TestSystem.Plot
                 //X *= (int)mult_point; // МАсштабирование!!!!!!!!!!!!!
                 //Y *= (int)mult_point;
                 points = Calculate(function, param);
+                double max = SearchMax();
+                coloring = factory.CreateColoring(this, max);
                 Paint();
                 //SetDrawNumberPoint(points[0]); //Изменить список точек на верные.
 
                 //ClickToForm();
             }
             //else StartCalc(mult/2);
+        }
+
+        private double SearchMax()
+        {
+            double max = double.MinValue;
+            for (int i = 0; i < points.Count; i++)
+            {
+                for (int j = 0; j < points[0].Count; j++)
+                {
+                    if (points[i][j].cost < double.MaxValue && points[i][j].cost > max) max = points[i][j].cost;
+                }
+            }
+            return max;
         }
 
         protected virtual List<List<IPoint>> Calculate(IFunction function, IEnterBlackBoxParam parameters) { throw new NotImplementedException(); }
@@ -346,6 +360,7 @@ namespace TestSystem.Plot
         {
             StartCalculate();
             DrawAll();
+            pictureBox1.Location = new Point((int)(-param.x1_min * normalize.Zoom()) + 10, (int)(-param.x2_min * normalize.Zoom()) + 10);
             trackBar1.Enabled = true;
             radioButton1.Enabled = true;
             radioButton2.Enabled = true;

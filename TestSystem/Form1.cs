@@ -480,6 +480,16 @@ namespace TestSystem
                             else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.GreenYellow;
                         }
 
+                        if ((Convert.ToDouble(dataGridViews[i].Rows[j].Cells[2].Value) - Convert.ToDouble(dataGridViews[0].Rows[j].Cells[2].Value)) == 0) dataGridViews[i].Rows[j].Cells[2].Style.BackColor = Color.Yellow;
+                        else
+                        {
+                            if ((Convert.ToDouble(dataGridViews[i].Rows[j].Cells[2].Value) - Convert.ToDouble(dataGridViews[0].Rows[j].Cells[2].Value)) > 0)
+                            {
+                                dataGridViews[i].Rows[j].Cells[2].Style.BackColor = Color.Red;
+                            }
+                            else dataGridViews[i].Rows[j].Cells[2].Style.BackColor = Color.GreenYellow;
+                        }
+
                     }
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count * 100;
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count * 100;

@@ -48,5 +48,11 @@ namespace TestSystem.Plot
              point.x2 +=100;*/
             N++;
         }
+
+
+        public double Zoom()
+        {
+            return Math.Min(mX1,mX2);
+        }
     }
 }

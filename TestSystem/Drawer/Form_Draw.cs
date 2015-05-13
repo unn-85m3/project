@@ -141,7 +141,7 @@ namespace TestSystem.Drawer
         public void Mult_color(double mult)
         {
             mult_color = mult; 
-            DrawLegend();
+            //DrawLegend();
         }
 
         public void Mult_point(double mult)
@@ -230,7 +230,7 @@ namespace TestSystem.Drawer
         {
             DrawAxe();
 
-            DrawLegend();
+            //DrawLegend();
 
             CreateBitmaps();
             if (radioButton1.Checked == true)
@@ -392,6 +392,7 @@ namespace TestSystem.Drawer
                 label2.Text = trackBar1.Value.ToString();
                 if (trackBar1.Value > 0)
                     label2.Text += (". Cost = " + ptAlg[trackBar1.Value - 1].cost);
+                //pictureBox1.Invalidate();
                 //for (int i = 0; i < bts.Count; i++)
                 //{
                 //    bts[i].Visible = false;
@@ -414,39 +415,41 @@ namespace TestSystem.Drawer
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            if (bms != null)
-            {
-                //for (int i = 0; i < bts.Count; i++)
-                //{
-                //    bts[i].Visible = false;
-                //}
-                if (radioButton1.Checked == true)
-                {
-                    ShowAllPointTo(trackBar1.Value);
-                    //for (int i = 0; i < trackBar1.Value; i++)
-                    //{
-                    //    bts[i].Visible = true;
-                    //}
-                }
-            }
+            pictureBox1.Invalidate();
+            //if (bms != null)
+            //{
+            //    //for (int i = 0; i < bts.Count; i++)
+            //    //{
+            //    //    bts[i].Visible = false;
+            //    //}
+            //    if (radioButton1.Checked == true)
+            //    {
+            //        ShowAllPointTo(trackBar1.Value);
+            //        //for (int i = 0; i < trackBar1.Value; i++)
+            //        //{
+            //        //    bts[i].Visible = true;
+            //        //}
+            //    }
+            //}
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            if (bms != null)
-            {
-                //for (int i = 0; i < bts.Count; i++)
-                //{
-                //    bts[i].Visible = false;
-                //}
-                if (radioButton2.Checked == true)
-                {
-                    ShowOnePointTo(trackBar1.Value);
-                    //if (trackBar1.Value > 0)
-                    //    bts[trackBar1.Value - 1].Visible = true;
-                }
+            pictureBox1.Invalidate();
+            //if (bms != null)
+            //{
+            //    //for (int i = 0; i < bts.Count; i++)
+            //    //{
+            //    //    bts[i].Visible = false;
+            //    //}
+            //    if (radioButton2.Checked == true)
+            //    {
+            //        ShowOnePointTo(trackBar1.Value);
+            //        //if (trackBar1.Value > 0)
+            //        //    bts[trackBar1.Value - 1].Visible = true;
+            //    }
 
-            }
+            //}
         }
 
         private void ShowOnePointTo(int numb)
@@ -551,6 +554,7 @@ namespace TestSystem.Drawer
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            pictureBox1.CreateGraphics().Clear(Color.Silver);
             if (bms != null)
             {
                 //for (int i = 0; i < bts.Count; i++)

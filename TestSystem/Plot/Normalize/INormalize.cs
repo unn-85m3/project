@@ -8,5 +8,6 @@ namespace TestSystem.Plot
     interface INormalize
     {
         void Normalization(IPoint point);
+        double Zoom();
     }
 }

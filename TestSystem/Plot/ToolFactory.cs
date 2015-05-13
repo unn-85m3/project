@@ -22,9 +22,9 @@ namespace TestSystem.Plot
             return FACTORY;
         }
 
-        public IColoring CreateColoring(Form_Draw form)
+        public IColoring CreateColoring(Form_Draw form, double norm)
         {
-            return new /*Coloring_Double(form);*/ Coloring_dotNet(form);
+            return new /*Coloring_Double(form);*/ Coloring_dotNet(form, norm);
         }
 
         public INormalize CreateNormalize(Form_Draw form)
