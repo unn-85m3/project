@@ -24,35 +24,124 @@ namespace TestSystem.Algorithm
 
         public Complex_Algorithm()
         {
-            h = 10;
             this.name = "Комплексный алгоритм";
-            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
+            this.atributs += "на " + 3 + " единиц площади приходится одна точка в рассматриваемой области,\n" +
                 "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
             points_Coord = new List<PointCoord>();
-            rnd = new Random(0);
+            //rnd = new Random(0);
             cg = new PointCoord();
         }
 
         public Complex_Algorithm(double step)
             : base(step)
         {
-            h = 10;
             this.name = "Комплексный алгоритм";
-            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
+            this.atributs += "на " + 3 + " единиц площади приходится одна точка в рассматриваемой области,\n" +
                 "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
             points_Coord = new List<PointCoord>();
-            rnd = new Random(0);
+            //rnd = new Random(0);
             cg = new PointCoord();
         }
 
         public override DataFormat.IOutBlackBoxParam Calculate() // алгоритм можно ускорить
         {
+            rnd = new Random(0);
             double cost = double.MaxValue;
+            double temp = 0.0;
             points_Coord.Clear();
+            double ind = 0.0;
+            double hDouble = 1.0;// (double)h;
 
-            SetNumberOfPoints();
+            switch (howManyD())
+            {
+                case 1: //x1 is one value, x2 is not one
+                    ind = parametr.x2_min;
+                    try
+                    {
+                        cost = Function(parametr.x1_min, ind).Cost;
+                    }
+                    catch
+                    {
+                        cost = double.MaxValue;
+                    }
+                    while (ind < parametr.x2_max)
+                    {
+                        try
+                        {
+                            temp = Function(parametr.x1_min, ind).Cost;
+                        }
+                        catch
+                        {
+                            temp = double.MaxValue;
+                        }
+                        if (temp < cost) cost = temp;
+                        ind += hDouble;
+                    }
+                    return new DataFormat.OutBlackBoxParam(cost);
+                case 2: //x2 is one value, x1 is not one
+                    ind = parametr.x1_min;
+                    try
+                    {
+                        cost = Function(ind, parametr.x2_min).Cost;
+                    }
+                    catch
+                    {
+                        cost = double.MaxValue;
+                    }
+                    while (ind < parametr.x1_max)
+                    {
+                        try
+                        {
+                            temp = Function(ind, parametr.x2_min).Cost;
+                        }
+                        catch
+                        {
+                            temp = double.MaxValue;
+                        }
+                        if (temp < cost) cost = temp;
+                        ind += hDouble;
+                    }
+                    return new DataFormat.OutBlackBoxParam(cost);
+                case 3: //it is one dot (x1;x2)
+                    cost = Function(parametr.x1_min, parametr.x2_min).Cost;
+                    return new DataFormat.OutBlackBoxParam(cost);
+                case 4: //x2/x1 is one value
+                    ind = parametr.x1_min;
+                    try
+                    {
+                        cost = Function(ind, parametr.x2_x1_max * ind).Cost;
+                    }
+                    catch
+                    {
+                        cost = double.MaxValue;
+                    }
+                    while (ind < parametr.x1_max)
+                    {
+                        try
+                        {
+                            temp = Function(ind, parametr.x2_x1_max * ind).Cost;
+                        }
+                        catch
+                        {
+                            temp = double.MaxValue;
+                        }
+                        if (temp < cost) cost = temp;
+                        ind += hDouble;
+                    }
+                    return new DataFormat.OutBlackBoxParam(cost);
+                case 5: //it is one dot x1 cross x2/x1
+                    cost = Function(parametr.x1_min, parametr.x1_min / parametr.x2_x1_min).Cost;
+                    return new DataFormat.OutBlackBoxParam(cost);
+                case 6: //or x2 cross x2/x1
+                    cost = Function(parametr.x2_min / parametr.x2_x1_min, parametr.x2_min).Cost;
+                    return new DataFormat.OutBlackBoxParam(cost);
+                default:
+                    break;
+            }
 
-            h = this.SetAreaOfTheRegion(STEP);
+
+            //h = this.SetAreaOfTheRegion(STEP);
+            h = this.SetAreaOfTheRegion(3); //это быстрее чем шаг = 1
             //h = (int)((parametr.x1_max - parametr.x1_min + parametr.x2_max - parametr.x2_min) / 2 * ((int)(parametr.x2_x1_max - parametr.x2_x1_min) + 1)) + 4;
 
             if (h == 1)
@@ -98,14 +187,14 @@ namespace TestSystem.Algorithm
             return new DataFormat.OutBlackBoxParam(cost);
         }
 
-        private void SetNumberOfPoints()
+        private int howManyD()
         {
-            if (parametr.x1_max - parametr.x1_min == 0 ||
-                parametr.x2_max - parametr.x2_min == 0 ||
-                parametr.x2_x1_max - parametr.x2_x1_min == 0) // какое условие выполняется чаще? '==' или '!=' ???
-            {
-                // != выполняется чаще. @АГА.
-            }
+            int t = 0;
+            if (parametr.x1_max - parametr.x1_min == 0) t += 1;
+            if (parametr.x2_max - parametr.x2_min == 0) t += 2;
+            if (parametr.x2_x1_max - parametr.x2_x1_min == 0) t += 4;
+
+            return t;
         }
 
         private PointCoord ReflectThePoint(PointCoord point)
@@ -114,20 +203,24 @@ namespace TestSystem.Algorithm
             //do {
             if (cg.x1 > point.x1)
             {
-                refPoint.x1 = rnd.NextDouble() * (cg.x1 - point.x1) + cg.x1;
+                //refPoint.x1 = rnd.NextDouble() * (cg.x1 - point.x1) + cg.x1;
+                refPoint.x1 = rnd.NextDouble() * (parametr.x1_max - cg.x1) + cg.x1 - 0.1;
             }
             else
             {
-                refPoint.x1 = cg.x1 - rnd.NextDouble() * (point.x1 - cg.x1);
+                //refPoint.x1 = cg.x1 - rnd.NextDouble() * (point.x1 - cg.x1);
+                refPoint.x1 = cg.x1 - rnd.NextDouble() * (cg.x1 - parametr.x1_min) - 0.1;
             }
 
             if (cg.x2 > point.x2)
             {
-                refPoint.x2 = rnd.NextDouble() * (cg.x2 - point.x2) + cg.x2;
+                //refPoint.x2 = rnd.NextDouble() * (cg.x2 - point.x2) + cg.x2;
+                refPoint.x2 = rnd.NextDouble() * (parametr.x2_max - cg.x2) + cg.x2 - 0.1;
             }
             else
             {
-                refPoint.x2 = cg.x2 - rnd.NextDouble() * (point.x2 - cg.x2);
+                //refPoint.x2 = cg.x2 - rnd.NextDouble() * (point.x2 - cg.x2);
+                refPoint.x2 = cg.x2 - rnd.NextDouble() * (cg.x2 - parametr.x2_min) - 0.1;
             }
 
             if (!IsFeasiblePoint(refPoint))
@@ -146,7 +239,7 @@ namespace TestSystem.Algorithm
             }
             //} while (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost);
 
-            if (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost)
+            if (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost) // мб ноги проблемы отсюда растут?
                 return point;
             return refPoint;
         }
