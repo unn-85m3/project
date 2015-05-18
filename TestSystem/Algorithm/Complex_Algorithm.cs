@@ -141,7 +141,7 @@ namespace TestSystem.Algorithm
 
 
             //h = this.SetAreaOfTheRegion(STEP);
-            h = this.SetAreaOfTheRegion(3); //это быстрее чем шаг = 1
+            h = this.SetAreaOfTheRegion(1); //это быстрее чем шаг = 1
             //h = (int)((parametr.x1_max - parametr.x1_min + parametr.x2_max - parametr.x2_min) / 2 * ((int)(parametr.x2_x1_max - parametr.x2_x1_min) + 1)) + 4;
 
             if (h == 1)
@@ -254,15 +254,34 @@ namespace TestSystem.Algorithm
             return true;
         }
 
+        private List<PointCoord> BubbleSort(List<PointCoord> A)
+        {
+            for (int i = 0; i < A.Count; i++)
+            {
+                for (int j = i + 1; j < A.Count; j++)
+                {
+                    if (A[j].cost > A[i].cost)
+                    {
+                        var temp = A[i];
+                        A[i] = A[j];
+                        A[j] = temp;
+                    }
+                }
+            }
+            return A;
+        }
+
         private void FindCG()
         {
             int i = 0;
             cg.x1 = 0;
             cg.x2 = 0;
-            foreach (var x in points_Coord)
+            points_Coord = BubbleSort(points_Coord);
+            int j = points_Coord.Count - points_Coord.Count / 3; //цифра указанная тут определяет то какой процент мы возьмем для отражения
+            for (; j < points_Coord.Count; j++)
             {
-                cg.x1 += x.x1;
-                cg.x2 += x.x2;
+                cg.x1 += points_Coord[j].x1;
+                cg.x2 += points_Coord[j].x2;
                 i++;
             }
             cg.x1 /= i;
