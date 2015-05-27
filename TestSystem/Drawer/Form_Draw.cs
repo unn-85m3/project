@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace TestSystem.Drawer
 {
-    partial class Form_Draw: Form//, IEndCalculate
+    partial class Form_Draw : Form//, IEndCalculate
     {
         protected PictureBox pictureBox1;
         protected PictureBox pictureBox2;
@@ -37,7 +37,7 @@ namespace TestSystem.Drawer
         protected List<IPoint> ptAlg = new List<IPoint>();
         protected Button button1;
 
-        
+
 
         public void UpdateComponent(int x, int y)
         {
@@ -84,17 +84,17 @@ namespace TestSystem.Drawer
             //linGrBrush.GammaCorrection = true;
             gr.FillRectangle(linGrBrushW, 0, 0, panel2.Size.Width / 2, panel2.Size.Height / 4);
 
-            LinearGradientBrush linGrBrushR = new LinearGradientBrush(new Point(0, panel2.Size.Height / 4-1), new Point(0, panel2.Size.Height / 2+1), Color.Red, Color.Green);
+            LinearGradientBrush linGrBrushR = new LinearGradientBrush(new Point(0, panel2.Size.Height / 4 - 1), new Point(0, panel2.Size.Height / 2 + 1), Color.Red, Color.Green);
 
             //linGrBrush.GammaCorrection = true;
-            gr.FillRectangle(linGrBrushR, 0, panel2.Size.Height / 4-1, panel2.Size.Width / 2, panel2.Size.Height / 4+1);
+            gr.FillRectangle(linGrBrushR, 0, panel2.Size.Height / 4 - 1, panel2.Size.Width / 2, panel2.Size.Height / 4 + 1);
 
-            LinearGradientBrush linGrBrushG = new LinearGradientBrush(new Point(0, panel2.Size.Height / 2-2), new Point(0, 3 * panel2.Size.Height / 4), Color.Green, Color.Blue);
+            LinearGradientBrush linGrBrushG = new LinearGradientBrush(new Point(0, panel2.Size.Height / 2 - 2), new Point(0, 3 * panel2.Size.Height / 4), Color.Green, Color.Blue);
 
             //linGrBrush.GammaCorrection = true;
-            gr.FillRectangle(linGrBrushG, 0, panel2.Size.Height / 2-1, panel2.Size.Width / 2, panel2.Size.Height / 4);
+            gr.FillRectangle(linGrBrushG, 0, panel2.Size.Height / 2 - 1, panel2.Size.Width / 2, panel2.Size.Height / 4);
 
-            LinearGradientBrush linGrBrushB = new LinearGradientBrush(new Point(0, 3 * panel2.Size.Height / 4-2), new Point(0, panel2.Size.Height), Color.Blue, Color.Black);
+            LinearGradientBrush linGrBrushB = new LinearGradientBrush(new Point(0, 3 * panel2.Size.Height / 4 - 2), new Point(0, panel2.Size.Height), Color.Blue, Color.Black);
 
             //linGrBrush.GammaCorrection = true;
             gr.FillRectangle(linGrBrushB, 0, 3 * panel2.Size.Height / 4 - 2, panel2.Size.Width / 2, panel2.Size.Height / 4);
@@ -103,9 +103,9 @@ namespace TestSystem.Drawer
 
             DrawText(gr, ((256 * 256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 4 - 10, 120, 20, 12);
 
-            DrawText(gr, ((256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 2 - 10, 120, 20, 12); 
+            DrawText(gr, ((256 * 256 - 1) / mult_color).ToString(), panel2.Size.Width / 2, panel2.Size.Height / 2 - 10, 120, 20, 12);
 
-            DrawText(gr, (255 / mult_color).ToString(), panel2.Size.Width / 2, 3 * panel2.Size.Height / 4 - 10, 120, 20, 12); 
+            DrawText(gr, (255 / mult_color).ToString(), panel2.Size.Width / 2, 3 * panel2.Size.Height / 4 - 10, 120, 20, 12);
 
             DrawText(gr, 0.ToString(), panel2.Size.Width / 2, panel2.Size.Height - 20, 120, 20, 12);
 
@@ -140,7 +140,7 @@ namespace TestSystem.Drawer
 
         public void Mult_color(double mult)
         {
-            mult_color = mult; 
+            mult_color = mult;
             //DrawLegend();
         }
 
@@ -273,8 +273,8 @@ namespace TestSystem.Drawer
             //}
 
             Graphics gr = Graphics.FromImage(image); //хз что не так...
-            DrawText(gr, "X", 0, image.Size.Width - distance, distance*2, distance*2, 10);
-            DrawText(gr, "Y", image.Size.Height - distance, 0, distance*2, distance*2, 10);
+            DrawText(gr, "X", 0, image.Size.Width - distance, distance * 2, distance * 2, 10);
+            DrawText(gr, "Y", image.Size.Height - distance, 0, distance * 2, distance * 2, 10);
             pictureBox1.Image = image;
         }
 
@@ -344,8 +344,8 @@ namespace TestSystem.Drawer
         {
             if (ptAlg != null)
             {
-                int best = 0; 
-                
+                int best = 0;
+
                 // 
                 // bms[i]
                 // 
@@ -367,12 +367,12 @@ namespace TestSystem.Drawer
 
         private void DrawBmps(int n)
         {
-            if(!(n< bms.Count)) n = bms.Count;
+            if (!(n < bms.Count)) n = bms.Count;
 
             pictureBox1.CreateGraphics().DrawImage(image, 0, 0);
             for (int i = 0; i < n; i++)
             {
-                pictureBox1.CreateGraphics().DrawImage(bms[i], (int)((ptAlg[i].x1 - x_small / 2)*zoom), (int)((ptAlg[i].x2 - y_small / 2)*zoom));
+                pictureBox1.CreateGraphics().DrawImage(bms[i], (int)((ptAlg[i].x1 - x_small / 2) * zoom), (int)((ptAlg[i].x2 - y_small / 2) * zoom));
             }
         }
 
@@ -382,7 +382,7 @@ namespace TestSystem.Drawer
 
             pictureBox1.CreateGraphics().DrawImage(image, 0, 0);
             if (n > 0)
-                pictureBox1.CreateGraphics().DrawImage(bms[n - 1], (int)((ptAlg[n - 1].x1 - x_small / 2)*zoom), (int)((ptAlg[n - 1].x2 - y_small / 2)*zoom));
+                pictureBox1.CreateGraphics().DrawImage(bms[n - 1], (int)((ptAlg[n - 1].x1 - x_small / 2) * zoom), (int)((ptAlg[n - 1].x2 - y_small / 2) * zoom));
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
@@ -484,7 +484,7 @@ namespace TestSystem.Drawer
             Graphics fig = Graphics.FromImage(bms[numb]);
             fig.DrawLine(new Pen(Color.Red), 0, 0, 50, 50);
         }
-        
+
         private void Form_Draw_Resize(object sender, EventArgs e)
         {
             if (this.ClientSize.Width < 685) this.ClientSize = new System.Drawing.Size(685, this.ClientSize.Height);
@@ -587,7 +587,7 @@ namespace TestSystem.Drawer
         //    //g.FillEllipse(linGrBrush, 0, 30, 200, 100);
         //    //g.FillRectangle(linGrBrush, 0, 155, 500, 30);
 
-            
+
         //}
     }
 }

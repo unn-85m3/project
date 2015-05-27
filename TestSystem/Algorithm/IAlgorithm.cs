@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
-using TestSystem.Algorithm.Diagonal_Algoritm;
+using TestSystem.Algorithm.Old.Diagonal_Algoritm;
 
 namespace TestSystem.Algorithm
 {
@@ -31,7 +31,7 @@ namespace TestSystem.Algorithm
         /// <summary>
         /// Имя алгоритма
         /// </summary>
-        String Name {get; }
+        String Name { get; set; }
 
         /// <summary>
         /// Шаг алгоритма
@@ -48,6 +48,7 @@ namespace TestSystem.Algorithm
         /// </summary>
         void SetFunction(IFunction function);
 
+        int Vesrsion { get; set; }
 
         List<IPoint> points { get; }
 

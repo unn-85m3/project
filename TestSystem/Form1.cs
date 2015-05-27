@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestSystem.test_system;
 using TestSystem.BlackBox;
+using TestSystem.Algorithm.Old;
+using TestSystem.Algorithm.New;
 using TestSystem.Algorithm;
 using TestSystem.Plot;
 using KSModels;
@@ -17,7 +19,7 @@ using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using TestSystem.Logger;
-using TestSystem.Algorithm.Diagonal_Algoritm;
+using TestSystem.Algorithm.Old.Diagonal_Algoritm;
 using System.IO;
 
 
@@ -122,19 +124,70 @@ namespace TestSystem
         //    tt = new ToolTip();
         //}
 
+        private void AddAlg(IAlgorithm alg)
+        {
+            foreach (var als in Algs)
+            {
+                if (alg.Name == als.Name)
+                {
+                    alg.Vesrsion++;
+                    alg.Name = alg.Name + ". V.=" + alg.Vesrsion;
+                }
+            }
+            Algs.Add(alg);
+        }
+
+        private void AddAlg(IAlgorithm[] alg)
+        {
+            foreach (var a in alg)
+            {
+                foreach (var als in Algs)
+                {
+                    if (a.Name == als.Name)
+                    {
+                        a.Vesrsion++;
+                        a.Name = a.Name + ". V.=" + a.Vesrsion;
+                    }
+                }
+                Algs.Add(a);
+            }
+        }
+
+        private void AddAlg(List<IAlgorithm> alg)
+        {
+            AddAlg(alg.ToArray());
+        }
+
+        private void ALGS()
+        {
+            double step = 1;
+            double.TryParse(maskedTextBox3.Text, out step);
+
+            Algs = new List<IAlgorithm>();
+
+            AddAlg(new Algorithm.Old.Benchmark_Algorithm(step));
+            //AddAlg(new Algorithm.Old.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
+            //AddAlg(new Algorithm.New.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
+            //AddAlg(new Algorithm.Old.Complex_Algorithm(step));
+            //AddAlg(new Algorithm.New.Complex_Algorithm(step));
+            AddAlg(new Algorithm.Old.Genetic_Algorithm(step));
+            AddAlg(new Algorithm.New.Genetic_Algorithm(step));
+        }
+
+
         /// <summary>
         /// Заглушка на алгоритмы.
         /// </summary>
         private void Create_TestSystem()
         {
-            double step = 1;
-            double.TryParse(maskedTextBox3.Text, out step);
-            Algs = new List<IAlgorithm>();
-            Algs.Add(new Algorithm.Benchmark_Algorithm(step));
+
+            ALGS();
+
+            //Algs.Add(new Algorithm.Benchmark_Algorithm(step));
             //Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
-            Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
-            Algs.Add(new Algorithm.Complex_Algorithm(step));
-            Algs.Add(new Algorithm.Genetic_Algorithm(step));
+            //Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
+            //Algs.Add(new Algorithm.Complex_Algorithm(step));
+            //Algs.Add(new Algorithm.Genetic_Algorithm(step));
             //Algs.Add(new Algorithm.Benchmark_Algorithm());
             ////Algs.Add(new Algorithm.Non_Benchmark_Algorithm());
             //Algs.Add(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2());
@@ -168,7 +221,7 @@ namespace TestSystem
             CreateTasks(dtf, true, MIN_NUMBER_TASK, MAX_NUMBER_TASK);
             //CreateTasks(dtf, false, 6);
 
-            BenchRez = new double[Algs.Count, 2, dtf.Count];
+            BenchRez = new double[Algs.Count, 3, dtf.Count];
 
             foreach (var d in dtf)
             {
@@ -230,6 +283,7 @@ namespace TestSystem
                     dataGridViews[i].Rows[j].Cells[4].Value = "";
                     dataGridViews[i].Rows[j].Cells[5].Value = "";
                     dataGridViews[i].Rows[j].Cells[6].Value = "";
+                    dataGridViews[i].Rows[j].Cells[7].Value = "";
                 }
                 dataGridViews[i].Rows.Add();
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[0].Value = "Среднее значение";
@@ -260,6 +314,7 @@ namespace TestSystem
                                 //dataGridViews[i].Rows[j].Cells[3].Value = "10*i + j =";
                                 dataGridViews[i].Rows[j].Cells[4].Value = rez.Cost;
                                 BenchRez[i, 1, j] = rez.Cost;
+                                BenchRez[i, 2, j] = alg.Calls;
                             }
                         }
                     }
@@ -290,6 +345,7 @@ namespace TestSystem
                             {
                                 BenchRez[i, 0, j] = time;
                                 BenchRez[i, 1, j] = rez.Cost;
+                                BenchRez[i, 2, j] = alg.Calls;
                             }
                         }
                     }
@@ -303,6 +359,7 @@ namespace TestSystem
                     {
                         dataGridViews[i].Rows[j].Cells[5].Value = (BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100;
                         dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
+                        dataGridViews[i].Rows[j].Cells[7].Value = (BenchRez[i, 2, j] / BenchRez[0, 2, j] - 1) * 100;
                     }
         }
 
@@ -450,7 +507,7 @@ namespace TestSystem
             
             for (int i = 1; i < Algorithms.Length; i++)
             {
-                double time = 0, count = 0;
+                double time = 0, count = 0, call = 0;
                 for (int j = 0; j < CompleateTask[i]; j++)
                     if (CompleateTask[0] >= CompleateTask[i])
                     {
@@ -458,7 +515,8 @@ namespace TestSystem
                         time += BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1;
                         dataGridViews[i].Rows[j].Cells[6].Value = (BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100;
                         count += BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1;
-
+                        dataGridViews[i].Rows[j].Cells[7].Value = (BenchRez[i, 2, j] / BenchRez[0, 2, j] - 1) * 100;
+                        call += BenchRez[i, 2, j] / BenchRez[0, 2, j] - 1;
 
                         if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) == 0) dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Yellow;
                         else
@@ -480,19 +538,20 @@ namespace TestSystem
                             else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.GreenYellow;
                         }
 
-                        if ((Convert.ToDouble(dataGridViews[i].Rows[j].Cells[2].Value) - Convert.ToDouble(dataGridViews[0].Rows[j].Cells[2].Value)) == 0) dataGridViews[i].Rows[j].Cells[2].Style.BackColor = Color.Yellow;
+                        if ((BenchRez[i, 2, j] / BenchRez[0, 2, j] - 1) == 0) dataGridViews[i].Rows[j].Cells[7].Style.BackColor = Color.Yellow;
                         else
                         {
-                            if ((Convert.ToDouble(dataGridViews[i].Rows[j].Cells[2].Value) - Convert.ToDouble(dataGridViews[0].Rows[j].Cells[2].Value)) > 0)
+                            if ((BenchRez[i, 2, j] / BenchRez[0, 2, j] - 1) * 100 > 0)
                             {
-                                dataGridViews[i].Rows[j].Cells[2].Style.BackColor = Color.Red;
+                                dataGridViews[i].Rows[j].Cells[7].Style.BackColor = Color.Red;
                             }
-                            else dataGridViews[i].Rows[j].Cells[2].Style.BackColor = Color.GreenYellow;
+                            else dataGridViews[i].Rows[j].Cells[7].Style.BackColor = Color.GreenYellow;
                         }
 
                     }
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Value = time / Tasks.Count * 100;
                 dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Value = count / Tasks.Count * 100;
+                dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Value = call / Tasks.Count * 100;
 
                 if (time / Tasks.Count == 0) dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Yellow;
                 else
@@ -512,6 +571,16 @@ namespace TestSystem
                         dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
                     }
                     else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.GreenYellow;
+                }
+
+                if (call / Tasks.Count == 0) dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Style.BackColor = Color.Yellow;
+                else
+                {
+                    if (call / Tasks.Count > 0)
+                    {
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Style.BackColor = Color.Red;
+                    }
+                    else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Style.BackColor = Color.GreenYellow;
                 }
             }
         }

@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
-using TestSystem.Algorithm.Diagonal_Algoritm;
+using TestSystem.Algorithm.New;
+using TestSystem.Algorithm.Old.Diagonal_Algoritm;
 using System.Data.OleDb;
 using Saver;
 using Logger;
@@ -20,6 +21,8 @@ namespace TestSystem.Algorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
+        protected string lastName;
+        protected int version = 1;
         protected string atributs = "Параметры алгоритма: ";// Параметры алгоритма
         private IFunction _function;///функция для оптимизации
         private int calls;
@@ -61,6 +64,12 @@ namespace TestSystem.Algorithm
         public virtual string Name
         {
             get { return name; }
+            set { lastName = name; name = value; }
+        }
+
+        public virtual void ReturnLastName()
+        {
+            this.Name = lastName;
         }
 
         public double Step
@@ -182,6 +191,19 @@ namespace TestSystem.Algorithm
         public void setCalculateListener(Logger.ICalculateListener listener)
         {
             listeners.Add(listener);
+        }
+
+
+        public int Vesrsion
+        {
+            get
+            {
+                return version;
+            }
+            set
+            {
+                version = value;
+            }
         }
     }
 }

@@ -14,13 +14,13 @@ namespace TestSystem.Plot
         Double X1;
         Double X2;
 
-        Double mX1=100;
-        Double mX2=100;
+        Double mX1=30;
+        Double mX2=30;
 
         public Normalize(Form_Draw form, Double koef = 1)
         {
             this.form = form;
-            mX1 = mX2 = koef;
+            //mX1 = mX2 = koef;
             //form.Zoom_draw((int)koef);
             form.Mult_point(koef);
         }

@@ -95,12 +95,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\AbsAlgorithm.cs" />
-    <Compile Include="Algorithm\Benchmark_Algorithm.cs" />
-    <Compile Include="Algorithm\Complex_Algorithm.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritms.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\DiagonalAlgorithmV2.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\ILine.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\IPlace.cs" />
+    <Compile Include="Algorithm\New\Complex_Algorithm.cs" />
+    <Compile Include="Algorithm\New\Benchmark_Algorithm.cs" />
+    <Compile Include="Algorithm\New\Genetic_Algorithm.cs" />
+    <Compile Include="Algorithm\Old\Benchmark_Algorithm.cs" />
+    <Compile Include="Algorithm\Old\Complex_Algorithm.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritm\DiagonalAlgorithmV2.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritms.cs" />
+    <Compile Include="Algorithm\New\Diagonal_Algoritm\DiagonalAlgorithmV2.cs" />
+    <Compile Include="Algorithm\New\Diagonal_Algoritm\ILine.cs" />
+    <Compile Include="Algorithm\New\Diagonal_Algoritm\IPlace.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritm\ILine.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritm\IPlace.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritm\Line.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritm\Place.cs" />
+    <Compile Include="Algorithm\Old\Diagonal_Algoritm\Point.cs" />
     <Compile Include="Drawer\Form_Draw.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,13 +117,13 @@
       <DependentUpon>Form_Draw.cs</DependentUpon>
     </Compile>
     <Compile Include="IPoint.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\Line.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\Place.cs" />
-    <Compile Include="Algorithm\Diagonal_Algoritm\Point.cs" />
-    <Compile Include="Algorithm\Genetic_Algorithm.cs" />
+    <Compile Include="Algorithm\New\Diagonal_Algoritm\Line.cs" />
+    <Compile Include="Algorithm\New\Diagonal_Algoritm\Place.cs" />
+    <Compile Include="Algorithm\New\Diagonal_Algoritm\Point.cs" />
+    <Compile Include="Algorithm\Old\Genetic_Algorithm.cs" />
     <Compile Include="Algorithm\IAlgorithm.cs" />
     <Compile Include="Algorithm\ICalculateFunction.cs" />
-    <Compile Include="Algorithm\Non_Benchmark_Algorithm.cs" />
+    <Compile Include="Algorithm\Old\Non_Benchmark_Algorithm.cs" />
     <Compile Include="BlackBox\BlackBoxFunction.cs" />
     <Compile Include="BlackBox\IFunction.cs" />
     <Compile Include="DataFormat\IBlackBox.cs" />
@@ -453,6 +462,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -351,6 +351,8 @@
                 this.dataGridViews[i].Columns[5].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
                 dataGridViews[i].Columns.Add("CostPercent", "% Стоимость"); 
                 this.dataGridViews[i].Columns[6].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
+                dataGridViews[i].Columns.Add("FuncPercent", "% Вызовов ф-ции");
+                this.dataGridViews[i].Columns[7].ToolTipText = "< 0, результат \"лучше\" чем в эталонном алгоритме.";
 
                 foreach (System.Windows.Forms.DataGridViewColumn column in dataGridViews[i].Columns)
                 {

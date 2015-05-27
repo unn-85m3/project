@@ -65,6 +65,7 @@ namespace TestSystem.Plot
             // pictureBox2
             // 
             this.pictureBox2.Size = new System.Drawing.Size(160, 330);
+            this.pictureBox2.Visible = false;
             // 
             // panel1
             // 
@@ -73,10 +74,6 @@ namespace TestSystem.Plot
             // panel2
             // 
             this.panel2.Size = new System.Drawing.Size(160, 330);
-            // 
-            // panel3
-            // 
-            this.panel3.Location = new System.Drawing.Point(14, 423);
             // 
             // panel4
             // 
