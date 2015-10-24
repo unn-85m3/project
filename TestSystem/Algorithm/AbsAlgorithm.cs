@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
-using TestSystem.Algorithm.New;
-using TestSystem.Algorithm.Old.Diagonal_Algoritm;
+using TestSystem.Algorithm.Diagonal_Algoritm;
 using System.Data.OleDb;
 using Saver;
 using Logger;
@@ -21,11 +20,10 @@ namespace TestSystem.Algorithm
     {
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
-        protected string lastName;
-        protected int version = 1;
         protected string atributs = "Параметры алгоритма: ";// Параметры алгоритма
         private IFunction _function;///функция для оптимизации
         private int calls;
+        private int version = 1;
         public Double STEP = 1;
         private List<IPoint> _points;
         private Saver.Saver saver;
@@ -56,20 +54,6 @@ namespace TestSystem.Algorithm
             _points = new List<IPoint>();
             listeners = new List<Logger.ICalculateListener>();
 
-        }
-
-        /// <summary>
-        /// Имя алгоритма
-        /// </summary>
-        public virtual string Name
-        {
-            get { return name; }
-            set { lastName = name; name = value; }
-        }
-
-        public virtual void ReturnLastName()
-        {
-            this.Name = lastName;
         }
 
         public double Step
@@ -124,23 +108,69 @@ namespace TestSystem.Algorithm
 
         public IOutBlackBoxParam Function(Double x1, Double x2, Int32 id = 0)
         {
-            calls++;
-            IOutBlackBoxParam p = function.Calculate(x1, x2);
+            
             Point point = new Point(x1, x2, id);
-            point.cost = p.Cost;
-            this._points.Add(point);
+            IOutBlackBoxParam p;
+            try
+            {
+                p=function.Calculate(point.x1, point.x2);
+                point.cost = p.Cost;
+              //  this._points.Add(point);
+                call(x1, x2, p.Cost, function.WhatTask());
+                calls++;
+
+            }
+            catch
+            {
+                p = new OutBlackBoxParam(Double.MaxValue);
+                point.cost = p.Cost;
+                //this._points.Add(point);
+                call(x1, x2, p.Cost, function.WhatTask());
+                calls++;
+
+            }
+            
+            
             return p;
         }
 
-        public IOutBlackBoxParam Function(Double x1, Double x2)
+        public virtual IOutBlackBoxParam Function(Double x1, Double x2)
         {
-            calls++;
+            /*calls++;
             IOutBlackBoxParam p = function.Calculate(x1, x2);
             Point point = new Point(x1, x2);
             point.cost = p.Cost;
             this._points.Add(point);
             call(x1, x2, p.Cost,function.WhatTask());
-            return p;
+            return p;*/
+
+            Point point = null;
+            IOutBlackBoxParam p;
+            try
+            {
+                point = new Point(x1, x2);
+                p = function.Calculate(point.x1, point.x2);
+                point.cost = p.Cost;
+                //this._points.Add(point);
+                call(x1, x2, p.Cost, function.WhatTask());
+                calls++;
+                return p;
+
+            }
+            catch
+            {
+                point = new Point(x1, x2);
+                p = new OutBlackBoxParam(Double.MaxValue);
+                point.cost = p.Cost;
+               // this._points.Add(point);
+                call(x1, x2, p.Cost, function.WhatTask());
+                calls++;
+                return p;
+
+            }
+
+
+            
         }
 
         /// <summary>
@@ -194,7 +224,7 @@ namespace TestSystem.Algorithm
         }
 
 
-        public int Vesrsion
+        public int Version
         {
             get
             {
@@ -203,6 +233,19 @@ namespace TestSystem.Algorithm
             set
             {
                 version = value;
+            }
+        }
+
+
+        public virtual string Name
+        {
+            get
+            {
+                return name;
+            }
+            set
+            {
+                name = value;
             }
         }
     }

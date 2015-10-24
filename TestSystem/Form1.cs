@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestSystem.test_system;
 using TestSystem.BlackBox;
-using TestSystem.Algorithm.Old;
-using TestSystem.Algorithm.New;
+//using TestSystem.Algorithm.Old;
+//using TestSystem.Algorithm.New;
 using TestSystem.Algorithm;
 using TestSystem.Plot;
 using KSModels;
@@ -19,7 +19,7 @@ using Microsoft.Office.Interop.Excel;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 using TestSystem.Logger;
-using TestSystem.Algorithm.Old.Diagonal_Algoritm;
+//using TestSystem.Algorithm.Old.Diagonal_Algoritm;
 using System.IO;
 
 
@@ -130,8 +130,8 @@ namespace TestSystem
             {
                 if (alg.Name == als.Name)
                 {
-                    alg.Vesrsion++;
-                    alg.Name = alg.Name + ". V.=" + alg.Vesrsion;
+                    alg.Version++;
+                    alg.Name = alg.Name + ". V.=" + alg.Version;
                 }
             }
             Algs.Add(alg);
@@ -145,8 +145,8 @@ namespace TestSystem
                 {
                     if (a.Name == als.Name)
                     {
-                        a.Vesrsion++;
-                        a.Name = a.Name + ". V.=" + a.Vesrsion;
+                        a.Version++;
+                        a.Name = a.Name + ". V.=" + a.Version;
                     }
                 }
                 Algs.Add(a);
@@ -165,13 +165,21 @@ namespace TestSystem
 
             Algs = new List<IAlgorithm>();
 
-            AddAlg(new Algorithm.Old.Benchmark_Algorithm(step));
+            AddAlg(new Algorithm.Benchmark_Algorithm(step));
+            AddAlg(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
+            AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgoritm3(step));
+            AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_1(step));
+            //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_2(step));
+
+            //AddAlg(new Algorithm.Old.Benchmark_Algorithm(step));
             //AddAlg(new Algorithm.Old.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
             //AddAlg(new Algorithm.New.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
+            //AddAlg(new Algorithm.Diagonal_Algoritm3.DiagonalAlgoritm3(step));
+            //AddAlg(new Algorithm.Diagonal_Algoritm3.Diagonal_Algoritm3_1(step));
             //AddAlg(new Algorithm.Old.Complex_Algorithm(step));
             //AddAlg(new Algorithm.New.Complex_Algorithm(step));
-            AddAlg(new Algorithm.Old.Genetic_Algorithm(step));
-            AddAlg(new Algorithm.New.Genetic_Algorithm(step));
+            //AddAlg(new Algorithm.Old.Genetic_Algorithm(step));
+            //AddAlg(new Algorithm.New.Genetic_Algorithm(step));
         }
 
 
@@ -523,7 +531,7 @@ namespace TestSystem
                         {
                             if ((BenchRez[i, 0, j] / BenchRez[0, 0, j] - 1) * 100 > 0)
                             {
-                                dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Red;
+                                dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.Crimson;
                             }
                             else dataGridViews[i].Rows[j].Cells[5].Style.BackColor = Color.GreenYellow;
                         }
@@ -533,7 +541,7 @@ namespace TestSystem
                         {
                             if ((BenchRez[i, 1, j] / BenchRez[0, 1, j] - 1) * 100 > 0)
                             {
-                                dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Red;
+                                dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.Crimson;
                             }
                             else dataGridViews[i].Rows[j].Cells[6].Style.BackColor = Color.GreenYellow;
                         }
@@ -543,7 +551,7 @@ namespace TestSystem
                         {
                             if ((BenchRez[i, 2, j] / BenchRez[0, 2, j] - 1) * 100 > 0)
                             {
-                                dataGridViews[i].Rows[j].Cells[7].Style.BackColor = Color.Red;
+                                dataGridViews[i].Rows[j].Cells[7].Style.BackColor = Color.Crimson;
                             }
                             else dataGridViews[i].Rows[j].Cells[7].Style.BackColor = Color.GreenYellow;
                         }
@@ -558,7 +566,7 @@ namespace TestSystem
                 {
                     if (time / Tasks.Count > 0)
                     {
-                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Red;
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.Crimson;
                     }
                     else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[5].Style.BackColor = Color.GreenYellow;
                 }
@@ -568,7 +576,7 @@ namespace TestSystem
                 {
                     if (count / Tasks.Count > 0)
                     {
-                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Red;
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.Crimson;
                     }
                     else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[6].Style.BackColor = Color.GreenYellow;
                 }
@@ -578,7 +586,7 @@ namespace TestSystem
                 {
                     if (call / Tasks.Count > 0)
                     {
-                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Style.BackColor = Color.Red;
+                        dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Style.BackColor = Color.Crimson;
                     }
                     else dataGridViews[i].Rows[dataGridViews[i].RowCount - 2].Cells[7].Style.BackColor = Color.GreenYellow;
                 }

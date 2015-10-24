@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestSystem.DataFormat;
 using TestSystem.BlackBox;
-using TestSystem.Algorithm.Old.Diagonal_Algoritm;
+using TestSystem.Algorithm.Diagonal_Algoritm;
 
 namespace TestSystem.Algorithm
 {
@@ -48,7 +48,8 @@ namespace TestSystem.Algorithm
         /// </summary>
         void SetFunction(IFunction function);
 
-        int Vesrsion { get; set; }
+        int Version { get; set; }
+
 
         List<IPoint> points { get; }
 
