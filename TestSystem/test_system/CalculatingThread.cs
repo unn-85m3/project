@@ -45,6 +45,11 @@ namespace TestSystem.test_system
         }
 
 
+        public bool isAlive
+        {
+            get { return thread.IsAlive; }
+        }
+
         /// <summary>
         /// Прогон заданий на этом алгориме
         /// </summary>

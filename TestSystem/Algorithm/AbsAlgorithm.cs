@@ -14,7 +14,7 @@ namespace TestSystem.Algorithm
 {
     /// <summary>
     /// От него наследуются все алгоритмы.
-    /// Уэтого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
+    /// У этого класса нет конструктора без параметра. Это сделано во избежние ошибок !!!
     /// </summary>
     abstract class AbsAlgorithm : IAlgorithm, ICalculateFunction
     {
@@ -248,5 +248,14 @@ namespace TestSystem.Algorithm
                 name = value;
             }
         }
+
+
+        public abstract bool EndOptimaze();
+
+        public abstract void NextOptimaze();
+
+        public abstract void StartOptimaze();
+
+        public abstract Dictionary<string, string> GetNowParams();
     }
 }

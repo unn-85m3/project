@@ -17,6 +17,8 @@ namespace TestSystem.test_system
        // private BlackBoxFunction function;
         private IEndCalculate listener;
         private Listener thListener;
+
+        private List<List<Dictionary<string, string>>> ArrayBestParamsInAlgs;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -81,14 +83,27 @@ namespace TestSystem.test_system
         /// </summary>
         public void Test()
         {
+            ArrayBestParamsInAlgs = new List<List<Dictionary<string, string>>>();
             foreach(IAlgorithm alg in algorithms)
             {
+                ArrayBestParamsInAlgs.Add(new List<Dictionary<string, string>>());
                 BlackBoxFunction function = new BlackBoxFunction();
                 alg.SetFunction(function);
-                CalculatingThread th = new CalculatingThread(alg,tasks,function);
+                CalculatingThread th = new CalculatingThread(alg, tasks, function);
                 thListener = new Listener(listener);
                 th.SetEndListener(thListener);
                 th.Start();
+                while (th.isAlive)
+                {
+                }
+                if (alg is Optimizate)
+                {
+                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1] = ((Optimizate)alg).GetNowListParams();
+                }
+                else
+                {
+                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1].Add(alg.GetNowParams());
+                }
             }
         }
 
@@ -121,7 +136,11 @@ namespace TestSystem.test_system
             if (thListener != null)
                 thListener.SetListener(listener);
         }
+        
 
-      
+        public List<List<Dictionary<string, string>>> ArrayBestParams()
+        {
+            return ArrayBestParamsInAlgs;
+        }
     }
 }

@@ -644,8 +644,46 @@ namespace TestSystem
         {
             buttonStart.Enabled = false;
             Algorithms.Test();
+            var BestResult = Algorithms.ArrayBestParams();
+            Save(BestResult, Algs, Tasks);
             button1.Enabled = true;
             button2.Enabled = true;
+        }
+
+        private void Save(List<List<Dictionary<string, string>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
+        {
+            var i = 0;
+            var dir = @"C:\ThisIsBestsResult";
+            if (!Directory.Exists(dir))
+            {
+                Directory.CreateDirectory(dir);
+            }
+            foreach (var alg in algs)
+            {
+                var path = Path.Combine(dir, alg + ".txt");
+
+                if (File.Exists(path))
+                {
+                    File.Delete(path);
+                }
+
+                var Lines = new List<string>();
+
+                var j = 0;
+                foreach(var task in tasks)
+                {
+                    Lines.Add(task.Name + "\n");
+                    foreach(var best in bestResult[i][j])
+                    {
+                        Lines[Lines.Count -1] += "\t" + best.Key + "\t:\t" + best.Value + "\n";
+                    }
+                    j++;
+                }
+
+                File.WriteAllLines(path, Lines);
+                i++;
+            }
+            MessageBox.Show(string.Format("Files with Best result saves in \"{0}\"", dir));
         }
 
         private void buttonShow_Click(object sender, EventArgs e)

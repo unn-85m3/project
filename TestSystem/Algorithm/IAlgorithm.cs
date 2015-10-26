@@ -56,5 +56,10 @@ namespace TestSystem.Algorithm
         int Calls { get; }
         void Refresh();
 
+        bool EndOptimaze();
+        void NextOptimaze();
+        void StartOptimaze();
+        Dictionary<string, string> GetNowParams();
+
     }
 }

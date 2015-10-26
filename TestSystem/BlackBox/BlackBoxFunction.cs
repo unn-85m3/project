@@ -10,7 +10,7 @@ using KSModels;
 
 namespace TestSystem.BlackBox
 {
-    class BlackBoxFunction : IFunction, IOutBlackBoxParam
+    class BlackBoxFunction : IOutBlackBoxParam, IFunction
     {
         private Double cost;
         ITaskPackage task;
