@@ -11,7 +11,7 @@ namespace TestSystem.Algorithm
         IAlgorithm _alg;
         List<Dictionary<string, string>> bestParams;
 
-        Optimizate(IAlgorithm alg)
+        public Optimizate(IAlgorithm alg)
         {
             _alg =  alg;
         }
