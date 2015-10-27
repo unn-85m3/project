@@ -31,7 +31,7 @@ namespace TestSystem.Algorithm
         protected List<Logger.ICalculateListener> listeners;
 
 
-       
+
         //
         /// <summary>
         /// конструктор
@@ -44,7 +44,7 @@ namespace TestSystem.Algorithm
             calls = 0;
             _points = new List<IPoint>();
             listeners = new List<Logger.ICalculateListener>();
-            
+
         }
 
         protected AbsAlgorithm(double step)
@@ -87,7 +87,7 @@ namespace TestSystem.Algorithm
         public void SetFunction(IFunction function)
         {
             this.function = function;
-            
+
         }
 
         private IFunction function
@@ -108,14 +108,14 @@ namespace TestSystem.Algorithm
 
         public IOutBlackBoxParam Function(Double x1, Double x2, Int32 id = 0)
         {
-            
+
             Point point = new Point(x1, x2, id);
             IOutBlackBoxParam p;
             try
             {
-                p=function.Calculate(point.x1, point.x2);
+                p = function.Calculate(point.x1, point.x2);
                 point.cost = p.Cost;
-              //  this._points.Add(point);
+                //  this._points.Add(point);
                 call(x1, x2, p.Cost, function.WhatTask());
                 calls++;
 
@@ -129,8 +129,8 @@ namespace TestSystem.Algorithm
                 calls++;
 
             }
-            
-            
+
+
             return p;
         }
 
@@ -162,7 +162,7 @@ namespace TestSystem.Algorithm
                 point = new Point(x1, x2);
                 p = new OutBlackBoxParam(Double.MaxValue);
                 point.cost = p.Cost;
-               // this._points.Add(point);
+                // this._points.Add(point);
                 call(x1, x2, p.Cost, function.WhatTask());
                 calls++;
                 return p;
@@ -170,7 +170,7 @@ namespace TestSystem.Algorithm
             }
 
 
-            
+
         }
 
         /// <summary>
@@ -210,11 +210,11 @@ namespace TestSystem.Algorithm
 
             for (int i = 0; i < n; i++)
             {
-                if (listeners[i]!=null)
+                if (listeners[i] != null)
                 {
                     listeners[i].onCalculate(x1, x2, cost, name);
                 }
-                
+
             }
         }
 
@@ -249,13 +249,9 @@ namespace TestSystem.Algorithm
             }
         }
 
+        public abstract List<Parametr> GetAllParam { get; }
 
-        public abstract bool EndOptimaze();
 
-        public abstract void NextOptimaze();
-
-        public abstract void StartOptimaze();
-
-        public abstract Dictionary<string, string> GetNowParams();
+        public List<ParametrNow> ParamNow { get; set; }
     }
 }

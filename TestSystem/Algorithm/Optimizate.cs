@@ -8,56 +8,134 @@ namespace TestSystem.Algorithm
 {
     class Optimizate : AbsAlgorithm
     {
-        IAlgorithm _alg;
-        List<Dictionary<string, string>> bestParams;
+        AbsAlgorithm _alg;
+        List<Parametr> algParamAll;
+        List<ParametrNow> algParamNow;
 
         public Optimizate(IAlgorithm alg)
         {
-            _alg =  alg;
+            if (alg is AbsAlgorithm)
+                _alg = (AbsAlgorithm)alg;
+            else return;
+            algParamAll = _alg.GetAllParam;
+            GetNextParams();
         }
 
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
-            _alg.StartOptimaze();
-            DataFormat.IOutBlackBoxParam ret = _alg.Calculate();
-            bestParams.Add(_alg.GetNowParams());
-            _alg.NextOptimaze();
-            while (_alg.EndOptimaze())
+            var best = new  DataFormat.OutBlackBoxParam(double.MaxValue);
+            while (!Compleate())
             {
-                var t = _alg.Calculate();
-                if (ret.Cost < t.Cost)
-                {
-                    ret = t;
-                    bestParams[bestParams.Count -1] = _alg.GetNowParams();
-                }
-                _alg.NextOptimaze();
+                var alg = GetNewAlg(algParamNow);
+                var result = alg.Calculate();
+                best = best.Cost < result.Cost ? best : (DataFormat.OutBlackBoxParam)result;
+                var dict = new Dictionary<ParametrNow, DataFormat.IOutBlackBoxParam>();
+                GetNowListParams.Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
+                GetNowListParams[GetNowListParams.Count - 1].Add(alg.ParamNow, result);
             }
-            return ret;
+            return best;
+
         }
 
-        public override bool EndOptimaze()
+        private AbsAlgorithm GetNewAlg(List<ParametrNow> pn)
         {
-            throw new NotImplementedException();
+            Type TestType = _alg.GetType();
+            System.Reflection.ConstructorInfo construct = TestType.GetConstructor(new Type[] { typeof(List<ParametrNow>) });
+            return construct != null ? (AbsAlgorithm)construct.Invoke(new object[] { pn }) : null;
         }
 
-        public override void NextOptimaze()
+        private void GetNextParams()
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (algParamNow == null)
+                {
+                    algParamNow = new List<ParametrNow>();
+                    foreach (var algParam in algParamAll)
+                    {
+                        algParamNow.Add(new ParametrNow { name = algParam.name, value = algParam.minValue });
+                    }
+                }
+                else
+                {
+                    foreach (var algParam in algParamAll)
+                    {
+                        var iter = GetPositionInNowParams(algParam.name);
+                        if (iter < algParamNow.Count)
+                        {
+                            if (TypeParams.discrete == algParam.tp)
+                            {
+                                if (algParamNow[iter].value < algParam.maxValue)
+                                {
+                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + 1.0, name = algParamNow[iter].name };
+                                    break;
+                                }
+                                else
+                                {
+                                    algParamNow[iter] = new ParametrNow { value = algParam.minValue + 1.0, name = algParamNow[iter].name };
+                                    continue;
+                                }
+                            }
+                            else if (TypeParams.continuous == algParam.tp)
+                            {
+                                if (algParamNow[iter].value < algParam.maxValue)
+                                {
+                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + 1.0, name = algParamNow[iter].name };
+                                    break;
+                                }
+                                else
+                                {
+                                    algParamNow[iter] = new ParametrNow { value = algParam.minValue + 1.0, name = algParamNow[iter].name };
+                                    continue;
+                                }
+
+                            }
+
+                        }
+                        else
+                        {
+                            throw new Exception("Нет такого параметра");
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                throw;
+            }
         }
 
-        public override void StartOptimaze()
+        private int GetPositionInNowParams(string nameAlg)
         {
-            throw new NotImplementedException();
+            int iter = -1;
+            foreach (var aP in algParamNow)
+            {
+                iter++;
+                if (aP.name == nameAlg)
+                {
+                    break;
+                }
+            }
+            return iter;
         }
 
-        public override Dictionary<string, string> GetNowParams()
+        private bool Compleate()
         {
-            throw new NotImplementedException();
+            foreach (var algParam in algParamAll)
+            {
+                if (algParamNow[GetPositionInNowParams(algParam.name)].value < algParam.maxValue)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
-        public List<Dictionary<string, string>> GetNowListParams()
+        public List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>> GetNowListParams { get; set; }
+
+        public override List<Parametr> GetAllParam
         {
-            return bestParams;
+            get { return _alg.GetAllParam; }
         }
     }
 }

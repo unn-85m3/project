@@ -651,7 +651,7 @@ namespace TestSystem
             button2.Enabled = true;
         }
 
-        private void Save(List<List<Dictionary<string, string>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
+        private void Save(List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
         {
             var i = 0;
             var dir = @"C:\ThisIsBestsResult";
@@ -676,7 +676,7 @@ namespace TestSystem
                     Lines.Add(task.Name + "\n");
                     foreach(var best in bestResult[i][j])
                     {
-                        Lines[Lines.Count -1] += "\t" + best.Key + "\t:\t" + best.Value + "\n";
+                        Lines[Lines.Count - 1] += best.ToString();
                     }
                     j++;
                 }

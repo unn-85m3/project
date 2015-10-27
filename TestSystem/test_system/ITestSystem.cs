@@ -31,7 +31,5 @@ namespace TestSystem.test_system
         /// Тест!!!
         /// </summary>
         void Test();
-
-        List<List<Dictionary<string, string>>> ArrayBestParams();
     }
 }

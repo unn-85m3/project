@@ -184,26 +184,5 @@ namespace TestSystem.Algorithm.Diagonal_Algoritm
             }
         }
 
-
-
-
-
-
-
-
-        public override void NextOptimaze()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override bool EndOptimaze()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void StartOptimaze()
-        {
-            throw new NotImplementedException();
-        }
     }
 }
