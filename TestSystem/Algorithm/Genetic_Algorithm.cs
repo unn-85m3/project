@@ -24,6 +24,7 @@ namespace TestSystem.Algorithm
         private int ga_T; //число поколений
         private int ga_Nc;
         private int ga_Nm;
+        private double h;
 
         static Random rnd = new Random(0);
 
@@ -43,6 +44,26 @@ namespace TestSystem.Algorithm
         {
             this.name = "Генетический алгоритм";
             this.atributs += ""; //ЗАПОЛНИ!!!!!!!!!!!!!
+        }
+
+        public Genetic_Algorithm(List<ParametrNow> pNow)
+        {
+            this.name = "Генетический алгоритм";
+            this.atributs += "";
+            ParamNow = pNow;
+            ga_size = (int)pNow.Find(s => s.name == "population size").value;
+            ga_Nc = (int)pNow.Find(s => s.name == "number of crossovers per generation").value;
+            ga_Nm = (int)pNow.Find(s => s.name == "number of mutations per generation").value;
+            h = pNow.Find(s => s.name == "step").value;
+        }
+
+        private List<Parametr> SetParams()
+        {
+
+            return new List<Parametr> {new Parametr{name = "population size", tp = TypeParams.discrete, minValue = 4, maxValue = 50},
+                                       new Parametr{name = "number of crossovers per generation", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
+                                       new Parametr{name = "number of mutations per generation", tp = TypeParams.discrete, minValue = 1, maxValue = 2},
+                                       new Parametr{name = "step", tp = TypeParams.continuous, minValue = 1, maxValue = 1} };
         }
 
         /// <summary>
@@ -102,14 +123,12 @@ namespace TestSystem.Algorithm
             }
             catch
             {
-            a = Double.MaxValue;
+                a = Double.MaxValue;
             }
             return a;
         }
 
-
         public int N { get { return ga_size; } set { ga_size = value; } }
-
 
         private void Sort()
         {
@@ -128,8 +147,6 @@ namespace TestSystem.Algorithm
             x = genom_fitness[i]; genom_fitness[i] = genom_fitness[j]; genom_fitness[j] = x;
         }
 
-
-
         private bool IsInternal(double x, double y)
         {
             bool state = true;
@@ -147,10 +164,8 @@ namespace TestSystem.Algorithm
                 genom_x.Insert(i, Math.Max(CY / FZ, AX) + rnd.NextDouble() * lx);  
                 ly = Math.Min(FZ*genom_x[i], DY) - Math.Max(EZ*genom_x[i], CY);
                 genom_y.Insert(i, Math.Max(EZ * genom_x[i], CY) + rnd.NextDouble() * ly);
-                genom_fitness.Insert(i, fitness_func(i));
-                
+                genom_fitness.Insert(i, fitness_func(i)); 
             }
-
         }
 
         private void ga_crossover()
@@ -161,14 +176,11 @@ namespace TestSystem.Algorithm
             List<double> rangs = new List<double>();
             Sort();
 
-
             double R = n * (n + 1) / 2;
-
 
             for (int i = 0; i < n; i++)
             {
                 rangs.Add((i + 1) / R);
-
             }
             rangs.Reverse();
 
@@ -178,13 +190,11 @@ namespace TestSystem.Algorithm
             do
             {
                 r = rnd.NextDouble();
-
                 j = rnd.Next(n);
 
                 do
                 {
                     k = rnd.Next(n);
-
                 }
                 while (k == j);
                 if ((rangs[j] > r) && (rangs[k] > r))
@@ -227,8 +237,7 @@ namespace TestSystem.Algorithm
         }
 
         private void ga_selection()
-        {
-           
+        {           
             Sort();
             for (int i = ga_size; i < genom_x.Count; i++)
             {
@@ -240,7 +249,7 @@ namespace TestSystem.Algorithm
 
         public override List<Parametr> GetAllParam
         {
-            get { throw new NotImplementedException(); }
+            get { return SetParams(); }
         }
     }
 
