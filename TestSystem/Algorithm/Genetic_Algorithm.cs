@@ -47,6 +47,7 @@ namespace TestSystem.Algorithm
         }
 
         public Genetic_Algorithm(List<ParametrNow> pNow)
+            : base(pNow.Find(s => s.name == "step").value)
         {
             this.name = "Генетический алгоритм";
             this.atributs += "";
@@ -54,12 +55,10 @@ namespace TestSystem.Algorithm
             ga_size = (int)pNow.Find(s => s.name == "population size").value;
             ga_Nc = (int)pNow.Find(s => s.name == "number of crossovers per generation").value;
             ga_Nm = (int)pNow.Find(s => s.name == "number of mutations per generation").value;
-            h = pNow.Find(s => s.name == "step").value;
         }
 
         private List<Parametr> SetParams()
         {
-
             return new List<Parametr> {new Parametr{name = "population size", tp = TypeParams.discrete, minValue = 4, maxValue = 50},
                                        new Parametr{name = "number of crossovers per generation", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
                                        new Parametr{name = "number of mutations per generation", tp = TypeParams.discrete, minValue = 1, maxValue = 2},
@@ -73,7 +72,6 @@ namespace TestSystem.Algorithm
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
             double cost = double.MaxValue;
-            int h = 0;
 
             AX = this.parametr.x1_min;
             BX = this.parametr.x1_max;
@@ -84,8 +82,8 @@ namespace TestSystem.Algorithm
 
             h = SetAreaOfTheRegion(STEP);
 
-            ga_size = h/4 + 4;
-            ga_T = 3*h/16;//*h - 4;
+            ga_size = (int)h/4 + 4;
+            ga_T = (int)(3*h/16);
             genom_x = new List<double>(ga_size);
             genom_y = new List<double>(ga_size);
             genom_fitness = new List<double>(ga_size);
