@@ -15,5 +15,6 @@ namespace TestSystem.DataFormat
         /// Стоимость
         /// </summary>
         Double Cost { get; }
+        string ToString();
     }
 }

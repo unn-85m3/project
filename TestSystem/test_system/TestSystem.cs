@@ -18,7 +18,7 @@ namespace TestSystem.test_system
         private IEndCalculate listener;
         private Listener thListener;
 
-        private List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>> ArrayBestParamsInAlgs;
+        private List<List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>> ArrayBestParamsInAlgs;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -83,10 +83,10 @@ namespace TestSystem.test_system
         /// </summary>
         public void Test()
         {
-            ArrayBestParamsInAlgs = new List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>();
+            ArrayBestParamsInAlgs = new List<List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>>();
             foreach(AbsAlgorithm alg in algorithms)
             {
-                ArrayBestParamsInAlgs.Add(new List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>());
+                ArrayBestParamsInAlgs.Add(new List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>());
                 BlackBoxFunction function = new BlackBoxFunction();
                 alg.SetFunction(function);
                 CalculatingThread th = new CalculatingThread(alg, tasks, function);
@@ -98,12 +98,15 @@ namespace TestSystem.test_system
                 }
                 if (alg is Optimizate)
                 {
-                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1] = ((Optimizate)alg).GetNowListParams;
+                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1].Add(((Optimizate)alg).GetNowListParams);
                 }
                 else
                 {
-                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1].Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
-                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1][ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1].Count - 1].Add(alg.ParamNow, (new OutBlackBoxParam(0)));
+                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1].Add(new List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>());
+                    var outList = alg.ParamNow != null && alg.ParamNow.Count > 0 ? alg.ParamNow : new List<ParametrNow> { new ParametrNow { name = "Нет параметров", value = 0 } };
+                    var r = new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>();
+                    r.Add(outList, new OutBlackBoxParam(0));
+                    ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1][ArrayBestParamsInAlgs[ArrayBestParamsInAlgs.Count - 1].Count - 1].Add(r);
                 }
             }
             
@@ -140,7 +143,7 @@ namespace TestSystem.test_system
         }
 
 
-        public List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>> ArrayBestParams()
+        public List<List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>> ArrayBestParams()
         {
             return ArrayBestParamsInAlgs;
         }

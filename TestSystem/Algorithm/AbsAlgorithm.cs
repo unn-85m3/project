@@ -21,7 +21,7 @@ namespace TestSystem.Algorithm
         protected IEnterBlackBoxParam parametr; ///парамтры, в рамках которых проводится оптимизация
         protected string name = "Имя";/// имя алгоритма+имя автора
         protected string atributs = "Параметры алгоритма: ";// Параметры алгоритма
-        private IFunction _function;///функция для оптимизации
+        protected IFunction _function;///функция для оптимизации
         private int calls;
         private int version = 1;
         public Double STEP = 1;

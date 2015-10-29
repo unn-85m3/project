@@ -214,6 +214,11 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             return tempPoint;
         }
 
+
+        public override List<Parametr> GetAllParam
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
     
 }

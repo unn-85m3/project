@@ -17,7 +17,7 @@ namespace TestSystem.Algorithm
 
 
 
-    struct Parametr //это структура для параметров
+    class Parametr //это структура для параметров
     {
 
         public string name; //описание параметра
@@ -35,7 +35,7 @@ namespace TestSystem.Algorithm
 
 
 
-    struct ParametrNow //это параметры для проверки
+    class ParametrNow //это параметры для проверки
     {
 
         public string name;

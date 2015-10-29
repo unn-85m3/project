@@ -19,6 +19,8 @@ namespace TestSystem.Algorithm
             else return;
             algParamAll = _alg.GetAllParam;
             GetNextParams();
+            Name = alg.Name;
+            GetNowListParams = new List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>();
         }
 
         public override DataFormat.IOutBlackBoxParam Calculate()
@@ -27,11 +29,21 @@ namespace TestSystem.Algorithm
             while (!Compleate())
             {
                 var alg = GetNewAlg(algParamNow);
+                alg.EnterParam = this.EnterParam;
+                alg.SetFunction(_function);
+
                 var result = alg.Calculate();
                 best = best.Cost < result.Cost ? best : (DataFormat.OutBlackBoxParam)result;
                 var dict = new Dictionary<ParametrNow, DataFormat.IOutBlackBoxParam>();
                 GetNowListParams.Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
-                GetNowListParams[GetNowListParams.Count - 1].Add(alg.ParamNow, result);
+                List<ParametrNow> outParam = new List<ParametrNow>(alg.ParamNow.Count);
+                foreach (var t in alg.ParamNow)
+                {
+                    outParam.Add(t);
+                }
+                var outResult = new DataFormat.OutBlackBoxParam(result.Cost);
+                GetNowListParams[GetNowListParams.Count - 1].Add(outParam, outResult);
+                GetNextParams();
             }
             return best;
 

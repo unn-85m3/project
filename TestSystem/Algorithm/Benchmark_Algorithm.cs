@@ -83,5 +83,10 @@ namespace TestSystem.Algorithm
         {
             get { return name; }
         }
+
+        public override List<Parametr> GetAllParam
+        {
+            get { return null; }
+        }
     }
 }

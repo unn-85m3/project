@@ -316,5 +316,10 @@ namespace TestSystem.Algorithm
         //    PIR.x = rnd.NextDouble() * (x2 - x1) + x1;
         //    PIR.y = (x1 * y2 - x2 * y1 + (y1 - y2) * PIR.x) / (x1 - x2);
         //}
+
+        public override List<Parametr> GetAllParam
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

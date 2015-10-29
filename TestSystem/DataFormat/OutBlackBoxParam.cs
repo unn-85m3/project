@@ -16,5 +16,10 @@ namespace TestSystem.DataFormat
         {
             get { return cost; }
         }
+
+        public string ToString()
+        {
+            return "cost = " + cost;
+        }
     }
 }

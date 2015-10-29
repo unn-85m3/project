@@ -177,5 +177,10 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
 
 
 
+
+        public override List<Parametr> GetAllParam
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

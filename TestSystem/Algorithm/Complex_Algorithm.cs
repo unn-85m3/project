@@ -237,5 +237,10 @@ namespace TestSystem.Algorithm
             return x12pc;
         }
 
+
+        public override List<Parametr> GetAllParam
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }

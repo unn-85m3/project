@@ -166,7 +166,8 @@ namespace TestSystem
             Algs = new List<IAlgorithm>();
 
             AddAlg(new Algorithm.Benchmark_Algorithm(step));
-            AddAlg(new Algorithm.Optimizate(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step)));
+            AddAlg(new Algorithm.Optimizate(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_2(step)));
+            //AddAlg(new Algorithm.Optimizate(new Algorithm.Genetic_Algorithm(step)));
             //AddAlg(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgoritm3(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_1(step));
@@ -651,7 +652,7 @@ namespace TestSystem
             button2.Enabled = true;
         }
 
-        private void Save(List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
+        private void Save(List<List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
         {
             var i = 0;
             var dir = @"C:\ThisIsBestsResult";
@@ -673,11 +674,19 @@ namespace TestSystem
                 var j = 0;
                 foreach(var task in tasks)
                 {
-                    Lines.Add(task.Name + "\n");
-                    foreach(var best in bestResult[i][j])
-                    {
-                        Lines[Lines.Count - 1] += best.ToString();
-                    }
+                    Lines.Add(task.Name);
+                    if(bestResult[i].Count>j)
+                        foreach(var bb in bestResult[i][j])
+                        {
+                            foreach (var best in bb)
+                            {
+                                foreach (var b in best.Key)
+                                {
+                                    Lines.Add("\tname = " + b.name + ",\tvalue = " + b.value);
+                                }
+                                Lines.Add("\t" + best.Value.ToString());
+                            }
+                        }
                     j++;
                 }
 

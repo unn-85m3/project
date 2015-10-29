@@ -56,7 +56,7 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             ISeparathor seperathor = Factory.GetSeparathor();
             subAlg.maxPoints = maxPoints / 100 * 10;
             tempMaxPoints -= maxPoints / 100 * 10;
-            bestPoint = subAlg.Calculate(firstPlace.MainDiagonal, stepHil);
+            bestPoint = subAlg.Calculate(firstPlace.MainDiagonal);//, stepHil);
 
             List<IPlace> pl = null;
 
@@ -80,21 +80,21 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
                         case 0:
                             if (pl[i].generation % 2 == 0)
                             {
-                                tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal, stepHil);
+                                tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal);//, stepHil);
                                 tempMaxPoints += subAlg.maxPoints;
                             }
                             else
                             {
-                                tempPoint = subAlg.Calculate(firstPlace.MainDiagonal, stepHil);
+                                tempPoint = subAlg.Calculate(firstPlace.MainDiagonal);//, stepHil);
                                 tempMaxPoints += subAlg.maxPoints;
                             }
                             break;
                         case 1:
-                            tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal, stepHil);
+                            tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal);//, stepHil);
                             tempMaxPoints += subAlg.maxPoints;
                             break;
                         case 2:
-                            tempPoint = subAlg.Calculate(firstPlace.MainDiagonal, stepHil);
+                            tempPoint = subAlg.Calculate(firstPlace.MainDiagonal);//, stepHil);
                             tempMaxPoints += subAlg.maxPoints;
                             break;
 
@@ -210,6 +210,14 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
         }
 
 
+        public DiagonalAlgorithm3_2(List<ParametrNow> pNow)
+        {
+            ParamNow = pNow;
+            this.STEP = 1;
+            this.name = "Диагональный алгоритм 3.2";
+
+        }
+
 
 
         public override List<Parametr> GetAllParam
@@ -217,9 +225,9 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             get 
             { 
                 return new List<Parametr> { 
-                new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 3 }, 
-                new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 3 }, 
-                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 0, maxValue = 10 }//, 
+                new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 0 }, 
+                new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
+                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 1, maxValue = 1 }//, 
                 //new Parametr { name = "HilClimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 10 }, 
                 //new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 100 } 
                 }; 
