@@ -142,5 +142,10 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Places
                 _needSeperate = value;
             }
         }
+
+        public int CompareTo(object obj) //sort
+        {
+            throw new NotImplementedException();
+        }
     }
 }

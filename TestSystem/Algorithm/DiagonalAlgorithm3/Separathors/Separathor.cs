@@ -11,11 +11,55 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Separathors
     class Separathor:ISeparathor
     {
 
+        public List<IPlace> Separate(IPlace place, IPoint point, int howSeparate)
+        {
+            List<IPlace> places = new List<IPlace>();
+            IPlace tempPlace;
+            if ((!place.isSeparated) && (point.cost != Double.MaxValue))
+            {
+                switch (howSeparate)
+                {
+                    case 0:
+                        tempPlace = CreatePlace(place.points[0], point, place);
+                        if (tempPlace != null)
+                            places.Add(tempPlace);
+
+                        IPoint tempPoint1 = new Point(point.x1, place.points[0].x2);
+                        IPoint tempPoint2 = new Point(place.points[3].x1, point.x2);
+                        tempPlace = CreatePlace(tempPoint1, tempPoint2, place);
+                        if (tempPlace != null)
+                            places.Add(tempPlace);
+
+
+                        tempPoint1 = new Point(place.points[2].x1, point.x2);
+                        tempPoint2 = new Point(point.x1, place.points[1].x2);
+                        tempPlace = CreatePlace(tempPoint1, tempPoint2, place);
+                        if (tempPlace != null)
+                            places.Add(tempPlace);
+
+
+                        tempPlace = CreatePlace(point, place.points[0], place);
+                        if (tempPlace != null)
+                            places.Add(tempPlace);
+
+                        place.isSeparated = true;
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
+            }
+
+            return places;
+        }
+
+
         public List<IPlace> Separate(IPlace place, IPoint point)
         {
             List<IPlace> places = new List<IPlace>();
             IPlace tempPlace;
-            if ((!place.isSeparated) && (point.cost!=Double.MaxValue))
+            if ((!place.isSeparated) && (point.cost != Double.MaxValue))
             {
                 tempPlace = CreatePlace(place.points[0], point, place);
                 if (tempPlace != null)
@@ -59,6 +103,5 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Separathors
             return place;
         }
 
- 
     }
 }

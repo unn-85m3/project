@@ -7,7 +7,7 @@ using TestSystem.Algorithm.Diagonal_Algoritm3.Lines;
 
 namespace TestSystem.Algorithm.DiagonalAlgorithm3.Places
 {
-    interface IPlace
+    interface IPlace : IComparable
     {
         int generation { set; get; }
         int hasPoints { get; set; }

@@ -175,5 +175,10 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Places
         {
             get { return place.Area; }
         }
+
+        public int CompareTo(object obj) //sort
+        {
+            throw new NotImplementedException();
+        }
     }
 }

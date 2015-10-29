@@ -14,5 +14,6 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Separathors
          * 
          */
         List<IPlace> Separate(IPlace place, IPoint point);
+        List<IPlace> Separate(IPlace place, IPoint point, int howSeparate);
     }
 }

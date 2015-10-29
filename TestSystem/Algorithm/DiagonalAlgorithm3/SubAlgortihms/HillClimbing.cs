@@ -38,7 +38,7 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.SubAlgorithms
             }
         }
 
-        public IPoint Calculate(ILine line)
+        public IPoint Calculate(ILine line)//edit
         {
           
             double step;
