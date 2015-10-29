@@ -38,17 +38,9 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.SubAlgorithms
             }
         }
 
-        public IPoint Calculate(ILine line)//edit
+        public IPoint Calculate(ILine line, double step)
         {
-          
-            double step;
-           
-                step = line.length / maxPoints;
-
-               /* if (step < 0.2)
-                    step = 0.2;*/
-
-
+            
             Double lPoint = this.rng.NextDouble() * (line.length);
             IPoint point = line.GetPoint(lPoint);
 
@@ -124,6 +116,20 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.SubAlgorithms
             }
 
             return main;
+        }
+        
+
+        public IPoint Calculate(ILine line)
+        {
+          
+            double step;
+           
+                step = line.length / maxPoints;
+
+               /* if (step < 0.2)
+                    step = 0.2;*/
+
+                return Calculate(line, step);
         }
 
 

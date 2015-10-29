@@ -178,7 +178,18 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Places
 
         public int CompareTo(object obj) //sort
         {
-            throw new NotImplementedException();
+            if (!(obj is IPlace)) return -1;
+            var o = (IPlace)obj;
+            var thisCost = points.Min(t => t.cost);
+            var objCost = o.points.Min(t => t.cost);
+            var th = this.Area / thisCost;
+            var ob = o.Area / objCost;
+            if (th < ob)
+                return -1;
+            else if (th > ob)
+                return 1;
+            else
+                return 0;
         }
     }
 }

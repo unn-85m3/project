@@ -148,5 +148,11 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.SubAlgorithms
         {
             get { throw new NotImplementedException(); }
         }
+
+
+        public IPoint Calculate(ILine line, double step)
+        {
+            return Calculate(line);
+        }
     }
 }

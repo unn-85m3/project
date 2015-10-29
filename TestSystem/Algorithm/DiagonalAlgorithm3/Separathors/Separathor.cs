@@ -17,6 +17,7 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Separathors
             IPlace tempPlace;
             if ((!place.isSeparated) && (point.cost != Double.MaxValue))
             {
+                howSeparate = 0;
                 switch (howSeparate)
                 {
                     case 0:
@@ -44,10 +45,24 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.Separathors
 
                         place.isSeparated = true;
                         break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
+                    //case 1:
+                        
+
+                    //    tempPoint1 = new Point(point.x1, place.points[2].x2);
+                    //    tempPlace = CreatePlace(place.points[0], tempPoint1, place);
+                    //    if (tempPlace != null)
+                    //        places.Add(tempPlace);
+
+
+                    //    tempPoint1 = new Point(point.x1, place.points[2].x2);
+                    //    tempPlace = CreatePlace(tempPoint1, place.points[1], place);
+                    //    if (tempPlace != null)
+                    //        places.Add(tempPlace);
+
+                    //    place.isSeparated = true;
+                    //    break;
+                    //case 2:
+                    //    break;
                 }
             }
 

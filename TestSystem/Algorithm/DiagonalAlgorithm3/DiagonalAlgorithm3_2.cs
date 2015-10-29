@@ -51,11 +51,12 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             FirstPlace firstPlace = new FirstPlace(bigPlace, this.parametr);
 
             ISubAlgorithm subAlg = Factory.GetSubAlgorithm(this, this.parametr, 1);
-
+            
+            int stepHil = (int)ParamNow.Where(t => t.name == "HilClimbibgStep").ToList()[0].value; //edit
             ISeparathor seperathor = Factory.GetSeparathor();
             subAlg.maxPoints = maxPoints / 100 * 10;
             tempMaxPoints -= maxPoints / 100 * 10;
-            bestPoint = subAlg.Calculate(firstPlace.MainDiagonal);
+            bestPoint = subAlg.Calculate(firstPlace.MainDiagonal, stepHil);
 
             List<IPlace> pl = null;
 
@@ -79,21 +80,21 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
                         case 0:
                             if (pl[i].generation % 2 == 0)
                             {
-                                tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal);
+                                tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal, stepHil);
                                 tempMaxPoints += subAlg.maxPoints;
                             }
                             else
                             {
-                                tempPoint = subAlg.Calculate(firstPlace.MainDiagonal);
+                                tempPoint = subAlg.Calculate(firstPlace.MainDiagonal, stepHil);
                                 tempMaxPoints += subAlg.maxPoints;
                             }
                             break;
                         case 1:
-                            tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal);
+                            tempPoint = subAlg.Calculate(firstPlace.SecondDiagonal, stepHil);
                             tempMaxPoints += subAlg.maxPoints;
                             break;
                         case 2:
-                            tempPoint = subAlg.Calculate(firstPlace.MainDiagonal);
+                            tempPoint = subAlg.Calculate(firstPlace.MainDiagonal, stepHil);
                             tempMaxPoints += subAlg.maxPoints;
                             break;
 
@@ -104,7 +105,7 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
                     if (tempMaxPoints <= 0)
                         break;
 
-                    pl.Sort(this); //edit
+                    pl.Sort(this); 
                     i = 0;
                 }
 
@@ -186,14 +187,16 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
 
         public int Compare(IPlace x, IPlace y) //edit
         {
-            if (x.GetPoint().cost < y.GetPoint().cost)
-                return 1;
-
-            if (x.GetPoint().cost > y.GetPoint().cost)
+            var thisCost = x.points.Min(t => t.cost);
+            var objCost = y.points.Min(t => t.cost);
+            var th = x.Area / thisCost;
+            var ob = y.Area / objCost;
+            if (th < ob)
                 return -1;
-
-
-            return 0;
+            else if (th > ob)
+                return 1;
+            else
+                return 0;
         }
 
 
@@ -216,9 +219,10 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
                 return new List<Parametr> { 
                 new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 3 }, 
                 new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 3 }, 
-                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 0, maxValue = 100 }, 
-                new Parametr { name = "HilClimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 10 }, 
-                new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 100 } }; 
+                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 0, maxValue = 10 }//, 
+                //new Parametr { name = "HilClimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 10 }, 
+                //new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 100 } 
+                }; 
             }
         }
     }

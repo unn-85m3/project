@@ -25,5 +25,7 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3.SubAlgorithms
          * рассчёт
          */
         IPoint Calculate(ILine line);
+
+        IPoint Calculate(ILine line, double step);
     }
 }
