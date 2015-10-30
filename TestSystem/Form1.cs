@@ -652,7 +652,7 @@ namespace TestSystem
             button2.Enabled = true;
         }
 
-        private void Save(List<List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
+        private void Save(List<List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>> bestResult, List<IAlgorithm> algs, List<TestSystem.Tasks.ITaskPackage> tasks)
         {
             var i = 0;
             var dir = @"C:\ThisIsBestsResult";
@@ -662,7 +662,7 @@ namespace TestSystem
             }
             foreach (var alg in algs)
             {
-                var path = Path.Combine(dir, alg + ".txt");
+                var path = Path.Combine(dir, alg.Name + ".txt");
 
                 if (File.Exists(path))
                 {
@@ -672,22 +672,22 @@ namespace TestSystem
                 var Lines = new List<string>();
 
                 var j = 0;
-                foreach(var task in tasks)
+                foreach (var task in tasks)
                 {
                     Lines.Add(task.Name);
-                    if(bestResult[i].Count>j)
-                        foreach(var bb in bestResult[i][j])
+                    if (bestResult[i].Count > j)
+                    {
+                        foreach (var best in bestResult[i][j])
                         {
-                            foreach (var best in bb)
+                            foreach (var b in best.Key)
                             {
-                                foreach (var b in best.Key)
-                                {
-                                    Lines.Add("\tname = " + b.name + ",\tvalue = " + b.value);
-                                }
-                                Lines.Add("\t" + best.Value.ToString());
+                                Lines.Add("\tname = " + b.name + ",\tvalue = " + b.value);
                             }
+                            Lines.Add("\t" + best.Value.ToString());
                         }
-                    j++;
+                        j++;
+                    }
+
                 }
 
                 File.WriteAllLines(path, Lines);

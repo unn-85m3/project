@@ -187,7 +187,7 @@ namespace TestSystem.Algorithm
             get { return calls; }
         }
 
-        public void Refresh()
+        public virtual void Refresh()
         {
             calls = 0;
         }

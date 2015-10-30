@@ -17,25 +17,33 @@ namespace TestSystem.Algorithm
             if (alg is AbsAlgorithm)
                 _alg = (AbsAlgorithm)alg;
             else return;
-            algParamAll = _alg.GetAllParam;
-            GetNextParams();
+            Update();
             Name = alg.Name;
             GetNowListParams = new List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>>();
         }
 
+        private void Update()
+        {
+            algParamNow = null;
+            algParamAll = _alg.GetAllParam;
+            //GetNextParams();
+        }
+
         public override DataFormat.IOutBlackBoxParam Calculate()
         {
+            Update();
+            var dict = new Dictionary<ParametrNow, DataFormat.IOutBlackBoxParam>();
+            GetNowListParams.Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
             var best = new  DataFormat.OutBlackBoxParam(double.MaxValue);
-            while (!Compleate())
+            while (algParamNow == null || !Compleate())
             {
+                GetNextParams();
                 var alg = GetNewAlg(algParamNow);
                 alg.EnterParam = this.EnterParam;
                 alg.SetFunction(_function);
-
+                alg.Refresh();
                 var result = alg.Calculate();
                 best = best.Cost < result.Cost ? best : (DataFormat.OutBlackBoxParam)result;
-                var dict = new Dictionary<ParametrNow, DataFormat.IOutBlackBoxParam>();
-                GetNowListParams.Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
                 List<ParametrNow> outParam = new List<ParametrNow>(alg.ParamNow.Count);
                 foreach (var t in alg.ParamNow)
                 {
@@ -43,7 +51,6 @@ namespace TestSystem.Algorithm
                 }
                 var outResult = new DataFormat.OutBlackBoxParam(result.Cost);
                 GetNowListParams[GetNowListParams.Count - 1].Add(outParam, outResult);
-                GetNextParams();
             }
             return best;
 
@@ -79,12 +86,13 @@ namespace TestSystem.Algorithm
                             {
                                 if (algParamNow[iter].value < algParam.maxValue)
                                 {
-                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + 1.0, name = algParamNow[iter].name };
+                                    var step = Math.Ceiling((algParam.maxValue - algParam.minValue) / 10);
+                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + step, name = algParamNow[iter].name };
                                     break;
                                 }
                                 else
                                 {
-                                    algParamNow[iter] = new ParametrNow { value = algParam.minValue + 1.0, name = algParamNow[iter].name };
+                                    algParamNow[iter] = new ParametrNow { value = algParam.minValue, name = algParamNow[iter].name };
                                     continue;
                                 }
                             }
@@ -92,12 +100,13 @@ namespace TestSystem.Algorithm
                             {
                                 if (algParamNow[iter].value < algParam.maxValue)
                                 {
-                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + 1.0, name = algParamNow[iter].name };
+                                    var step = Math.Ceiling((algParam.maxValue - algParam.minValue) / 10);
+                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + step, name = algParamNow[iter].name };
                                     break;
                                 }
                                 else
                                 {
-                                    algParamNow[iter] = new ParametrNow { value = algParam.minValue + 1.0, name = algParamNow[iter].name };
+                                    algParamNow[iter] = new ParametrNow { value = algParam.minValue, name = algParamNow[iter].name };
                                     continue;
                                 }
 
@@ -141,6 +150,12 @@ namespace TestSystem.Algorithm
                 }
             }
             return true;
+        }
+
+        public override void Refresh()
+        {
+            base.Refresh();
+            
         }
 
         public List<Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>> GetNowListParams { get; set; }
