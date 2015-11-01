@@ -32,6 +32,60 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             places = new List<IPlace>();
         }
 
+        private List<IPlace> SortAlgs(List<IPlace> algs, double mod)
+        {
+            List<IPlace> aOut = (new IPlace[algs.Count]).ToList();
+            if (mod == 0)
+            {
+                algs.CopyTo(aOut.ToArray(), 0);
+                for (int i = 0; i < algs.Count; i++)
+                {
+                    for (int j = i + 1; j < algs.Count; j++)
+                    {
+                        if (aOut[i].Area < aOut[j].Area)
+                        {
+                            var tmp = aOut[i];
+                            aOut[i] = aOut[j];
+                            aOut[j] = tmp;
+                        }
+                    }
+                }
+            }
+            else if (mod == 1)
+            {
+                algs.CopyTo(aOut.ToArray(), 0);
+                for (int i = 0; i < algs.Count; i++)
+                {
+                    for (int j = i + 1; j < algs.Count; j++)
+                    {
+                        if (aOut[i].Area / aOut[i].points.Min(t => t.cost) < aOut[j].Area / aOut[j].points.Min(t => t.cost))
+                        {
+                            var tmp = aOut[i];
+                            aOut[i] = aOut[j];
+                            aOut[j] = tmp;
+                        }
+                    }
+                }
+
+            }
+            else
+            {
+                algs.CopyTo(aOut.ToArray(), 0);
+                for (int i = 0; i < algs.Count; i++)
+                {
+                    for (int j = i + 1; j < algs.Count; j++)
+                    {
+                        if (aOut[i].Area / aOut[i].points.Min(t => t.cost) - aOut[j].Area / aOut[j].points.Min(t => t.cost) < mod)
+                        {
+                            var tmp = aOut[i];
+                            aOut[i] = aOut[j];
+                            aOut[j] = tmp;
+                        }
+                    }
+                }
+            }
+            return aOut;
+        }
 
         public override IOutBlackBoxParam Calculate()
         {
@@ -65,6 +119,8 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             pl = seperathor.Separate(firstPlace, bestPoint, separat); //edit
             int n = pl.Count;
             int Diagonal = (int)ParamNow.Where(t => t.name == "Diagonale").ToList()[0].value; //edit
+
+            double ModSort = ParamNow.Where(t => t.name == "HowSortPlace").ToList()[0].value / GetAllParam.Where(t => t.name == "HowSortPlace").ToList()[0].maxValue;
 
             for (int i = 0; i < n; i++) //wtf?
             {
@@ -105,7 +161,8 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
                     if (tempMaxPoints <= 0)
                         break;
 
-                    pl.Sort(this); 
+                    pl = SortAlgs(pl, ModSort);
+                    //pl.Sort(this); 
                     i = 0;
                 }
 
@@ -226,10 +283,10 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             { 
                 return new List<Parametr> { 
                 new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 0 }, 
-                new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
-                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 1, maxValue = 1 }//, 
+                new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 0 }, 
+                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 1, maxValue = 1 }, 
                 //new Parametr { name = "HilClimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 10 }, 
-                //new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 100 } 
+                new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 10 } 
                 }; 
             }
         }
