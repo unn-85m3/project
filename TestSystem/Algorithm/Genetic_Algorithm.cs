@@ -25,6 +25,7 @@ namespace TestSystem.Algorithm
         private int ga_Nc;
         private int ga_Nm;
         private double h;
+        private double pSize, Pc, Pm;
 
         static Random rnd = new Random(0);
 
@@ -52,16 +53,16 @@ namespace TestSystem.Algorithm
             this.name = "Генетический алгоритм";
             this.atributs += "";
             ParamNow = pNow;
-            ga_size = (int)pNow.Find(s => s.name == "population size").value;
-            ga_Nc = (int)pNow.Find(s => s.name == "number of crossovers per generation").value;
-            ga_Nm = (int)pNow.Find(s => s.name == "number of mutations per generation").value;
+            pSize = (int)pNow.Find(s => s.name == "population size").value;
+            Pc = (int)pNow.Find(s => s.name == "crossover probability").value;
+            Pm = (int)pNow.Find(s => s.name == "mutation probability").value;
         }
 
         private List<Parametr> SetParams()
         {
-            return new List<Parametr> {new Parametr{name = "population size", tp = TypeParams.discrete, minValue = 4, maxValue = 50},
-                                       new Parametr{name = "number of crossovers per generation", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
-                                       new Parametr{name = "number of mutations per generation", tp = TypeParams.discrete, minValue = 1, maxValue = 2},
+            return new List<Parametr> {new Parametr{name = "population size", tp = TypeParams.continuous, minValue = 0.1, maxValue = 0.15},
+                                       new Parametr{name = "crossover probability", tp = TypeParams.continuous, minValue = 0.5, maxValue = 0.7},
+                                       new Parametr{name = "mutation probability", tp = TypeParams.continuous, minValue = 0.1, maxValue = 0.2},
                                        new Parametr{name = "step", tp = TypeParams.continuous, minValue = 1, maxValue = 1} };
         }
 
@@ -82,8 +83,10 @@ namespace TestSystem.Algorithm
 
             h = SetAreaOfTheRegion(STEP);
 
-            ga_size = (int)h/4 + 4;
-            ga_T = (int)(3*h/16);
+            ga_size = (int)Math.Max(4, h * pSize);
+            ga_Nc = (int)Math.Max(1, Pc * ga_size / 2);
+            ga_Nm = (int)Math.Max(1, Pm * ga_size);
+            ga_T = (int)((h - ga_size)/(2 * ga_Nm + 2 * ga_Nc));
             genom_x = new List<double>(ga_size);
             genom_y = new List<double>(ga_size);
             genom_fitness = new List<double>(ga_size);
