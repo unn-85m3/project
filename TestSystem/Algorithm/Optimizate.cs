@@ -35,22 +35,81 @@ namespace TestSystem.Algorithm
             var dict = new Dictionary<ParametrNow, DataFormat.IOutBlackBoxParam>();
             GetNowListParams.Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
             var best = new  DataFormat.OutBlackBoxParam(double.MaxValue);
-            while (algParamNow == null || !Compleate())
+
+            if (_alg is Genetic_Algorithm)
             {
-                GetNextParams();
-                var alg = GetNewAlg(algParamNow);
-                alg.EnterParam = this.EnterParam;
-                alg.SetFunction(_function);
-                alg.Refresh();
-                var result = alg.Calculate();
-                best = best.Cost < result.Cost ? best : (DataFormat.OutBlackBoxParam)result;
-                List<ParametrNow> outParam = new List<ParametrNow>(alg.ParamNow.Count);
-                foreach (var t in alg.ParamNow)
+                int n = algParamAll.Count - 1;
+                int count = 1;
+                double step = 0.1;
+
+                for (int i = 0; i < n; i++)
                 {
-                    outParam.Add(t);
+                    double c = (algParamAll[i].maxValue - algParamAll[i].minValue) / step;
+                    int s = (int)Math.Max(Math.Ceiling(c) + 1, 2);
+                    count = count * s;
                 }
-                var outResult = new DataFormat.OutBlackBoxParam(result.Cost);
-                GetNowListParams[GetNowListParams.Count - 1].Add(outParam, outResult);
+
+                for (int i = 0; i < count; i++)
+                {
+                    if (algParamNow == null)
+                    {
+                        algParamNow = new List<ParametrNow>();
+                        foreach (var algParam in algParamAll)
+                        {
+                            algParamNow.Add(new ParametrNow { name = algParam.name, value = algParam.minValue });
+                        }
+
+                    }
+                    else
+                    {
+                        algParamNow[n - 1] = new ParametrNow { value = algParamNow[n - 1].value + step, name = algParamNow[n - 1].name };
+                        for (int j = n - 1; j > 0; j--)
+                        {
+                            if (algParamNow[j].value > algParamAll[j].maxValue)
+                            {
+                                algParamNow[j] = new ParametrNow { value = algParamAll[j].minValue, name = algParamNow[j].name };
+                                algParamNow[j - 1] = new ParametrNow { value = algParamNow[j - 1].value + step, name = algParamNow[j - 1].name };
+                            }
+                        }
+                        for (int k = 0; k < n; k++)
+                            if (algParamNow[k].value > algParamAll[k].maxValue)
+                                algParamNow[k] = new ParametrNow { value = algParamAll[k].maxValue, name = algParamNow[k].name };
+                    }
+                    var alg = GetNewAlg(algParamNow);
+                    alg.EnterParam = this.EnterParam;
+                    alg.SetFunction(_function);
+                    alg.Refresh();
+                    var result = alg.Calculate();
+                    best = best.Cost < result.Cost ? best : (DataFormat.OutBlackBoxParam)result;
+                    List<ParametrNow> outParam = new List<ParametrNow>(alg.ParamNow.Count);
+                    foreach (var t in alg.ParamNow)
+                    {
+                        outParam.Add(t);
+                    }
+                    var outResult = new DataFormat.OutBlackBoxParam(result.Cost);
+                    GetNowListParams[GetNowListParams.Count - 1].Add(outParam, outResult);
+
+                }
+            }
+            else
+            {
+                while (algParamNow == null || !Compleate())
+                {
+                    GetNextParams();
+                    var alg = GetNewAlg(algParamNow);
+                    alg.EnterParam = this.EnterParam;
+                    alg.SetFunction(_function);
+                    alg.Refresh();
+                    var result = alg.Calculate();
+                    best = best.Cost < result.Cost ? best : (DataFormat.OutBlackBoxParam)result;
+                    List<ParametrNow> outParam = new List<ParametrNow>(alg.ParamNow.Count);
+                    foreach (var t in alg.ParamNow)
+                    {
+                        outParam.Add(t);
+                    }
+                    var outResult = new DataFormat.OutBlackBoxParam(result.Cost);
+                    GetNowListParams[GetNowListParams.Count - 1].Add(outParam, outResult);
+                }
             }
             return best;
 
