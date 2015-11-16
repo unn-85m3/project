@@ -86,6 +86,15 @@ namespace TestSystem
                     _cost = value;
                 }
             }
+
+            public int CompareTo(object obj)
+            {
+                if (obj is IPoint)
+                {
+                    return this._cost > ((IPoint)obj).cost ? 1 : this._cost < ((IPoint)obj).cost ? -1 : 0;
+                }
+                else throw new Exception();
+            }
         }
 
         public Form1()
@@ -167,7 +176,7 @@ namespace TestSystem
 
             AddAlg(new Algorithm.Benchmark_Algorithm(step));
             //AddAlg(new Algorithm.Optimizate(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_2(step)));
-            AddAlg(new Algorithm.Optimizate(new Algorithm.Complex_Algorithm(step)));
+            AddAlg(new Algorithm.Optimizate(new Algorithm.Genetic_Algorithm(step)));
             //AddAlg(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgoritm3(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_1(step));

@@ -35,6 +35,7 @@ namespace TestSystem.Algorithm
             var dict = new Dictionary<ParametrNow, DataFormat.IOutBlackBoxParam>();
             GetNowListParams.Add(new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>());
             var best = new  DataFormat.OutBlackBoxParam(double.MaxValue);
+            calls = 0;
             while (algParamNow == null || !Compleate())
             {
                 GetNextParams();
@@ -51,6 +52,7 @@ namespace TestSystem.Algorithm
                 }
                 var outResult = new DataFormat.OutBlackBoxParam(result.Cost);
                 GetNowListParams[GetNowListParams.Count - 1].Add(outParam, outResult);
+                calls += alg.Calls;
             }
             return best;
 
