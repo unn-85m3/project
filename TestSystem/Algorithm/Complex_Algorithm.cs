@@ -22,12 +22,17 @@ namespace TestSystem.Algorithm
         private PointCoord cg;
         private int h;
 
+        private int ca_worst_percent; // процент для отражения
+        private int ca_cg_recent; // процент точек для построения ЦМ
+        private int ca_reflections; // количество отражений плохой точки
+        private double ca_max_range; // максимальная дальность точки отражения
+
         public Complex_Algorithm()
         {
             h = 10;
             this.name = "Комплексный алгоритм";
             this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
-                "дальность отражения задаётся случайно."; //Параметры алгоритма указывай
+                "дальность отражения задаётся случайно.";
             points_Coord = new List<PointCoord>();
             rnd = new Random(0);
             cg = new PointCoord();
@@ -45,6 +50,37 @@ namespace TestSystem.Algorithm
             cg = new PointCoord();
         }
 
+        public Complex_Algorithm(List<ParametrNow> pNow)
+            : base(pNow.Find(s => s.name == "step").value)
+        {
+            h = 10;
+            this.name = "Комплексный алгоритм";
+            this.atributs += "на " + h + " единиц площади приходится одна точка в рассматриваемой области,\n" +
+                "дальность отражения задаётся случайно.";
+            points_Coord = new List<PointCoord>();
+            rnd = new Random(0);
+            cg = new PointCoord();
+            ParamNow = pNow;
+            ca_worst_percent = (int)pNow.Find(s => s.name == "the worst percent of points").value;
+            ca_cg_recent = (int)pNow.Find(s => s.name == "the percent of points for create CG").value;
+            ca_reflections = (int)pNow.Find(s => s.name == "the number of reflections of bad point").value;
+            ca_max_range = (double)pNow.Find(s => s.name == "the maximum range of point reflection").value;
+        }
+
+        public override List<Parametr> GetAllParam
+        {
+            get
+            {
+                return new List<Parametr> {
+                    new Parametr{name = "the worst percent of points", tp = TypeParams.discrete, minValue = 0, maxValue = 10},
+                    new Parametr{name = "the percent of points for create CG", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
+                    new Parametr{name = "the number of reflections of bad point", tp = TypeParams.discrete, minValue = 0, maxValue = 10},
+                    new Parametr{name = "the maximum range of point reflection", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
+                    new Parametr{name = "step", tp = TypeParams.continuous, minValue = 1, maxValue = 1}
+                };
+            }
+        }
+
         public override DataFormat.IOutBlackBoxParam Calculate() // алгоритм можно ускорить
         {
             double cost = double.MaxValue;
@@ -53,8 +89,7 @@ namespace TestSystem.Algorithm
             SetNumberOfPoints();
 
             h = this.SetAreaOfTheRegion(STEP);
-            //h = (int)((parametr.x1_max - parametr.x1_min + parametr.x2_max - parametr.x2_min) / 2 * ((int)(parametr.x2_x1_max - parametr.x2_x1_min) + 1)) + 4;
-
+            
             if (h == 1)
             {
                 cost = Function(parametr.x1_min, parametr.x2_min).Cost;
@@ -86,12 +121,28 @@ namespace TestSystem.Algorithm
             worstValInd = FindMaxCostIndex();
             FindCG();
 
-            for (int i = 0; i < h * 5; i++)
+            //for (int i = 0; i < h * 5; i++)
+            //{
+            //    points_Coord[worstValInd] = ReflectThePoint(points_Coord[worstValInd]);
+            //    worstValInd = FindMaxCostIndex();
+            //    FindCG();
+            //}
+
+            if (ca_worst_percent == 0)
             {
-                points_Coord[worstValInd] = ReflectThePoint(points_Coord[worstValInd]);
                 worstValInd = FindMaxCostIndex();
-                FindCG();
+                points_Coord[worstValInd] = ReflectThePoint(points_Coord[worstValInd]);
             }
+            else
+            {
+                int worst_count = points_Coord.Count - (int)Math.Ceiling(points_Coord.Count * (double)ca_worst_percent / 10.0);
+                //if (points_Coord[0].cost < points_Coord[points_Coord.Count].cost)
+                for (int i = points_Coord.Count - 1; i > worst_count; i--)
+                {
+                    points_Coord[i] = ReflectThePoint(points_Coord[i]);
+                }
+            }
+             
 
             cost = points_Coord[FindMinCostIndex()].cost;
 
@@ -111,47 +162,51 @@ namespace TestSystem.Algorithm
         private PointCoord ReflectThePoint(PointCoord point)
         {
             PointCoord refPoint = new PointCoord();
-            //do {
-            if (cg.x1 > point.x1)
+            int i;
+            for (i = 0; (!IsItFeasiblePoint(refPoint) || point.cost <= refPoint.cost) && i < ca_reflections; i++)
             {
-                refPoint.x1 = rnd.NextDouble() * (cg.x1 - point.x1) + cg.x1;
-            }
-            else
-            {
-                refPoint.x1 = cg.x1 - rnd.NextDouble() * (point.x1 - cg.x1);
+                if (cg.x1 > point.x1)
+                {
+                    refPoint.x1 = rnd.NextDouble() * (cg.x1 - point.x1) * ca_max_range / 5 + cg.x1;
+                }
+                else
+                {
+                    refPoint.x1 = cg.x1 - rnd.NextDouble() * (point.x1 - cg.x1) * ca_max_range / 5;
+                }
+
+                if (cg.x2 > point.x2)
+                {
+                    refPoint.x2 = rnd.NextDouble() * (cg.x2 - point.x2) * ca_max_range / 5 + cg.x2;
+                }
+                else
+                {
+                    refPoint.x2 = cg.x2 - rnd.NextDouble() * (point.x2 - cg.x2) * ca_max_range / 5;
+                }
+
+                if (!IsItFeasiblePoint(refPoint))
+                {
+                    refPoint.x1 -= Math.Abs(refPoint.x1 - point.x1);
+                    refPoint.x2 -= Math.Abs(refPoint.x2 - point.x2);
+                }
+
+                try
+                {
+                    refPoint.cost = Function(refPoint.x1, refPoint.x2).Cost;
+                }
+                catch
+                {
+                    refPoint.cost = double.MaxValue;
+                }
             }
 
-            if (cg.x2 > point.x2)
-            {
-                refPoint.x2 = rnd.NextDouble() * (cg.x2 - point.x2) + cg.x2;
-            }
-            else
-            {
-                refPoint.x2 = cg.x2 - rnd.NextDouble() * (point.x2 - cg.x2);
-            }
+            // if (i == ca_reflections) здесь будет то что надо делать с "трудными" точками
 
-            if (!IsFeasiblePoint(refPoint))
-            {
-                refPoint.x1 -= Math.Abs(refPoint.x1 - point.x1);
-                refPoint.x2 -= Math.Abs(refPoint.x2 - point.x2);
-            }
-
-            try
-            {
-                refPoint.cost = Function(refPoint.x1, refPoint.x2).Cost;
-            }
-            catch
-            {
-                refPoint.cost = double.MaxValue;
-            }
-            //} while (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost);
-
-            if (!IsFeasiblePoint(refPoint) || point.cost < refPoint.cost)
+            if (!IsItFeasiblePoint(refPoint) || point.cost < refPoint.cost)
                 return point;
             return refPoint;
         }
 
-        private bool IsFeasiblePoint(PointCoord point)
+        private bool IsItFeasiblePoint(PointCoord point)
         {
             if (point.x1 < parametr.x1_min || point.x1 > parametr.x1_max ||
                 point.x2 < parametr.x2_min || point.x2 > parametr.x2_max ||
@@ -161,20 +216,40 @@ namespace TestSystem.Algorithm
             return true;
         }
 
+        private class PointComparer : IComparer<PointCoord>
+        {
+            public int Compare(PointCoord x, PointCoord y)
+            {
+                if (x.cost == y.cost)
+                    return 0;
+                if (x.cost < y.cost) // как сортировать
+                    return 1;
+                else return -1;
+            }
+        }
+
         private void FindCG()
         {
-            int i = 0;
+            points_Coord.Sort(new PointComparer());
+            List<PointCoord> pc = new List<PointCoord>();
+            int p_count = (int)Math.Ceiling(points_Coord.Count * (double)ca_cg_recent / 10.0) + 1;
+            for (int i = 0; i < p_count; i++)
+            {
+                pc.Add(points_Coord[i]);
+            }
+
+            int cnt = 0;
             cg.x1 = 0;
             cg.x2 = 0;
-            foreach (var x in points_Coord)
+            foreach (var x in pc)
             {
                 cg.x1 += x.x1;
                 cg.x2 += x.x2;
-                i++;
+                cnt++;
             }
-            cg.x1 /= i;
-            cg.x2 /= i;
-            //cg.cost = Function(cg.x1, cg.x2).Cost;
+            cg.x1 /= cnt;
+            cg.x2 /= cnt;
+            
         }
 
         private int FindMinCostIndex()
@@ -237,10 +312,5 @@ namespace TestSystem.Algorithm
             return x12pc;
         }
 
-
-        public override List<Parametr> GetAllParam
-        {
-            get { throw new NotImplementedException(); }
-        }
     }
 }

@@ -86,33 +86,15 @@ namespace TestSystem
                     _cost = value;
                 }
             }
-            public int CompareTo(object obj)
-            {
-                if (obj is IPoint)
-                {
-                    var o = (IPoint)obj;
-                    if (o.cost > this.cost)
-                    {
-                        return -1;
-                    }
-                    else if (o.cost < this.cost)
-                    {
-                        return 1;
-                    }
-                    else return 0;
-                }
-                else throw new Exception("not IPoint");
-            }
         }
 
         public Form1()
         {
             log = new List<ILogger>();
             InitializeComponent();
-
-
             
         }
+
 
 
         private void CreateTasks(List<DataFormat.DataFormat> dtf, bool array, int min, int max)
@@ -183,10 +165,9 @@ namespace TestSystem
 
             Algs = new List<IAlgorithm>();
 
-            //AddAlg(new Algorithm.Benchmark_Algorithm(step));
-            AddAlg(new Algorithm.Optimizate(new Algorithm.Diagonal_Algoritms(step)));
+            AddAlg(new Algorithm.Benchmark_Algorithm(step));
             //AddAlg(new Algorithm.Optimizate(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_2(step)));
-            //AddAlg(new Algorithm.Optimizate(new Algorithm.Genetic_Algorithm(step)));
+            AddAlg(new Algorithm.Optimizate(new Algorithm.Complex_Algorithm(step)));
             //AddAlg(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgoritm3(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_1(step));
@@ -679,8 +660,6 @@ namespace TestSystem
             {
                 Directory.CreateDirectory(dir);
             }
-            //var total = new Dictionary<List<ParametrNow>, DataFormat.IOutBlackBoxParam>();
-
             foreach (var alg in algs)
             {
                 var path = Path.Combine(dir, alg.Name + ".txt");
@@ -700,14 +679,6 @@ namespace TestSystem
                     {
                         foreach (var best in bestResult[i][j])
                         {
-                            //if (!total.ContainsKey(best.Key))
-                            //{
-                            //    total.Add(best.Key, best.Value);
-                            //}
-                            //else
-                            //{
-
-                            //}
                             foreach (var b in best.Key)
                             {
                                 Lines.Add("\tname = " + b.name + ",\tvalue = " + b.value);
