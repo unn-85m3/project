@@ -8,7 +8,7 @@ using TestSystem.DataFormat;
 
 namespace TestSystem
 {
-    public interface IPoint
+    public interface IPoint : IComparable
     {
         Double x1 { get; set; }
         Double x2 { get; set; }

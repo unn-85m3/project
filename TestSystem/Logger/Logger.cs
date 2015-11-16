@@ -14,6 +14,23 @@ namespace TestSystem.Logger
             private Double _x2;
             private Double _cost;
 
+            public int CompareTo(object obj)
+            {
+                if (obj is IPoint)
+                {
+                    var o = (IPoint)obj;
+                    if (o.cost > this.cost)
+                    {
+                        return -1;
+                    }
+                    else if (o.cost < this.cost)
+                    {
+                        return 1;
+                    }
+                    else return 0;
+                }
+                else throw new Exception("not IPoint");
+            }
             public Double x1
             {
                 get

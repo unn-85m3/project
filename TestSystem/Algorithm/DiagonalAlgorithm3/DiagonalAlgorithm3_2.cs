@@ -34,10 +34,10 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
 
         private List<IPlace> SortAlgs(List<IPlace> algs, double mod)
         {
-            List<IPlace> aOut = (new IPlace[algs.Count]).ToList();
+            IPlace[] aOut = (new IPlace[algs.Count]);
             if (mod == 0)
             {
-                algs.CopyTo(aOut.ToArray(), 0);
+                algs.CopyTo(aOut, 0);
                 for (int i = 0; i < algs.Count; i++)
                 {
                     for (int j = i + 1; j < algs.Count; j++)
@@ -53,12 +53,36 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             }
             else if (mod == 1)
             {
-                algs.CopyTo(aOut.ToArray(), 0);
+                algs.CopyTo(aOut, 0);
                 for (int i = 0; i < algs.Count; i++)
                 {
                     for (int j = i + 1; j < algs.Count; j++)
                     {
-                        if (aOut[i].Area / aOut[i].points.Min(t => t.cost) < aOut[j].Area / aOut[j].points.Min(t => t.cost))
+                        var ti = Double.MaxValue;
+                        foreach (var op in aOut[i].points)
+                        {
+                            if (op.cost > 0.0 && op.cost < ti)
+                            {
+                                ti = op.cost;
+                            }
+                        }
+                        if (ti == Double.MaxValue)
+                        {
+                            ti = 0.0;
+                        }
+                        var tj = Double.MaxValue;
+                        foreach (var op in aOut[j].points)
+                        {
+                            if (op.cost > 0.0 && op.cost < tj)
+                            {
+                                tj = op.cost;
+                            }
+                        }
+                        if (tj == Double.MaxValue)
+                        {
+                            tj = 0.0;
+                        }
+                        if (aOut[i].Area / ti < aOut[j].Area / tj)
                         {
                             var tmp = aOut[i];
                             aOut[i] = aOut[j];
@@ -70,12 +94,37 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             }
             else
             {
-                algs.CopyTo(aOut.ToArray(), 0);
+                algs.CopyTo(aOut, 0);
                 for (int i = 0; i < algs.Count; i++)
                 {
                     for (int j = i + 1; j < algs.Count; j++)
                     {
-                        if (aOut[i].Area / aOut[i].points.Min(t => t.cost) - aOut[j].Area / aOut[j].points.Min(t => t.cost) < mod)
+                        var ti = Double.MaxValue;
+                        foreach (var op in aOut[i].points)
+                        {
+                            if (op.cost > 0.0 && op.cost < ti)
+                            {
+                                ti = op.cost;
+                            }
+                        }
+                        if (ti == Double.MaxValue)
+                        {
+                            ti = 0.0;
+                        }
+                        var tj = Double.MaxValue;
+                        foreach (var op in aOut[j].points)
+                        {
+                            if (op.cost > 0.0 && op.cost < tj)
+                            {
+                                tj = op.cost;
+                            }
+                        }
+                        if (tj == Double.MaxValue)
+                        {
+                            tj = 0.0;
+                        }
+
+                        if (aOut[i].Area / ti - aOut[j].Area / tj < mod)
                         {
                             var tmp = aOut[i];
                             aOut[i] = aOut[j];
@@ -84,7 +133,7 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
                     }
                 }
             }
-            return aOut;
+            return aOut.ToList();
         }
 
         public override IOutBlackBoxParam Calculate()
@@ -174,27 +223,27 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
         }
 
 
-        private List<IPlace> Down(List<IPlace> places, int maxPoints, int levels=1)
-        {
-            ISeparathor separathor=Factory.GetSeparathor();
-            ISubAlgorithm alg = Factory.GetSubAlgorithm(this, this.parametr, 1);
-            List<IPlace> tempPlaces = places;
-            int tempMaxPoints = maxPoints;
+        //private List<IPlace> Down(List<IPlace> places, int maxPoints, int levels=1)
+        //{
+            //ISeparathor separathor=Factory.GetSeparathor();
+            //ISubAlgorithm alg = Factory.GetSubAlgorithm(this, this.parametr, 1);
+            //List<IPlace> tempPlaces = places;
+            //int tempMaxPoints = maxPoints;
 
-            for (int i = 0; i < levels;i++ )
-            {
-                double middle = MiddleArea(places);
+            //for (int i = 0; i < levels;i++ )
+            //{
+            //    double middle = MiddleArea(places);
                 
-                tempPlaces.Sort(this);
-                alg.maxPoints = tempMaxPoints;
-                IPoint best = alg.Calculate(tempPlaces[0].MainDiagonal);
-                tempPlaces = separathor.Separate(tempPlaces[0], best);
-                separathor = null;
-                alg = null;
-            }
-            return tempPlaces;
+            //    tempPlaces.Sort(this);
+            //    alg.maxPoints = tempMaxPoints;
+            //    IPoint best = alg.Calculate(tempPlaces[0].MainDiagonal);
+            //    tempPlaces = separathor.Separate(tempPlaces[0], best);
+            //    separathor = null;
+            //    alg = null;
+            //}
+            //return tempPlaces;
 
-        }
+        //}
 
 
         private double MiddleArea(List<IPlace> places)
@@ -282,9 +331,9 @@ namespace TestSystem.Algorithm.DiagonalAlgorithm3
             get 
             { 
                 return new List<Parametr> { 
-                new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 0 }, 
-                new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 0 }, 
-                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 1, maxValue = 1 }, 
+                new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
+                new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
+                new Parametr { name = "HilClimbibgStep", tp = TypeParams.continuous, minValue = 1, maxValue = 2 }, 
                 //new Parametr { name = "HilClimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 10 }, 
                 new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 10 } 
                 }; 

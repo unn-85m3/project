@@ -17,6 +17,23 @@ namespace TestSystem.Plot
             this._x2 = x2;
             this._cost = cost;
         }
+        public int CompareTo(object obj)
+        {
+            if (obj is IPoint)
+            {
+                var o = (IPoint)obj;
+                if (o.cost > this.cost)
+                {
+                    return -1;
+                }
+                else if (o.cost < this.cost)
+                {
+                    return 1;
+                }
+                else return 0;
+            }
+            else throw new Exception("not IPoint");
+        }
 
         public double x1
         {
