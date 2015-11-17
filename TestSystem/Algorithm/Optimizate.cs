@@ -89,7 +89,7 @@ namespace TestSystem.Algorithm
                                 if (algParamNow[iter].value < algParam.maxValue)
                                 {
                                     var step = Math.Ceiling((algParam.maxValue - algParam.minValue) / 4);
-                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + step, name = algParamNow[iter].name };
+                                    algParamNow[iter] = new ParametrNow { value = Math.Round(algParamNow[iter].value + step, 9), name = algParamNow[iter].name };
                                     break;
                                 }
                                 else
@@ -103,7 +103,7 @@ namespace TestSystem.Algorithm
                                 if (algParamNow[iter].value < algParam.maxValue)
                                 {
                                     var step = Math.Ceiling((algParam.maxValue - algParam.minValue) / 4);
-                                    algParamNow[iter] = new ParametrNow { value = algParamNow[iter].value + step, name = algParamNow[iter].name };
+                                    algParamNow[iter] = new ParametrNow { value = Math.Round(algParamNow[iter].value + step, 9), name = algParamNow[iter].name };
                                     break;
                                 }
                                 else
