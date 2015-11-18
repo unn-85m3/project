@@ -176,7 +176,7 @@ namespace TestSystem
 
             AddAlg(new Algorithm.Benchmark_Algorithm(step));
             //AddAlg(new Algorithm.Optimizate(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_2(step)));
-            AddAlg(new Algorithm.Optimizate(new Algorithm.Genetic_Algorithm(step)));
+            AddAlg(new Algorithm.Optimizate(new Algorithm.Diagonal_Algoritms(step)));
             //AddAlg(new Algorithm.Diagonal_Algoritm.DiagonalAlgorithmV2(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgoritm3(step));
             //AddAlg(new Algorithm.DiagonalAlgorithm3.DiagonalAlgorithm3_1(step));

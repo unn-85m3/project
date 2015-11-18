@@ -98,9 +98,9 @@ namespace TestSystem.Algorithm
                 return new List<Parametr> { 
                 new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
                 new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
-                new Parametr { name = "HillClimbibgStep", tp = TypeParams.continuous, minValue = 0, maxValue = 100 }, 
+                new Parametr { name = "HillClimbibgStep", tp = TypeParams.discrete, minValue = 0, maxValue = 100 }, 
                 new Parametr { name = "HilllimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 5 }, 
-                new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 2 } 
+                new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 1 } 
                 };
             }
         }
@@ -161,13 +161,6 @@ namespace TestSystem.Algorithm
             LeftBottomToRightTop,
             LeftTopToRightBottom,
             Both
-        }
-
-        public enum Sorted
-        {
-            ByCost,
-            BySpace,
-            Else
         }
 
         #endregion
@@ -355,20 +348,21 @@ namespace TestSystem.Algorithm
                 private set;
             }
 
-            public static List<Place> Sort(List<Place> places, Sorted sort)
+            public static List<Place> Sort(List<Place> places, double sort)
             {
-                if (sort == Sorted.ByCost)
-                {
-                    return places.OrderBy(p => p.Cost).ToList();
-                }
-                else if (sort == Sorted.BySpace)
-                {
-                    return places.OrderBy(p => p.Space).ToList();
-                }
-                else
-                {
-                    return places.OrderBy(p => p.Space/p.Cost).ToList();
-                }
+                //if (sort == Sorted.ByCost)
+                //{
+                //    return places.OrderBy(p => p.Cost).ToList();
+                //}
+                //else if (sort == Sorted.BySpace)
+                //{
+                //    return places.OrderBy(p => p.Space).ToList();
+                //}
+                //else
+                //{
+                //    return places.OrderBy(p => p.Space/p.Cost).ToList();
+                //}
+                return places.OrderBy(p => sort * p.Cost + (1 - sort) / p.Space).ToList();
             }
 
             public Point GetSeparatePoint(DiagonalThis diag)
@@ -646,15 +640,6 @@ namespace TestSystem.Algorithm
             }
 
             var sorted = GetParamByName("HowSortPlace");
-            var sort = Sorted.Else;
-            if (sorted == GetAllParam.Find(t => t.name == "HowSortPlace").minValue)
-            {
-                sort = Sorted.BySpace;
-            }
-            else if (sorted == GetAllParam.Find(t => t.name == "HowSortPlace").maxValue)
-            {
-                sort = Sorted.ByCost;
-            }
 
             var HillStep = GetParamByName("HillClimbibgStep");
 
@@ -682,7 +667,7 @@ namespace TestSystem.Algorithm
                 {
                     break;
                 }
-                Place.Sort(places, sort);
+                Place.Sort(places, sorted);
             }
             return new DataFormat.OutBlackBoxParam(best);
 
