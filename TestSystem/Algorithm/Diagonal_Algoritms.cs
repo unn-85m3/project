@@ -99,7 +99,7 @@ namespace TestSystem.Algorithm
                 new Parametr { name = "Separate", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
                 new Parametr { name = "Diagonale", tp = TypeParams.discrete, minValue = 0, maxValue = 2 }, 
                 new Parametr { name = "HillClimbibgStep", tp = TypeParams.discrete, minValue = 0, maxValue = 100 }, 
-                new Parametr { name = "HilllimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 5 }, 
+                new Parametr { name = "HilllimbibgCount", tp = TypeParams.discrete, minValue = 0, maxValue = 10 }, 
                 new Parametr { name = "HowSortPlace", tp = TypeParams.continuous, minValue = 0, maxValue = 1 } 
                 };
             }
@@ -641,7 +641,7 @@ namespace TestSystem.Algorithm
 
             var sorted = GetParamByName("HowSortPlace");
 
-            var HillStep = GetParamByName("HillClimbibgStep");
+            var HillStep = (int)GetParamByName("HillClimbibgStep");
 
             var HillCount = GetParamByName("HillClimbibgCount");
             HillClim = new HillClimb(HillStep, (int)HillCount, this);
