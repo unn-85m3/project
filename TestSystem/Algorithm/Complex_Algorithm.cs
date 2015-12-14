@@ -74,7 +74,7 @@ namespace TestSystem.Algorithm
                 return new List<Parametr> {
                     new Parametr{name = "the worst percent of points", tp = TypeParams.discrete, minValue = 0, maxValue = 10},
                     new Parametr{name = "the percent of points for create CG", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
-                    new Parametr{name = "the number of reflections of bad point", tp = TypeParams.discrete, minValue = 0, maxValue = 10},
+                    new Parametr{name = "the number of reflections of bad point", tp = TypeParams.discrete, minValue = 1, maxValue = 10},
                     new Parametr{name = "the maximum range of point reflection", tp = TypeParams.discrete, minValue = 1, maxValue = 5},
                     new Parametr{name = "step", tp = TypeParams.continuous, minValue = 1, maxValue = 1}
                 };
@@ -135,9 +135,10 @@ namespace TestSystem.Algorithm
             }
             else
             {
-                int worst_count = points_Coord.Count - (int)Math.Ceiling(points_Coord.Count * (double)ca_worst_percent / 10.0);
+                int worst_count = /*points_Coord.Count -*/ (int)Math.Ceiling(points_Coord.Count * (double)ca_worst_percent / 10.0);
                 //if (points_Coord[0].cost < points_Coord[points_Coord.Count].cost)
-                for (int i = points_Coord.Count - 1; i > worst_count; i--)
+                //for (int i = points_Coord.Count - 1; i > worst_count; i--)
+                for (int i = 0; i < worst_count; i++)
                 {
                     points_Coord[i] = ReflectThePoint(points_Coord[i]);
                 }
